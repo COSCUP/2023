@@ -1,0 +1,14 @@
+@import "./reset";
+@import "./font";
+@import "./variables";
+@import "./mixins";
+@import "./container";
+
+// native variables
+:root {
+  --navbar-height: 68px;
+
+  @include xsOnly {
+    --navbar-height: 54px;
+  }
+}

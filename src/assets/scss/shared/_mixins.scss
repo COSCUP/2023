@@ -1,0 +1,90 @@
+// Mixins for breakpoints
+
+// Rule: Only
+@mixin xlOnly() {
+  @media screen and (min-width: $lg-max-width + 1px) {
+    @content;
+  }
+}
+
+@mixin lgOnly() {
+  @media screen and (min-width: $md-max-width + 1px) and (max-width: $lg-max-width) {
+    @content;
+  }
+}
+
+@mixin mdOnly() {
+  @media screen and (min-width: $sm-max-width + 1px) and (max-width: $md-max-width) {
+    @content;
+  }
+}
+
+@mixin smOnly() {
+  @media screen and (min-width: $xs-max-width + 1px) and (max-width: $sm-max-width) {
+    @content;
+  }
+}
+
+@mixin xsOnly() {
+  @media screen and (max-width: $xs-max-width) {
+    @content;
+  }
+}
+
+// Rule: AndUp
+@mixin lgAndUp() {
+  @media screen and (min-width: $md-max-width + 1px) {
+    @content;
+  }
+}
+
+@mixin mdAndUp() {
+  @media screen and (min-width: $sm-max-width + 1px) {
+    @content;
+  }
+}
+
+@mixin smAndUp() {
+  @media screen and (min-width: $xs-max-width + 1px) {
+    @content;
+  }
+}
+
+// Rule: AndDown
+@mixin lgAndDown() {
+  @media screen and (max-width: $lg-max-width) {
+    @content;
+  }
+}
+
+@mixin mdAndDown() {
+  @media screen and (max-width: $md-max-width) {
+    @content;
+  }
+}
+
+@mixin smAndDown() {
+  @media screen and (max-width: $sm-max-width) {
+    @content;
+  }
+}
+
+// Mixins for utils
+
+@mixin no-scrollbar {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  & {
+    -ms-overflow-style: none; /* IE 11 */
+    scrollbar-width: none; /* Firefox 64 */
+  }
+}
+
+// Mixins for pages
+
+@mixin page($id) {
+  #app ##{$id}.page-container {
+    @content;
+  }
+}

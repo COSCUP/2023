@@ -1,0 +1,20 @@
+@import "./shared";
+@import "./components/app/navbar";
+@import "./components/app/footer";
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  color: var(--color-text);
+  background-color: var(--color-background);
+}
+
+#app {
+  position: relative;
+  height: 100%;
+  padding-top: $navbar-height;
+}

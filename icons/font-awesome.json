@@ -1,0 +1,50 @@
+{
+  "blogger": [
+    "fab",
+    "blogger"
+  ],
+  "facebook": [
+    "fab",
+    "facebook"
+  ],
+  "flickr": [
+    "fab",
+    "flickr"
+  ],
+  "plurk": [
+    "ext",
+    "plurk"
+  ],
+  "twitter": [
+    "fab",
+    "twitter"
+  ],
+  "youtube": [
+    "fab",
+    "youtube"
+  ],
+  "telegram": [
+    "fab",
+    "telegram"
+  ],
+  "bullhorn": [
+    "fas",
+    "bullhorn"
+  ],
+  "external-link-alt": [
+    "fas",
+    "external-link-alt"
+  ],
+  "angle-left": [
+    "fas",
+    "angle-left"
+  ],
+  "angle-right": [
+    "fas",
+    "angle-right"
+  ],
+  "bars": [
+    "fas",
+    "bars"
+  ]
+}

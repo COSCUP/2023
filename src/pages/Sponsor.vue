@@ -1,0 +1,20 @@
+<template>
+  <main
+    id="sponsor"
+    class="page-container"
+  >
+    Sponsor
+  </main>
+</template>
+
+<script lang="ts">
+import Vue from 'vue'
+
+import '@/assets/scss/pages/sponsor.scss'
+
+export default Vue.extend({
+  name: 'Sponsor',
+  components: {
+  }
+})
+</script>

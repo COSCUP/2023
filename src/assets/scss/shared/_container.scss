@@ -1,0 +1,16 @@
+#app {
+  .main-container {
+    width: 100%;
+
+    &.scroll-lock {
+      z-index: 1;
+      position: fixed;
+      left: var(--current-scroll-x, 0);
+      top: calc(-1 * var(--current-scroll-y, 0) + var(--navbar-height));
+    }
+
+    .page-container {
+      min-height: 900px;
+    }
+  }
+}
