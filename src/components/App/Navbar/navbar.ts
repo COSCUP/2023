@@ -1,5 +1,7 @@
 import { Location, Route } from 'vue-router'
 import { defaultLanguageType } from '@/utils/language'
+import { pageRouteNameList } from '@/router'
+import { camelCase } from 'lodash-es'
 
 export enum NavbarItemType {
   Action,
@@ -39,79 +41,27 @@ export interface NavbarLanguageSwitchItem extends NavbarItemBasic {
   type: NavbarItemType.LanguageSwitch;
 }
 
+const internalLinksThatFixedInNavbar: string[] = ['home']
+const internalLinksThatHiddenInMenu: string[] = []
+
+const internalLinks: NavbarInternalLinkItem[] = pageRouteNameList.map((routeName) => {
+  const itemName = camelCase(routeName)
+  return {
+    type: NavbarItemType.InternalLink,
+    name: itemName,
+    fixedInNavbar: internalLinksThatFixedInNavbar.includes(itemName),
+    hiddenInMenu: internalLinksThatHiddenInMenu.includes(itemName),
+    location: (currentRoute) => ({
+      name: routeName,
+      params: {
+        languageType: currentRoute.params.languageType || defaultLanguageType
+      }
+    })
+  }
+})
+
 export const navbarItems: NavbarItemData[] = [
-  {
-    type: NavbarItemType.InternalLink,
-    name: 'home',
-    fixedInNavbar: true,
-    hiddenInMenu: false,
-    location: (currentRoute) => ({
-      name: 'Home',
-      params: {
-        languageType: currentRoute.params.languageType || defaultLanguageType
-      }
-    })
-  },
-  {
-    type: NavbarItemType.InternalLink,
-    name: 'agenda',
-    fixedInNavbar: false,
-    hiddenInMenu: false,
-    location: (currentRoute) => ({
-      name: 'Agenda',
-      params: {
-        languageType: currentRoute.params.languageType || defaultLanguageType
-      }
-    })
-  },
-  {
-    type: NavbarItemType.InternalLink,
-    name: 'map',
-    fixedInNavbar: false,
-    hiddenInMenu: false,
-    location: (currentRoute) => ({
-      name: 'Map',
-      params: {
-        languageType: currentRoute.params.languageType || defaultLanguageType
-      }
-    })
-  },
-  {
-    type: NavbarItemType.InternalLink,
-    name: 'venue',
-    fixedInNavbar: false,
-    hiddenInMenu: false,
-    location: (currentRoute) => ({
-      name: 'Venue',
-      params: {
-        languageType: currentRoute.params.languageType || defaultLanguageType
-      }
-    })
-  },
-  {
-    type: NavbarItemType.InternalLink,
-    name: 'sponsor',
-    fixedInNavbar: false,
-    hiddenInMenu: false,
-    location: (currentRoute) => ({
-      name: 'Sponsor',
-      params: {
-        languageType: currentRoute.params.languageType || defaultLanguageType
-      }
-    })
-  },
-  {
-    type: NavbarItemType.InternalLink,
-    name: 'staff',
-    fixedInNavbar: false,
-    hiddenInMenu: false,
-    location: (currentRoute) => ({
-      name: 'Staff',
-      params: {
-        languageType: currentRoute.params.languageType || defaultLanguageType
-      }
-    })
-  },
+  ...internalLinks,
   {
     type: NavbarItemType.ExternalLink,
     name: 'blog',

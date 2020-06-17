@@ -1,11 +1,12 @@
 import Vue from 'vue'
 import App from './App.vue'
-import router, { registerLanguageBeforeEachGuard } from './router'
+import { createRouter } from './router'
 
 import { createThemeManager, ThemeManager } from '@/utils/theme'
 import { createLanguageManager, LanguageManager } from '@/utils/language'
 import { createBreakpointManager, BreakpointManager } from '@/utils/breakpoint'
 import { createScrollLockManager, ScrollLockManager } from '@/utils/scrollLock'
+import { createFullPageProgressManager, FullPageProgressManager } from '@/utils/fullPageProgress'
 
 import Icon from '@/components/Basic/Icon/index.vue'
 
@@ -17,15 +18,20 @@ const languageManager: LanguageManager = Vue.observable(createLanguageManager())
 const themeManager: ThemeManager = Vue.observable(createThemeManager())
 const breakpointManager: BreakpointManager = Vue.observable(createBreakpointManager())
 const scrollLockManager: ScrollLockManager = Vue.observable(createScrollLockManager())
+const fullPageProgressManager: FullPageProgressManager = Vue.observable(createFullPageProgressManager(scrollLockManager))
 
-registerLanguageBeforeEachGuard(languageManager)
+const router = createRouter({
+  languageManager,
+  fullPageProgressManager: fullPageProgressManager
+})
 
 new Vue({
   provide: {
     languageManager,
     themeManager,
     breakpointManager,
-    scrollLockManager
+    scrollLockManager,
+    fullPageProgressManager
   },
   router,
   render: h => h(App)

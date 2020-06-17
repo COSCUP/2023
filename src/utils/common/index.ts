@@ -9,3 +9,7 @@
 export function injectedThis <Injected> (thisArg: unknown) {
   return thisArg as Injected
 }
+
+export function delay (ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms))
+}

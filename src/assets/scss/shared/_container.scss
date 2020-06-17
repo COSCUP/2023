@@ -1,6 +1,7 @@
 #app {
   .main-container {
     width: 100%;
+    position: relative;
 
     &.scroll-lock {
       z-index: 1;
@@ -10,7 +11,28 @@
     }
 
     .page-container {
-      min-height: 900px;
+      width: 100%;
+      min-height: calc(100vh - var(--navbar-height));
+      transition-property: transform, opacity;
+      transition-duration: 0.4s;
+      transition-timing-function: ease-out;
+
+      &.slide-left-enter,
+      &.slide-right-leave-active {
+        opacity: 0;
+        transform: translateX(50%) translateZ(0);
+      }
+
+      &.slide-left-leave-active,
+      &.slide-right-enter {
+        opacity: 0;
+        transform: translateX(-50%) translateZ(0);
+      }
+
+      &.fade-enter,
+      &.fade-leave-active {
+        opacity: 0;
+      }
     }
   }
 }
