@@ -124,7 +124,7 @@ export default Vue.extend({
       if (injected(this).breakpointManager.xsOnly) return
       const windowWidth = window.innerWidth
       const menuItemTotalWidth = Array.from<HTMLElement>(
-        document.querySelectorAll('#navbar .menu .menu-item-container')
+        document.querySelectorAll('#navbar .menu .navbar-item-container')
       )
         .map(element => element.offsetWidth)
         .reduce((a, b) => a + b, 0)
