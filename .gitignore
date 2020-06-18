@@ -20,3 +20,8 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+# Auto-generated files
+src/utils/icon/index.ts
+src/utils/icon/icons/fontAwesome.ts
+src/utils/language/languages.ts
