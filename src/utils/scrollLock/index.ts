@@ -4,47 +4,45 @@ export interface Position {
 }
 
 export interface ScrollLockManager {
-  isLocked: boolean;
+  readonly isLocked: boolean;
   readonly currentScrollPosition: Position;
+  lock: () => void;
+  unlock: () => void;
 }
 
 class ScrollLockManagerConcrete implements ScrollLockManager {
-  private _isLocked = false
-  private _currentScrollPosition: Position = {
-    x: 0,
-    y: 0
-  }
+  private _lockStack: Position[] = []
 
   public get isLocked (): boolean {
-    return this._isLocked
-  }
-
-  public set isLocked (newValue: boolean) {
-    if (newValue) {
-      this._currentScrollPosition = {
-        x: window.scrollX,
-        y: window.scrollY
-      }
-    }
-    if (!newValue) {
-      setTimeout(() => {
-        window.scrollTo({
-          left: this._currentScrollPosition.x,
-          top: this._currentScrollPosition.y,
-          behavior: 'auto'
-        })
-
-        this._currentScrollPosition = {
-          x: 0,
-          y: 0
-        }
-      })
-    }
-    this._isLocked = newValue
+    return this._lockStack.length > 0
   }
 
   public get currentScrollPosition (): Position {
-    return this._currentScrollPosition
+    return this._lockStack.slice(-1)[0] ?? {
+      x: 0,
+      y: 0
+    }
+  }
+
+  public lock (): void {
+    this._lockStack.push({
+      x: window.scrollX,
+      y: window.scrollY
+    })
+  }
+
+  public unlock (): void {
+    setTimeout(() => {
+      const position: Position = this._lockStack.pop() ?? {
+        x: 0,
+        y: 0
+      }
+      window.scrollTo({
+        left: position.x,
+        top: position.y,
+        behavior: 'auto'
+      })
+    })
   }
 }
 

@@ -118,7 +118,7 @@ export default Vue.extend({
     },
     setMenuOpen (isOpen: boolean) {
       this.isMenuOpen = isOpen
-      injected(this).scrollLockManager.isLocked = isOpen
+      isOpen ? injected(this).scrollLockManager.lock() : injected(this).scrollLockManager.unlock()
     },
     detectOverflow () {
       if (injected(this).breakpointManager.xsOnly) return

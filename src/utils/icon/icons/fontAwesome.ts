@@ -1,7 +1,7 @@
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faBlogger, faFacebook, faFlickr, faTwitter, faYoutube, faTelegram } from '@fortawesome/free-brands-svg-icons'
 import { faPlurk } from '../fontAwesome/ext'
-import { faBullhorn, faExternalLinkAlt, faAngleLeft, faAngleRight, faBars } from '@fortawesome/free-solid-svg-icons'
+import { faBullhorn, faExternalLinkAlt, faAngleLeft, faAngleRight, faBars, faTimes } from '@fortawesome/free-solid-svg-icons'
 
 export type FontAwesomeSource = 'fontAwesome'
 export interface FontAwesomeIconData {
@@ -10,7 +10,7 @@ export interface FontAwesomeIconData {
   value: [string, string];
 }
 
-library.add(faBlogger, faFacebook, faFlickr, faTwitter, faYoutube, faTelegram, faPlurk, faBullhorn, faExternalLinkAlt, faAngleLeft, faAngleRight, faBars)
+library.add(faBlogger, faFacebook, faFlickr, faTwitter, faYoutube, faTelegram, faPlurk, faBullhorn, faExternalLinkAlt, faAngleLeft, faAngleRight, faBars, faTimes)
 
 export const fontAwesomeIcons: FontAwesomeIconData[] = [
   {
@@ -72,5 +72,10 @@ export const fontAwesomeIcons: FontAwesomeIconData[] = [
     source: 'fontAwesome',
     name: 'bars',
     value: ['fas', 'bars']
+  },
+  {
+    source: 'fontAwesome',
+    name: 'times',
+    value: ['fas', 'times']
   }
 ]

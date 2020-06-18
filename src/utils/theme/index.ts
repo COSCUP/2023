@@ -60,6 +60,9 @@ class ThemeManagerConcrete implements ThemeManager {
       .map((entry) => `--color-${entry[0]}: ${entry[1]};`)
       .join('')
     variableStyleDom.innerHTML = `:root {${properties}}`
+    const themeClassNameList = Array.from(document.body.classList).filter((className) => className.startsWith('theme-'))
+    document.body.classList.remove(...themeClassNameList)
+    document.body.classList.add(`theme-${themeType}`)
   }, 30)
 
   public get themePack (): ThemePack {

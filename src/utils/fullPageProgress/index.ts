@@ -17,7 +17,7 @@ class FullPageProgressManagerConcrete implements FullPageProgressManager {
   }
 
   public set isLoading (newValue: boolean) {
-    this._scrollLockManager.isLocked = newValue
+    newValue ? this._scrollLockManager.lock() : this._scrollLockManager.unlock()
     this._isLoading = newValue
   }
 }

@@ -18,11 +18,9 @@
       </transition>
       <Footer></Footer>
     </div>
-    <FullPageProgress
-      :class="{
-        loading: fullPageProgressManager.isLoading
-      }"
-    ></FullPageProgress>
+    <FullPageProgress v-show="fullPageProgressManager.isLoading">
+    </FullPageProgress>
+    <Popup></Popup>
   </div>
 </template>
 
@@ -33,13 +31,16 @@ import '@/assets/scss/app.scss'
 import Navbar from '@/components/App/Navbar/index.vue'
 import Footer from '@/components/App/Footer.vue'
 import FullPageProgress from '@/components/App/FullPageProgress.vue'
+import Popup from '@/components/App/Popup/index.vue'
 import { pageRouteNameList } from '@/router'
 
 import { injectedThis } from '@/utils/common'
 import { LanguageManager } from '@/utils/language'
 import { BreakpointManager } from '@/utils/breakpoint'
 import { ThemeManager } from '@/utils/theme'
+import { ScrollLockManager } from '@/utils/scrollLock'
 import { FullPageProgressManager } from '@/utils/fullPageProgress'
+import { PopupManager } from '@/utils/popup'
 import { Route } from 'vue-router'
 
 function injected (thisArg: unknown) {
@@ -47,7 +48,9 @@ function injected (thisArg: unknown) {
     languageManager: LanguageManager;
     themeManager: ThemeManager;
     breakpointManager: BreakpointManager;
-    globalProgressManager: FullPageProgressManager;
+    scrollLockManager: ScrollLockManager;
+    fullPageProgressManager: FullPageProgressManager;
+    popupManager: PopupManager;
   }>(thisArg)
 }
 
@@ -58,12 +61,14 @@ export default Vue.extend({
     'themeManager',
     'breakpointManager',
     'scrollLockManager',
-    'fullPageProgressManager'
+    'fullPageProgressManager',
+    'popupManager'
   ],
   components: {
     Navbar,
     Footer,
-    FullPageProgress
+    FullPageProgress,
+    Popup
   },
   data () {
     return {
@@ -91,7 +96,7 @@ export default Vue.extend({
       }
     }
   },
-  mounted () {
+  async mounted () {
     injected(this).breakpointManager.startDetect()
     injected(this).themeManager.startDetect()
   },

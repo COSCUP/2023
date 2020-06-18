@@ -1,0 +1,13 @@
+@mixin popup-container {
+  #app #popup .popup-container {
+    @content;
+  }
+}
+
+@mixin popup-content {
+  @include popup-container {
+    .popup-content {
+      @content;
+    }
+  }
+}

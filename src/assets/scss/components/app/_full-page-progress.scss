@@ -1,18 +1,14 @@
-#global-progress {
+#app #full-page-progress {
   position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-  display: none;
+  display: flex;
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.3);
   z-index: 999999;
-
-  &.loading {
-    display: flex;
-  }
 
   .lds-ripple {
     display: inline-block;

@@ -7,6 +7,7 @@ import { createLanguageManager, LanguageManager } from '@/utils/language'
 import { createBreakpointManager, BreakpointManager } from '@/utils/breakpoint'
 import { createScrollLockManager, ScrollLockManager } from '@/utils/scrollLock'
 import { createFullPageProgressManager, FullPageProgressManager } from '@/utils/fullPageProgress'
+import { createPopupManager, PopupManager } from '@/utils/popup'
 
 import Icon from '@/components/Basic/Icon/index.vue'
 
@@ -19,6 +20,7 @@ const themeManager: ThemeManager = Vue.observable(createThemeManager())
 const breakpointManager: BreakpointManager = Vue.observable(createBreakpointManager())
 const scrollLockManager: ScrollLockManager = Vue.observable(createScrollLockManager())
 const fullPageProgressManager: FullPageProgressManager = Vue.observable(createFullPageProgressManager(scrollLockManager))
+const popupManager: PopupManager = Vue.observable(createPopupManager(scrollLockManager))
 
 const router = createRouter({
   languageManager,
@@ -31,7 +33,8 @@ new Vue({
     themeManager,
     breakpointManager,
     scrollLockManager,
-    fullPageProgressManager
+    fullPageProgressManager,
+    popupManager
   },
   router,
   render: h => h(App)

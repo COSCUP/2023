@@ -36,3 +36,9 @@
     }
   }
 }
+
+@mixin page($id) {
+  #app ##{$id}.page-container {
+    @content;
+  }
+}
