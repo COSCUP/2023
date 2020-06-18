@@ -20,7 +20,7 @@ import '@/assets/scss/pages/agenda.scss'
 import { injectedThis } from '../utils/common'
 import { LanguageManager } from '../utils/language'
 import { MetaManager } from '../utils/meta'
-import { PopupManager, PopupContentType } from '../utils/popup'
+import { PopupManager, PopupContentType, PopupContainerType } from '../utils/popup'
 import { Route } from 'vue-router'
 
 function injected (thisArg: unknown) {
@@ -46,10 +46,13 @@ export default Vue.extend({
       }
     },
     popupSession (sessionId = ''): void {
-      injected(this).popupManager.popupContentData = {
-        type: PopupContentType.General,
-        html: `<h1>${sessionId}</h1>`
-      }
+      injected(this).popupManager.popup({
+        containerType: PopupContainerType.Default,
+        contentData: {
+          type: PopupContentType.General,
+          html: `<h1>${sessionId}</h1>`
+        }
+      })
     },
     closeSessionPopup (): void {
       this.$router.push({

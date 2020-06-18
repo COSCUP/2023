@@ -24,32 +24,55 @@ export interface GeneralPopupContentData extends PopupContentDataBase {
 
 export type PopupContentData = EmptyPopupContentData | GeneralPopupContentData
 
+export interface PopupData {
+  containerType: PopupContainerType;
+  contentData: PopupContentData;
+}
+
 export interface PopupManager {
   readonly isPopup: boolean;
-  popupContainerType: PopupContainerType;
-  popupContentData: PopupContentData;
+  readonly popupContainerType: PopupContainerType;
+  readonly popupContentData: PopupContentData;
+  popup: (popupData: PopupData) => void;
+  close: () => void;
 }
 
 class PopupManagerConcrete implements PopupManager {
-  private _popupContentData: PopupContentData = { type: PopupContentType.Empty }
+  private _popupDataStack: PopupData[] = [{
+    containerType: PopupContainerType.Default,
+    contentData: {
+      type: PopupContentType.Empty
+    }
+  }]
+
   private _scrollLockManager: ScrollLockManager
-  public popupContainerType: PopupContainerType = PopupContainerType.Default
 
   constructor (scrollLockManager: ScrollLockManager) {
     this._scrollLockManager = scrollLockManager
   }
 
   public get isPopup (): boolean {
-    return this._popupContentData.type !== PopupContentType.Empty
+    return this._popupDataStack.length > 1
   }
 
   public get popupContentData (): PopupContentData {
-    return Object.freeze(this._popupContentData)
+    const popupData: PopupData = this._popupDataStack.slice(-1)[0]
+    return Object.freeze(popupData.contentData)
   }
 
-  public set popupContentData (newValue: PopupContentData) {
-    this._popupContentData = newValue
-    this.isPopup ? this._scrollLockManager.lock() : this._scrollLockManager.unlock()
+  public get popupContainerType (): PopupContainerType {
+    const popupData: PopupData = this._popupDataStack.slice(-1)[0]
+    return Object.freeze(popupData.containerType)
+  }
+
+  public popup (popupData: PopupData) {
+    this._popupDataStack.push(popupData)
+  }
+
+  public close (): void {
+    if (this._popupDataStack.length > 1) {
+      this._popupDataStack.pop()
+    }
   }
 }
 

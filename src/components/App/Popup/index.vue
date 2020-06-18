@@ -46,9 +46,7 @@ export default Vue.extend({
   },
   methods: {
     onClose () {
-      injected(this).popupManager.popupContentData = {
-        type: PopupContentType.Empty
-      }
+      injected(this).popupManager.close()
     }
   }
 })
