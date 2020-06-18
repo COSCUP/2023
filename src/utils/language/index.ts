@@ -23,6 +23,9 @@ export interface LanguagePack {
   };
 
   home: {
+    meta: {
+      title: string;
+    };
     info: {
       venue: string;
       tabs: {
@@ -39,7 +42,34 @@ export interface LanguagePack {
     };
   };
 
+  agenda: {
+    meta: {
+      title: string;
+    };
+  };
+
+  venue: {
+    meta: {
+      title: string;
+    };
+    title: string;
+    name: string;
+    address: string;
+    plans: {
+      [name: string]: string;
+    };
+  };
+
+  map: {
+    meta: {
+      title: string;
+    };
+  };
+
   sponsor: {
+    meta: {
+      title: string;
+    };
     callForSponsorship: {
       title: string;
       content: string;
@@ -55,16 +85,10 @@ export interface LanguagePack {
     };
   };
 
-  venue: {
-    title: string;
-    name: string;
-    address: string;
-    plans: {
-      [name: string]: string;
-    };
-  };
-
   staff: {
+    meta: {
+      title: string;
+    };
     groups: {
       secretary: string;
       coordinator: string;

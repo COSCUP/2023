@@ -4,7 +4,8 @@
       [kebabCase(navbarItem.name)]: true,
       active:
         navbarItem.type === NavbarItemType.InternalLink &&
-        $route.name === navbarItem.location($route).name
+        $route.name &&
+        $route.name.startsWith(navbarItem.location($route).name)
     }"
     class="navbar-item-container"
     @click="$emit('click', $event)"

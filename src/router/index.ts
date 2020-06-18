@@ -3,6 +3,8 @@ import VueRouter, { RouteConfig } from 'vue-router'
 import { LanguageManager, LanguageType, defaultLanguageType, availableLanguageTypes } from '@/utils/language'
 import { FullPageProgressManager } from '@/utils/fullPageProgress'
 import { delay } from '@/utils/common'
+import { MetaManager } from '@/utils/meta'
+import { camelCase } from 'lodash-es'
 
 Vue.use(VueRouter)
 
@@ -13,7 +15,13 @@ const pageRoutes: Array<RouteConfig> = [
   },
   {
     path: '/agenda',
-    name: 'Agenda'
+    name: 'Agenda',
+    children: [
+      {
+        path: ':sessionId',
+        name: 'AgendaDetail'
+      }
+    ]
   },
   {
     path: '/venue',
@@ -36,12 +44,13 @@ const pageRoutes: Array<RouteConfig> = [
 export const pageRouteNameList: Array<string> = pageRoutes.map((route) => route.name as string)
 
 interface Inject {
+  metaManager: MetaManager;
   languageManager: LanguageManager;
   fullPageProgressManager: FullPageProgressManager;
 }
 
 export function createRouter (injects: Inject): VueRouter {
-  const { languageManager, fullPageProgressManager } = injects
+  const { languageManager, fullPageProgressManager, metaManager } = injects
 
   const PageComponent: { [name: string]: () => Promise<typeof import('*.vue')> } = {
     Home: () => import(/* webpackChunkName: "home" */ '@/pages/Home.vue'),
@@ -122,6 +131,15 @@ export function createRouter (injects: Inject): VueRouter {
       next('/')
     } else {
       languageManager.languageType = languageType as LanguageType || defaultLanguageType
+
+      const routeName = to.name ?? ''
+      if (pageRouteNameList.includes(routeName)) {
+        type LanguagePackKeys = Exclude<(keyof typeof languageManager.languagePack), 'app'>
+        metaManager.resetMeta()
+        metaManager.setMeta({
+          title: languageManager.languagePack[camelCase(routeName) as LanguagePackKeys].meta.title
+        })
+      }
       next()
     }
   })
