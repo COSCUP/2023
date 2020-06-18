@@ -32,11 +32,11 @@ class ScrollLockManagerConcrete implements ScrollLockManager {
   }
 
   public unlock (): void {
+    const position: Position = this._lockStack.pop() ?? {
+      x: 0,
+      y: 0
+    }
     setTimeout(() => {
-      const position: Position = this._lockStack.pop() ?? {
-        x: 0,
-        y: 0
-      }
       window.scrollTo({
         left: position.x,
         top: position.y,
