@@ -13,7 +13,7 @@
     >
       <transition :name="pageTransitionName" mode="out-in">
         <keep-alive>
-          <router-view></router-view>
+          <router-view @render="onPageRender"></router-view>
         </keep-alive>
       </transition>
       <Footer></Footer>
@@ -94,6 +94,9 @@ export default Vue.extend({
       } else {
         this.pageTransitionName = 'slide-right'
       }
+    },
+    onPageRender (): void {
+      document.dispatchEvent(new Event('x-app-rendered'))
     }
   },
   async mounted () {
