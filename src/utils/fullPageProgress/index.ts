@@ -1,24 +1,25 @@
 import { ScrollLockManager } from '@/utils/scrollLock'
 
 export interface FullPageProgressManager {
-  isLoading: boolean;
+  readonly isLoading: boolean;
+  setStatus: (status: boolean) => void;
 }
 
 class FullPageProgressManagerConcrete implements FullPageProgressManager {
   private _scrollLockManager: ScrollLockManager
-  private _isLoading = false
+  private _stack: true[] = []
 
   constructor (scrollLockManager: ScrollLockManager) {
     this._scrollLockManager = scrollLockManager
   }
 
   public get isLoading () {
-    return this._isLoading
+    return this._stack.length > 0
   }
 
-  public set isLoading (newValue: boolean) {
-    newValue ? this._scrollLockManager.lock() : this._scrollLockManager.unlock()
-    this._isLoading = newValue
+  public setStatus (status: boolean): void {
+    status ? this._scrollLockManager.lock() : this._scrollLockManager.unlock()
+    status ? this._stack.push(true) : ((this._stack.length > 0) && this._stack.pop())
   }
 }
 

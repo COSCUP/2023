@@ -65,7 +65,7 @@ export function createRouter (injects: Inject): VueRouter {
     route.component = async () => {
       let didLoad = false
       delay(100).then(() => {
-        didLoad || (fullPageProgressManager.isLoading = true)
+        didLoad || (fullPageProgressManager.setStatus(true))
       })
       const component = await PageComponent[route.name as string]().then((component) => {
         didLoad = true
@@ -73,7 +73,7 @@ export function createRouter (injects: Inject): VueRouter {
       })
       if (fullPageProgressManager.isLoading) {
         await delay(300)
-        fullPageProgressManager.isLoading = false
+        fullPageProgressManager.setStatus(false)
       }
       return component
     }
