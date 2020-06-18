@@ -1,17 +1,13 @@
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-a,
-p,
-ul,
-li,
-span,
-div {
+* {
   line-height: 1;
-  font-family: "PingFang TC", Din, "Microsoft YaHei", Avenir, Helvetica, Arial, sans-serif;
+  font-family: "PingFang TC", Din, "Microsoft YaHei", Avenir, Helvetica, Arial,
+    sans-serif;
   font-weight: 400;
   letter-spacing: 1px;
+}
+
+code,
+code > * {
+  font-family: "JetBrains Mono", monospace;
+  line-height: 1.5;
 }
