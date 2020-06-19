@@ -1,10 +1,9 @@
 import MarkdownIt from 'markdown-it'
 import Prism from 'prismjs'
-import loadLanguages from 'prismjs/components'
 import plugins from '@/utils/markdown/plugins'
+import 'prismjs/components'
 
 function createMarkdownIt () {
-  loadLanguages()
   const options: MarkdownIt.Options = {
     html: true,
     xhtmlOut: false,

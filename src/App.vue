@@ -41,7 +41,8 @@ import { ThemeManager } from '@/utils/theme'
 import { ScrollLockManager } from '@/utils/scrollLock'
 import { FullPageProgressManager } from '@/utils/fullPageProgress'
 import { PopupManager } from '@/utils/popup'
-import { Route } from 'vue-router'
+import { Route, Location } from 'vue-router'
+import { AnnouncementManager } from './utils/announcement'
 
 function injected (thisArg: unknown) {
   return injectedThis<{
@@ -51,6 +52,7 @@ function injected (thisArg: unknown) {
     scrollLockManager: ScrollLockManager;
     fullPageProgressManager: FullPageProgressManager;
     popupManager: PopupManager;
+    announcementManager: AnnouncementManager;
   }>(thisArg)
 }
 
@@ -62,7 +64,8 @@ export default Vue.extend({
     'breakpointManager',
     'scrollLockManager',
     'fullPageProgressManager',
-    'popupManager'
+    'popupManager',
+    'announcementManager'
   ],
   components: {
     Navbar,
@@ -78,6 +81,7 @@ export default Vue.extend({
   watch: {
     '$route' (newRoute: Route, oldRoute: Route): void {
       this.updatePageTransitionName(newRoute.name ?? '', oldRoute.name ?? '')
+      this.detectAnnouncementRoute()
     }
   },
   methods: {
@@ -95,8 +99,32 @@ export default Vue.extend({
         this.pageTransitionName = 'slide-right'
       }
     },
+    detectAnnouncementRoute () {
+      if (this.$route.query.popUp === 'announcement') {
+        const onClose: () => void = () => {
+          const query = { ...this.$route.query }
+          delete query.popUp
+          this.$router.push({
+            ...(this.$route as Location),
+            query
+          })
+        }
+        injected(this).announcementManager.showAnnouncement(onClose)
+      }
+    },
+    detectAnnouncementUpdate () {
+      if (injected(this).announcementManager.hasUpdated) {
+        this.$router.push({
+          query: {
+            ...this.$route.query,
+            popUp: 'announcement'
+          }
+        })
+      }
+    },
     onPageRender (): void {
       document.dispatchEvent(new Event('x-app-rendered'))
+      this.detectAnnouncementUpdate()
     }
   },
   async mounted () {

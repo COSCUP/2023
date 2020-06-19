@@ -11,6 +11,21 @@ export interface ThemePack {
   background: Color;
   'navbar-background': Color;
   'footer-background': Color;
+  'markdown-link': Color;
+  'markdown-link-hover': Color;
+  'markdown-hr': Color;
+  'markdown-blockquote-side': Color;
+  'markdown-blockquote-text': Color;
+  'markdown-blockquote-background': Color;
+  'markdown-code-text': Color;
+  'markdown-code-background': Color;
+  'markdown-code-block-text': Color;
+  'markdown-code-block-background': Color;
+  'markdown-code-block-lang-text': Color;
+  'markdown-table-border': Color;
+  'markdown-mark-background': Color;
+  'home-banner-logo-wrapper-background': Color;
+  'home-section-background': Color;
 }
 
 export type ThemePackSet = {
@@ -24,7 +39,22 @@ const defaultThemePack: ThemePack = {
   text: '#404040',
   background: '#ffffff',
   'navbar-background': 'rgba(255,255,255,.8)',
-  'footer-background': '#f0f0f0'
+  'footer-background': '#f0f0f0',
+  'markdown-link': colors['coscup-green'],
+  'markdown-link-hover': colors['coscup-green-lighten-1'],
+  'markdown-hr': '#cfcfcf',
+  'markdown-blockquote-side': '#aaaaaa',
+  'markdown-blockquote-text': '#8f8f8f',
+  'markdown-blockquote-background': '#cfcfcf',
+  'markdown-code-text': colors['coscup-green'],
+  'markdown-code-background': '#cfcfcf',
+  'markdown-code-block-text': '#ffffff',
+  'markdown-code-block-background': '#333333',
+  'markdown-code-block-lang-text': '#999999',
+  'markdown-table-border': '#666666',
+  'markdown-mark-background': colors['coscup-green-lighten-3'],
+  'home-banner-logo-wrapper-background': adjustAlpha(colors['dark-blue'], 0.95),
+  'home-section-background': colors['coscup-green']
 }
 
 const themePackSet: ThemePackSet = {
@@ -56,10 +86,13 @@ class ThemeManagerConcrete implements ThemeManager {
     const themeType: ThemeType = this._detectColorSchema()
     const variableStyleDom = (document.getElementById('variable') as HTMLElement)
     const themePack: ThemePack = this.themePackSet[themeType]
-    const properties = Object.entries(themePack)
+    const themePackProperties = Object.entries(themePack)
       .map((entry) => `--color-${entry[0]}: ${entry[1]};`)
       .join('')
-    variableStyleDom.innerHTML = `:root {${properties}}`
+    const colorPackProperties = Object.entries(colors)
+      .map((entry) => `--color-${entry[0]}: ${entry[1]};`)
+      .join('')
+    variableStyleDom.innerHTML = `:root {${themePackProperties + colorPackProperties}}`
     const themeClassNameList = Array.from(document.body.classList).filter((className) => className.startsWith('theme-'))
     document.body.classList.remove(...themeClassNameList)
     document.body.classList.add(`theme-${themeType}`)

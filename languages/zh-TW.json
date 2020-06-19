@@ -5,7 +5,7 @@
       "home": "COSCUP 2020",
       "agenda": "議程表",
       "map": "會場地圖",
-      "venue": "交通",
+      "venue": "地圖",
       "sponsor": "贊助",
       "staff": "工作人員",
       "blog": "部落格",
@@ -44,9 +44,9 @@
   },
   "venue": {
     "meta": {
-      "title": "交通"
+      "title": "地圖"
     },
-    "title": "交通",
+    "title": "地圖",
     "name": "國立臺灣科技大學",
     "address": "106 台北市大安區基隆路四段 43 號",
     "plans": {

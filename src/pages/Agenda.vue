@@ -37,21 +37,17 @@ export default Vue.extend({
   components: {
   },
   methods: {
-    updateSessionMeta () {
-      if (this.$route.name === 'AgendaDetail') {
-        injected(this).metaManager.resetMeta()
-        injected(this).metaManager.setMeta({
-          title: 'Detail'
-        })
-      }
-    },
     popupSession (sessionId = ''): void {
       injected(this).popupManager.popup({
+        metaOptions: {
+          title: 'Detail'
+        },
         containerType: PopupContainerType.Default,
         contentData: {
           type: PopupContentType.General,
           html: `<h1>${sessionId}</h1>`
-        }
+        },
+        onClose: () => this.closeSessionPopup()
       })
     },
     closeSessionPopup (): void {
@@ -61,7 +57,6 @@ export default Vue.extend({
     },
     processByRoute (route: Route): void {
       if (route.name === 'AgendaDetail') {
-        this.updateSessionMeta()
         this.popupSession(route.params.sessionId)
       }
     }
@@ -69,15 +64,11 @@ export default Vue.extend({
   watch: {
     $route (to: Route): void {
       this.processByRoute(to)
-    },
-    'popupManager.isPopup' (isPopup: boolean) {
-      if (!isPopup) {
-        this.closeSessionPopup()
-      }
     }
   },
   mounted () {
     this.processByRoute(this.$route)
+    this.$emit('render')
   }
 })
 </script>

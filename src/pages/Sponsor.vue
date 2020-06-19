@@ -1,8 +1,5 @@
 <template>
-  <main
-    id="sponsor"
-    class="page-container"
-  >
+  <main id="sponsor" class="page-container">
     Sponsor
   </main>
 </template>
@@ -15,6 +12,9 @@ import '@/assets/scss/pages/sponsor.scss'
 export default Vue.extend({
   name: 'Sponsor',
   components: {
+  },
+  mounted () {
+    this.$emit('render')
   }
 })
 </script>

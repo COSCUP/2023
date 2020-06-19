@@ -70,7 +70,7 @@ class MetaManagerConcrete implements MetaManager {
 
   public setMeta (options: MetaOptions): void {
     this._currentMetaValues = {
-      ...this.currentMetaValues,
+      ...defaultMetaValues,
       ...options
     }
   }

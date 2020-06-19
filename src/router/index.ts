@@ -53,12 +53,30 @@ export function createRouter (injects: Inject): VueRouter {
   const { languageManager, fullPageProgressManager, metaManager } = injects
 
   const PageComponent: { [name: string]: () => Promise<typeof import('*.vue')> } = {
-    Home: () => import(/* webpackChunkName: "home" */ '@/pages/Home.vue'),
-    Agenda: () => import(/* webpackChunkName: "agenda" */ '@/pages/Agenda.vue'),
-    Venue: () => import(/* webpackChunkName: "venue" */ '@/pages/Venue.vue'),
-    Map: () => import(/* webpackChunkName: "map" */ '@/pages/Map.vue'),
-    Sponsor: () => import(/* webpackChunkName: "sponsor" */ '@/pages/Sponsor.vue'),
-    Staff: () => import(/* webpackChunkName: "staff" */ '@/pages/Staff.vue')
+    Home: () => import(
+      /* webpackChunkName: "home" */
+      /* webpackPrefetch: true */
+      '@/pages/Home.vue'),
+    Agenda: () => import(
+      /* webpackChunkName: "agenda" */
+      /* webpackPrefetch: true */
+      '@/pages/Agenda.vue'),
+    Venue: () => import(
+      /* webpackChunkName: "venue" */
+      /* webpackPrefetch: true */
+      '@/pages/Venue.vue'),
+    Map: () => import(
+      /* webpackChunkName: "map" */
+      /* webpackPrefetch: true */
+      '@/pages/Map.vue'),
+    Sponsor: () => import(
+      /* webpackChunkName: "sponsor" */
+      /* webpackPrefetch: true */
+      '@/pages/Sponsor.vue'),
+    Staff: () => import(
+      /* webpackChunkName: "staff" */
+      /* webpackPrefetch: true */
+      '@/pages/Staff.vue')
   }
 
   pageRoutes.forEach((route) => {
@@ -114,7 +132,7 @@ export function createRouter (injects: Inject): VueRouter {
     routes: expandedRoutes,
     scrollBehavior (to) {
       if (to.hash) {
-        const target = document.querySelector(CSS.escape(to.hash)) as HTMLElement
+        const target = document.querySelector(to.hash) as HTMLElement
 
         return window.scrollTo({
           top: target.offsetTop,
@@ -135,7 +153,6 @@ export function createRouter (injects: Inject): VueRouter {
       const routeName = to.name ?? ''
       if (pageRouteNameList.includes(routeName)) {
         type LanguagePackKeys = Exclude<(keyof typeof languageManager.languagePack), 'app'>
-        metaManager.resetMeta()
         metaManager.setMeta({
           title: languageManager.languagePack[camelCase(routeName) as LanguagePackKeys].meta.title
         })

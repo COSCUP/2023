@@ -1,8 +1,5 @@
 <template>
-  <main
-    id="staff"
-    class="page-container"
-  >
+  <main id="staff" class="page-container">
     Staff
   </main>
 </template>
@@ -15,6 +12,9 @@ import '@/assets/scss/pages/staff.scss'
 export default Vue.extend({
   name: 'Staff',
   components: {
+  },
+  mounted () {
+    this.$emit('render')
   }
 })
 </script>

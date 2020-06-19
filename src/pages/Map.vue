@@ -1,8 +1,5 @@
 <template>
-  <main
-    id="map"
-    class="page-container"
-  >
+  <main id="map" class="page-container">
     Map
   </main>
 </template>
@@ -15,6 +12,9 @@ import '@/assets/scss/pages/map.scss'
 export default Vue.extend({
   name: 'Map',
   components: {
+  },
+  mounted () {
+    this.$emit('render')
   }
 })
 </script>

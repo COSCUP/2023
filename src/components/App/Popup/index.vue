@@ -3,7 +3,7 @@
     <component :is="popupContainerComponent" @close="onClose">
       <component
         :is="popupContentComponent"
-        :popup-content-data="popupManager.popupContentData"
+        :popup-content-data="popupManager.popupData.contentData"
       ></component>
     </component>
   </div>
@@ -35,13 +35,13 @@ export default Vue.extend({
     popupContainerComponent () {
       return {
         [PopupContainerType.Default]: DefaultPopupContainer
-      }[injected(this).popupManager.popupContainerType]
+      }[injected(this).popupManager.popupData.containerType]
     },
     popupContentComponent () {
       return {
         [PopupContentType.Empty]: EmptyPopupContent,
         [PopupContentType.General]: GeneralPopupContent
-      }[injected(this).popupManager.popupContentData.type]
+      }[injected(this).popupManager.popupData.contentData.type]
     }
   },
   methods: {

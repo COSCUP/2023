@@ -4,7 +4,9 @@
 @import "./components/app/full-page-progress";
 @import "./components/app/popup";
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -12,7 +14,7 @@ html,
 body {
   height: 100%;
   color: var(--color-text);
-  background-color: var(--color-background);
+  background-color: var(--color-background) !important;
 }
 
 #app {
