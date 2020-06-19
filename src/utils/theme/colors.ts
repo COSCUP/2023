@@ -24,6 +24,7 @@ export function extendLightenDarkenColorPack (colorPack: ColorPack): ColorPack {
 
 let colors: ColorPack = {
   'coscup-green': '#3b9838',
+  'coscup-secondary': 'rgb(177, 215, 191)',
   'dark-blue': '#12344c'
 }
 
