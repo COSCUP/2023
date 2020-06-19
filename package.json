@@ -9,7 +9,9 @@
     "build:bundle-analysis": "npm run build -- --analyze",
     "generate:icons-import": "npm run ts-script -- ./scripts/generateIconsImport.ts",
     "generate:languages-import": "npm run ts-script -- ./scripts/generateLanguagesImport.ts",
-    "pre-build": "npm run generate:languages-import && npm run generate:icons-import",
+    "generate:session": "[ -n \"$PRETALX_TOKEN\" ] && node ./scripts/generateSession.js > public/json/session.json || curl -o public/json/session.json https://coscup.org/2020/json/session.json",
+    "generate:staff": "node ./scripts/generateStaff.js > public/json/staff.json",
+    "pre-build": "npm run generate:languages-import && npm run generate:icons-import && npm run generate:session && npm run generate:staff",
     "ts-script": "ts-node -r tsconfig-paths/register --project ./scripts/tsconfig.json"
   },
   "dependencies": {
@@ -21,6 +23,7 @@
     "axios": "^0.19.2",
     "core-decorators": "^0.20.0",
     "core-js": "^3.6.5",
+    "js-md5": "^0.7.3",
     "lodash-es": "^4.17.15",
     "markdown-it": "^11.0.0",
     "markdown-it-abbr": "^1.0.4",

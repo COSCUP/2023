@@ -25,3 +25,5 @@ pnpm-debug.log*
 src/utils/icon/index.ts
 src/utils/icon/icons/fontAwesome.ts
 src/utils/language/languages.ts
+public/json/session.json
+public/json/staff.json
