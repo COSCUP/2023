@@ -1,7 +1,7 @@
 <template>
   <main id="staff" class="page-container">
     <div
-      v-for="group in staffs"
+      v-for="group in staffData"
       :key="`staff-group-${group.tid}`"
       class="group-box-wrapper"
     >
@@ -11,32 +11,25 @@
         </h2>
         <div class="staff-wrapper">
           <div
-            v-for="chief in group.chiefs"
-            :key="`${group.tid}-${chief.name}`"
-            class="staff chief"
-          >
-            <img
-              class="staff-avatar"
-              :src="
-                `https://www.gravatar.com/avatar/${chief.email_hash}?s=320&d=identicon&r=g`
-              "
-              :alt="`${chief.name}'s Avatar`"
-            />
-            <p>{{ chief.name }}</p>
-          </div>
-          <div
-            v-for="member in group.members"
-            :key="`${group.tid}-${member.name}`"
+            v-for="staff in group.staffs"
+            :key="`${group.tid}-${staff.name}`"
             class="staff"
+            :class="{
+              chief: staff.isChief
+            }"
           >
-            <img
-              class="staff-avatar"
-              :src="
-                `https://www.gravatar.com/avatar/${member.email_hash}?s=320&d=identicon&r=g`
-              "
-              :alt="`${member.name}'s Avatar`"
-            />
-            <p>{{ member.name }}</p>
+            <div class="staff-avatar-wrapper">
+              <div class="staff-avatar-container">
+                <img
+                  class="staff-avatar"
+                  :src="
+                    `https://www.gravatar.com/avatar/${staff.email_hash}?s=320&d=identicon&r=g`
+                  "
+                  :alt="`${staff.name}'s Avatar`"
+                />
+              </div>
+            </div>
+            <p>{{ staff.name }}</p>
           </div>
         </div>
       </section>
@@ -46,16 +39,27 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import _staffs from '@/../public/json/staff.json'
+import _staffData from '@/../public/json/staff.json'
 import '@/assets/scss/pages/staff.scss'
 
 export default Vue.extend({
   name: 'Staff',
   inject: ['languageManager'],
   computed: {
-    staffs () {
+    staffData () {
       const groupSequence = ['coordinator', 'secretary', 'program', 'field', 'finance', 'it', 'marketing', 'photo', 'sponsor', 'streaming']
-      return _staffs.sort((a, b) => groupSequence.indexOf(a.tid) - groupSequence.indexOf(b.tid))
+      return _staffData
+        .sort((a, b) => groupSequence.indexOf(a.tid) - groupSequence.indexOf(b.tid))
+        .map((group) => {
+          return {
+            tid: group.tid,
+            name: group.name,
+            staffs: [
+              ...group.chiefs.map((chief) => ({ ...chief, isChief: true })),
+              ...group.members.map((chief) => ({ ...chief, isChief: false }))
+            ]
+          }
+        })
     }
   },
   mounted () {
