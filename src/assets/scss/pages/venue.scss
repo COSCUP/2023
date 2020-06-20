@@ -6,9 +6,47 @@
     height: 550px;
   }
 
-  @include xsOnly {
+  .plan-container {
+    margin: auto;
+    padding: 2rem;
+    max-width: 900px;
+    column-count: 2;
+
+    .plan {
+      display: inline-block;
+      width: 100%;
+      padding: 2rem;
+      margin: 1rem 0;
+      background-color: var(--color-venue-plan-card-background);
+      color: var(--color-text);
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+      h3 {
+        display: inline-block;
+        margin-bottom: 1rem;
+        padding: 0 1rem 0.5rem 0;
+        border-bottom: solid 2px;
+        color: var(--color-venue-plan-card-title);
+        font-size: 1.75rem;
+        font-weight: 600;
+      }
+    }
+  }
+
+  @include smAndDown {
     #map-component {
       height: 300px;
+    }
+
+    .plan-container {
+      column-count: 1;
+      max-width: 600px;
+      padding: 1rem;
+
+      .plan {
+        padding: 1.5rem;
+      }
     }
   }
 }
