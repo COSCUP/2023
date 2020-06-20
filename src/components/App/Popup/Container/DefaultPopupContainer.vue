@@ -1,9 +1,11 @@
 <template>
   <div id="default-popup-container" class="popup-container">
-    <button class="close" @click="$emit('close')">
-      <Icon name="times"></Icon>
-    </button>
-    <slot></slot>
+    <div class="inner-container">
+      <button class="close" @click="$emit('close')">
+        <Icon name="times"></Icon>
+      </button>
+      <slot></slot>
+    </div>
   </div>
 </template>
 
