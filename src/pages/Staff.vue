@@ -47,6 +47,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import _staffData from '@/../public/json/staff.json'
+
 import '@/assets/scss/pages/staff.scss'
 
 export default Vue.extend({

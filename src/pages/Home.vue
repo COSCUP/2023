@@ -60,10 +60,11 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import markdown from '@/utils/markdown'
-import '@/assets/scss/pages/home.scss'
-import { injectedThis } from '@/utils/common'
 import { LanguageService } from '@/services/language'
+import { injectedThis } from '@/utils/common'
+import markdown from '@/utils/markdown'
+
+import '@/assets/scss/pages/home.scss'
 
 function injected (thisArg: unknown) {
   return injectedThis<{

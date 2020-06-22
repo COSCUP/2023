@@ -33,23 +33,22 @@
 
 <script lang="ts">
 import Vue from 'vue'
-
-import '@/assets/scss/app.scss'
+import { Route, Location } from 'vue-router'
 import Navbar from '@/components/App/Navbar/index.vue'
 import Footer from '@/components/App/Footer.vue'
 import FullPageProgress from '@/components/App/FullPageProgress.vue'
 import Popup from '@/components/App/Popup/index.vue'
 import { pageRouteNameList } from '@/router'
-
-import { injectedThis } from '@/utils/common'
-import { LanguageService } from '@/services/language'
-import { BreakpointService } from '@/services/breakpoint'
-import { ThemeService } from '@/services/theme'
-import { ScrollLockService } from '@/services/scrollLock'
-import { FullPageProgressService } from '@/services/fullPageProgress'
-import { PopupService } from '@/services/popup'
-import { Route, Location } from 'vue-router'
 import { AnnouncementService } from '@/services/announcement'
+import { BreakpointService } from '@/services/breakpoint'
+import { FullPageProgressService } from '@/services/fullPageProgress'
+import { LanguageService } from '@/services/language'
+import { PopupService } from '@/services/popup'
+import { ScrollLockService } from '@/services/scrollLock'
+import { ThemeService } from '@/services/theme'
+import { injectedThis } from '@/utils/common'
+
+import '@/assets/scss/app.scss'
 
 function injected (thisArg: unknown) {
   return injectedThis<{

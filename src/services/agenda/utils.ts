@@ -3,9 +3,9 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-import _rawData from '@/../public/json/session.json'
-import { PopupData, PopupContainerType, PopupContentType } from '../popup'
 import groupBy from 'lodash/groupBy'
+import _rawData from '@/../public/json/session.json'
+import { PopupData, PopupContainerType, PopupContentType } from '@/services/popup'
 import markdown from '@/utils/markdown'
 
 export type RawData = typeof _rawData

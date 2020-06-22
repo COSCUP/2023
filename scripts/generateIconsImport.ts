@@ -3,9 +3,9 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
+import fs from 'fs'
 import { camelCase, groupBy, upperFirst } from 'lodash'
 import path from 'path'
-import fs from 'fs'
 
 const iconPacksDir = path.join(__dirname, '../icons/')
 

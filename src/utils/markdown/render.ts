@@ -5,8 +5,8 @@
 
 import MarkdownIt from 'markdown-it'
 import Prism from 'prismjs'
-import plugins from './plugins'
 import 'prismjs/components'
+import plugins from './plugins'
 
 function createMarkdownIt () {
   const options: MarkdownIt.Options = {

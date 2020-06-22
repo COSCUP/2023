@@ -4,17 +4,18 @@
 // https://opensource.org/licenses/MIT
 
 import { Map as OlMap, View, Feature } from 'ol'
-import OSM from 'ol/source/OSM'
-import TileLayer from 'ol/layer/Tile'
 import Point from 'ol/geom/Point'
-import { fromLonLat } from 'ol/proj'
 import { defaults } from 'ol/interaction'
-import 'ol/ol.css'
+import TileLayer from 'ol/layer/Tile'
+import LayerVector from 'ol/layer/Vector'
+import { fromLonLat } from 'ol/proj'
+import OSM from 'ol/source/OSM'
+import SourceVector from 'ol/source/Vector'
 import Style from 'ol/style/Style'
 import Icon from 'ol/style/Icon'
 import IconAnchorUnits from 'ol/style/IconAnchorUnits'
-import LayerVector from 'ol/layer/Vector'
-import SourceVector from 'ol/source/Vector'
+
+import 'ol/ol.css'
 
 export interface MapOptions {
   target: string | HTMLElement;

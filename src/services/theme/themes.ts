@@ -3,8 +3,8 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-import { Color, adjustAlpha } from './utils'
 import colors from './colors'
+import { Color, adjustAlpha } from './utils'
 
 export type ThemeType = 'light' | 'dark'
 

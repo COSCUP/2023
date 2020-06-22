@@ -3,8 +3,8 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-import { formatDateString, fixedTimeZoneDate, generateAgendaTableData, generateAgendaListData, AgendaTableData, AgendaListData, RoomData, Session, SessionData, rawData, TypeData, SpeakerData, TagData, generateSessionPopupData } from './utils'
 import groupBy from 'lodash/groupBy'
+import { formatDateString, fixedTimeZoneDate, generateAgendaTableData, generateAgendaListData, AgendaTableData, AgendaListData, RoomData, Session, SessionData, rawData, TypeData, SpeakerData, TagData, generateSessionPopupData } from './utils'
 import { PopupData } from '@/services/popup'
 
 export * from './utils'

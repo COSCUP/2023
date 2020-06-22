@@ -4,7 +4,7 @@
 // https://opensource.org/licenses/MIT
 
 import { ScrollLockService } from '@/services/scrollLock'
-import { MetaOptions, MetaService } from '../meta'
+import { MetaOptions, MetaService } from '@/services/meta'
 
 export enum PopupContentType {
   Empty = 'Empty',

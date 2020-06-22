@@ -5,18 +5,16 @@
 
 import Vue from 'vue'
 import App from './App.vue'
-import { createRouter } from './router'
-
-import { createThemeService, ThemeService } from '@/services/theme'
-import { createLanguageService, LanguageService } from '@/services/language'
-import { createBreakpointService, BreakpointService } from '@/services/breakpoint'
-import { createScrollLockService, ScrollLockService } from '@/services/scrollLock'
-import { createFullPageProgressService, FullPageProgressService } from '@/services/fullPageProgress'
-import { createPopupService, PopupService } from '@/services/popup'
-import { createMetaService, MetaService } from '@/services/meta'
-import { createAnnouncementService, AnnouncementService } from '@/services/announcement'
-
 import Icon from '@/components/Basic/Icon/index.vue'
+import { createRouter } from './router'
+import { createAnnouncementService, AnnouncementService } from '@/services/announcement'
+import { createBreakpointService, BreakpointService } from '@/services/breakpoint'
+import { createFullPageProgressService, FullPageProgressService } from '@/services/fullPageProgress'
+import { createLanguageService, LanguageService } from '@/services/language'
+import { createMetaService, MetaService } from '@/services/meta'
+import { createPopupService, PopupService } from '@/services/popup'
+import { createScrollLockService, ScrollLockService } from '@/services/scrollLock'
+import { createThemeService, ThemeService } from '@/services/theme'
 
 Vue.component('Icon', Icon)
 

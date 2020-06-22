@@ -48,9 +48,9 @@
 import Vue from 'vue'
 import { Location } from 'vue-router'
 import { Session, AgendaService, formatTimeString } from '@/services/agenda'
-import { injectedThis } from '@/utils/common'
-import { LanguageService } from '@/services/language'
 import { BreakpointService } from '@/services/breakpoint'
+import { LanguageService } from '@/services/language'
+import { injectedThis } from '@/utils/common'
 
 function injected (thisArg: unknown) {
   return injectedThis<{

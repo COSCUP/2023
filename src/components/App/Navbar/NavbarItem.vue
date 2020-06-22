@@ -93,12 +93,12 @@
 </template>
 
 <script lang="ts">
-import Vue, { PropType } from 'vue'
 import { kebabCase } from 'lodash-es'
-import { NavbarItemType, NavbarItemData } from './navbar'
-import { injectedThis } from '@/utils/common'
-import { LanguageService, LanguageType, availableLanguageTypes, defaultLanguageType } from '@/services/language'
+import Vue, { PropType } from 'vue'
 import { Location } from 'vue-router'
+import { NavbarItemType, NavbarItemData } from './navbar'
+import { LanguageService, LanguageType, availableLanguageTypes, defaultLanguageType } from '@/services/language'
+import { injectedThis } from '@/utils/common'
 
 function injected (thisArg: unknown) {
   return injectedThis<{ languageService: LanguageService }>(thisArg)

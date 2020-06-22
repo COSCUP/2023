@@ -28,10 +28,10 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { injectedThis } from '@/utils/common'
-import { LanguageService } from '@/services/language'
-import { AgendaService, formatTimeString } from '@/services/agenda'
 import AgendaSessionItem from '@/components/Agenda/AgendaSessionItem.vue'
+import { AgendaService, formatTimeString } from '@/services/agenda'
+import { LanguageService } from '@/services/language'
+import { injectedThis } from '@/utils/common'
 
 function injected (thisArg: unknown) {
   return injectedThis<{

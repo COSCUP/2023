@@ -21,18 +21,17 @@
 
 <script lang="ts">
 import Vue from 'vue'
-
-import '@/assets/scss/pages/agenda.scss'
-import { injectedThis } from '@/utils/common'
-import { LanguageService } from '@/services/language'
-import { MetaService } from '@/services/meta'
-import { PopupService, PopupData, PopupContainerType, PopupContentType } from '@/services/popup'
 import { Route } from 'vue-router'
-import { createAgendaService } from '@/services/agenda'
 import AgendaNavbar from '@/components/Agenda/AgendaNavbar.vue'
 import AgendaTable from '@/components/Agenda/AgendaTable.vue'
 import AgendaList from '@/components/Agenda/AgendaList.vue'
+import { createAgendaService } from '@/services/agenda'
 import { BreakpointService } from '@/services/breakpoint'
+import { LanguageService } from '@/services/language'
+import { MetaService } from '@/services/meta'
+import { PopupService, PopupData, PopupContainerType, PopupContentType } from '@/services/popup'
+import { injectedThis } from '@/utils/common'
+import '@/assets/scss/pages/agenda.scss'
 
 function injected (thisArg: unknown) {
   return injectedThis<{

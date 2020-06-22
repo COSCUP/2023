@@ -74,13 +74,13 @@
 </template>
 
 <script lang="ts">
+import { debounce } from 'lodash-es'
 import Vue from 'vue'
 import NavbarItem from './NavbarItem.vue'
 import { navbarItems, NavbarItemData, NavbarAction } from './navbar'
 import { BreakpointService } from '@/services/breakpoint'
 import { ScrollLockService } from '@/services/scrollLock'
 import { injectedThis } from '@/utils/common'
-import { debounce } from 'lodash-es'
 
 function injected (thisArg: unknown) {
   return injectedThis<{

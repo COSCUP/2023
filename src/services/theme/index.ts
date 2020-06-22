@@ -3,11 +3,11 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-import { ThemePack, ThemePackSet, ThemeType, themePackSet } from './themes'
-import colors from './colors'
 import { debounce } from 'lodash-es'
-export * from './utils'
+import colors from './colors'
+import { ThemePack, ThemePackSet, ThemeType, themePackSet } from './themes'
 export * from './themes'
+export * from './utils'
 
 export interface ThemeService {
   themeType: ThemeType;
