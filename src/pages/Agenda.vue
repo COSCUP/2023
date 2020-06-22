@@ -14,8 +14,8 @@
     }"
   >
     <AgendaNavbar />
-    <AgendaTable v-show="breakpointManager.smAndUp" />
-    <AgendaList v-show="breakpointManager.xsOnly" />
+    <AgendaTable v-show="breakpointService.smAndUp" />
+    <AgendaList v-show="breakpointService.xsOnly" />
   </main>
 </template>
 
@@ -32,14 +32,14 @@ import { createAgendaService } from '@/utils/agenda'
 import AgendaNavbar from '@/components/Agenda/AgendaNavbar.vue'
 import AgendaTable from '@/components/Agenda/AgendaTable.vue'
 import AgendaList from '@/components/Agenda/AgendaList.vue'
-import { BreakpointManager } from '../utils/breakpoint'
+import { BreakpointService } from '../utils/breakpoint'
 
 function injected (thisArg: unknown) {
   return injectedThis<{
     languageService: LanguageService;
     metaManager: MetaManager;
     popupManager: PopupManager;
-    breakpointManager: BreakpointManager;
+    breakpointService: BreakpointService;
   }>(thisArg)
 }
 
@@ -53,7 +53,7 @@ const agendaService = Vue.observable(createAgendaService([
 
 export default Vue.extend({
   name: 'Agenda',
-  inject: ['languageService', 'metaManager', 'popupManager', 'breakpointManager'],
+  inject: ['languageService', 'metaManager', 'popupManager', 'breakpointService'],
   provide: {
     agendaService
   },

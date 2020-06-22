@@ -43,7 +43,7 @@ import { pageRouteNameList } from '@/router'
 
 import { injectedThis } from '@/utils/common'
 import { LanguageService } from '@/utils/language'
-import { BreakpointManager } from '@/utils/breakpoint'
+import { BreakpointService } from '@/utils/breakpoint'
 import { ThemeManager } from '@/utils/theme'
 import { ScrollLockManager } from '@/utils/scrollLock'
 import { FullPageProgressManager } from '@/utils/fullPageProgress'
@@ -55,7 +55,7 @@ function injected (thisArg: unknown) {
   return injectedThis<{
     languageService: LanguageService;
     themeManager: ThemeManager;
-    breakpointManager: BreakpointManager;
+    breakpointService: BreakpointService;
     scrollLockManager: ScrollLockManager;
     fullPageProgressManager: FullPageProgressManager;
     popupManager: PopupManager;
@@ -68,7 +68,7 @@ export default Vue.extend({
   inject: [
     'languageService',
     'themeManager',
-    'breakpointManager',
+    'breakpointService',
     'scrollLockManager',
     'fullPageProgressManager',
     'popupManager',
@@ -93,7 +93,7 @@ export default Vue.extend({
   },
   methods: {
     updatePageTransitionName (newRouteName: string, oldRouteName: string): void {
-      if (injected(this).breakpointManager.xsOnly) {
+      if (injected(this).breakpointService.xsOnly) {
         this.pageTransitionName = 'fade'
         return
       }
@@ -135,11 +135,11 @@ export default Vue.extend({
     }
   },
   async mounted () {
-    injected(this).breakpointManager.startDetect()
+    injected(this).breakpointService.startDetect()
     injected(this).themeManager.startDetect()
   },
   beforeDestroy () {
-    injected(this).breakpointManager.stopDetect()
+    injected(this).breakpointService.stopDetect()
     injected(this).themeManager.stopDetect()
   }
 })

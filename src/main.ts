@@ -9,7 +9,7 @@ import { createRouter } from './router'
 
 import { createThemeManager, ThemeManager } from '@/utils/theme'
 import { createLanguageService, LanguageService } from '@/utils/language'
-import { createBreakpointManager, BreakpointManager } from '@/utils/breakpoint'
+import { createBreakpointService, BreakpointService } from '@/utils/breakpoint'
 import { createScrollLockManager, ScrollLockManager } from '@/utils/scrollLock'
 import { createFullPageProgressManager, FullPageProgressManager } from '@/utils/fullPageProgress'
 import { createPopupManager, PopupManager } from '@/utils/popup'
@@ -24,7 +24,7 @@ Vue.config.productionTip = false
 
 const languageService: LanguageService = Vue.observable(createLanguageService())
 const themeManager: ThemeManager = Vue.observable(createThemeManager())
-const breakpointManager: BreakpointManager = Vue.observable(createBreakpointManager())
+const breakpointService: BreakpointService = Vue.observable(createBreakpointService())
 const scrollLockManager: ScrollLockManager = Vue.observable(createScrollLockManager())
 const fullPageProgressManager: FullPageProgressManager = Vue.observable(createFullPageProgressManager(scrollLockManager))
 const metaManager: MetaManager = Vue.observable(createMetaManager())
@@ -41,7 +41,7 @@ new Vue({
   provide: {
     languageService,
     themeManager,
-    breakpointManager,
+    breakpointService,
     scrollLockManager,
     fullPageProgressManager,
     popupManager,

@@ -11,7 +11,7 @@ export type BreakpointWith<T> = {
   [breakpoint in Breakpoint]: T
 }
 
-export interface BreakpointManager {
+export interface BreakpointService {
   breakpoint: Breakpoint;
   readonly xsOnly: boolean;
   readonly smOnly: boolean;
@@ -28,7 +28,7 @@ export interface BreakpointManager {
   stopDetect: () => void;
 }
 
-class BreakpointManagerConcrete implements BreakpointManager {
+class BreakpointServiceConcrete implements BreakpointService {
   public breakpoint: Breakpoint = 'xl'
   private _debouncedDetectBreakpoint = debounce(() => { this.breakpoint = this._detectBreakpoint() }, 300)
 
@@ -105,6 +105,6 @@ class BreakpointManagerConcrete implements BreakpointManager {
   }
 }
 
-export function createBreakpointManager (): BreakpointManager {
-  return new BreakpointManagerConcrete()
+export function createBreakpointService (): BreakpointService {
+  return new BreakpointServiceConcrete()
 }

@@ -77,31 +77,31 @@
 import Vue from 'vue'
 import NavbarItem from './NavbarItem.vue'
 import { navbarItems, NavbarItemData, NavbarAction } from './navbar'
-import { BreakpointManager } from '@/utils/breakpoint'
+import { BreakpointService } from '@/utils/breakpoint'
 import { ScrollLockManager } from '@/utils/scrollLock'
 import { injectedThis } from '@/utils/common'
 import { debounce } from 'lodash-es'
 
 function injected (thisArg: unknown) {
   return injectedThis<{
-    breakpointManager: BreakpointManager;
+    breakpointService: BreakpointService;
     scrollLockManager: ScrollLockManager;
   }>(thisArg)
 }
 
 export default Vue.extend({
   name: 'Navbar',
-  inject: ['breakpointManager', 'scrollLockManager'],
+  inject: ['breakpointService', 'scrollLockManager'],
   components: {
     NavbarItem
   },
   computed: {
     navbarItemsInMenu (): NavbarItemData[] {
-      if (injected(this).breakpointManager.smAndUp) return this.navbarItems
+      if (injected(this).breakpointService.smAndUp) return this.navbarItems
       return this.navbarItems.filter(item => !item.hiddenInMenu)
     },
     navbarItemsFixedInNavbar (): NavbarItemData[] {
-      if (injected(this).breakpointManager.smAndUp) return []
+      if (injected(this).breakpointService.smAndUp) return []
       return this.navbarItems.filter(item => item.fixedInNavbar)
     }
   },
@@ -128,7 +128,7 @@ export default Vue.extend({
       isOpen ? injected(this).scrollLockManager.lock() : injected(this).scrollLockManager.unlock()
     },
     detectOverflow () {
-      if (injected(this).breakpointManager.xsOnly) return
+      if (injected(this).breakpointService.xsOnly) return
       const windowWidth = window.innerWidth
       const menuItemTotalWidth = Array.from<HTMLElement>(
         document.querySelectorAll('#navbar .menu .navbar-item-container')

@@ -9,7 +9,7 @@
   <router-link class="agenda-session-item" :to="location">
     <section class="content-section">
       <h4 class="track">
-        <span v-show="breakpointManager.xsOnly" class="room">{{ room }}</span>
+        <span v-show="breakpointService.xsOnly" class="room">{{ room }}</span>
         <span>{{ track }}</span>
       </h4>
       <!--  -->
@@ -50,19 +50,19 @@ import { Location } from 'vue-router'
 import { Session, AgendaService, formatTimeString } from '@/utils/agenda'
 import { injectedThis } from '@/utils/common'
 import { LanguageService } from '@/utils/language'
-import { BreakpointManager } from '@/utils/breakpoint'
+import { BreakpointService } from '@/utils/breakpoint'
 
 function injected (thisArg: unknown) {
   return injectedThis<{
     languageService: LanguageService;
     agendaService: AgendaService;
-    breakpointManager: BreakpointManager;
+    breakpointService: BreakpointService;
   }>(thisArg)
 }
 
 export default Vue.extend({
   name: 'AgendaSessionItem',
-  inject: ['languageService', 'agendaService', 'breakpointManager'],
+  inject: ['languageService', 'agendaService', 'breakpointService'],
   props: {
     sessionId: {
       type: String,
