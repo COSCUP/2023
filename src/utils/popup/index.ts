@@ -26,6 +26,7 @@ export interface GeneralPopupContentData extends PopupContentDataBase {
 export type PopupContentData = EmptyPopupContentData | GeneralPopupContentData
 
 export interface PopupData {
+  popupId?: string;
   metaOptions: MetaOptions;
   containerType: PopupContainerType;
   contentData: PopupContentData;
@@ -71,6 +72,7 @@ class PopupManagerConcrete implements PopupManager {
   }
 
   public popup (popupData: PopupData) {
+    if (popupData.popupId && this._popupDataStack.some((data) => data.popupId === popupData.popupId)) return
     this._popupDataStack.push(popupData)
     this._scrollLockManager.lock()
     this._metaManager.setMeta(this.popupData.metaOptions)

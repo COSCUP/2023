@@ -77,6 +77,7 @@ export default Vue.extend({
     },
     closeSessionPopup (): void {
       this.$router.push({
+        ...this.$route,
         name: 'Agenda'
       })
     },

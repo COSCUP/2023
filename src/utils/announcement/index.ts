@@ -30,6 +30,7 @@ class AnnouncementManagerConcrete implements AnnouncementManager {
   public async showAnnouncement (onClose?: () => void) {
     const languageType: LanguageType = this._languageManager.languageType
     const popupData: PopupData = {
+      popupId: 'announcement',
       metaOptions: {
         title: announcement.meta.title[languageType],
         description: announcement.meta.description[languageType]

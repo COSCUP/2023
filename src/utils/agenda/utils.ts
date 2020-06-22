@@ -244,6 +244,7 @@ const generateSessionPopupContentHtml = async (session: Session, language: 'en' 
 
 export async function generateSessionPopupData (session: Session, language: 'en' | 'zh'): Promise<PopupData> {
   return {
+    popupId: `session-${session.id}`,
     metaOptions: {
       title: session[language].title
     },
