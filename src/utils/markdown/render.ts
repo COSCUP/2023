@@ -1,3 +1,8 @@
+// Copyright (c) 2020 DevilTea
+//
+// This software is released under the MIT License.
+// https://opensource.org/licenses/MIT
+
 import MarkdownIt from 'markdown-it'
 import Prism from 'prismjs'
 import plugins from '@/utils/markdown/plugins'

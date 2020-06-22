@@ -1,3 +1,10 @@
+<!--
+  Copyright (c) 2020 DevilTea
+
+  This software is released under the MIT License.
+  https://opensource.org/licenses/MIT
+-->
+
 <template>
   <div v-show="popupManager.isPopup" id="popup">
     <component :is="popupContainerComponent" @close="onClose">

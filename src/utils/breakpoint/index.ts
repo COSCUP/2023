@@ -1,3 +1,8 @@
+// Copyright (c) 2020 DevilTea
+//
+// This software is released under the MIT License.
+// https://opensource.org/licenses/MIT
+
 import { debounce } from 'lodash-es'
 
 export type Breakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl'

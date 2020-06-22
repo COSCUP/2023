@@ -1,3 +1,8 @@
+// Copyright (c) 2020 DevilTea
+//
+// This software is released under the MIT License.
+// https://opensource.org/licenses/MIT
+
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import { LanguageManager, LanguageType, defaultLanguageType, availableLanguageTypes } from '@/utils/language'

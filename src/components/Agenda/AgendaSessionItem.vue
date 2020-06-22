@@ -1,3 +1,10 @@
+<!--
+  Copyright (c) 2020 DevilTea
+
+  This software is released under the MIT License.
+  https://opensource.org/licenses/MIT
+-->
+
 <template>
   <router-link class="agenda-session-item" :to="location">
     <section class="content-section">

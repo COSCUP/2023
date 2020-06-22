@@ -1,3 +1,10 @@
+<!--
+  Copyright (c) 2020 DevilTea
+
+  This software is released under the MIT License.
+  https://opensource.org/licenses/MIT
+-->
+
 <template>
   <table class="agenda-table" :style="tableStyle">
     <thead class="room-list">

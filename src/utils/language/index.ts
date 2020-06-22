@@ -1,3 +1,8 @@
+// Copyright (c) 2020 DevilTea
+//
+// This software is released under the MIT License.
+// https://opensource.org/licenses/MIT
+
 import { LanguageType, defaultLanguageType, languagePackSet } from '@/utils/language/languages'
 export * from '@/utils/language/languages'
 

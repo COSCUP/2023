@@ -1,3 +1,7 @@
+// Copyright (c) 2020 DevilTea
+//
+// This software is released under the MIT License.
+// https://opensource.org/licenses/MIT
 
 import { Map as OlMap, View, Feature } from 'ol'
 import OSM from 'ol/source/OSM'

@@ -1,3 +1,8 @@
+// Copyright (c) 2020 DevilTea
+//
+// This software is released under the MIT License.
+// https://opensource.org/licenses/MIT
+
 import { ThemePack, ThemePackSet, ThemeType, themePackSet } from './themes'
 import colors from './colors'
 import { debounce } from 'lodash-es'

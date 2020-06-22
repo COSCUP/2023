@@ -1,3 +1,8 @@
+// Copyright (c) 2020 DevilTea
+//
+// This software is released under the MIT License.
+// https://opensource.org/licenses/MIT
+
 import { createAgendaService } from '../src/utils/agenda/index'
 import { MetaDomSetterSet, MetaType, defaultMetaValues, createMetaManager } from '../src/utils/meta'
 import cheerio from 'cheerio'

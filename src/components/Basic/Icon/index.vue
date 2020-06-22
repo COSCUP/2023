@@ -1,3 +1,10 @@
+<!--
+  Copyright (c) 2020 DevilTea
+
+  This software is released under the MIT License.
+  https://opensource.org/licenses/MIT
+-->
+
 <template>
   <component :is="iconComponent" :icon-value="icon.value" />
 </template>

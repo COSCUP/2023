@@ -1,3 +1,8 @@
+// Copyright (c) 2020 DevilTea
+//
+// This software is released under the MIT License.
+// https://opensource.org/licenses/MIT
+
 import announcement from '@/assets/json/announcement.json'
 import { PopupManager, PopupData, PopupContainerType, PopupContentType } from '../popup'
 import markdown from '@/utils/markdown'

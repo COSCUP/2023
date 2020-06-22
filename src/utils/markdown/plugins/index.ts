@@ -1,3 +1,8 @@
+// Copyright (c) 2020 DevilTea
+//
+// This software is released under the MIT License.
+// https://opensource.org/licenses/MIT
+
 import MarkdownIt from 'markdown-it'
 import pluginSub from 'markdown-it-sub'
 import pluginSup from 'markdown-it-sup'

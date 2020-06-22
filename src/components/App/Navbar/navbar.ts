@@ -1,3 +1,8 @@
+// Copyright (c) 2020 DevilTea
+//
+// This software is released under the MIT License.
+// https://opensource.org/licenses/MIT
+
 import { Location, Route } from 'vue-router'
 import { defaultLanguageType } from '@/utils/language'
 import { pageRouteNameList } from '@/router'
