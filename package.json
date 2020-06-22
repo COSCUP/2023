@@ -79,6 +79,7 @@
     "lint-staged": "^9.5.0",
     "node-sass": "^4.12.0",
     "npm": "^6.14.5",
+    "ora": "^4.0.4",
     "prerender-spa-plugin": "^3.2.1",
     "sass-loader": "^8.0.2",
     "sitemap-generator": "^8.4.2",
