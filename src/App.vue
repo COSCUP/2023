@@ -44,7 +44,7 @@ import { pageRouteNameList } from '@/router'
 import { injectedThis } from '@/utils/common'
 import { LanguageService } from '@/utils/language'
 import { BreakpointService } from '@/utils/breakpoint'
-import { ThemeManager } from '@/utils/theme'
+import { ThemeService } from '@/utils/theme'
 import { ScrollLockService } from '@/utils/scrollLock'
 import { FullPageProgressService } from '@/utils/fullPageProgress'
 import { PopupService } from '@/utils/popup'
@@ -54,7 +54,7 @@ import { AnnouncementService } from './utils/announcement'
 function injected (thisArg: unknown) {
   return injectedThis<{
     languageService: LanguageService;
-    themeManager: ThemeManager;
+    themeService: ThemeService;
     breakpointService: BreakpointService;
     scrollLockService: ScrollLockService;
     fullPageProgressService: FullPageProgressService;
@@ -67,7 +67,7 @@ export default Vue.extend({
   name: 'App',
   inject: [
     'languageService',
-    'themeManager',
+    'themeService',
     'breakpointService',
     'scrollLockService',
     'fullPageProgressService',
@@ -136,11 +136,11 @@ export default Vue.extend({
   },
   async mounted () {
     injected(this).breakpointService.startDetect()
-    injected(this).themeManager.startDetect()
+    injected(this).themeService.startDetect()
   },
   beforeDestroy () {
     injected(this).breakpointService.stopDetect()
-    injected(this).themeManager.stopDetect()
+    injected(this).themeService.stopDetect()
   }
 })
 </script>

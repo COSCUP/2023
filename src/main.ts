@@ -7,7 +7,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import { createRouter } from './router'
 
-import { createThemeManager, ThemeManager } from '@/utils/theme'
+import { createThemeService, ThemeService } from '@/utils/theme'
 import { createLanguageService, LanguageService } from '@/utils/language'
 import { createBreakpointService, BreakpointService } from '@/utils/breakpoint'
 import { createScrollLockService, ScrollLockService } from '@/utils/scrollLock'
@@ -23,7 +23,7 @@ Vue.component('Icon', Icon)
 Vue.config.productionTip = false
 
 const languageService: LanguageService = Vue.observable(createLanguageService())
-const themeManager: ThemeManager = Vue.observable(createThemeManager())
+const themeService: ThemeService = Vue.observable(createThemeService())
 const breakpointService: BreakpointService = Vue.observable(createBreakpointService())
 const scrollLockService: ScrollLockService = Vue.observable(createScrollLockService())
 const fullPageProgressService: FullPageProgressService = Vue.observable(createFullPageProgressService(scrollLockService))
@@ -40,7 +40,7 @@ const router = createRouter({
 new Vue({
   provide: {
     languageService,
-    themeManager,
+    themeService,
     breakpointService,
     scrollLockService,
     fullPageProgressService,

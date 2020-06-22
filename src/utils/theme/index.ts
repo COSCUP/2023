@@ -9,7 +9,7 @@ import { debounce } from 'lodash-es'
 export * from './utils'
 export * from './themes'
 
-export interface ThemeManager {
+export interface ThemeService {
   themeType: ThemeType;
   themePackSet: ThemePackSet;
   readonly themePack: ThemePack;
@@ -17,7 +17,7 @@ export interface ThemeManager {
   stopDetect: () => void;
 }
 
-class ThemeManagerConcrete implements ThemeManager {
+class ThemeServiceConcrete implements ThemeService {
   public themeType: ThemeType = 'light'
   public themePackSet: ThemePackSet = themePackSet
   private _debouncedDetectTheme = debounce(() => {
@@ -74,6 +74,6 @@ class ThemeManagerConcrete implements ThemeManager {
   }
 }
 
-export function createThemeManager (): ThemeManager {
-  return new ThemeManagerConcrete()
+export function createThemeService (): ThemeService {
+  return new ThemeServiceConcrete()
 }
