@@ -8,7 +8,7 @@ const publicPath = isProduction ? '/2020/' : '/2020/'
 const needBundleAnalysis = process.argv.includes('--analyze')
 const gaTempHTML = fs.readFileSync(path.join(__dirname, './template/ga.html')).toString()
 
-process.env.VUE_APP_PRODUCTION_ORIGIN = 'https://coscup.org'
+process.env.VUE_APP_PRODUCTION_ORIGIN = require('./package.json').origin
 
 const renderRoutes = (() => {
   const routes = [
