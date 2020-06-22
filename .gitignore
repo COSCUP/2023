@@ -24,7 +24,7 @@ pnpm-debug.log*
 # Auto-generated files
 src/utils/icon/index.ts
 src/utils/icon/icons/fontAwesome.ts
-src/utils/language/languages/*
-!src/utils/language/languages/.gitkeep
+src/services/language/languages/*
+!src/services/language/languages/.gitkeep
 public/json/session.json
 public/json/staff.json
