@@ -1,5 +1,6 @@
 <template>
   <main id="agenda" class="page-container">
+    <AgendaNavbar />
     <AgendaTable
       v-show="breakpointManager.smAndUp"
       :class="{
@@ -20,6 +21,7 @@ import { MetaManager } from '../utils/meta'
 import { PopupManager, PopupContentType, PopupContainerType } from '../utils/popup'
 import { Route } from 'vue-router'
 import { createAgendaService } from '@/utils/agenda'
+import AgendaNavbar from '@/components/Agenda/AgendaNavbar.vue'
 import AgendaTable from '@/components/Agenda/AgendaTable.vue'
 import AgendaList from '@/components/Agenda/AgendaList.vue'
 import { BreakpointManager } from '../utils/breakpoint'
@@ -48,6 +50,7 @@ export default Vue.extend({
     agendaService
   },
   components: {
+    AgendaNavbar,
     AgendaTable,
     AgendaList
   },

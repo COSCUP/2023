@@ -33,6 +33,7 @@ export interface DayData {
 
 export interface AgendaService {
   dayIndex: number;
+  readonly days: [number, number, number][];
   readonly day: [number, number, number];
   readonly table: AgendaTableData;
   readonly list: AgendaListData;
@@ -146,6 +147,10 @@ class AgendaServiceConcrete implements AgendaService {
       this._dayDataCache[this._days[value].join('')] = this._generateDayData(value)
     }
     this._dayIndex = value
+  }
+
+  public get days (): [number, number, number][] {
+    return this._days
   }
 
   public get day (): [number, number, number] {

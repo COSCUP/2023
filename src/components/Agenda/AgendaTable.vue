@@ -64,7 +64,6 @@ export default Vue.extend({
     },
     tableStyle () {
       return {
-        '--table-cell-width': '200px',
         '--table-column': injected(this).agendaService.table.rooms.length
       }
     }

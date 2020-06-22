@@ -1,8 +1,10 @@
 @import "../shared";
+@import "../components/agenda/agenda-navbar";
 @import "../components/agenda/agenda-table";
 @import "../components/agenda/agenda-list";
 
 @include page("agenda") {
+  @include agenda-navbar;
   @include agenda-table;
   @include agenda-list;
 }

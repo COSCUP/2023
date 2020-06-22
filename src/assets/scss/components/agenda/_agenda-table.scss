@@ -23,7 +23,6 @@
           top: var(--navbar-height);
           height: var(--room-list-height);
           background-color: var(--color-agenda-table-room-list-background);
-          box-shadow: 0 2px 4px rgba(65, 65, 65, 0.25);
           z-index: 2;
 
           .cell-content {
