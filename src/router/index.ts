@@ -44,7 +44,7 @@ const pageRoutes: Array<RouteConfig> = [
     path: '/staff',
     name: 'Staff'
   }
-]
+].filter((route: RouteConfig) => process.env.NODE_ENV === 'development' || !['Map', 'Sponsor'].includes(route.name || ''))
 
 export const pageRouteNameList: Array<string> = pageRoutes.map((route) => route.name as string)
 
