@@ -46,21 +46,21 @@
 import Vue from 'vue'
 import { Location } from 'vue-router'
 import { injectedThis } from '@/utils/common'
-import { LanguageManager } from '@/utils/language'
+import { LanguageService } from '@/utils/language'
 import { AgendaService, TableCellType } from '@/utils/agenda'
 import AgendaSessionItem from './AgendaSessionItem.vue'
 import AgendaTableRoomCell from './AgendaTableRoomCell.vue'
 
 function injected (thisArg: unknown) {
   return injectedThis<{
-    languageManager: LanguageManager;
+    languageService: LanguageService;
     agendaService: AgendaService;
   }>(thisArg)
 }
 
 export default Vue.extend({
   name: 'AgendaTable',
-  inject: ['languageManager', 'agendaService'],
+  inject: ['languageService', 'agendaService'],
   components: {
     AgendaTableRoomCell,
     AgendaSessionItem

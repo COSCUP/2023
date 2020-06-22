@@ -10,7 +10,7 @@
     <Map id="map-component" :options="mapOptions"></Map>
     <div class="plan-container">
       <div
-        v-for="key in Object.keys(languageManager.languagePack.venue.plans)"
+        v-for="key in Object.keys(languageService.languagePack.venue.plans)"
         :key="key"
         class="plan"
       >
@@ -27,18 +27,18 @@ import Map from '@/components/Venue/Map.vue'
 import { MapOptions } from '@/utils/map'
 import markdown from '@/utils/markdown'
 import '@/assets/scss/pages/venue.scss'
-import { LanguageManager } from '@/utils/language'
+import { LanguageService } from '@/utils/language'
 import { injectedThis } from '../utils/common'
 
 function injected (thisArg: unknown) {
   return injectedThis<{
-    languageManager: LanguageManager;
+    languageService: LanguageService;
   }>(thisArg)
 }
 
 export default Vue.extend({
   name: 'Venue',
-  inject: ['languageManager'],
+  inject: ['languageService'],
   components: {
     Map
   },
@@ -77,7 +77,7 @@ export default Vue.extend({
   methods: {
     async parseMarkdownContent () {
       const plansHtml = {}
-      for (const plan of injected(this).languageManager.languagePack.venue.plans) {
+      for (const plan of injected(this).languageService.languagePack.venue.plans) {
         plansHtml[plan.name] = await markdown(plan.description)
       }
 
@@ -85,7 +85,7 @@ export default Vue.extend({
     }
   },
   watch: {
-    'languageManager.languageType' () {
+    'languageService.languageType' () {
       this.parseMarkdownContent()
     }
   },

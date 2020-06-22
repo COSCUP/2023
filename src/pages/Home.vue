@@ -24,7 +24,7 @@
       <div class="info">
         <span class="date">8 / 1 ~ 8 / 2</span>
         <span class="venue">
-          {{ languageManager.languagePack.home.info.venue }}
+          {{ languageService.languagePack.home.info.venue }}
         </span>
       </div>
       <router-link
@@ -36,7 +36,7 @@
         }"
       >
         <span>
-          {{ languageManager.languagePack.home.info.tabs.announcement }}
+          {{ languageService.languagePack.home.info.tabs.announcement }}
         </span>
       </router-link>
     </div>
@@ -63,11 +63,11 @@ import Vue from 'vue'
 import markdown from '@/utils/markdown'
 import '@/assets/scss/pages/home.scss'
 import { injectedThis } from '@/utils/common'
-import { LanguageManager } from '@/utils/language'
+import { LanguageService } from '@/utils/language'
 
 function injected (thisArg: unknown) {
   return injectedThis<{
-    languageManager: LanguageManager;
+    languageService: LanguageService;
   }>(thisArg)
 }
 
@@ -79,18 +79,18 @@ interface Section {
 
 export default Vue.extend({
   name: 'Home',
-  inject: ['languageManager'],
+  inject: ['languageService'],
   computed: {
     sections (): Section[] {
       return [
         {
           name: 'notice',
-          title: injected(this).languageManager.languagePack.home.notice.title,
+          title: injected(this).languageService.languagePack.home.notice.title,
           content: this.noticeHtml
         },
         {
           name: 'about',
-          title: injected(this).languageManager.languagePack.home.about.title,
+          title: injected(this).languageService.languagePack.home.about.title,
           content: this.aboutHtml
         }
       ]
@@ -104,12 +104,12 @@ export default Vue.extend({
   },
   methods: {
     async parseMarkdownContent () {
-      this.noticeHtml = `<div class="markdown">${await markdown(injected(this).languageManager.languagePack.home.notice.content)}</div>`
-      this.aboutHtml = `<div class="markdown">${await markdown(injected(this).languageManager.languagePack.home.about.content)}</div>`
+      this.noticeHtml = `<div class="markdown">${await markdown(injected(this).languageService.languagePack.home.notice.content)}</div>`
+      this.aboutHtml = `<div class="markdown">${await markdown(injected(this).languageService.languagePack.home.about.content)}</div>`
     }
   },
   watch: {
-    'languageManager.languageType' () {
+    'languageService.languageType' () {
       this.parseMarkdownContent()
     }
   },

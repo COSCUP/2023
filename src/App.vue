@@ -42,7 +42,7 @@ import Popup from '@/components/App/Popup/index.vue'
 import { pageRouteNameList } from '@/router'
 
 import { injectedThis } from '@/utils/common'
-import { LanguageManager } from '@/utils/language'
+import { LanguageService } from '@/utils/language'
 import { BreakpointManager } from '@/utils/breakpoint'
 import { ThemeManager } from '@/utils/theme'
 import { ScrollLockManager } from '@/utils/scrollLock'
@@ -53,7 +53,7 @@ import { AnnouncementManager } from './utils/announcement'
 
 function injected (thisArg: unknown) {
   return injectedThis<{
-    languageManager: LanguageManager;
+    languageService: LanguageService;
     themeManager: ThemeManager;
     breakpointManager: BreakpointManager;
     scrollLockManager: ScrollLockManager;
@@ -66,7 +66,7 @@ function injected (thisArg: unknown) {
 export default Vue.extend({
   name: 'App',
   inject: [
-    'languageManager',
+    'languageService',
     'themeManager',
     'breakpointManager',
     'scrollLockManager',

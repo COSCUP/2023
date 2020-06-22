@@ -16,18 +16,18 @@
 import Vue from 'vue'
 import { AgendaService, Room } from '@/utils/agenda'
 import { injectedThis } from '@/utils/common'
-import { LanguageManager } from '@/utils/language'
+import { LanguageService } from '@/utils/language'
 
 function injected (thisArg: unknown) {
   return injectedThis<{
-    languageManager: LanguageManager;
+    languageService: LanguageService;
     agendaService: AgendaService;
   }>(thisArg)
 }
 
 export default Vue.extend({
   name: 'AgendaTableRoomCell',
-  inject: ['languageManager', 'agendaService'],
+  inject: ['languageService', 'agendaService'],
   props: {
     roomId: {
       type: String,
@@ -36,7 +36,7 @@ export default Vue.extend({
   },
   computed: {
     laugaugeType (): 'en' | 'zh' {
-      if (injected(this).languageManager.languageType === 'en') return 'en'
+      if (injected(this).languageService.languageType === 'en') return 'en'
       else return 'zh'
     },
     room (): Room {

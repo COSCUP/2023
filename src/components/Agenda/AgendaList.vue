@@ -29,20 +29,20 @@
 <script lang="ts">
 import Vue from 'vue'
 import { injectedThis } from '@/utils/common'
-import { LanguageManager } from '@/utils/language'
+import { LanguageService } from '@/utils/language'
 import { AgendaService, formatTimeString } from '@/utils/agenda'
 import AgendaSessionItem from '@/components/Agenda/AgendaSessionItem.vue'
 
 function injected (thisArg: unknown) {
   return injectedThis<{
-    languageManager: LanguageManager;
+    languageService: LanguageService;
     agendaService: AgendaService;
   }>(thisArg)
 }
 
 export default Vue.extend({
   name: 'AgendaList',
-  inject: ['languageManager', 'agendaService'],
+  inject: ['languageService', 'agendaService'],
   components: {
     AgendaSessionItem
   },

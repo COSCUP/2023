@@ -8,7 +8,7 @@ import App from './App.vue'
 import { createRouter } from './router'
 
 import { createThemeManager, ThemeManager } from '@/utils/theme'
-import { createLanguageManager, LanguageManager } from '@/utils/language'
+import { createLanguageService, LanguageService } from '@/utils/language'
 import { createBreakpointManager, BreakpointManager } from '@/utils/breakpoint'
 import { createScrollLockManager, ScrollLockManager } from '@/utils/scrollLock'
 import { createFullPageProgressManager, FullPageProgressManager } from '@/utils/fullPageProgress'
@@ -22,24 +22,24 @@ Vue.component('Icon', Icon)
 
 Vue.config.productionTip = false
 
-const languageManager: LanguageManager = Vue.observable(createLanguageManager())
+const languageService: LanguageService = Vue.observable(createLanguageService())
 const themeManager: ThemeManager = Vue.observable(createThemeManager())
 const breakpointManager: BreakpointManager = Vue.observable(createBreakpointManager())
 const scrollLockManager: ScrollLockManager = Vue.observable(createScrollLockManager())
 const fullPageProgressManager: FullPageProgressManager = Vue.observable(createFullPageProgressManager(scrollLockManager))
 const metaManager: MetaManager = Vue.observable(createMetaManager())
 const popupManager: PopupManager = Vue.observable(createPopupManager({ scrollLockManager, metaManager }))
-const announcementManager: AnnouncementManager = Vue.observable(createAnnouncementManager({ languageManager, popupManager }))
+const announcementManager: AnnouncementManager = Vue.observable(createAnnouncementManager({ languageService, popupManager }))
 
 const router = createRouter({
-  languageManager,
+  languageService,
   fullPageProgressManager,
   metaManager
 })
 
 new Vue({
   provide: {
-    languageManager,
+    languageService,
     themeManager,
     breakpointManager,
     scrollLockManager,

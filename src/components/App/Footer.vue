@@ -16,7 +16,7 @@
       </section>
       <section class="footer__section">
         <p class="title">
-          {{ languageManager.languagePack.app.footer.websites }}
+          {{ languageService.languagePack.app.footer.websites }}
         </p>
         <div class="content past">
           <a
@@ -32,7 +32,7 @@
       </section>
       <section class="footer__section">
         <p class="title">
-          {{ languageManager.languagePack.app.footer.social }}
+          {{ languageService.languagePack.app.footer.social }}
         </p>
         <div class="content">
           <a
@@ -56,7 +56,7 @@ import Vue from 'vue'
 
 export default Vue.extend({
   name: 'Footer',
-  inject: ['languageManager'],
+  inject: ['languageService'],
   computed: {
     numOfPast () {
       return new Date().getFullYear() - 2006 - 1

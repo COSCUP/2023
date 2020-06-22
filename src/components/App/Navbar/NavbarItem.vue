@@ -30,7 +30,7 @@
       <div class="navbar-item__content">
         <slot name="default">
           <span>
-            {{ languageManager.languagePack.app.navbar[navbarItem.name] }}
+            {{ languageService.languagePack.app.navbar[navbarItem.name] }}
           </span>
         </slot>
       </div>
@@ -49,7 +49,7 @@
       <div class="navbar-item__content">
         <slot name="default">
           <span>
-            {{ languageManager.languagePack.app.navbar[navbarItem.name] }}
+            {{ languageService.languagePack.app.navbar[navbarItem.name] }}
           </span>
         </slot>
       </div>
@@ -65,7 +65,7 @@
         <slot name="default">
           <span>
             {{
-              languageManager.languagePackSet[nextLanguageType].app.navbar[
+              languageService.languagePackSet[nextLanguageType].app.navbar[
                 navbarItem.name
               ]
             }}
@@ -83,7 +83,7 @@
       <div class="navbar-item__content">
         <slot name="default">
           <span>
-            {{ languageManager.languagePack.app.navbar[navbarItem.name] }}
+            {{ languageService.languagePack.app.navbar[navbarItem.name] }}
           </span>
         </slot>
       </div>
@@ -97,16 +97,16 @@ import Vue, { PropType } from 'vue'
 import { kebabCase } from 'lodash-es'
 import { NavbarItemType, NavbarItemData } from './navbar'
 import { injectedThis } from '@/utils/common'
-import { LanguageManager, LanguageType, availableLanguageTypes, defaultLanguageType } from '@/utils/language'
+import { LanguageService, LanguageType, availableLanguageTypes, defaultLanguageType } from '@/utils/language'
 import { Location } from 'vue-router'
 
 function injected (thisArg: unknown) {
-  return injectedThis<{ languageManager: LanguageManager }>(thisArg)
+  return injectedThis<{ languageService: LanguageService }>(thisArg)
 }
 
 export default Vue.extend({
   name: 'NavbarItem',
-  inject: ['languageManager'],
+  inject: ['languageService'],
   props: {
     navbarItem: {
       type: Object as PropType<NavbarItemData>,
@@ -115,7 +115,7 @@ export default Vue.extend({
   },
   computed: {
     nextLanguageType (): LanguageType {
-      const currentLanguageType = injected(this).languageManager.languageType
+      const currentLanguageType = injected(this).languageService.languageType
       const nextLanguageType = [...availableLanguageTypes, ...availableLanguageTypes]
         .find((languageType, index, array) => array.indexOf(currentLanguageType) === index - 1) || defaultLanguageType
       return nextLanguageType

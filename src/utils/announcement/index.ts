@@ -6,11 +6,11 @@
 import announcement from '@/assets/json/announcement.json'
 import { PopupManager, PopupData, PopupContainerType, PopupContentType } from '../popup'
 import markdown from '@/utils/markdown'
-import { LanguageManager, LanguageType } from '../language'
+import { LanguageService, LanguageType } from '../language'
 
 interface Inject {
   popupManager: PopupManager;
-  languageManager: LanguageManager;
+  languageService: LanguageService;
 }
 
 export interface AnnouncementManager {
@@ -19,11 +19,11 @@ export interface AnnouncementManager {
 }
 
 class AnnouncementManagerConcrete implements AnnouncementManager {
-  private _languageManager: LanguageManager
+  private _languageService: LanguageService
   private _popupManager: PopupManager
 
   constructor (inject: Inject) {
-    this._languageManager = inject.languageManager
+    this._languageService = inject.languageService
     this._popupManager = inject.popupManager
   }
 
@@ -33,7 +33,7 @@ class AnnouncementManagerConcrete implements AnnouncementManager {
   }
 
   public async showAnnouncement (onClose?: () => void) {
-    const languageType: LanguageType = this._languageManager.languageType
+    const languageType: LanguageType = this._languageService.languageType
     const popupData: PopupData = {
       popupId: 'announcement',
       metaOptions: {

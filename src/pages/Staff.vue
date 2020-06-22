@@ -14,7 +14,7 @@
     >
       <section class="group-box">
         <h2 class="group-name">
-          {{ languageManager.languagePack.staff.groups[group.tid] }}
+          {{ languageService.languagePack.staff.groups[group.tid] }}
         </h2>
         <div class="staff-wrapper">
           <div
@@ -51,7 +51,7 @@ import '@/assets/scss/pages/staff.scss'
 
 export default Vue.extend({
   name: 'Staff',
-  inject: ['languageManager'],
+  inject: ['languageService'],
   computed: {
     staffData () {
       const groupSequence = ['coordinator', 'secretary', 'program', 'field', 'finance', 'it', 'marketing', 'photo', 'sponsor', 'streaming']

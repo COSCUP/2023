@@ -5,7 +5,7 @@
 
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
-import { LanguageManager, LanguageType, defaultLanguageType, availableLanguageTypes } from '@/utils/language'
+import { LanguageService, LanguageType, defaultLanguageType, availableLanguageTypes } from '@/utils/language'
 import { FullPageProgressManager } from '@/utils/fullPageProgress'
 import { delay } from '@/utils/common'
 import { MetaManager } from '@/utils/meta'
@@ -50,12 +50,12 @@ export const pageRouteNameList: Array<string> = pageRoutes.map((route) => route.
 
 interface Inject {
   metaManager: MetaManager;
-  languageManager: LanguageManager;
+  languageService: LanguageService;
   fullPageProgressManager: FullPageProgressManager;
 }
 
 export function createRouter (injects: Inject): VueRouter {
-  const { languageManager, fullPageProgressManager, metaManager } = injects
+  const { languageService, fullPageProgressManager, metaManager } = injects
 
   const PageComponent: { [name: string]: () => Promise<typeof import('*.vue')> } = {
     Home: () => import(
@@ -153,13 +153,13 @@ export function createRouter (injects: Inject): VueRouter {
     if (languageType && !(availableLanguageTypes as string[]).includes(languageType)) {
       next('/')
     } else {
-      languageManager.languageType = languageType as LanguageType || defaultLanguageType
+      languageService.languageType = languageType as LanguageType || defaultLanguageType
 
       const routeName = to.name ?? ''
       if (pageRouteNameList.includes(routeName)) {
-        type LanguagePackKeys = Exclude<(keyof typeof languageManager.languagePack), 'app'>
+        type LanguagePackKeys = Exclude<(keyof typeof languageService.languagePack), 'app'>
         metaManager.setMeta({
-          title: languageManager.languagePack[camelCase(routeName) as LanguagePackKeys].meta.title
+          title: languageService.languagePack[camelCase(routeName) as LanguagePackKeys].meta.title
         })
       }
       next()

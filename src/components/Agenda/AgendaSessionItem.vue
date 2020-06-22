@@ -49,12 +49,12 @@ import Vue from 'vue'
 import { Location } from 'vue-router'
 import { Session, AgendaService, formatTimeString } from '@/utils/agenda'
 import { injectedThis } from '@/utils/common'
-import { LanguageManager } from '@/utils/language'
+import { LanguageService } from '@/utils/language'
 import { BreakpointManager } from '@/utils/breakpoint'
 
 function injected (thisArg: unknown) {
   return injectedThis<{
-    languageManager: LanguageManager;
+    languageService: LanguageService;
     agendaService: AgendaService;
     breakpointManager: BreakpointManager;
   }>(thisArg)
@@ -62,7 +62,7 @@ function injected (thisArg: unknown) {
 
 export default Vue.extend({
   name: 'AgendaSessionItem',
-  inject: ['languageManager', 'agendaService', 'breakpointManager'],
+  inject: ['languageService', 'agendaService', 'breakpointManager'],
   props: {
     sessionId: {
       type: String,
@@ -71,7 +71,7 @@ export default Vue.extend({
   },
   computed: {
     laugaugeType (): 'en' | 'zh' {
-      if (injected(this).languageManager.languageType === 'en') return 'en'
+      if (injected(this).languageService.languageType === 'en') return 'en'
       else return 'zh'
     },
     session (): Session {

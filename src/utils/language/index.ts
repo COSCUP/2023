@@ -6,13 +6,13 @@
 import { LanguageType, defaultLanguageType, languagePackSet, LanguagePackSet, LanguagePack } from '@/utils/language/languages'
 export * from '@/utils/language/languages'
 
-export interface LanguageManager {
+export interface LanguageService {
   languageType: LanguageType;
   languagePackSet: LanguagePackSet;
   readonly languagePack: LanguagePack;
 }
 
-class LanguageManagerConcrete implements LanguageManager {
+class LanguageServiceConcrete implements LanguageService {
   public languageType: LanguageType = defaultLanguageType
   public languagePackSet: LanguagePackSet = languagePackSet
 
@@ -21,6 +21,6 @@ class LanguageManagerConcrete implements LanguageManager {
   }
 }
 
-export function createLanguageManager (): LanguageManager {
-  return new LanguageManagerConcrete()
+export function createLanguageService (): LanguageService {
+  return new LanguageServiceConcrete()
 }
