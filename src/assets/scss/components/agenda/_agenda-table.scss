@@ -4,7 +4,7 @@
 @mixin agenda-table {
   .agenda-table {
     --room-list-height: 100px;
-    --column-width: 250px;
+    --column-width: 230px;
 
     table-layout: fixed;
     width: calc(var(--column-width) * var(--table-column));

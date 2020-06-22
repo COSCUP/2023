@@ -35,30 +35,15 @@
       }
 
       .period {
-        margin-bottom: 0.5rem;
         font-size: 0.8rem;
         font-weight: 500;
-      }
-
-      .tag-list {
-        color: #fff;
-        margin-top: 0.5rem;
-
-        span {
-          display: inline-block;
-          font-size: 0.8rem;
-          margin-right: 0.5rem;
-          padding: 4px 8px;
-          background-color: var(--color-coscup-green);
-          border-radius: 16px;
-        }
       }
 
       .title {
         line-height: 1.5;
         font-size: 1.25rem;
         font-weight: 600;
-        margin-bottom: 0.5rem;
+        margin: 2rem 0;
       }
 
       .speaker-list {
@@ -74,6 +59,20 @@
 
         .speaker {
           text-decoration: underline;
+        }
+      }
+
+      .tag-list {
+        color: #fff;
+        margin-top: 0.5rem;
+
+        span {
+          display: inline-block;
+          font-size: 0.8rem;
+          margin-right: 0.5rem;
+          padding: 4px 8px;
+          background-color: var(--color-coscup-green);
+          border-radius: 16px;
         }
       }
     }
