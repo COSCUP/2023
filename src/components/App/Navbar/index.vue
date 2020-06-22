@@ -78,20 +78,20 @@ import Vue from 'vue'
 import NavbarItem from './NavbarItem.vue'
 import { navbarItems, NavbarItemData, NavbarAction } from './navbar'
 import { BreakpointService } from '@/utils/breakpoint'
-import { ScrollLockManager } from '@/utils/scrollLock'
+import { ScrollLockService } from '@/utils/scrollLock'
 import { injectedThis } from '@/utils/common'
 import { debounce } from 'lodash-es'
 
 function injected (thisArg: unknown) {
   return injectedThis<{
     breakpointService: BreakpointService;
-    scrollLockManager: ScrollLockManager;
+    scrollLockService: ScrollLockService;
   }>(thisArg)
 }
 
 export default Vue.extend({
   name: 'Navbar',
-  inject: ['breakpointService', 'scrollLockManager'],
+  inject: ['breakpointService', 'scrollLockService'],
   components: {
     NavbarItem
   },
@@ -125,7 +125,7 @@ export default Vue.extend({
     },
     setMenuOpen (isOpen: boolean) {
       this.isMenuOpen = isOpen
-      isOpen ? injected(this).scrollLockManager.lock() : injected(this).scrollLockManager.unlock()
+      isOpen ? injected(this).scrollLockService.lock() : injected(this).scrollLockService.unlock()
     },
     detectOverflow () {
       if (injected(this).breakpointService.xsOnly) return

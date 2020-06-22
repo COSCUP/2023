@@ -10,11 +10,11 @@
     <Navbar></Navbar>
     <div
       :class="{
-        'scroll-lock': scrollLockManager.isLocked
+        'scroll-lock': scrollLockService.isLocked
       }"
       :style="{
-        '--current-scroll-x': `${scrollLockManager.currentScrollPosition.x}px`,
-        '--current-scroll-y': `${scrollLockManager.currentScrollPosition.y}px`
+        '--current-scroll-x': `${scrollLockService.currentScrollPosition.x}px`,
+        '--current-scroll-y': `${scrollLockService.currentScrollPosition.y}px`
       }"
       class="main-container"
     >
@@ -45,7 +45,7 @@ import { injectedThis } from '@/utils/common'
 import { LanguageService } from '@/utils/language'
 import { BreakpointService } from '@/utils/breakpoint'
 import { ThemeManager } from '@/utils/theme'
-import { ScrollLockManager } from '@/utils/scrollLock'
+import { ScrollLockService } from '@/utils/scrollLock'
 import { FullPageProgressService } from '@/utils/fullPageProgress'
 import { PopupService } from '@/utils/popup'
 import { Route, Location } from 'vue-router'
@@ -56,7 +56,7 @@ function injected (thisArg: unknown) {
     languageService: LanguageService;
     themeManager: ThemeManager;
     breakpointService: BreakpointService;
-    scrollLockManager: ScrollLockManager;
+    scrollLockService: ScrollLockService;
     fullPageProgressService: FullPageProgressService;
     popupService: PopupService;
     announcementService: AnnouncementService;
@@ -69,7 +69,7 @@ export default Vue.extend({
     'languageService',
     'themeManager',
     'breakpointService',
-    'scrollLockManager',
+    'scrollLockService',
     'fullPageProgressService',
     'popupService',
     'announcementService'

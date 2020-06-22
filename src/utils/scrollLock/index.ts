@@ -8,14 +8,14 @@ export interface Position {
   y: number;
 }
 
-export interface ScrollLockManager {
+export interface ScrollLockService {
   readonly isLocked: boolean;
   readonly currentScrollPosition: Position;
   lock: () => void;
   unlock: () => void;
 }
 
-class ScrollLockManagerConcrete implements ScrollLockManager {
+class ScrollLockServiceConcrete implements ScrollLockService {
   private _lockStack: Position[] = []
 
   public get isLocked (): boolean {
@@ -51,6 +51,6 @@ class ScrollLockManagerConcrete implements ScrollLockManager {
   }
 }
 
-export function createScrollLockManager (): ScrollLockManager {
-  return new ScrollLockManagerConcrete()
+export function createScrollLockService (): ScrollLockService {
+  return new ScrollLockServiceConcrete()
 }

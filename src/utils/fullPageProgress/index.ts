@@ -3,7 +3,7 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-import { ScrollLockManager } from '@/utils/scrollLock'
+import { ScrollLockService } from '@/utils/scrollLock'
 
 export interface FullPageProgressService {
   readonly isLoading: boolean;
@@ -11,11 +11,11 @@ export interface FullPageProgressService {
 }
 
 class FullPageProgressServiceConcrete implements FullPageProgressService {
-  private _scrollLockManager: ScrollLockManager
+  private _scrollLockService: ScrollLockService
   private _stack: true[] = []
 
-  constructor (scrollLockManager: ScrollLockManager) {
-    this._scrollLockManager = scrollLockManager
+  constructor (scrollLockService: ScrollLockService) {
+    this._scrollLockService = scrollLockService
   }
 
   public get isLoading () {
@@ -23,11 +23,11 @@ class FullPageProgressServiceConcrete implements FullPageProgressService {
   }
 
   public setStatus (status: boolean): void {
-    status ? this._scrollLockManager.lock() : this._scrollLockManager.unlock()
+    status ? this._scrollLockService.lock() : this._scrollLockService.unlock()
     status ? this._stack.push(true) : ((this._stack.length > 0) && this._stack.pop())
   }
 }
 
-export function createFullPageProgressService (scrollLockManager: ScrollLockManager): FullPageProgressService {
-  return new FullPageProgressServiceConcrete(scrollLockManager)
+export function createFullPageProgressService (scrollLockService: ScrollLockService): FullPageProgressService {
+  return new FullPageProgressServiceConcrete(scrollLockService)
 }

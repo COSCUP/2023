@@ -3,7 +3,7 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-import { ScrollLockManager } from '@/utils/scrollLock'
+import { ScrollLockService } from '@/utils/scrollLock'
 import { MetaOptions, MetaService } from '../meta'
 
 export enum PopupContentType {
@@ -46,7 +46,7 @@ export interface PopupService {
 }
 
 interface Inject {
-  scrollLockManager: ScrollLockManager;
+  scrollLockService: ScrollLockService;
   metaService: MetaService;
 }
 
@@ -59,12 +59,12 @@ class PopupServiceConcrete implements PopupService {
     }
   }]
 
-  private _scrollLockManager: ScrollLockManager
+  private _scrollLockService: ScrollLockService
   private _metaService: MetaService
 
   constructor (inject: Inject) {
-    const { scrollLockManager, metaService } = inject
-    this._scrollLockManager = scrollLockManager
+    const { scrollLockService, metaService } = inject
+    this._scrollLockService = scrollLockService
     this._metaService = metaService
   }
 
@@ -79,7 +79,7 @@ class PopupServiceConcrete implements PopupService {
   public popup (popupData: PopupData) {
     if (popupData.popupId && this._popupDataStack.some((data) => data.popupId === popupData.popupId)) return
     this._popupDataStack.push(popupData)
-    this._scrollLockManager.lock()
+    this._scrollLockService.lock()
     this._metaService.setMeta(this.popupData.metaOptions)
   }
 
@@ -87,7 +87,7 @@ class PopupServiceConcrete implements PopupService {
     if (this._popupDataStack.length > 1) {
       (this.popupData.onClose || (() => { /**/ }))()
       this._popupDataStack.pop()
-      this._scrollLockManager.unlock()
+      this._scrollLockService.unlock()
       this._metaService.setMeta(this.popupData.metaOptions)
     }
   }
