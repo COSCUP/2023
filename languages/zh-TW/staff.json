@@ -1,0 +1,17 @@
+{
+  "meta": {
+    "title": "工作人員"
+  },
+  "groups": {
+    "secretary": "行政組",
+    "coordinator": "總召組",
+    "program": "議程組",
+    "field": "場務組",
+    "streaming": "紀錄組",
+    "finance": "財務組",
+    "marketing": "行銷組",
+    "it": "資訊組",
+    "photo": "攝影組",
+    "sponsor": "贊助組"
+  }
+}

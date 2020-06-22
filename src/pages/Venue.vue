@@ -77,8 +77,8 @@ export default Vue.extend({
   methods: {
     async parseMarkdownContent () {
       const plansHtml = {}
-      for (const entry of Object.entries(injected(this).languageManager.languagePack.venue.plans)) {
-        plansHtml[entry[0]] = await markdown(entry[1])
+      for (const plan of injected(this).languageManager.languagePack.venue.plans) {
+        plansHtml[plan.name] = await markdown(plan.description)
       }
 
       this.plansHtml = plansHtml

@@ -1,0 +1,17 @@
+{
+  "meta": {
+    "title": "Staff"
+  },
+  "groups": {
+    "secretary": "Administrative Staff",
+    "coordinator": "General Coordinator",
+    "program": "Program Staff",
+    "field": "Field Staff",
+    "streaming": "Recordings Staff",
+    "finance": "Finance Staff",
+    "marketing": "Marketing Staff",
+    "it": "IT Staff",
+    "photo": "Photo Staff",
+    "sponsor": "Sponsor Staff"
+  }
+}

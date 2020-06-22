@@ -1,0 +1,18 @@
+{
+  "meta": {
+    "title": "贊助"
+  },
+  "callForSponsorship": {
+    "title": "贊助我們",
+    "content": "請聯絡"
+  },
+  "level": {
+    "titanium": "鈦金級贊助",
+    "diamond": "鑽石級贊助",
+    "gold": "黃金級贊助",
+    "silver": "白銀級贊助",
+    "bronze": "青銅級贊助",
+    "co-organizer": "協辦單位",
+    "special-thanks": "特別感謝"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "meta": {
+    "title": "Sponsor"
+  },
+  "callForSponsorship": {
+    "title": "Call For Sponsorship",
+    "content": "Contact"
+  },
+  "level": {
+    "titanium": "Titanium Sponsor",
+    "diamond": "Diamond Sponsor",
+    "gold": "Gold Sponsor",
+    "silver": "Silver Sponsor",
+    "bronze": "Bronze Sponsor",
+    "co-organizer": "Co-Organizer",
+    "special-thanks": "Special Thanks"
+  }
+}
