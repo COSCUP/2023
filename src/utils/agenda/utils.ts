@@ -1,6 +1,6 @@
 import _rawData from '@/../public/json/session.json'
 import { PopupData, PopupContainerType, PopupContentType } from '../popup'
-import { groupBy } from 'lodash-es'
+import groupBy from 'lodash-es/groupBy'
 import markdown from '@/utils/markdown'
 
 export type RawData = typeof _rawData

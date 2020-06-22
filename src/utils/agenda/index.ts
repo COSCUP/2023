@@ -1,5 +1,5 @@
 import { formatDateString, fixedTimeZoneDate, generateAgendaTableData, generateAgendaListData, AgendaTableData, AgendaListData, RoomData, Session, SessionData, rawData, TypeData, SpeakerData, TagData, generateSessionPopupData } from './utils'
-import { groupBy } from 'lodash-es'
+import groupBy from 'lodash-es/groupBy'
 import { PopupData } from '../popup'
 
 export * from './utils'
