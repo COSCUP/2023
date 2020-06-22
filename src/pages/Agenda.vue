@@ -1,15 +1,12 @@
 <template>
   <main id="agenda" class="page-container">
-    <router-link
-      :to="{
-        name: 'AgendaDetail',
-        params: {
-          sessionId: 'asdasd'
-        }
+    <AgendaTable
+      v-show="breakpointManager.smAndUp"
+      :class="{
+        popupped: popupManager.isPopup
       }"
-    >
-      Agenda
-    </router-link>
+    />
+    <AgendaList v-show="breakpointManager.xsOnly" />
   </main>
 </template>
 
@@ -22,19 +19,42 @@ import { LanguageManager } from '../utils/language'
 import { MetaManager } from '../utils/meta'
 import { PopupManager, PopupContentType, PopupContainerType } from '../utils/popup'
 import { Route } from 'vue-router'
+import { createAgendaService } from '@/utils/agenda'
+import AgendaTable from '@/components/Agenda/AgendaTable.vue'
+import AgendaList from '@/components/Agenda/AgendaList.vue'
+import { BreakpointManager } from '../utils/breakpoint'
 
 function injected (thisArg: unknown) {
   return injectedThis<{
     languageManager: LanguageManager;
     metaManager: MetaManager;
     popupManager: PopupManager;
+    breakpointManager: BreakpointManager;
   }>(thisArg)
 }
 
+const agendaService = Vue.observable(createAgendaService([
+  'AU',
+  'TR209', 'TR211', 'TR212', 'TR213', 'TR214',
+  'TR309', 'TR313',
+  'TR409-2', 'TR410', 'TR411', 'TR412-1', 'TR412-2', 'TR413-1', 'TR413-2',
+  'TR510', 'TR511'
+]))
+
 export default Vue.extend({
   name: 'Agenda',
-  inject: ['languageManager', 'metaManager', 'popupManager'],
+  inject: ['languageManager', 'metaManager', 'popupManager', 'breakpointManager'],
+  provide: {
+    agendaService
+  },
   components: {
+    AgendaTable,
+    AgendaList
+  },
+  data () {
+    return {
+      dayIndex: 0
+    }
   },
   methods: {
     popupSession (sessionId = ''): void {

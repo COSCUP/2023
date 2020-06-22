@@ -7,7 +7,7 @@ export interface ColorPack {
 export function extendLightenDarkenColorPack (colorPack: ColorPack): ColorPack {
   const entries: [string, Color][] = Object.entries(colorPack)
   const extendedEntries: [string, Color][] = []
-  const step = 30
+  const step = 8
   entries.forEach((entry) => {
     for (let i = 0; i < 10; i++) {
       if (i < 4) {

@@ -1,7 +1,11 @@
 #app #footer {
+  position: sticky;
+  top: 100vh;
+  left: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100vw;
   padding: 2rem 0;
   background-color: var(--color-footer-background);
 

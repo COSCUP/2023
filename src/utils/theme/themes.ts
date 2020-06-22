@@ -24,6 +24,8 @@ export interface ThemePack {
   'markdown-mark-background': Color;
   'home-banner-logo-wrapper-background': Color;
   'home-section-background': Color;
+  'agenda-table-room-list-background': Color;
+  'agenda-session-item-background': Color;
   'venue-plan-card-title': Color;
   'venue-plan-card-background': Color;
   'staff-group-background': Color;
@@ -40,7 +42,7 @@ const defaultThemePack: ThemePack = {
   primary: colors['coscup-green'],
   text: '#404040',
   background: '#ffffff',
-  'navbar-background': 'rgba(255,255,255,.8)',
+  'navbar-background': '#fff',
   'footer-background': '#f0f0f0',
   'markdown-link': colors['coscup-green'],
   'markdown-link-hover': colors['coscup-green-lighten-1'],
@@ -57,6 +59,8 @@ const defaultThemePack: ThemePack = {
   'markdown-mark-background': colors['coscup-green-lighten-3'],
   'home-banner-logo-wrapper-background': adjustAlpha(colors['dark-blue'], 0.95),
   'home-section-background': colors['coscup-green'],
+  'agenda-table-room-list-background': adjustAlpha('#fff', 0.7),
+  'agenda-session-item-background': '#f0f9ef',
   'venue-plan-card-title': colors['coscup-green'],
   'venue-plan-card-background': '#fff',
   'staff-group-background': adjustAlpha(colors['coscup-secondary'], 0.2),
@@ -72,8 +76,10 @@ export const themePackSet: ThemePackSet = {
 
     text: '#ffffff',
     background: '#12344c',
-    'navbar-background': adjustAlpha(colors['dark-blue-lighten-1'], 0.8),
+    'navbar-background': colors['dark-blue-lighten-1'],
     'footer-background': colors['dark-blue-lighten-1'],
+    'agenda-table-room-list-background': adjustAlpha(colors['dark-blue-lighten-1'], 0.8),
+    'agenda-session-item-background': colors['dark-blue-lighten-2'],
     'venue-plan-card-title': '#fff',
     'venue-plan-card-background': colors['dark-blue-lighten-2'],
     'staff-group-background': colors['dark-blue-lighten-2'],

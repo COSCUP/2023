@@ -1,12 +1,12 @@
 #app {
   .main-container {
-    width: 100%;
+    width: fit-content;
     position: relative;
 
     &.scroll-lock {
       z-index: 1;
       position: fixed;
-      left: var(--current-scroll-x, 0);
+      left: calc(-1 * var(--current-scroll-x, 0));
       top: calc(-1 * var(--current-scroll-y, 0) + var(--navbar-height));
     }
 

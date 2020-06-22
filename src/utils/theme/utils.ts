@@ -106,20 +106,18 @@ export function adjustAlpha (color: Color, alpha: number) {
  * @param {number} percentage
  * @returns {Color} color
  */
-export function calcLightenDarkenColor (color: Color, percentage: number) {
+export function calcLightenDarkenColor (color: Color, offset: number) {
   let [r, g, b, a] = getRGBA(color)
 
-  const per = (100 + percentage) / 100
-
-  r = Math.round(r * per)
+  r = Math.round(r + offset)
   if (r > 255) r = 255
   else if (r < 0) r = 0
 
-  g = Math.round(g * per)
+  g = Math.round(g + offset)
   if (g > 255) g = 255
   else if (g < 0) g = 0
 
-  b = Math.round(b * per)
+  b = Math.round(b + offset)
   if (b > 255) b = 255
   else if (b < 0) b = 0
 

@@ -1,0 +1,89 @@
+<template>
+  <table class="agenda-table" :style="tableStyle">
+    <thead class="room-list">
+      <tr>
+        <th v-for="(room, index) in table.rooms" :key="`table-room-${index}`">
+          <div class="cell-content">
+            <AgendaTableRoomCell :room-id="room"> </AgendaTableRoomCell>
+          </div>
+        </th>
+      </tr>
+    </thead>
+    <div style="height: 0.5rem;"></div>
+    <tbody class="table-body">
+      <tr v-for="(row, rowIndex) in table.rows" :key="`table-row-${rowIndex}`">
+        <td
+          v-for="(cell, index) in row"
+          :key="`table-row-${rowIndex}-cell-${index}`"
+          :rowspan="cell.rowSpan"
+        >
+          <div
+            class="cell-content"
+            :class="{
+              blank: cell.type === TableCellType.Blank
+            }"
+          >
+            <AgendaSessionItem
+              v-if="cell.type !== TableCellType.Blank"
+              :session-id="cell.sessionId"
+            >
+            </AgendaSessionItem>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</template>
+
+<script lang="ts">
+import Vue from 'vue'
+import { Location } from 'vue-router'
+import { injectedThis } from '@/utils/common'
+import { LanguageManager } from '@/utils/language'
+import { AgendaService, TableCellType } from '@/utils/agenda'
+import AgendaSessionItem from './AgendaSessionItem.vue'
+import AgendaTableRoomCell from './AgendaTableRoomCell.vue'
+
+function injected (thisArg: unknown) {
+  return injectedThis<{
+    languageManager: LanguageManager;
+    agendaService: AgendaService;
+  }>(thisArg)
+}
+
+export default Vue.extend({
+  name: 'AgendaTable',
+  inject: ['languageManager', 'agendaService'],
+  components: {
+    AgendaTableRoomCell,
+    AgendaSessionItem
+  },
+  computed: {
+    table () {
+      return injected(this).agendaService.table
+    },
+    tableStyle () {
+      return {
+        '--table-cell-width': '200px',
+        '--table-column': injected(this).agendaService.table.rooms.length
+      }
+    }
+  },
+  data () {
+    return {
+      TableCellType
+    }
+  },
+  methods: {
+    getSessionLocation (sessionId: string): Location {
+      return {
+        name: 'AgendaDetail',
+        params: {
+          ...this.$route.params,
+          sessionId
+        }
+      }
+    }
+  }
+})
+</script>
