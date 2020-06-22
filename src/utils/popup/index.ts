@@ -38,7 +38,7 @@ export interface PopupData {
   onClose?: () => void;
 }
 
-export interface PopupManager {
+export interface PopupService {
   readonly isPopup: boolean;
   readonly popupData: PopupData;
   popup: (popupData: PopupData) => void;
@@ -50,7 +50,7 @@ interface Inject {
   metaService: MetaService;
 }
 
-class PopupManagerConcrete implements PopupManager {
+class PopupServiceConcrete implements PopupService {
   private _popupDataStack: PopupData[] = [{
     metaOptions: {},
     containerType: PopupContainerType.Default,
@@ -93,6 +93,6 @@ class PopupManagerConcrete implements PopupManager {
   }
 }
 
-export function createPopupManager (inject: Inject): PopupManager {
-  return new PopupManagerConcrete(inject)
+export function createPopupService (inject: Inject): PopupService {
+  return new PopupServiceConcrete(inject)
 }

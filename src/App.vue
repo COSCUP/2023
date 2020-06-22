@@ -47,7 +47,7 @@ import { BreakpointService } from '@/utils/breakpoint'
 import { ThemeManager } from '@/utils/theme'
 import { ScrollLockManager } from '@/utils/scrollLock'
 import { FullPageProgressService } from '@/utils/fullPageProgress'
-import { PopupManager } from '@/utils/popup'
+import { PopupService } from '@/utils/popup'
 import { Route, Location } from 'vue-router'
 import { AnnouncementService } from './utils/announcement'
 
@@ -58,7 +58,7 @@ function injected (thisArg: unknown) {
     breakpointService: BreakpointService;
     scrollLockManager: ScrollLockManager;
     fullPageProgressService: FullPageProgressService;
-    popupManager: PopupManager;
+    popupService: PopupService;
     announcementService: AnnouncementService;
   }>(thisArg)
 }
@@ -71,7 +71,7 @@ export default Vue.extend({
     'breakpointService',
     'scrollLockManager',
     'fullPageProgressService',
-    'popupManager',
+    'popupService',
     'announcementService'
   ],
   components: {

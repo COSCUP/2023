@@ -10,7 +10,7 @@
     id="agenda"
     class="page-container"
     :class="{
-      popupped: popupManager.isPopup
+      popupped: popupService.isPopup
     }"
   >
     <AgendaNavbar />
@@ -26,7 +26,7 @@ import '@/assets/scss/pages/agenda.scss'
 import { injectedThis } from '../utils/common'
 import { LanguageService } from '../utils/language'
 import { MetaService } from '../utils/meta'
-import { PopupManager, PopupData, PopupContainerType, PopupContentType } from '../utils/popup'
+import { PopupService, PopupData, PopupContainerType, PopupContentType } from '../utils/popup'
 import { Route } from 'vue-router'
 import { createAgendaService } from '@/utils/agenda'
 import AgendaNavbar from '@/components/Agenda/AgendaNavbar.vue'
@@ -38,7 +38,7 @@ function injected (thisArg: unknown) {
   return injectedThis<{
     languageService: LanguageService;
     metaService: MetaService;
-    popupManager: PopupManager;
+    popupService: PopupService;
     breakpointService: BreakpointService;
   }>(thisArg)
 }
@@ -53,7 +53,7 @@ const agendaService = Vue.observable(createAgendaService([
 
 export default Vue.extend({
   name: 'Agenda',
-  inject: ['languageService', 'metaService', 'popupManager', 'breakpointService'],
+  inject: ['languageService', 'metaService', 'popupService', 'breakpointService'],
   provide: {
     agendaService
   },
@@ -89,7 +89,7 @@ export default Vue.extend({
         }
         : await agendaService.getSessionPopupData(sessionId, this.laugaugeType)
 
-      injected(this).popupManager.popup({
+      injected(this).popupService.popup({
         ...popupData,
         onClose: () => this.closeSessionPopup()
       })

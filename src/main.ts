@@ -12,7 +12,7 @@ import { createLanguageService, LanguageService } from '@/utils/language'
 import { createBreakpointService, BreakpointService } from '@/utils/breakpoint'
 import { createScrollLockManager, ScrollLockManager } from '@/utils/scrollLock'
 import { createFullPageProgressService, FullPageProgressService } from '@/utils/fullPageProgress'
-import { createPopupManager, PopupManager } from '@/utils/popup'
+import { createPopupService, PopupService } from '@/utils/popup'
 import { createMetaService, MetaService } from '@/utils/meta'
 import { createAnnouncementService, AnnouncementService } from '@/utils/announcement'
 
@@ -28,8 +28,8 @@ const breakpointService: BreakpointService = Vue.observable(createBreakpointServ
 const scrollLockManager: ScrollLockManager = Vue.observable(createScrollLockManager())
 const fullPageProgressService: FullPageProgressService = Vue.observable(createFullPageProgressService(scrollLockManager))
 const metaService: MetaService = Vue.observable(createMetaService())
-const popupManager: PopupManager = Vue.observable(createPopupManager({ scrollLockManager, metaService }))
-const announcementService: AnnouncementService = Vue.observable(createAnnouncementService({ languageService, popupManager }))
+const popupService: PopupService = Vue.observable(createPopupService({ scrollLockManager, metaService }))
+const announcementService: AnnouncementService = Vue.observable(createAnnouncementService({ languageService, popupService }))
 
 const router = createRouter({
   languageService,
@@ -44,7 +44,7 @@ new Vue({
     breakpointService,
     scrollLockManager,
     fullPageProgressService,
-    popupManager,
+    popupService,
     metaService,
     announcementService
   },

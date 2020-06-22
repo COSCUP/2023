@@ -6,11 +6,11 @@
 -->
 
 <template>
-  <div v-show="popupManager.isPopup" id="popup">
+  <div v-show="popupService.isPopup" id="popup">
     <component :is="popupContainerComponent" @close="onClose">
       <component
         :is="popupContentComponent"
-        :popup-content-data="popupManager.popupData.contentData"
+        :popup-content-data="popupService.popupData.contentData"
       ></component>
     </component>
   </div>
@@ -21,18 +21,18 @@ import Vue from 'vue'
 import GeneralPopupContent from '@/components/App/Popup/Content/GeneralPopupContent.vue'
 import EmptyPopupContent from '@/components/App/Popup/Content/EmptyPopupContent.vue'
 import DefaultPopupContainer from '@/components/App/Popup/Container/DefaultPopupContainer.vue'
-import { PopupManager, PopupContentType, PopupContainerType } from '@/utils/popup'
+import { PopupService, PopupContentType, PopupContainerType } from '@/utils/popup'
 import { injectedThis } from '@/utils/common'
 
 function injected (thisArg: unknown) {
   return injectedThis<{
-    popupManager: PopupManager;
+    popupService: PopupService;
   }>(thisArg)
 }
 
 export default Vue.extend({
   name: 'Popup',
-  inject: ['popupManager'],
+  inject: ['popupService'],
   components: {
     DefaultPopupContainer,
     EmptyPopupContent,
@@ -42,18 +42,18 @@ export default Vue.extend({
     popupContainerComponent () {
       return {
         [PopupContainerType.Default]: DefaultPopupContainer
-      }[injected(this).popupManager.popupData.containerType]
+      }[injected(this).popupService.popupData.containerType]
     },
     popupContentComponent () {
       return {
         [PopupContentType.Empty]: EmptyPopupContent,
         [PopupContentType.General]: GeneralPopupContent
-      }[injected(this).popupManager.popupData.contentData.type]
+      }[injected(this).popupService.popupData.contentData.type]
     }
   },
   methods: {
     onClose () {
-      injected(this).popupManager.close()
+      injected(this).popupService.close()
     }
   }
 })

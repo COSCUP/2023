@@ -4,12 +4,12 @@
 // https://opensource.org/licenses/MIT
 
 import announcement from '@/assets/json/announcement.json'
-import { PopupManager, PopupData, PopupContainerType, PopupContentType } from '../popup'
+import { PopupService, PopupData, PopupContainerType, PopupContentType } from '../popup'
 import markdown from '@/utils/markdown'
 import { LanguageService, LanguageType } from '../language'
 
 interface Inject {
-  popupManager: PopupManager;
+  popupService: PopupService;
   languageService: LanguageService;
 }
 
@@ -20,11 +20,11 @@ export interface AnnouncementService {
 
 class AnnouncementServiceConcrete implements AnnouncementService {
   private _languageService: LanguageService
-  private _popupManager: PopupManager
+  private _popupService: PopupService
 
   constructor (inject: Inject) {
     this._languageService = inject.languageService
-    this._popupManager = inject.popupManager
+    this._popupService = inject.popupService
   }
 
   public get hasUpdated (): boolean {
@@ -47,7 +47,7 @@ class AnnouncementServiceConcrete implements AnnouncementService {
       },
       onClose
     }
-    this._popupManager.popup(popupData)
+    this._popupService.popup(popupData)
     localStorage.setItem('announcement', announcement.uuid)
   }
 }
