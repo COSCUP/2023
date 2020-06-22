@@ -43,7 +43,7 @@ class LanguagePackBuilder {
 
   public endBuildChild () {
     const unitData = this._stack.pop()
-    if (!unitData || this._stack.length < 1) throw new Error('The stack is empty')
+    if (!unitData) throw new Error('The stack is empty')
     this.add(unitData.key, unitData.unit)
   }
 
