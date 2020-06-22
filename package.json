@@ -6,7 +6,7 @@
     "serve": "npm run pre-build && vue-cli-service serve",
     "build": "npm run pre-build && vue-cli-service build && npm run after-build && npm run end-build",
     "lint": "npm run pre-build && vue-cli-service lint",
-    "build:bundle-analysis": "npm run build -- --analyze",
+    "build:bundle-analysis": "npm run pre-build && vue-cli-service build --analyze",
     "generate:icons-import": "npm run ts-script -- ./scripts/generateIconsImport.ts",
     "generate:languages-import": "npm run ts-script -- ./scripts/generateLanguagesImport.ts",
     "generate:session": "[ -n \"$PRETALX_TOKEN\" ] && node ./scripts/generateSession.js > public/json/session.json || curl -o public/json/session.json https://coscup.org/2020/json/session.json",
