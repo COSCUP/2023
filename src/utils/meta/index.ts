@@ -49,13 +49,13 @@ const vanillaMetaDomSetterSet: MetaDomSetterSet = {
   [MetaType.OgSiteName]: (value) => { (document.querySelector('meta[property="og:site_name"]') as HTMLElement).setAttribute('content', value) }
 }
 
-export interface MetaManager {
+export interface MetaService {
   readonly currentMetaValues: MetaValues;
   setMeta: (options: MetaOptions) => void;
   resetMeta: () => void;
 }
 
-class MetaManagerConcrete implements MetaManager {
+class MetaServiceConcrete implements MetaService {
   private __currentMetaValues: MetaValues = defaultMetaValues
   private _metaDomSetterSet: MetaDomSetterSet
 
@@ -90,6 +90,6 @@ class MetaManagerConcrete implements MetaManager {
   }
 }
 
-export function createMetaManager (metaDomSetterSet = vanillaMetaDomSetterSet): MetaManager {
-  return new MetaManagerConcrete(metaDomSetterSet)
+export function createMetaService (metaDomSetterSet = vanillaMetaDomSetterSet): MetaService {
+  return new MetaServiceConcrete(metaDomSetterSet)
 }

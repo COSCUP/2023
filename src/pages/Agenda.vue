@@ -25,7 +25,7 @@ import Vue from 'vue'
 import '@/assets/scss/pages/agenda.scss'
 import { injectedThis } from '../utils/common'
 import { LanguageService } from '../utils/language'
-import { MetaManager } from '../utils/meta'
+import { MetaService } from '../utils/meta'
 import { PopupManager, PopupData, PopupContainerType, PopupContentType } from '../utils/popup'
 import { Route } from 'vue-router'
 import { createAgendaService } from '@/utils/agenda'
@@ -37,7 +37,7 @@ import { BreakpointService } from '../utils/breakpoint'
 function injected (thisArg: unknown) {
   return injectedThis<{
     languageService: LanguageService;
-    metaManager: MetaManager;
+    metaService: MetaService;
     popupManager: PopupManager;
     breakpointService: BreakpointService;
   }>(thisArg)
@@ -53,7 +53,7 @@ const agendaService = Vue.observable(createAgendaService([
 
 export default Vue.extend({
   name: 'Agenda',
-  inject: ['languageService', 'metaManager', 'popupManager', 'breakpointService'],
+  inject: ['languageService', 'metaService', 'popupManager', 'breakpointService'],
   provide: {
     agendaService
   },

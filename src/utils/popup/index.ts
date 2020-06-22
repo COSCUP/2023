@@ -4,7 +4,7 @@
 // https://opensource.org/licenses/MIT
 
 import { ScrollLockManager } from '@/utils/scrollLock'
-import { MetaOptions, MetaManager } from '../meta'
+import { MetaOptions, MetaService } from '../meta'
 
 export enum PopupContentType {
   Empty = 'Empty',
@@ -47,7 +47,7 @@ export interface PopupManager {
 
 interface Inject {
   scrollLockManager: ScrollLockManager;
-  metaManager: MetaManager;
+  metaService: MetaService;
 }
 
 class PopupManagerConcrete implements PopupManager {
@@ -60,12 +60,12 @@ class PopupManagerConcrete implements PopupManager {
   }]
 
   private _scrollLockManager: ScrollLockManager
-  private _metaManager: MetaManager
+  private _metaService: MetaService
 
   constructor (inject: Inject) {
-    const { scrollLockManager, metaManager } = inject
+    const { scrollLockManager, metaService } = inject
     this._scrollLockManager = scrollLockManager
-    this._metaManager = metaManager
+    this._metaService = metaService
   }
 
   public get isPopup (): boolean {
@@ -80,7 +80,7 @@ class PopupManagerConcrete implements PopupManager {
     if (popupData.popupId && this._popupDataStack.some((data) => data.popupId === popupData.popupId)) return
     this._popupDataStack.push(popupData)
     this._scrollLockManager.lock()
-    this._metaManager.setMeta(this.popupData.metaOptions)
+    this._metaService.setMeta(this.popupData.metaOptions)
   }
 
   public close (): void {
@@ -88,7 +88,7 @@ class PopupManagerConcrete implements PopupManager {
       (this.popupData.onClose || (() => { /**/ }))()
       this._popupDataStack.pop()
       this._scrollLockManager.unlock()
-      this._metaManager.setMeta(this.popupData.metaOptions)
+      this._metaService.setMeta(this.popupData.metaOptions)
     }
   }
 }

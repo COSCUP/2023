@@ -8,7 +8,7 @@ import VueRouter, { RouteConfig } from 'vue-router'
 import { LanguageService, LanguageType, defaultLanguageType, availableLanguageTypes } from '@/utils/language'
 import { FullPageProgressService } from '@/utils/fullPageProgress'
 import { delay } from '@/utils/common'
-import { MetaManager } from '@/utils/meta'
+import { MetaService } from '@/utils/meta'
 import { camelCase } from 'lodash-es'
 
 Vue.use(VueRouter)
@@ -49,13 +49,13 @@ const pageRoutes: Array<RouteConfig> = [
 export const pageRouteNameList: Array<string> = pageRoutes.map((route) => route.name as string)
 
 interface Inject {
-  metaManager: MetaManager;
+  metaService: MetaService;
   languageService: LanguageService;
   fullPageProgressService: FullPageProgressService;
 }
 
 export function createRouter (injects: Inject): VueRouter {
-  const { languageService, fullPageProgressService, metaManager } = injects
+  const { languageService, fullPageProgressService, metaService } = injects
 
   const PageComponent: { [name: string]: () => Promise<typeof import('*.vue')> } = {
     Home: () => import(
@@ -158,7 +158,7 @@ export function createRouter (injects: Inject): VueRouter {
       const routeName = to.name ?? ''
       if (pageRouteNameList.includes(routeName)) {
         type LanguagePackKeys = Exclude<(keyof typeof languageService.languagePack), 'app'>
-        metaManager.setMeta({
+        metaService.setMeta({
           title: languageService.languagePack[camelCase(routeName) as LanguagePackKeys].meta.title
         })
       }

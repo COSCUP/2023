@@ -13,7 +13,7 @@ import { createBreakpointService, BreakpointService } from '@/utils/breakpoint'
 import { createScrollLockManager, ScrollLockManager } from '@/utils/scrollLock'
 import { createFullPageProgressService, FullPageProgressService } from '@/utils/fullPageProgress'
 import { createPopupManager, PopupManager } from '@/utils/popup'
-import { createMetaManager, MetaManager } from '@/utils/meta'
+import { createMetaService, MetaService } from '@/utils/meta'
 import { createAnnouncementService, AnnouncementService } from '@/utils/announcement'
 
 import Icon from '@/components/Basic/Icon/index.vue'
@@ -27,14 +27,14 @@ const themeManager: ThemeManager = Vue.observable(createThemeManager())
 const breakpointService: BreakpointService = Vue.observable(createBreakpointService())
 const scrollLockManager: ScrollLockManager = Vue.observable(createScrollLockManager())
 const fullPageProgressService: FullPageProgressService = Vue.observable(createFullPageProgressService(scrollLockManager))
-const metaManager: MetaManager = Vue.observable(createMetaManager())
-const popupManager: PopupManager = Vue.observable(createPopupManager({ scrollLockManager, metaManager }))
+const metaService: MetaService = Vue.observable(createMetaService())
+const popupManager: PopupManager = Vue.observable(createPopupManager({ scrollLockManager, metaService }))
 const announcementService: AnnouncementService = Vue.observable(createAnnouncementService({ languageService, popupManager }))
 
 const router = createRouter({
   languageService,
   fullPageProgressService,
-  metaManager
+  metaService
 })
 
 new Vue({
@@ -45,7 +45,7 @@ new Vue({
     scrollLockManager,
     fullPageProgressService,
     popupManager,
-    metaManager,
+    metaService,
     announcementService
   },
   router,

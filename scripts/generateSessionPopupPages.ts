@@ -4,7 +4,7 @@
 // https://opensource.org/licenses/MIT
 
 import { createAgendaService } from '../src/utils/agenda/index'
-import { MetaDomSetterSet, MetaType, defaultMetaValues, createMetaManager } from '../src/utils/meta'
+import { MetaDomSetterSet, MetaType, defaultMetaValues, createMetaService } from '../src/utils/meta'
 import cheerio from 'cheerio'
 import fs from 'fs'
 import path from 'path'
@@ -66,8 +66,8 @@ async function run () {
 
   datas.forEach((data) => {
     const $ = cheerio.load(zhOriginalHtml, { _useHtmlParser2: true })
-    const metaManager = createMetaManager(createCheerioMetaDomSetterSet($))
-    metaManager.setMeta(data.popupData.metaOptions)
+    const metaService = createMetaService(createCheerioMetaDomSetterSet($))
+    metaService.setMeta(data.popupData.metaOptions)
     $('#session-detail').replaceWith((data.popupData.contentData as GeneralPopupContentData).html)
     fs.writeFileSync(path.join(zhOriginalHtmlDir, `${data.sessionId}.html`), $.html())
     fs.mkdirSync(path.join(zhOriginalHtmlDir, data.sessionId))
@@ -87,8 +87,8 @@ async function run () {
 
   datas.forEach((data) => {
     const $ = cheerio.load(enOriginalHtml, { _useHtmlParser2: true })
-    const metaManager = createMetaManager(createCheerioMetaDomSetterSet($))
-    metaManager.setMeta(data.popupData.metaOptions)
+    const metaService = createMetaService(createCheerioMetaDomSetterSet($))
+    metaService.setMeta(data.popupData.metaOptions)
     $('#session-detail').replaceWith((data.popupData.contentData as GeneralPopupContentData).html)
     fs.writeFileSync(path.join(enOriginalHtmlDir, `${data.sessionId}.html`), $.html())
     fs.mkdirSync(path.join(enOriginalHtmlDir, data.sessionId))
