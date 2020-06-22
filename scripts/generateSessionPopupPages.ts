@@ -6,6 +6,7 @@
 import cheerio from 'cheerio'
 import fs from 'fs'
 import path from 'path'
+import { origin } from '../package.json'
 import { createAgendaService } from '@/services/agenda'
 import { availableLanguageTypes } from '@/services/language'
 import { MetaDomSetterSet, MetaType, defaultMetaValues, createMetaService } from '@/services/meta'
@@ -34,7 +35,7 @@ function createCheerioMetaDomSetterSet ($: CheerioStatic) {
 }
 
 async function run () {
-  process.env.VUE_APP_PRODUCTION_ORIGIN = 'https://coscup.org'
+  process.env.VUE_APP_PRODUCTION_ORIGIN = origin
 
   const agendaService = createAgendaService([
     'AU',
@@ -49,14 +50,16 @@ async function run () {
     agendaService.dayIndex = index
   })
 
-  await Promise.all(availableLanguageTypes.map((languageType) => {
-    return {
-      languageType: languageType,
-      languageTypeAlias: (languageType === 'zh-TW' ? 'zh' : 'en') as 'zh' | 'en',
-      outputHtmlDir: path.join(__dirname, `../dist/2020/${languageType}/agenda/`),
-      templateHtml: fs.readFileSync(path.join(__dirname, `../dist/2020/${languageType}/agenda/template.html`)).toString()
-    }
-  })
+  await Promise.all(availableLanguageTypes
+    .map((languageType) => {
+      const languageData = {
+        languageType: languageType,
+        languageTypeAlias: (languageType === 'zh-TW' ? 'zh' : 'en') as 'zh' | 'en',
+        outputHtmlDir: path.join(__dirname, `../dist/2020/${languageType}/agenda/`),
+        templateHtml: fs.readFileSync(path.join(__dirname, `../dist/2020/${languageType}/agenda/template.html`)).toString()
+      }
+      return languageData
+    })
     .map(async (languageData) => {
       const datas = await Promise.all(
         Object.keys(agendaService.sessionSet)
@@ -77,7 +80,17 @@ async function run () {
         fs.mkdirSync(path.join(languageData.outputHtmlDir, data.sessionId))
         fs.writeFileSync(path.join(languageData.outputHtmlDir, data.sessionId, 'index.html'), $.html())
       })
-    }))
+    })
+  )
+
+  availableLanguageTypes.forEach((languageType) => {
+    const outputHtmlPath = path.join(__dirname, `../dist/2020/${languageType}/agenda/`)
+    const templateHtmlPath = path.join(outputHtmlPath, 'template.html')
+    fs.existsSync(outputHtmlPath) && fs.rmdirSync(path.join(outputHtmlPath, '/template/'), {
+      recursive: true
+    })
+    fs.existsSync(templateHtmlPath) && fs.unlinkSync(templateHtmlPath)
+  })
 }
 
 run()
