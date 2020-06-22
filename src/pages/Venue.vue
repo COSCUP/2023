@@ -10,12 +10,12 @@
     <Map id="map-component" :options="mapOptions"></Map>
     <div class="plan-container">
       <div
-        v-for="key in Object.keys(languageService.languagePack.venue.plans)"
-        :key="key"
+        v-for="plan in languageService.languagePack.venue.plans"
+        :key="plan.name"
         class="plan"
       >
-        <h3>{{ key }}</h3>
-        <section v-html="plansHtml[key]" class="markdown"></section>
+        <h3>{{ plan.name }}</h3>
+        <section v-html="plansHtml[plan.name]" class="markdown"></section>
       </div>
     </div>
   </main>
