@@ -29,8 +29,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import { injectedThis } from '@/utils/common'
-import { LanguageService } from '@/utils/language'
-import { AgendaService, formatTimeString } from '@/utils/agenda'
+import { LanguageService } from '@/services/language'
+import { AgendaService, formatTimeString } from '@/services/agenda'
 import AgendaSessionItem from '@/components/Agenda/AgendaSessionItem.vue'
 
 function injected (thisArg: unknown) {

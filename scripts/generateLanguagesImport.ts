@@ -77,7 +77,7 @@ function visitRecursively (builder: LanguagePackBuilder, dirPath: string) {
 }
 
 const languagesRoot = path.join(__dirname, '../languages/')
-const targetDir = path.join(__dirname, '../src/utils/language/languages/')
+const targetDir = path.join(__dirname, '../src/services/language/languages/')
 const config: LanguageServiceConfig = require(path.join(languagesRoot, 'config.json'))
 const defaultLanguage = config.default
 

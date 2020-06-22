@@ -63,7 +63,7 @@ import Vue from 'vue'
 import markdown from '@/utils/markdown'
 import '@/assets/scss/pages/home.scss'
 import { injectedThis } from '@/utils/common'
-import { LanguageService } from '@/utils/language'
+import { LanguageService } from '@/services/language'
 
 function injected (thisArg: unknown) {
   return injectedThis<{

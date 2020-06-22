@@ -4,9 +4,9 @@
 // https://opensource.org/licenses/MIT
 
 import announcement from '@/assets/json/announcement.json'
-import { PopupService, PopupData, PopupContainerType, PopupContentType } from '../popup'
+import { PopupService, PopupData, PopupContainerType, PopupContentType } from '@/services/popup'
 import markdown from '@/utils/markdown'
-import { LanguageService, LanguageType } from '../language'
+import { LanguageService, LanguageType } from '@/services/language'
 
 interface Inject {
   popupService: PopupService;

@@ -3,8 +3,8 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-import { LanguageType, defaultLanguageType, languagePackSet, LanguagePackSet, LanguagePack } from '@/utils/language/languages'
-export * from '@/utils/language/languages'
+import { LanguageType, defaultLanguageType, languagePackSet, LanguagePackSet, LanguagePack } from './languages'
+export * from './languages'
 
 export interface LanguageService {
   languageType: LanguageType;

@@ -42,14 +42,14 @@ import Popup from '@/components/App/Popup/index.vue'
 import { pageRouteNameList } from '@/router'
 
 import { injectedThis } from '@/utils/common'
-import { LanguageService } from '@/utils/language'
-import { BreakpointService } from '@/utils/breakpoint'
-import { ThemeService } from '@/utils/theme'
-import { ScrollLockService } from '@/utils/scrollLock'
-import { FullPageProgressService } from '@/utils/fullPageProgress'
-import { PopupService } from '@/utils/popup'
+import { LanguageService } from '@/services/language'
+import { BreakpointService } from '@/services/breakpoint'
+import { ThemeService } from '@/services/theme'
+import { ScrollLockService } from '@/services/scrollLock'
+import { FullPageProgressService } from '@/services/fullPageProgress'
+import { PopupService } from '@/services/popup'
 import { Route, Location } from 'vue-router'
-import { AnnouncementService } from './utils/announcement'
+import { AnnouncementService } from '@/services/announcement'
 
 function injected (thisArg: unknown) {
   return injectedThis<{

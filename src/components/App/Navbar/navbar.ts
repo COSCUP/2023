@@ -4,7 +4,7 @@
 // https://opensource.org/licenses/MIT
 
 import { Location, Route } from 'vue-router'
-import { defaultLanguageType } from '@/utils/language'
+import { defaultLanguageType } from '@/services/language'
 import { pageRouteNameList } from '@/router'
 import { camelCase } from 'lodash-es'
 

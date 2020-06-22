@@ -27,8 +27,8 @@ import Map from '@/components/Venue/Map.vue'
 import { MapOptions } from '@/utils/map'
 import markdown from '@/utils/markdown'
 import '@/assets/scss/pages/venue.scss'
-import { LanguageService } from '@/utils/language'
-import { injectedThis } from '../utils/common'
+import { LanguageService } from '@/services/language'
+import { injectedThis } from '@/utils/common'
 
 function injected (thisArg: unknown) {
   return injectedThis<{

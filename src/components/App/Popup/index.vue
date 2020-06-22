@@ -21,7 +21,7 @@ import Vue from 'vue'
 import GeneralPopupContent from '@/components/App/Popup/Content/GeneralPopupContent.vue'
 import EmptyPopupContent from '@/components/App/Popup/Content/EmptyPopupContent.vue'
 import DefaultPopupContainer from '@/components/App/Popup/Container/DefaultPopupContainer.vue'
-import { PopupService, PopupContentType, PopupContainerType } from '@/utils/popup'
+import { PopupService, PopupContentType, PopupContainerType } from '@/services/popup'
 import { injectedThis } from '@/utils/common'
 
 function injected (thisArg: unknown) {

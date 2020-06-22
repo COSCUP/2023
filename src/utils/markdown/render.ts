@@ -5,7 +5,7 @@
 
 import MarkdownIt from 'markdown-it'
 import Prism from 'prismjs'
-import plugins from '@/utils/markdown/plugins'
+import plugins from './plugins'
 import 'prismjs/components'
 
 function createMarkdownIt () {

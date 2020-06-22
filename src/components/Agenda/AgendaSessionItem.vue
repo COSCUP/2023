@@ -47,10 +47,10 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Location } from 'vue-router'
-import { Session, AgendaService, formatTimeString } from '@/utils/agenda'
+import { Session, AgendaService, formatTimeString } from '@/services/agenda'
 import { injectedThis } from '@/utils/common'
-import { LanguageService } from '@/utils/language'
-import { BreakpointService } from '@/utils/breakpoint'
+import { LanguageService } from '@/services/language'
+import { BreakpointService } from '@/services/breakpoint'
 
 function injected (thisArg: unknown) {
   return injectedThis<{

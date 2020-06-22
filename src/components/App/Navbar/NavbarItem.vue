@@ -97,7 +97,7 @@ import Vue, { PropType } from 'vue'
 import { kebabCase } from 'lodash-es'
 import { NavbarItemType, NavbarItemData } from './navbar'
 import { injectedThis } from '@/utils/common'
-import { LanguageService, LanguageType, availableLanguageTypes, defaultLanguageType } from '@/utils/language'
+import { LanguageService, LanguageType, availableLanguageTypes, defaultLanguageType } from '@/services/language'
 import { Location } from 'vue-router'
 
 function injected (thisArg: unknown) {

@@ -77,8 +77,8 @@
 import Vue from 'vue'
 import NavbarItem from './NavbarItem.vue'
 import { navbarItems, NavbarItemData, NavbarAction } from './navbar'
-import { BreakpointService } from '@/utils/breakpoint'
-import { ScrollLockService } from '@/utils/scrollLock'
+import { BreakpointService } from '@/services/breakpoint'
+import { ScrollLockService } from '@/services/scrollLock'
 import { injectedThis } from '@/utils/common'
 import { debounce } from 'lodash-es'
 

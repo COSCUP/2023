@@ -3,12 +3,12 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-import { createAgendaService } from '../src/utils/agenda/index'
-import { MetaDomSetterSet, MetaType, defaultMetaValues, createMetaService } from '../src/utils/meta'
+import { createAgendaService } from '@/services/agenda'
+import { MetaDomSetterSet, MetaType, defaultMetaValues, createMetaService } from '@/services//meta'
 import cheerio from 'cheerio'
 import fs from 'fs'
 import path from 'path'
-import { GeneralPopupContentData } from '@/utils/popup'
+import { GeneralPopupContentData } from '@/services/popup'
 
 const zhOriginalHtmlDir = path.join(__dirname, '../dist/2020/zh-TW/agenda/')
 const zhOriginalHtml = fs.readFileSync(path.join(zhOriginalHtmlDir, 'template.html')).toString()

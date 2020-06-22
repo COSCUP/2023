@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import Vue, { PropType } from 'vue'
-import { EmptyPopupContentData, PopupContentType } from '@/utils/popup'
+import { EmptyPopupContentData, PopupContentType } from '@/services/popup'
 
 export default Vue.extend({
   name: 'EmptyPopupContent',

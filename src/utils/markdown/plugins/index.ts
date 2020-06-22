@@ -17,7 +17,7 @@ import pluginExternalLinks from 'markdown-it-external-links'
 import pluginAnchor from 'markdown-it-anchor'
 import pluginTOC from 'markdown-it-toc-done-right'
 import pluginImsize from 'markdown-it-imsize'
-import pluginLazyLoadImg from '@/utils/markdown/plugins/lazyLoadImg'
+import pluginLazyLoadImg from './lazyLoadImg'
 import { getFullUrl } from '@/utils/common'
 
 function allPlugins (md: MarkdownIt) {

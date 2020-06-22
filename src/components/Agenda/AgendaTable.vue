@@ -46,8 +46,8 @@
 import Vue from 'vue'
 import { Location } from 'vue-router'
 import { injectedThis } from '@/utils/common'
-import { LanguageService } from '@/utils/language'
-import { AgendaService, TableCellType } from '@/utils/agenda'
+import { LanguageService } from '@/services/language'
+import { AgendaService, TableCellType } from '@/services/agenda'
 import AgendaSessionItem from './AgendaSessionItem.vue'
 import AgendaTableRoomCell from './AgendaTableRoomCell.vue'
 

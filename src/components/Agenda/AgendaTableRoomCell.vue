@@ -14,9 +14,9 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { AgendaService, Room } from '@/utils/agenda'
+import { AgendaService, Room } from '@/services/agenda'
 import { injectedThis } from '@/utils/common'
-import { LanguageService } from '@/utils/language'
+import { LanguageService } from '@/services/language'
 
 function injected (thisArg: unknown) {
   return injectedThis<{

@@ -5,10 +5,10 @@
 
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
-import { LanguageService, LanguageType, defaultLanguageType, availableLanguageTypes } from '@/utils/language'
-import { FullPageProgressService } from '@/utils/fullPageProgress'
+import { LanguageService, LanguageType, defaultLanguageType, availableLanguageTypes } from '@/services/language'
+import { FullPageProgressService } from '@/services/fullPageProgress'
 import { delay } from '@/utils/common'
-import { MetaService } from '@/utils/meta'
+import { MetaService } from '@/services/meta'
 import { camelCase } from 'lodash-es'
 
 Vue.use(VueRouter)
