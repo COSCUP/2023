@@ -93,16 +93,33 @@
           width: 320px;
           height: 320px;
           margin-left: 1rem;
+          margin-bottom: 1rem;
           float: right;
-        }
-
-        .bio {
         }
 
         &::after {
           content: "";
           clear: both;
           display: table;
+        }
+      }
+    }
+
+    @include xsOnly {
+      .detail-description {
+        padding: 2rem 0;
+      }
+
+      .detail-speakers {
+        .speaker-content {
+          padding: 0;
+
+          .avatar {
+            width: 100%;
+            height: auto;
+            float: none;
+            margin-left: 0;
+          }
         }
       }
     }
