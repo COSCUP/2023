@@ -2,9 +2,9 @@ import { groupBy } from 'lodash-es'
 
 export interface SessionBase {
   id: string;
-  start: Date;
-  end: Date;
-  roomId: string;
+  start: string;
+  end: string;
+  room: string;
 }
 
 export enum TableCellType {
@@ -45,11 +45,11 @@ export interface AgendaListData {
 /**
  * Return a time zone fixed Date object.
  *
- * @param {Date} date Source Date object
+ * @param {Date | string} date Source Date object
  * @param {number} timeZoneOffsetMinutes The time zone difference, in minutes, from current locale (host system settings) to UTC.
  * @returns {Date} Time zone fixed Date object
  */
-export function fixedTimeZoneDate (date: Date, timeZoneOffsetMinutes: number): Date {
+export function fixedTimeZoneDate (date: Date | string, timeZoneOffsetMinutes: number): Date {
   date = new Date(date)
   date.setMinutes(date.getMinutes() - timeZoneOffsetMinutes + (date.getTimezoneOffset()))
   return date
@@ -88,16 +88,17 @@ export function formatTimeString (date: Date, joinChar = '') {
 export function getTimePoints (sessions: SessionBase[]) {
   return [...new Set([
     ...sessions.flatMap((session) => {
-      return [formatTimeString(session.start), formatTimeString(session.end)]
+      return [formatTimeString(new Date(session.start)), formatTimeString(new Date(session.end))]
     })
   ])]
     .sort((strA, strB) => parseInt(strA) - parseInt(strB))
     .map((timeStr) => `t-${timeStr}`)
 }
 
-export function generateAgendaTableData (sessions: SessionBase[], roomSequence?: string[]): AgendaTableData {
+export function generateAgendaTableData (sessions: SessionBase[], fixedTimezone?: (date: Date | string) => Date, roomSequence?: string[]): AgendaTableData {
+  const createDate = (date: Date | string) => fixedTimezone ? fixedTimezone(date) : new Date(date)
   const timePoints = getTimePoints(sessions)
-  let entries = Object.entries(groupBy(sessions, (session) => `r-${session.roomId}`))
+  let entries = Object.entries(groupBy(sessions, (session) => `r-${session.room}`))
   if (roomSequence) {
     entries = entries.sort((entryA, entryB) => {
       const indexA = roomSequence.indexOf(entryA[0].slice(2))
@@ -116,15 +117,15 @@ export function generateAgendaTableData (sessions: SessionBase[], roomSequence?:
   entries.forEach((entry, columnIndex) => {
     entry[1]
       .sort((sessionA, sessionB) => {
-        const indexA = timePoints.indexOf(`t-${formatTimeString(sessionA.start)}`)
-        const indexB = timePoints.indexOf(`t-${formatTimeString(sessionB.start)}`)
+        const indexA = timePoints.indexOf(`t-${formatTimeString(createDate(sessionA.start))}`)
+        const indexB = timePoints.indexOf(`t-${formatTimeString(createDate(sessionB.start))}`)
         if (indexA === -1 || indexB === -1) throw new Error(`${indexA}, ${indexB}`)
 
         return indexA - indexB
       })
       .forEach((session) => {
-        const indexStart = timePoints.indexOf(`t-${formatTimeString(session.start)}`)
-        const indexEnd = timePoints.indexOf(`t-${formatTimeString(session.end)}`)
+        const indexStart = timePoints.indexOf(`t-${formatTimeString(new Date(session.start))}`)
+        const indexEnd = timePoints.indexOf(`t-${formatTimeString(new Date(session.end))}`)
         if (indexStart === -1 || indexEnd === -1 || indexStart >= indexEnd) throw new Error()
 
         const rowSpan = indexEnd - indexStart
@@ -136,10 +137,6 @@ export function generateAgendaTableData (sessions: SessionBase[], roomSequence?:
       })
   })
 
-  const columns = rows[0].map((col, colIndex) => rows.map((row) => row[colIndex]))
-
-  console.log(JSON.stringify(columns, null, 2))
-
   rows = rows.map((row) => row.filter((cell) => cell.type !== TableCellType.Span))
 
   return {
@@ -148,22 +145,23 @@ export function generateAgendaTableData (sessions: SessionBase[], roomSequence?:
   }
 }
 
-export function generateAgendaListData (sessions: SessionBase[], roomSequence?: string[]): AgendaListData {
+export function generateAgendaListData (sessions: SessionBase[], fixedTimezone?: (date: Date | string) => Date, roomSequence?: string[]): AgendaListData {
+  const createDate = (date: Date | string) => fixedTimezone ? fixedTimezone(date) : new Date(date)
   return {
-    sections: Object.entries(groupBy(sessions, (session) => `t-${formatTimeString(session.start)}`))
+    sections: Object.entries(groupBy(sessions, (session) => `t-${formatTimeString(createDate(session.start))}`))
       .sort((entryA, entryB) => parseInt(entryA[0].slice(2)) - parseInt(entryB[0].slice(2)))
       .map((entry) => {
         const _sessions = roomSequence
           ? entry[1].sort((sessionA, sessionB) => {
-            const indexA = roomSequence.indexOf(sessionA.roomId)
-            const indexB = roomSequence.indexOf(sessionB.roomId)
+            const indexA = roomSequence.indexOf(sessionA.room)
+            const indexB = roomSequence.indexOf(sessionB.room)
             if (indexA === -1 || indexB === -1) throw new Error()
 
             return indexA - indexB
           })
           : entry[1]
         return {
-          start: _sessions[0].start,
+          start: createDate(_sessions[0].start),
           sessions: _sessions.map((_session) => _session.id)
         }
       })
