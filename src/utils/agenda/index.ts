@@ -72,6 +72,7 @@ class AgendaServiceConcrete implements AgendaService {
         )
       )
     )
+      .sort((entryA, entryB) => parseInt(entryA[0].replace(/,/g, '')) - parseInt(entryB[0].replace(/,/g, '')))
       .map((entry) => {
         return [
           entry[0].split(',').map((numStr) => parseInt(numStr)),
