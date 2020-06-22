@@ -4,6 +4,10 @@
 @import "./components/app/full-page-progress";
 @import "./components/app/popup";
 
+@include reset;
+@include native-variables;
+@include font;
+@include markdown;
 *,
 *::before,
 *::after {
@@ -21,4 +25,10 @@ body {
   position: relative;
   height: 100%;
   padding-top: $navbar-height;
+
+  @include container;
+  @include full-page-progress;
+  @include popup;
+  @include navbar;
+  @include footer;
 }

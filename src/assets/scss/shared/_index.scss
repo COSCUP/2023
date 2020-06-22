@@ -5,11 +5,13 @@
 @import "./container";
 @import "./markdown";
 
-// native variables
-:root {
-  --navbar-height: 68px;
+@mixin native-variables {
+  // native variables
+  :root {
+    --navbar-height: 68px;
 
-  @include xsOnly {
-    --navbar-height: 54px;
+    @include xsOnly {
+      --navbar-height: 54px;
+    }
   }
 }

@@ -1,226 +1,228 @@
-.markdown {
-  position: relative;
+@mixin markdown {
+  .markdown {
+    position: relative;
 
-  & > *:not(:last-child) {
-    margin-bottom: 1.5rem;
-    border-radius: 5px;
-  }
+    & > *:not(:last-child) {
+      margin-bottom: 1.5rem;
+      border-radius: 5px;
+    }
 
-  @for $i from 1 to 6 {
-    h#{$i} {
-      position: relative;
-      font-size: #{(2 - $i * 0.25)}rem;
-      font-weight: 600;
+    @for $i from 1 to 6 {
+      h#{$i} {
+        position: relative;
+        font-size: #{(2 - $i * 0.25)}rem;
+        font-weight: 600;
 
-      .header-anchor {
-        position: absolute;
-        display: none;
-        left: -1.25rem;
-        width: 100%;
-      }
+        .header-anchor {
+          position: absolute;
+          display: none;
+          left: -1.25rem;
+          width: 100%;
+        }
 
-      @include smAndUp {
-        .header-anchor:hover,
-        &:hover .header-anchor {
-          display: inline-block;
+        @include smAndUp {
+          .header-anchor:hover,
+          &:hover .header-anchor {
+            display: inline-block;
+          }
         }
       }
     }
-  }
 
-  a {
-    word-break: break-word;
-    text-decoration: none;
-    color: var(--color-markdown-link);
-    transition: all 0.2s;
-
-    &:hover {
-      color: var(--color-markdown-link-hover);
+    a {
+      word-break: break-word;
+      text-decoration: none;
+      color: var(--color-markdown-link);
       transition: all 0.2s;
+
+      &:hover {
+        color: var(--color-markdown-link-hover);
+        transition: all 0.2s;
+      }
+
+      &::content {
+        word-break: break-all;
+      }
     }
 
-    &::content {
-      word-break: break-all;
+    p {
+      line-height: 1.5;
     }
-  }
 
-  p {
-    line-height: 1.5;
-  }
-
-  hr:not(.divider) {
-    border: none;
-    text-align: center;
-    line-height: 0;
-    height: 1px;
-    padding: 1rem 0;
-
-    &::after {
-      content: "";
-      display: inline-block;
-      width: 300px;
-      max-width: 80%;
+    hr:not(.divider) {
+      border: none;
+      text-align: center;
+      line-height: 0;
       height: 1px;
-      background-color: var(--color-markdown-hr);
-    }
-  }
+      padding: 1rem 0;
 
-  blockquote {
-    padding: 16px;
-    border-left: 5px solid var(--color-markdown-blockquote-side);
-    color: var(--color-markdown-blockquote-text);
-    background-color: var(--color-markdown-blockquote-background);
+      &::after {
+        content: "";
+        display: inline-block;
+        width: 300px;
+        max-width: 80%;
+        height: 1px;
+        background-color: var(--color-markdown-hr);
+      }
+    }
 
     blockquote {
-      padding-right: 0;
-      margin-top: 16px;
-      margin-bottom: 16px;
-    }
-  }
+      padding: 16px;
+      border-left: 5px solid var(--color-markdown-blockquote-side);
+      color: var(--color-markdown-blockquote-text);
+      background-color: var(--color-markdown-blockquote-background);
 
-  ul,
-  ol {
-    padding-inline-start: 40px;
-
-    @include smOnly {
-      padding-inline-start: 30px;
-    }
-
-    @include xsOnly {
-      padding-inline-start: 20px;
-    }
-
-    li {
-      line-height: 2;
-    }
-  }
-
-  ul {
-    list-style-type: disc;
-    ul {
-      list-style-type: circle;
-      ul {
-        list-style-type: square;
+      blockquote {
+        padding-right: 0;
+        margin-top: 16px;
+        margin-bottom: 16px;
       }
     }
-  }
 
-  ol {
-    list-style-type: decimal;
-  }
+    ul,
+    ol {
+      padding-inline-start: 40px;
 
-  code {
-    display: inline-block;
-    border-radius: 5px;
-    padding: 2px 4px;
-    color: var(--color-markdown-code-text);
-    background-color: var(--color-markdown-code-background);
-  }
+      @include smOnly {
+        padding-inline-start: 30px;
+      }
 
-  .code-block {
-    position: relative;
-    padding: 1rem;
-    color: var(--color-markdown-code-block-text);
-    background-color: var(--color-markdown-code-block-background);
+      @include xsOnly {
+        padding-inline-start: 20px;
+      }
+
+      li {
+        line-height: 2;
+      }
+    }
+
+    ul {
+      list-style-type: disc;
+      ul {
+        list-style-type: circle;
+        ul {
+          list-style-type: square;
+        }
+      }
+    }
+
+    ol {
+      list-style-type: decimal;
+    }
 
     code {
-      max-width: 100%;
-      overflow-x: auto;
-      border-radius: 0;
-      padding: 0;
-      color: inherit;
-      background-color: inherit;
+      display: inline-block;
+      border-radius: 5px;
+      padding: 2px 4px;
+      color: var(--color-markdown-code-text);
+      background-color: var(--color-markdown-code-background);
     }
 
-    &[data-lang]::before {
-      content: attr(data-lang);
+    .code-block {
+      position: relative;
+      padding: 1rem;
+      color: var(--color-markdown-code-block-text);
+      background-color: var(--color-markdown-code-block-background);
+
+      code {
+        max-width: 100%;
+        overflow-x: auto;
+        border-radius: 0;
+        padding: 0;
+        color: inherit;
+        background-color: inherit;
+      }
+
+      &[data-lang]::before {
+        content: attr(data-lang);
+        display: block;
+        margin-top: -1rem;
+        padding: 8px 0;
+        font-size: 1rem;
+        text-align: end;
+        color: var(--color-markdown-code-block-lang-text);
+      }
+    }
+
+    table {
+      th,
+      td {
+        border-collapse: collapse;
+        border: var(--color-markdown-table-border) solid 1px;
+        padding: 0.75rem;
+      }
+    }
+
+    img {
       display: block;
-      margin-top: -1rem;
-      padding: 8px 0;
-      font-size: 1rem;
-      text-align: end;
-      color: var(--color-markdown-code-block-lang-text);
-    }
-  }
-
-  table {
-    th,
-    td {
-      border-collapse: collapse;
-      border: var(--color-markdown-table-border) solid 1px;
-      padding: 0.75rem;
-    }
-  }
-
-  img {
-    display: block;
-    max-width: 100%;
-    margin: auto;
-
-    &.loading {
-      width: 100px;
-      height: 100px;
-    }
-
-    &.loaded {
-      animation: load-in 0.5s;
-
-      @keyframes load-in {
-        from {
-          opacity: 0;
-        }
-        to {
-          opacity: 1;
-        }
-      }
-    }
-  }
-
-  mark {
-    padding: 0 0.25rem;
-    background-color: var(--color-markdown-mark-background);
-  }
-
-  div {
-    $containers: (
-      info: (
-        color: #31708f,
-        background-color: #d9edf7,
-        border-color: #bce8f1,
-      ),
-      success: (
-        color: #3c763d,
-        background-color: #dff0d8,
-        border-color: #d6e9c6,
-      ),
-      error: (
-        color: #a94442,
-        background-color: #f2dede,
-        border-color: #ebccd1,
-      ),
-      warning: (
-        color: #8a6d3b,
-        background-color: #fcf8e3,
-        border-color: #faebcc,
-      ),
-    );
-
-    @each $container, $properties in $containers {
-      &.#{$container} {
-        padding: 1rem;
-        border: solid 2px;
-        @each $key, $value in $properties {
-          #{$key}: $value;
-        }
-      }
-    }
-  }
-
-  dl {
-    * {
       max-width: 100%;
-      overflow-x: auto;
-      overflow-y: hidden;
+      margin: auto;
+
+      &.loading {
+        width: 100px;
+        height: 100px;
+      }
+
+      &.loaded {
+        animation: load-in 0.5s;
+
+        @keyframes load-in {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+      }
+    }
+
+    mark {
+      padding: 0 0.25rem;
+      background-color: var(--color-markdown-mark-background);
+    }
+
+    div {
+      $containers: (
+        info: (
+          color: #31708f,
+          background-color: #d9edf7,
+          border-color: #bce8f1,
+        ),
+        success: (
+          color: #3c763d,
+          background-color: #dff0d8,
+          border-color: #d6e9c6,
+        ),
+        error: (
+          color: #a94442,
+          background-color: #f2dede,
+          border-color: #ebccd1,
+        ),
+        warning: (
+          color: #8a6d3b,
+          background-color: #fcf8e3,
+          border-color: #faebcc,
+        ),
+      );
+
+      @each $container, $properties in $containers {
+        &.#{$container} {
+          padding: 1rem;
+          border: solid 2px;
+          @each $key, $value in $properties {
+            #{$key}: $value;
+          }
+        }
+      }
+    }
+
+    dl {
+      * {
+        max-width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+      }
     }
   }
 }

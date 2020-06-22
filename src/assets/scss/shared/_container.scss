@@ -1,4 +1,4 @@
-#app {
+@mixin container {
   .main-container {
     width: fit-content;
     position: relative;
