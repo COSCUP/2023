@@ -6,7 +6,7 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import { LanguageService, LanguageType, defaultLanguageType, availableLanguageTypes } from '@/utils/language'
-import { FullPageProgressManager } from '@/utils/fullPageProgress'
+import { FullPageProgressService } from '@/utils/fullPageProgress'
 import { delay } from '@/utils/common'
 import { MetaManager } from '@/utils/meta'
 import { camelCase } from 'lodash-es'
@@ -51,11 +51,11 @@ export const pageRouteNameList: Array<string> = pageRoutes.map((route) => route.
 interface Inject {
   metaManager: MetaManager;
   languageService: LanguageService;
-  fullPageProgressManager: FullPageProgressManager;
+  fullPageProgressService: FullPageProgressService;
 }
 
 export function createRouter (injects: Inject): VueRouter {
-  const { languageService, fullPageProgressManager, metaManager } = injects
+  const { languageService, fullPageProgressService, metaManager } = injects
 
   const PageComponent: { [name: string]: () => Promise<typeof import('*.vue')> } = {
     Home: () => import(
@@ -88,15 +88,15 @@ export function createRouter (injects: Inject): VueRouter {
     route.component = async () => {
       let didLoad = false
       delay(100).then(() => {
-        didLoad || (fullPageProgressManager.setStatus(true))
+        didLoad || (fullPageProgressService.setStatus(true))
       })
       const component = await PageComponent[route.name as string]().then((component) => {
         didLoad = true
         return component
       })
-      if (fullPageProgressManager.isLoading) {
+      if (fullPageProgressService.isLoading) {
         await delay(300)
-        fullPageProgressManager.setStatus(false)
+        fullPageProgressService.setStatus(false)
       }
       return component
     }

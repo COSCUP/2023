@@ -25,7 +25,7 @@
       </transition>
       <Footer></Footer>
     </div>
-    <FullPageProgress v-show="fullPageProgressManager.isLoading">
+    <FullPageProgress v-show="fullPageProgressService.isLoading">
     </FullPageProgress>
     <Popup></Popup>
   </div>
@@ -46,7 +46,7 @@ import { LanguageService } from '@/utils/language'
 import { BreakpointService } from '@/utils/breakpoint'
 import { ThemeManager } from '@/utils/theme'
 import { ScrollLockManager } from '@/utils/scrollLock'
-import { FullPageProgressManager } from '@/utils/fullPageProgress'
+import { FullPageProgressService } from '@/utils/fullPageProgress'
 import { PopupManager } from '@/utils/popup'
 import { Route, Location } from 'vue-router'
 import { AnnouncementService } from './utils/announcement'
@@ -57,7 +57,7 @@ function injected (thisArg: unknown) {
     themeManager: ThemeManager;
     breakpointService: BreakpointService;
     scrollLockManager: ScrollLockManager;
-    fullPageProgressManager: FullPageProgressManager;
+    fullPageProgressService: FullPageProgressService;
     popupManager: PopupManager;
     announcementService: AnnouncementService;
   }>(thisArg)
@@ -70,7 +70,7 @@ export default Vue.extend({
     'themeManager',
     'breakpointService',
     'scrollLockManager',
-    'fullPageProgressManager',
+    'fullPageProgressService',
     'popupManager',
     'announcementService'
   ],

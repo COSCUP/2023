@@ -5,12 +5,12 @@
 
 import { ScrollLockManager } from '@/utils/scrollLock'
 
-export interface FullPageProgressManager {
+export interface FullPageProgressService {
   readonly isLoading: boolean;
   setStatus: (status: boolean) => void;
 }
 
-class FullPageProgressManagerConcrete implements FullPageProgressManager {
+class FullPageProgressServiceConcrete implements FullPageProgressService {
   private _scrollLockManager: ScrollLockManager
   private _stack: true[] = []
 
@@ -28,6 +28,6 @@ class FullPageProgressManagerConcrete implements FullPageProgressManager {
   }
 }
 
-export function createFullPageProgressManager (scrollLockManager: ScrollLockManager): FullPageProgressManager {
-  return new FullPageProgressManagerConcrete(scrollLockManager)
+export function createFullPageProgressService (scrollLockManager: ScrollLockManager): FullPageProgressService {
+  return new FullPageProgressServiceConcrete(scrollLockManager)
 }
