@@ -1,29 +1,10 @@
-import _rawData from '@/../public/json/session.json'
-import { formatDateString, fixedTimeZoneDate, generateAgendaTableData, generateAgendaListData, AgendaTableData, AgendaListData } from './utils'
+import { formatDateString, fixedTimeZoneDate, generateAgendaTableData, generateAgendaListData, AgendaTableData, AgendaListData, RoomData, Session, SessionData, rawData, TypeData, SpeakerData, TagData, generateSessionPopupData } from './utils'
 import { groupBy } from 'lodash-es'
+import { PopupData } from '../popup'
 
 export * from './utils'
 
-type RawData = typeof _rawData
-type ArrayElement<ArrayType extends readonly unknown[]> = ArrayType[number];
-type SessionData = ArrayElement<typeof _rawData.sessions>
-type TypeData = ArrayElement<typeof _rawData['session_types']>
-type SpeakerData = ArrayElement<typeof _rawData.speakers>
-type RoomData = ArrayElement<typeof _rawData.rooms>
-type TagData = ArrayElement<typeof _rawData.tags>
 export type Room = RoomData
-
-const rawData: RawData = Object.freeze(_rawData)
-
-export interface Session extends Omit<SessionData, 'type' | 'room' | 'speakers' | 'tags' | 'start' | 'end'> {
-  start: Date;
-  end: Date;
-  type: TypeData;
-  roomId: string;
-  room: RoomData;
-  speakers: SpeakerData[];
-  tags: TagData[];
-}
 
 export interface DayData {
   day: [number, number, number];
@@ -39,6 +20,7 @@ export interface AgendaService {
   readonly list: AgendaListData;
   getSessionById: (sessionId: string) => Readonly<Session> | null;
   getRoomById: (roomId: string) => Readonly<Room> | null;
+  getSessionPopupData: (sessionId: string, language: 'en' | 'zh') => Promise<PopupData>;
 }
 
 class AgendaServiceConcrete implements AgendaService {
@@ -131,7 +113,6 @@ class AgendaServiceConcrete implements AgendaService {
       start,
       end,
       type,
-      roomId: sessionData.room,
       room,
       speakers,
       tags
@@ -179,6 +160,11 @@ class AgendaServiceConcrete implements AgendaService {
     const room = this._roomSet[roomId]
     if (!room) throw new Error()
     return room
+  }
+
+  public async getSessionPopupData (sessionId: string, language: 'en' | 'zh'): Promise<PopupData> {
+    const session = this.getSessionById(sessionId)
+    return await generateSessionPopupData(session, language)
   }
 }
 

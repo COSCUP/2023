@@ -37,7 +37,7 @@ class AnnouncementManagerConcrete implements AnnouncementManager {
       containerType: PopupContainerType.Default,
       contentData: {
         type: PopupContentType.General,
-        html: await markdown(announcement.content[languageType])
+        html: `<div class="markdown">${await markdown(announcement.content[languageType])}</div>`
       },
       onClose
     }

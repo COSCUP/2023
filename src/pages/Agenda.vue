@@ -1,12 +1,13 @@
 <template>
-  <main id="agenda" class="page-container">
+  <main
+    id="agenda"
+    class="page-container"
+    :class="{
+      popupped: popupManager.isPopup
+    }"
+  >
     <AgendaNavbar />
-    <AgendaTable
-      v-show="breakpointManager.smAndUp"
-      :class="{
-        popupped: popupManager.isPopup
-      }"
-    />
+    <AgendaTable v-show="breakpointManager.smAndUp" />
     <AgendaList v-show="breakpointManager.xsOnly" />
   </main>
 </template>
@@ -54,22 +55,23 @@ export default Vue.extend({
     AgendaTable,
     AgendaList
   },
+  computed: {
+    laugaugeType (): 'en' | 'zh' {
+      if (injected(this).languageManager.languageType === 'en') return 'en'
+      else return 'zh'
+    }
+  },
   data () {
     return {
       dayIndex: 0
     }
   },
   methods: {
-    popupSession (sessionId = ''): void {
+    async popupSession (sessionId = ''): Promise<void> {
+      const popupData = await agendaService.getSessionPopupData(sessionId, this.laugaugeType)
+
       injected(this).popupManager.popup({
-        metaOptions: {
-          title: 'Detail'
-        },
-        containerType: PopupContainerType.Default,
-        contentData: {
-          type: PopupContentType.General,
-          html: `<h1>${sessionId}</h1>`
-        },
+        ...popupData,
         onClose: () => this.closeSessionPopup()
       })
     },
@@ -78,7 +80,7 @@ export default Vue.extend({
         name: 'Agenda'
       })
     },
-    processByRoute (route: Route): void {
+    async processByRoute (route: Route): Promise<void> {
       if (route.name === 'AgendaDetail') {
         this.popupSession(route.params.sessionId)
       }

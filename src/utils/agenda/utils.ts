@@ -1,10 +1,31 @@
+import _rawData from '@/../public/json/session.json'
+import { PopupData, PopupContainerType, PopupContentType } from '../popup'
 import { groupBy } from 'lodash-es'
+import markdown from '@/utils/markdown'
 
+export type RawData = typeof _rawData
+export type ArrayElement<ArrayType extends readonly unknown[]> = ArrayType[number];
+export type SessionData = ArrayElement<typeof _rawData.sessions>
+export type TypeData = ArrayElement<typeof _rawData['session_types']>
+export type SpeakerData = ArrayElement<typeof _rawData.speakers>
+export type RoomData = ArrayElement<typeof _rawData.rooms>
+export type TagData = ArrayElement<typeof _rawData.tags>
+
+export const rawData = Object.freeze(_rawData)
 export interface SessionBase {
   id: string;
   start: string;
   end: string;
   room: string;
+}
+
+export interface Session extends Omit<SessionData, 'type' | 'room' | 'speakers' | 'tags' | 'start' | 'end'> {
+  start: Date;
+  end: Date;
+  type: TypeData;
+  room: RoomData;
+  speakers: SpeakerData[];
+  tags: TagData[];
 }
 
 export enum TableCellType {
@@ -166,5 +187,70 @@ export function generateAgendaListData (sessions: SessionBase[], fixedTimezone?:
         }
       })
       .filter((section) => section.sessions.length > 0)
+  }
+}
+
+const generateSessionPopupContentHtml = async (session: Session, language: 'en' | 'zh') => `
+<article id="session-detail" class="session-detail">
+  <header class="detail-header">
+    <div class="date">
+      ${formatDateString(session.start, ' / ')}
+    </div>
+    <div class="period">
+      ${formatTimeString(session.start, '：')} ~ ${formatTimeString(session.end, '：')}
+    </div>
+    <div class="track">
+      <span class="room">${session.room[language].name.split(' / ')[0]}</span>
+      <span>${session.type[language].name}</span>
+    </div>
+    <div class="title">${session[language].title}</div>
+    <div class="speaker-list">
+      <span>by</span>
+      ${
+        session.speakers
+          .map((speaker) => `<span class="speaker">${speaker[language].name}</span>`)
+          .join('')
+      }
+    </div>
+    <div class="tag-list">
+      <span>${session.language}</span>
+      ${
+        session.tags
+          .map((tag) => `<span>${tag[language].name}</span>`)
+          .join('')
+      }
+    </div>
+  </header>
+  <section class="detail-description markdown">
+    ${await markdown(session[language].description)}
+  </section>
+  <section class="detail-speakers">
+    ${(await Promise.all(session.speakers.map(async (speaker) => ({
+      avatar: speaker.avatar,
+      name: speaker[language].name,
+      bio: await markdown(speaker[language].bio)
+    })))).map((speaker) => `
+    <h2 class="speaker-title">About ${speaker.name}</h2>
+    <div class="speaker-content">
+      <img class="avatar" alt="Speaker ${speaker.name}'s avatar" src="${speaker.avatar}"></img>
+      <div class="bio markdown">
+        ${speaker.bio}
+      </div>
+    </div>
+    `.trim())}
+  </section>
+</article>
+`.trim()
+
+export async function generateSessionPopupData (session: Session, language: 'en' | 'zh'): Promise<PopupData> {
+  return {
+    metaOptions: {
+      title: session[language].title
+    },
+    containerType: PopupContainerType.Default,
+    contentData: {
+      type: PopupContentType.General,
+      html: await generateSessionPopupContentHtml(session, language)
+    }
   }
 }

@@ -1,5 +1,6 @@
 @import "./mixins";
 @import "./container/default-popup-container";
+@import "./content/session-detail";
 
 #app #popup {
   position: fixed;
@@ -11,4 +12,6 @@
   background-color: rgba(0, 0, 0, 0.3);
   z-index: 99;
   display: flex;
+
+  @include session-detail;
 }

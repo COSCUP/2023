@@ -4,6 +4,13 @@
 @import "../components/agenda/agenda-list";
 
 @include page("agenda") {
+  transition: opacity 0.3s 0.2s;
+
+  &.popupped {
+    opacity: 0;
+    transition: opacity 0.8s;
+  }
+
   @include agenda-navbar;
   @include agenda-table;
   @include agenda-list;

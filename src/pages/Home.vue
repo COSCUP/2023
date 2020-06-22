@@ -48,33 +48,6 @@
         v-html="section.content"
       ></article>
     </section>
-
-    <!-- <div class="spotlight-container">
-      <div class="spotlight sharp-back-taton">
-        <h1 class="title has-prefix-icon">
-          <img class="prefix-icon" src="/2020/images/logo.svg" />
-          <span class="inner font-black">{{
-            languageManager.languagePack.home.notice.title
-          }}</span>
-        </h1>
-        <div
-          v-html="
-            markdownParser(languageManager.languagePack.home.notice.content)
-          "
-        ></div>
-      </div>
-    </div>
-    <div class="spotlight-container">
-      <div class="spotlight sharp-back-taton">
-        <h1 class="title has-prefix-icon">
-          <img class="prefix-icon" src="/2020/images/logo.svg" />
-          <span class="inner font-black">{{
-            languageManager.languagePack.home.about.title
-          }}</span>
-        </h1>
-        <div v-html="markdownParser(languageManager.languagePack.home.about.content)"></div>
-      </div>
-    </div> -->
   </main>
 </template>
 
@@ -124,8 +97,8 @@ export default Vue.extend({
   },
   methods: {
     async parseMarkdownContent () {
-      this.noticeHtml = await markdown(injected(this).languageManager.languagePack.home.notice.content)
-      this.aboutHtml = await markdown(injected(this).languageManager.languagePack.home.about.content)
+      this.noticeHtml = `<div class="markdown">${await markdown(injected(this).languageManager.languagePack.home.notice.content)}</div>`
+      this.aboutHtml = `<div class="markdown">${await markdown(injected(this).languageManager.languagePack.home.about.content)}</div>`
     }
   },
   watch: {

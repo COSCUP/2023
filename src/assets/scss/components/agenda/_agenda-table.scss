@@ -9,12 +9,6 @@
     table-layout: fixed;
     width: calc(var(--column-width) * var(--table-column));
     height: 100%;
-    transition: opacity 0.3s 0.2s;
-
-    &.popupped {
-      opacity: 0;
-      transition: opacity 0.8s;
-    }
 
     .room-list {
       tr {

@@ -2,7 +2,7 @@
   <section
     id="general-popup-content"
     v-html="html"
-    class="popup-content markdown"
+    class="popup-content"
   ></section>
 </template>
 

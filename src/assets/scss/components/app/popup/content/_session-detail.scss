@@ -1,0 +1,110 @@
+@mixin session-detail {
+  .session-detail {
+    .detail-header {
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #ccc;
+
+      .date {
+        font-size: 0.85rem;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+      }
+
+      .period {
+        margin-bottom: 0.5rem;
+        font-size: 1.15rem;
+        font-weight: 500;
+      }
+
+      .track {
+        color: var(--color-coscup-green-lighten-1);
+        line-height: 1.15;
+        margin-bottom: 0.5rem;
+
+        span {
+          display: inline-block;
+          font-weight: 600;
+          font-size: 1.25rem;
+          vertical-align: middle;
+
+          &.room {
+            padding: 4px 8px;
+            color: #fff;
+            background-color: var(--color-coscup-green);
+            border-radius: 4px;
+          }
+        }
+      }
+
+      .title {
+        line-height: 1.5;
+        font-size: 2rem;
+        font-weight: 600;
+        margin: 1rem 0;
+      }
+
+      .speaker-list {
+        color: var(--color-coscup-green-lighten-1);
+
+        span {
+          display: inline;
+          margin: 0 4px;
+          line-height: 1.5;
+          text-align: center;
+          font-weight: 600;
+        }
+
+        .speaker {
+          text-decoration: underline;
+        }
+      }
+
+      .tag-list {
+        color: #fff;
+        margin-top: 0.5rem;
+
+        span {
+          display: inline-block;
+          font-size: 0.8rem;
+          margin-right: 0.5rem;
+          padding: 4px 8px;
+          background-color: var(--color-coscup-green);
+          border-radius: 16px;
+        }
+      }
+    }
+
+    .detail-description {
+      padding: 3rem 1rem;
+    }
+
+    .detail-speakers {
+      .speaker-title {
+        margin-bottom: 1rem;
+        font-size: 1.75rem;
+        font-weight: 500;
+      }
+
+      .speaker-content {
+        padding: 0 1rem;
+
+        .avatar {
+          object-fit: cover;
+          width: 320px;
+          height: 320px;
+          margin-left: 1rem;
+          float: right;
+        }
+
+        .bio {
+        }
+
+        &::after {
+          content: "";
+          clear: both;
+          display: table;
+        }
+      }
+    }
+  }
+}
