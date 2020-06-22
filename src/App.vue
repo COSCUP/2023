@@ -49,7 +49,7 @@ import { ScrollLockManager } from '@/utils/scrollLock'
 import { FullPageProgressManager } from '@/utils/fullPageProgress'
 import { PopupManager } from '@/utils/popup'
 import { Route, Location } from 'vue-router'
-import { AnnouncementManager } from './utils/announcement'
+import { AnnouncementService } from './utils/announcement'
 
 function injected (thisArg: unknown) {
   return injectedThis<{
@@ -59,7 +59,7 @@ function injected (thisArg: unknown) {
     scrollLockManager: ScrollLockManager;
     fullPageProgressManager: FullPageProgressManager;
     popupManager: PopupManager;
-    announcementManager: AnnouncementManager;
+    announcementService: AnnouncementService;
   }>(thisArg)
 }
 
@@ -72,7 +72,7 @@ export default Vue.extend({
     'scrollLockManager',
     'fullPageProgressManager',
     'popupManager',
-    'announcementManager'
+    'announcementService'
   ],
   components: {
     Navbar,
@@ -116,11 +116,11 @@ export default Vue.extend({
             query
           })
         }
-        injected(this).announcementManager.showAnnouncement(onClose)
+        injected(this).announcementService.showAnnouncement(onClose)
       }
     },
     detectAnnouncementUpdate () {
-      if (injected(this).announcementManager.hasUpdated) {
+      if (injected(this).announcementService.hasUpdated) {
         this.$router.push({
           query: {
             ...this.$route.query,

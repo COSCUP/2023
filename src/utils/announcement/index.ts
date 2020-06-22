@@ -13,12 +13,12 @@ interface Inject {
   languageService: LanguageService;
 }
 
-export interface AnnouncementManager {
+export interface AnnouncementService {
   readonly hasUpdated: boolean;
   showAnnouncement: (onClose?: () => void) => Promise<void>;
 }
 
-class AnnouncementManagerConcrete implements AnnouncementManager {
+class AnnouncementServiceConcrete implements AnnouncementService {
   private _languageService: LanguageService
   private _popupManager: PopupManager
 
@@ -52,6 +52,6 @@ class AnnouncementManagerConcrete implements AnnouncementManager {
   }
 }
 
-export function createAnnouncementManager (inject: Inject) {
-  return new AnnouncementManagerConcrete(inject)
+export function createAnnouncementService (inject: Inject) {
+  return new AnnouncementServiceConcrete(inject)
 }
