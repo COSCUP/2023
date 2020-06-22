@@ -1,5 +1,5 @@
 import { formatDateString, fixedTimeZoneDate, generateAgendaTableData, generateAgendaListData, AgendaTableData, AgendaListData, RoomData, Session, SessionData, rawData, TypeData, SpeakerData, TagData, generateSessionPopupData } from './utils'
-import groupBy from 'lodash-es/groupBy'
+import groupBy from 'lodash/groupBy'
 import { PopupData } from '../popup'
 
 export * from './utils'
@@ -14,6 +14,7 @@ export interface DayData {
 
 export interface AgendaService {
   dayIndex: number;
+  readonly sessionSet: { [sessionId: string]: Session };
   readonly days: [number, number, number][];
   readonly day: [number, number, number];
   readonly table: AgendaTableData;
@@ -145,6 +146,10 @@ class AgendaServiceConcrete implements AgendaService {
 
   public get list (): AgendaListData {
     return this._dayDataCache[`${this._days[this.dayIndex].join('')}`].list
+  }
+
+  public get sessionSet () {
+    return this._sessionsCache
   }
 
   public getSessionById (sessionId: string): Readonly<Session> {

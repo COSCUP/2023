@@ -19,6 +19,7 @@ export function delay (ms: number) {
 }
 
 export function getFullUrl (relativeUrl = ''): string {
+  if (process.env.VUE_APP_PRODUCTION_ORIGIN === undefined) throw new Error()
   const productionOrigin: string = process.env.VUE_APP_PRODUCTION_ORIGIN
   // this condition is for running scripts in node environment without 'window'
   if (typeof window === 'undefined') return productionOrigin

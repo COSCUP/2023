@@ -80,7 +80,7 @@ class PopupManagerConcrete implements PopupManager {
 
   public close (): void {
     if (this._popupDataStack.length > 1) {
-      (this.popupData.onClose ?? (() => { /**/ }))()
+      (this.popupData.onClose || (() => { /**/ }))()
       this._popupDataStack.pop()
       this._scrollLockManager.unlock()
       this._metaManager.setMeta(this.popupData.metaOptions)

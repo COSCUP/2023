@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "npm run pre-build && vue-cli-service serve",
-    "build": "npm run pre-build && vue-cli-service build",
+    "build": "npm run pre-build && vue-cli-service build && npm run after-build && npm run end-build",
     "lint": "npm run pre-build && vue-cli-service lint",
     "build:bundle-analysis": "npm run build -- --analyze",
     "generate:icons-import": "npm run ts-script -- ./scripts/generateIconsImport.ts",
@@ -12,6 +12,9 @@
     "generate:session": "[ -n \"$PRETALX_TOKEN\" ] && node ./scripts/generateSession.js > public/json/session.json || curl -o public/json/session.json https://coscup.org/2020/json/session.json",
     "generate:staff": "node ./scripts/generateStaff.js > public/json/staff.json",
     "pre-build": "npm run generate:languages-import && npm run generate:icons-import && npm run generate:session && npm run generate:staff",
+    "generate:session-popup-pages": "npm run ts-script -- ./scripts/generateSessionPopupPages.ts",
+    "after-build": "npm run generate:session-popup-pages",
+    "end-build": "mv ./dist/2020/* ./dist && rm -rf ./dist/2020 && cp -R ./dist/zh-TW/* ./dist/",
     "ts-script": "ts-node -r tsconfig-paths/register --project ./scripts/tsconfig.json"
   },
   "dependencies": {
@@ -21,9 +24,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "@fortawesome/vue-fontawesome": "^0.1.9",
     "axios": "^0.19.2",
-    "core-decorators": "^0.20.0",
     "core-js": "^3.6.5",
-    "js-md5": "^0.7.3",
     "lodash-es": "^4.17.15",
     "markdown-it": "^11.0.0",
     "markdown-it-abbr": "^1.0.4",
@@ -46,6 +47,7 @@
     "vue-router": "^3.2.0"
   },
   "devDependencies": {
+    "@types/cheerio": "^0.22.18",
     "@types/lodash-es": "^4.17.3",
     "@types/markdown-it": "^10.0.1",
     "@types/node": "^14.0.13",
@@ -61,12 +63,14 @@
     "@vue/eslint-config-standard": "^5.1.2",
     "@vue/eslint-config-typescript": "^5.0.2",
     "babel-plugin-prismjs": "^2.0.1",
+    "cheerio": "^1.0.0-rc.3",
     "eslint": "^6.7.2",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-vue": "^6.2.2",
+    "js-md5": "^0.7.3",
     "lint-staged": "^9.5.0",
     "node-sass": "^4.12.0",
     "prerender-spa-plugin": "^3.2.1",

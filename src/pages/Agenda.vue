@@ -19,7 +19,7 @@ import '@/assets/scss/pages/agenda.scss'
 import { injectedThis } from '../utils/common'
 import { LanguageManager } from '../utils/language'
 import { MetaManager } from '../utils/meta'
-import { PopupManager } from '../utils/popup'
+import { PopupManager, PopupData, PopupContainerType, PopupContentType } from '../utils/popup'
 import { Route } from 'vue-router'
 import { createAgendaService } from '@/utils/agenda'
 import AgendaNavbar from '@/components/Agenda/AgendaNavbar.vue'
@@ -68,7 +68,19 @@ export default Vue.extend({
   },
   methods: {
     async popupSession (sessionId = ''): Promise<void> {
-      const popupData = await agendaService.getSessionPopupData(sessionId, this.laugaugeType)
+      const popupData: PopupData = sessionId === 'template'
+        ? {
+          popupId: 'session-template',
+          metaOptions: {
+            title: 'Template'
+          },
+          containerType: PopupContainerType.Default,
+          contentData: {
+            type: PopupContentType.General,
+            html: '<article id="session-detail" class="session-detail"><h1>Session Popup Template</h1></article>'
+          }
+        }
+        : await agendaService.getSessionPopupData(sessionId, this.laugaugeType)
 
       injected(this).popupManager.popup({
         ...popupData,
@@ -83,7 +95,14 @@ export default Vue.extend({
     },
     async processByRoute (route: Route): Promise<void> {
       if (route.name === 'AgendaDetail') {
-        this.popupSession(route.params.sessionId)
+        try {
+          await this.popupSession(route.params.sessionId)
+        } catch (error) {
+          await this.$router.replace({
+            ...this.$route,
+            name: 'Agenda'
+          })
+        }
       }
     }
   },
@@ -92,8 +111,8 @@ export default Vue.extend({
       this.processByRoute(to)
     }
   },
-  mounted () {
-    this.processByRoute(this.$route)
+  async mounted () {
+    await this.processByRoute(this.$route)
     this.$emit('render')
   }
 })

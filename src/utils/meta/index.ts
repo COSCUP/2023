@@ -1,4 +1,4 @@
-enum MetaType {
+export enum MetaType {
   Title = 'title',
   Description = 'description',
   OgUrl = 'ogUrl',
@@ -7,7 +7,7 @@ enum MetaType {
   OgSiteName = 'ogSiteName'
 }
 
-type MetaSetterSet = {
+export type MetaDomSetterSet = {
   [name in MetaType]: (value: string) => void;
 };
 
@@ -15,11 +15,11 @@ export type MetaOptions = {
   [name in MetaType]?: string;
 }
 
-type MetaValues = {
+export type MetaValues = {
   [name in MetaType]: string;
 }
 
-const defaultMetaValues: MetaValues = {
+export const defaultMetaValues: MetaValues = {
   [MetaType.Title]: 'COSCUP 2020 | Conference for Open Source Coders, Users, and Promoters',
   [MetaType.Description]: 'Conference for Open Source Coders, Users, and Promoters is a free annual conference providing a platform to connect FLOSS folks across Asia since 2006. It\'s a major force of free software movement advocacy in Taiwan.',
   [MetaType.OgUrl]: 'https://coscup.org/2020',
@@ -28,7 +28,7 @@ const defaultMetaValues: MetaValues = {
   [MetaType.OgSiteName]: 'COSCUP 2020'
 }
 
-const metaDomSetterSet: MetaSetterSet = {
+const vanillaMetaDomSetterSet: MetaDomSetterSet = {
   [MetaType.Title]: (value) => {
     const title: string = (value.length === 0 || value === defaultMetaValues.title) ? (defaultMetaValues.title) : (`${value} - ${defaultMetaValues.title}`);
     (document.querySelector('title') as HTMLElement).innerHTML = title;
@@ -52,6 +52,11 @@ export interface MetaManager {
 
 class MetaManagerConcrete implements MetaManager {
   private __currentMetaValues: MetaValues = defaultMetaValues
+  private _metaDomSetterSet: MetaDomSetterSet
+
+  constructor (metaDomSetterSet = vanillaMetaDomSetterSet) {
+    this._metaDomSetterSet = metaDomSetterSet
+  }
 
   private set _currentMetaValues (values: MetaValues) {
     this.__currentMetaValues = values
@@ -59,7 +64,7 @@ class MetaManagerConcrete implements MetaManager {
       .forEach((entry) => {
         const metaDomType: MetaType = entry[0] as MetaType
         const value = entry[1]
-        const setter = metaDomSetterSet[metaDomType]
+        const setter = this._metaDomSetterSet[metaDomType]
         setter(value)
       })
   }
@@ -80,6 +85,6 @@ class MetaManagerConcrete implements MetaManager {
   }
 }
 
-export function createMetaManager (): MetaManager {
-  return new MetaManagerConcrete()
+export function createMetaManager (metaDomSetterSet = vanillaMetaDomSetterSet): MetaManager {
+  return new MetaManagerConcrete(metaDomSetterSet)
 }
