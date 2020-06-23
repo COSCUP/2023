@@ -10,7 +10,8 @@
     <Navbar></Navbar>
     <div
       :class="{
-        'scroll-lock': scrollLockService.isLocked
+        'scroll-lock': scrollLockService.isLocked,
+        popupped: popupService.isPopup
       }"
       :style="{
         '--current-scroll-x': `${scrollLockService.currentScrollPosition.x}px`,

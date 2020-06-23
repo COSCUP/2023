@@ -6,13 +6,7 @@
 -->
 
 <template>
-  <main
-    id="agenda"
-    class="page-container"
-    :class="{
-      popupped: popupService.isPopup
-    }"
-  >
+  <main id="agenda" class="page-container">
     <AgendaNavbar />
     <AgendaTable v-show="breakpointService.smAndUp" />
     <AgendaList v-show="breakpointService.xsOnly" />

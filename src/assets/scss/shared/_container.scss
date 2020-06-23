@@ -7,6 +7,12 @@
   .main-container {
     width: fit-content;
     position: relative;
+    transition: opacity 0.3s 0.3s;
+
+    &.popupped {
+      opacity: 0;
+      transition: opacity 0.8s;
+    }
 
     &.scroll-lock {
       z-index: 1;
