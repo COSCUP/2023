@@ -2,11 +2,12 @@
 const fs = require('fs')
 const path = require('path')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const minify = require('html-minifier').minify
 
 const isProduction = process.env.NODE_ENV === 'production'
 const publicPath = isProduction ? '/2020/' : '/2020/'
 const needBundleAnalysis = process.argv.includes('--analyze')
-const gaTempHTML = fs.readFileSync(path.join(__dirname, './template/ga.html')).toString()
+const gaTempHTML = minify(fs.readFileSync(path.join(__dirname, './template/ga.html')).toString())
 
 process.env.VUE_APP_PRODUCTION_ORIGIN = require('./package.json').origin
 
