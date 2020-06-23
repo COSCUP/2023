@@ -9,7 +9,9 @@ import VueRouter, { RouteConfig } from 'vue-router'
 import { FullPageProgressService } from '@/services/fullPageProgress'
 import { LanguageService, LanguageType, defaultLanguageType, availableLanguageTypes } from '@/services/language'
 import { MetaService } from '@/services/meta'
+import { PopupService } from '@/services/popup'
 import { delay } from '@/utils/common'
+import { scrollTo } from '@/utils/scrollTo'
 
 Vue.use(VueRouter)
 
@@ -52,9 +54,11 @@ interface Inject {
   metaService: MetaService;
   languageService: LanguageService;
   fullPageProgressService: FullPageProgressService;
+  popupService: PopupService;
 }
 
 export function createRouter (injects: Inject): VueRouter {
+  let savedPosition: { x: number; y: number } = { x: 0, y: 0 }
   const { languageService, fullPageProgressService, metaService } = injects
 
   const PageComponent: { [name: string]: () => Promise<typeof import('*.vue')> } = {
@@ -134,18 +138,7 @@ export function createRouter (injects: Inject): VueRouter {
   const router = new VueRouter({
     mode: 'history',
     base: process.env.BASE_URL,
-    routes: expandedRoutes,
-    scrollBehavior (to) {
-      if (to.hash) {
-        const target = document.querySelector(to.hash) as HTMLElement
-
-        return window.scrollTo({
-          top: target.offsetTop,
-          left: target.offsetLeft,
-          behavior: 'smooth'
-        })
-      }
-    }
+    routes: expandedRoutes
   })
 
   router.beforeEach((to, from, next) => {
@@ -162,8 +155,31 @@ export function createRouter (injects: Inject): VueRouter {
           title: languageService.languagePack[camelCase(routeName) as LanguagePackKeys].meta.title
         })
       }
+      savedPosition = {
+        x: window.scrollX,
+        y: window.scrollY
+      }
       next()
     }
+
+    router.afterEach((to, from) => {
+      if (to.name === from.name) {
+        const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent)
+        const { cancel } = scrollTo({
+          from: isSafari ? savedPosition : { x: 0, y: 0 },
+          to: savedPosition
+        })
+        const onScroll = () => {
+          window.removeEventListener('wheel', onScroll)
+          window.removeEventListener('mousewheel', onScroll)
+          window.removeEventListener('DOMMouseScroll', onScroll)
+          cancel()
+        }
+        window.addEventListener('wheel', onScroll)
+        window.addEventListener('mousewheel', onScroll)
+        window.addEventListener('DOMMouseScroll', onScroll)
+      }
+    })
   })
 
   return router

@@ -29,7 +29,11 @@ body {
 #app {
   position: relative;
   height: 100%;
-  padding-top: $navbar-height;
+  padding-top: var(--navbar-height);
+
+  &.in-app {
+    --navbar-height: 0;
+  }
 
   @include container;
   @include full-page-progress;

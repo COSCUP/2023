@@ -6,8 +6,13 @@
 -->
 
 <template>
-  <div id="app">
-    <Navbar></Navbar>
+  <div
+    id="app"
+    :class="{
+      'in-app': isInApp
+    }"
+  >
+    <Navbar v-if="!isInApp"></Navbar>
     <div
       :class="{
         'scroll-lock': scrollLockService.isLocked,
@@ -82,6 +87,7 @@ export default Vue.extend({
   },
   data () {
     return {
+      isInApp: false,
       pageTransitionName: 'slide-left' as 'slide-left' | 'slide-right' | 'fade'
     }
   },
@@ -137,6 +143,8 @@ export default Vue.extend({
   async mounted () {
     injected(this).breakpointService.startDetect()
     injected(this).themeService.startDetect()
+    await this.$nextTick()
+    this.isInApp = this.$route.query.mode === 'app'
   },
   beforeDestroy () {
     injected(this).breakpointService.stopDetect()

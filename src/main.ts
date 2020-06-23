@@ -32,7 +32,8 @@ const announcementService: AnnouncementService = Vue.observable(createAnnounceme
 const router = createRouter({
   languageService,
   fullPageProgressService,
-  metaService
+  metaService,
+  popupService
 })
 
 new Vue({

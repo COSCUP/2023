@@ -6,7 +6,7 @@
 -->
 
 <template>
-  <div v-show="popupService.isPopup" id="popup">
+  <div v-show="popupService.isPopup" id="popup" @click="onClose">
     <component :is="popupContainerComponent" @close="onClose">
       <component
         :is="popupContentComponent"
