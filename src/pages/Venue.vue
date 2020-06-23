@@ -9,6 +9,10 @@
   <main id="venue" class="page-container">
     <Map id="map-component" :options="mapOptions"></Map>
     <div class="plan-container">
+      <div class="plan address">
+        <h2>{{ languageService.languagePack.venue.name }}</h2>
+        <h3>{{ languageService.languagePack.venue.address }}</h3>
+      </div>
       <div
         v-for="plan in languageService.languagePack.venue.plans"
         :key="plan.name"

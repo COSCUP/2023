@@ -33,10 +33,7 @@ export interface MapMarkerOptions {
 }
 
 export interface Map {
-  addMapMarker: (options: MapMarkerOptions) => void;
-  attach: (target?: string | HTMLElement) => void;
-  detach: () => void;
-  refresh: () => void;
+  resetView: () => void;
   destroy: (forRefresh?: boolean) => void;
 }
 
@@ -47,8 +44,8 @@ class MapConcrete implements Map {
 
   constructor (options: MapOptions) {
     this._options = options
+    this._addMapMarker(...(this._options.mapMarkers || []))
     this._map = this._createMap()
-    this.addMapMarker(...(this._options.mapMarkers || []))
   }
 
   private _createMapMarker (options: MapMarkerOptions): LayerVector {
@@ -93,32 +90,25 @@ class MapConcrete implements Map {
     })
   }
 
-  public attach (target = this._options.target): void {
-    this._map !== null && this._map.setTarget(target)
+  public resetView (): void {
+    this._map && this._map.setView(new View({
+      center: fromLonLat([this._options.center.lng, this._options.center.lat]),
+      zoom: this._options.zoom
+    }))
   }
 
-  public detach (): void {
-    this._map !== null && this._map.setTarget(undefined)
-  }
-
-  public refresh (): void {
-    this.destroy(true)
-    this._map = this._createMap()
-  }
-
-  public destroy (forRefresh = false): void {
-    this.detach()
+  public destroy (): void {
+    this._map && this._map.setTarget(undefined)
     this._map = null
-    forRefresh || Object.keys(this._mapMarkerOptionsSet)
+    Object.keys(this._mapMarkerOptionsSet)
       .forEach((key) => delete this._mapMarkerOptionsSet[key])
   }
 
-  public addMapMarker (...optionsList: MapMarkerOptions[]) {
+  public _addMapMarker (...optionsList: MapMarkerOptions[]) {
     optionsList.forEach((options) => {
       if (this._mapMarkerOptionsSet[options.name]) return
       this._mapMarkerOptionsSet[options.name] = options
     })
-    this.refresh()
   }
 }
 

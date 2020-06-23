@@ -1,0 +1,35 @@
+@mixin map {
+  .map {
+    position: relative;
+    z-index: 0;
+
+    .reset-view-btn-container {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      z-index: 1;
+      padding: 0.75rem;
+      .reset-view-btn {
+        display: block;
+        margin: 1px;
+        padding: 0;
+        color: white;
+        font-size: 1.14em;
+        font-weight: bold;
+        text-decoration: none;
+        text-align: center;
+        height: 1.375em;
+        width: 1.375em;
+        line-height: 0.4em;
+        background-color: rgba(0, 60, 136, 0.5);
+        border: none;
+        border-radius: 2px;
+
+        &:hover {
+          text-decoration: none;
+          background-color: rgba(0, 60, 136, 0.7);
+        }
+      }
+    }
+  }
+}
