@@ -58,8 +58,7 @@ interface Inject {
 }
 
 export function createRouter (injects: Inject): VueRouter {
-  let savedPosition: { x: number; y: number } = { x: 0, y: 0 }
-  const { languageService, fullPageProgressService, metaService } = injects
+  const { languageService, fullPageProgressService, metaService, popupService } = injects
 
   const PageComponent: { [name: string]: () => Promise<typeof import('*.vue')> } = {
     Home: () => import(
@@ -135,10 +134,34 @@ export function createRouter (injects: Inject): VueRouter {
     }
   })
 
+  let mySavedPosition: { x: number; y: number } = { x: 0, y: 0 }
+
   const router = new VueRouter({
     mode: 'history',
     base: process.env.BASE_URL,
-    routes: expandedRoutes
+    routes: expandedRoutes,
+    scrollBehavior (to, from, savedPosition) {
+      setTimeout(() => {
+        if (savedPosition) {
+          return { x: 0, y: 0 }
+        } else if (to.name === from.name) {
+          const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent)
+          const { cancel } = scrollTo({
+            from: isSafari ? mySavedPosition : { x: 0, y: 0 },
+            to: mySavedPosition
+          })
+          const events = ['wheel', 'mousewheel', 'DOMMouseScroll']
+          const onScrolling = () => {
+            events.forEach((event) => window.removeEventListener(event, onScrolling))
+            cancel()
+          }
+          events.forEach((event) => window.addEventListener(event, onScrolling))
+        } else if (popupService.isPopup) {
+          const popupDom = document.getElementById('popup')
+          popupDom && popupDom.scrollTo(0, 0)
+        }
+      })
+    }
   })
 
   router.beforeEach((to, from, next) => {
@@ -155,31 +178,13 @@ export function createRouter (injects: Inject): VueRouter {
           title: languageService.languagePack[camelCase(routeName) as LanguagePackKeys].meta.title
         })
       }
-      savedPosition = {
+
+      mySavedPosition = {
         x: window.scrollX,
         y: window.scrollY
       }
       next()
     }
-
-    router.afterEach((to, from) => {
-      if (to.name === from.name) {
-        const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent)
-        const { cancel } = scrollTo({
-          from: isSafari ? savedPosition : { x: 0, y: 0 },
-          to: savedPosition
-        })
-        const onScroll = () => {
-          window.removeEventListener('wheel', onScroll)
-          window.removeEventListener('mousewheel', onScroll)
-          window.removeEventListener('DOMMouseScroll', onScroll)
-          cancel()
-        }
-        window.addEventListener('wheel', onScroll)
-        window.addEventListener('mousewheel', onScroll)
-        window.addEventListener('DOMMouseScroll', onScroll)
-      }
-    })
   })
 
   return router
