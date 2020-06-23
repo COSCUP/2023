@@ -135,8 +135,9 @@ export default Vue.extend({
         })
       }
     },
-    onPageRender (): void {
+    async onPageRender (): Promise<void> {
       document.dispatchEvent(new Event('x-app-rendered'))
+      await this.$nextTick()
       this.detectAnnouncementUpdate()
     }
   },
