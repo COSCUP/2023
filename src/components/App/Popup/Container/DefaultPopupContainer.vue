@@ -6,7 +6,11 @@
 -->
 
 <template>
-  <div id="default-popup-container" class="popup-container">
+  <div
+    id="default-popup-container"
+    class="popup-container"
+    @click.self="$emit('close')"
+  >
     <div class="inner-container">
       <button class="close" @click="$emit('close')">
         <Icon name="times"></Icon>
