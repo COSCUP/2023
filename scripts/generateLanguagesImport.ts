@@ -116,3 +116,4 @@ export const languagePackSet: LanguagePackSet = {
 `.trimStart()
 
 fs.writeFileSync(path.join(targetDir, 'index.ts'), result)
+fs.writeFileSync(path.join(languagesRoot, 'languages.json'), JSON.stringify(languages, null, 2))

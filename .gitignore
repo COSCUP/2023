@@ -28,3 +28,4 @@ src/services/language/languages/*
 !src/services/language/languages/.gitkeep
 public/json/session.json
 public/json/staff.json
+languages/languages.json
