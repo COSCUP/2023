@@ -7,9 +7,15 @@ const app = new (require('koa'))()
 const port = 3000
 const origin = require('../package.json').origin
 const sitemapPath = path.join(__dirname, '../dist/sitemap.xml')
-const spinner = require('ora')('Generating sitemap.xml...').start()
+const spinner = require('ora')('Generating sitemap.xml...')
+let serverOnServe = () => { throw new Error('Promise is not init') }
+const waitForServer = new Promise((resolve) => {
+  serverOnServe = resolve
+})
 
 app.use(serve({ rootDir: path.join(__dirname, '../dist'), rootPath: '/2020' }))
+
+const server = app.listen(port, serverOnServe)
 const generator = SitemapGenerator(`http://localhost:${port}/2020/`, {
   filepath: sitemapPath,
   maxEntriesPerFile: 50000,
@@ -18,16 +24,24 @@ const generator = SitemapGenerator(`http://localhost:${port}/2020/`, {
   lastMod: true
 })
 
-const server = app.listen(port, () => {
-  generator.start()
+generator.on('error', (error) => {
+  console.log(error)
+  // => { code: 404, message: 'Not found.', url: 'http://example.com/foo' }
 })
 
 generator.on('done', () => {
   server.close()
-  fs.writeFileSync(sitemapPath, fs.readFileSync(sitemapPath).toString().replace(new RegExp(`http://localhost:${port}`, 'g'), origin))
+  const content = fs.readFileSync(sitemapPath).toString()
+  fs.writeFileSync(sitemapPath, content.replace(new RegExp(`http://localhost:${port}`, 'g'), origin))
   spinner.succeed('sitemap.xml generated.')
 })
 
 generator.on('add', (url) => {
   spinner.text = `Add ${origin}${url.split(`http://localhost:${port}`)[1]}`
 })
+
+waitForServer
+  .then(() => {
+    spinner.start()
+    generator.start()
+  })
