@@ -1,0 +1,16 @@
+language: node_js
+node_js:
+  - "12"
+branches:
+  only:
+    - master
+before_deploy:
+  - npm run build
+deploy:
+  skip_cleanup: true
+  strategy: git
+  provider: pages
+  token: $GITHUB_TOKEN
+  local_dir: dist/
+  on:
+    branch: master
