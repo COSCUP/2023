@@ -21,7 +21,7 @@ export default Vue.extend({
   components: {
   },
   mounted () {
-    this.$emit('render')
+    this.$dispatchRenderedEvent()
   }
 })
 </script>

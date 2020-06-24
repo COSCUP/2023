@@ -96,7 +96,7 @@ export default Vue.extend({
   },
   async mounted () {
     await this.parseMarkdownContent()
-    this.$emit('render')
+    this.$dispatchRenderedEvent()
   }
 })
 </script>

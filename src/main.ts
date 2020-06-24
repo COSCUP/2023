@@ -6,7 +6,8 @@
 import Vue from 'vue'
 import App from './App.vue'
 import Icon from '@/components/Basic/Icon/index.vue'
-import { createRouter } from './router'
+import { RenderedEventDispatcher } from '@/plugins/renderedEventDispatcher'
+import { createRouter } from '@/router'
 import { createAnnouncementService, AnnouncementService } from '@/services/announcement'
 import { createBreakpointService, BreakpointService } from '@/services/breakpoint'
 import { createFullPageProgressService, FullPageProgressService } from '@/services/fullPageProgress'
@@ -15,6 +16,8 @@ import { createMetaService, MetaService } from '@/services/meta'
 import { createPopupService, PopupService } from '@/services/popup'
 import { createScrollLockService, ScrollLockService } from '@/services/scrollLock'
 import { createThemeService, ThemeService } from '@/services/theme'
+
+Vue.use(RenderedEventDispatcher)
 
 Vue.component('Icon', Icon)
 
@@ -36,7 +39,7 @@ const router = createRouter({
   popupService
 })
 
-new Vue({
+const root = new Vue({
   provide: {
     languageService,
     themeService,
@@ -49,4 +52,8 @@ new Vue({
   },
   router,
   render: h => h(App)
-}).$mount('#app')
+})
+
+document.addEventListener('DOMContentLoaded', () => {
+  root.$mount('#app')
+})

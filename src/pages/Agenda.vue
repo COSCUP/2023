@@ -113,7 +113,7 @@ export default Vue.extend({
   },
   async mounted () {
     await this.processByRoute(this.$route)
-    this.$emit('render')
+    this.$dispatchRenderedEvent()
   }
 })
 </script>

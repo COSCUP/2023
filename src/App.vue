@@ -26,7 +26,7 @@
     >
       <transition :name="pageTransitionName" mode="out-in">
         <keep-alive>
-          <router-view @render="onPageRender"></router-view>
+          <router-view></router-view>
         </keep-alive>
       </transition>
       <Footer></Footer>
@@ -135,13 +135,12 @@ export default Vue.extend({
         })
       }
     },
-    async onPageRender (): Promise<void> {
-      document.dispatchEvent(new Event('x-app-rendered'))
-      await this.$nextTick()
+    onAppRender (): void {
       this.detectAnnouncementUpdate()
     }
   },
   async mounted () {
+    document.addEventListener('x-app-rendered', () => { this.onAppRender() })
     injected(this).breakpointService.startDetect()
     injected(this).themeService.startDetect()
     await this.$nextTick()
