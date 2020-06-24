@@ -121,6 +121,39 @@ export function getTimePoints (sessions: SessionBase[]) {
     .map((timeStr) => `t-${timeStr}`)
 }
 
+export function generateSession (sessionData: SessionData, timeZoneOffsetMinutes: number): Session {
+  const type: TypeData | undefined = rawData.session_types.find((typeData: TypeData) => typeData.id === sessionData.type)
+  if (type === undefined) throw new Error()
+
+  const room: RoomData | undefined = rawData.rooms.find((roomData: RoomData) => roomData.id === sessionData.room)
+  if (room === undefined) throw new Error()
+
+  const speakers: SpeakerData[] = rawData.speakers.filter((speakerData: SpeakerData) => sessionData.speakers.includes(speakerData.id))
+  if (speakers.length === 0) throw new Error()
+
+  const tags: TagData[] = rawData.tags.filter((tagData: TagData) => sessionData.tags.includes(tagData.id))
+
+  const start: Date = fixedTimeZoneDate(new Date(sessionData.start), timeZoneOffsetMinutes)
+  if (start.toString() === 'Invalid Date') throw new Error()
+
+  const end: Date = fixedTimeZoneDate(new Date(sessionData.end), timeZoneOffsetMinutes)
+  if (end.toString() === 'Invalid Date') throw new Error()
+
+  return {
+    ...sessionData,
+    start,
+    end,
+    type,
+    room,
+    speakers,
+    tags
+  }
+}
+
+export function generateSessions (timeZoneOffsetMinutes: number): Session[] {
+  return rawData.sessions.map((sessionData) => generateSession(sessionData, timeZoneOffsetMinutes))
+}
+
 export function generateAgendaTableData (sessions: SessionBase[], fixedTimezone?: (date: Date | string) => Date, roomSequence?: string[]): AgendaTableData {
   const createDate = (date: Date | string) => fixedTimezone ? fixedTimezone(date) : new Date(date)
   const timePoints = getTimePoints(sessions)
@@ -156,6 +189,10 @@ export function generateAgendaTableData (sessions: SessionBase[], fixedTimezone?
 
         const rowSpan = indexEnd - indexStart
 
+        if (rows[indexStart][columnIndex].type !== TableCellType.Blank) {
+          console.warn(`Session "${session.id}" conflicts with others, hidden for now.`)
+          return
+        }
         rows[indexStart][columnIndex] = { type: TableCellType.Session, sessionId: session.id, rowSpan }
         for (let i = 1; i < rowSpan; i++) {
           rows[indexStart + i][columnIndex] = spanCell

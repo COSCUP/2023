@@ -7,7 +7,7 @@ import cheerio from 'cheerio'
 import fs from 'fs'
 import path from 'path'
 import { origin } from '../package.json'
-import { createAgendaService } from '@/services/agenda'
+import { generateSessions, generateSessionPopupData } from '@/services/agenda'
 import { availableLanguageTypes } from '@/services/language'
 import { MetaDomSetterSet, MetaType, defaultMetaValues, createMetaService } from '@/services/meta'
 import { GeneralPopupContentData } from '@/services/popup'
@@ -37,19 +37,6 @@ function createCheerioMetaDomSetterSet ($: CheerioStatic) {
 async function run () {
   process.env.VUE_APP_PRODUCTION_ORIGIN = origin
 
-  const agendaService = createAgendaService([
-    'AU',
-    'TR209', 'TR211', 'TR212', 'TR213', 'TR214',
-    'TR309', 'TR313',
-    'TR409-2', 'TR410', 'TR411', 'TR412-1', 'TR412-2', 'TR413-1', 'TR413-2',
-    'TR510', 'TR511'
-  ])
-
-  // Force to load all sessions of days
-  agendaService.days.forEach((day, index) => {
-    agendaService.dayIndex = index
-  })
-
   await Promise.all(availableLanguageTypes
     .map((languageType) => {
       const languageData = {
@@ -61,12 +48,13 @@ async function run () {
       return languageData
     })
     .map(async (languageData) => {
+      const timezoneOffsetMinutes = -480
       const datas = await Promise.all(
-        Object.keys(agendaService.sessionSet)
-          .map(async (sessionId) => {
+        generateSessions(timezoneOffsetMinutes)
+          .map(async (session) => {
             return {
-              sessionId,
-              popupData: await agendaService.getSessionPopupData(sessionId, languageData.languageTypeAlias)
+              sessionId: session.id,
+              popupData: await generateSessionPopupData(session, languageData.languageTypeAlias)
             }
           })
       )

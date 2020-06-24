@@ -4,7 +4,7 @@
 // https://opensource.org/licenses/MIT
 
 import groupBy from 'lodash/groupBy'
-import { formatDateString, fixedTimeZoneDate, generateAgendaTableData, generateAgendaListData, AgendaTableData, AgendaListData, RoomData, Session, SessionData, rawData, TypeData, SpeakerData, TagData, generateSessionPopupData } from './utils'
+import { formatDateString, fixedTimeZoneDate, generateAgendaTableData, generateAgendaListData, AgendaTableData, AgendaListData, RoomData, Session, SessionData, rawData, TypeData, SpeakerData, TagData, generateSessionPopupData, generateSession } from './utils'
 import { PopupData } from '@/services/popup'
 
 export * from './utils'
@@ -97,32 +97,7 @@ class AgendaServiceConcrete implements AgendaService {
   }
 
   private _generateSession (sessionData: SessionData): Session {
-    const type: TypeData | undefined = rawData.session_types.find((typeData: TypeData) => typeData.id === sessionData.type)
-    if (type === undefined) throw new Error()
-
-    const room: RoomData | undefined = rawData.rooms.find((roomData: RoomData) => roomData.id === sessionData.room)
-    if (room === undefined) throw new Error()
-
-    const speakers: SpeakerData[] = rawData.speakers.filter((speakerData: SpeakerData) => sessionData.speakers.includes(speakerData.id))
-    if (speakers.length === 0) throw new Error()
-
-    const tags: TagData[] = rawData.tags.filter((tagData: TagData) => sessionData.tags.includes(tagData.id))
-
-    const start: Date = fixedTimeZoneDate(new Date(sessionData.start), this._timeZoneOffsetMinutes)
-    if (start.toString() === 'Invalid Date') throw new Error()
-
-    const end: Date = fixedTimeZoneDate(new Date(sessionData.end), this._timeZoneOffsetMinutes)
-    if (end.toString() === 'Invalid Date') throw new Error()
-
-    return {
-      ...sessionData,
-      start,
-      end,
-      type,
-      room,
-      speakers,
-      tags
-    }
+    return generateSession(sessionData, this._timeZoneOffsetMinutes)
   }
 
   public get dayIndex (): number {
