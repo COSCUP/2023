@@ -4,7 +4,7 @@
 // https://opensource.org/licenses/MIT
 
 import groupBy from 'lodash/groupBy'
-import { formatDateString, fixedTimeZoneDate, generateAgendaTableData, generateAgendaListData, AgendaTableData, AgendaListData, RoomData, Session, SessionData, rawData, TypeData, SpeakerData, TagData, generateSessionPopupData, generateSession } from './utils'
+import { formatDateString, fixedTimeZoneDate, generateAgendaTableData, generateAgendaListData, AgendaTableData, AgendaListData, RoomData, Session, SessionData, rawData, generateSessionPopupData, generateSession } from './utils'
 import { PopupData } from '@/services/popup'
 
 export * from './utils'
@@ -82,7 +82,6 @@ class AgendaServiceConcrete implements AgendaService {
   private _generateDayData (dayIndex: number): DayData {
     const day = this._days[dayIndex]
     const sessionDataList = this._sessionDataListByDays[dayIndex]
-    const fixedTimeZone = (date: Date | string) => fixedTimeZoneDate(date, this._timeZoneOffsetMinutes)
 
     sessionDataList.forEach((sessionData) => {
       if (this._sessionsCache[sessionData.id]) return
@@ -91,13 +90,17 @@ class AgendaServiceConcrete implements AgendaService {
 
     return {
       day,
-      table: generateAgendaTableData(sessionDataList, fixedTimeZone, this._roomSequence),
-      list: generateAgendaListData(sessionDataList, fixedTimeZone, this._roomSequence)
+      table: generateAgendaTableData(sessionDataList, this._fixedTimeZone, this._roomSequence),
+      list: generateAgendaListData(sessionDataList, this._fixedTimeZone, this._roomSequence)
     }
   }
 
   private _generateSession (sessionData: SessionData): Session {
-    return generateSession(sessionData, this._timeZoneOffsetMinutes)
+    return generateSession(sessionData, this._fixedTimeZone)
+  }
+
+  private get _fixedTimeZone (): ((date: Date | string) => Date) {
+    return (date: Date | string) => fixedTimeZoneDate(date, this._timeZoneOffsetMinutes)
   }
 
   public get dayIndex (): number {
@@ -105,7 +108,7 @@ class AgendaServiceConcrete implements AgendaService {
   }
 
   public set dayIndex (value: number) {
-    if (value < 0 || value > this._days.length) throw new Error()
+    if (value < 0 || value > this._days.length) throw new Error(`Invalid dayIndex ${value}`)
     if (!this._dayDataCache[value]) {
       this._dayDataCache[this._days[value].join('')] = this._generateDayData(value)
     }
@@ -136,14 +139,14 @@ class AgendaServiceConcrete implements AgendaService {
     const cache = this._sessionsCache[sessionId]
     if (cache) return cache
     const sessionData = rawData.sessions.find((sessionData) => sessionData.id === sessionId)
-    if (!sessionData) throw new Error()
+    if (!sessionData) throw new Error(`Invalid sessionId: ${sessionId}`)
     this._sessionsCache[sessionId] = this._generateSession(sessionData)
     return this._sessionsCache[sessionId]
   }
 
   public getRoomById (roomId: string): Readonly<{ id: string; zh: { name: string }; en: { name: string } }> {
     const room = this._roomSet[roomId]
-    if (!room) throw new Error()
+    if (!room) throw new Error(`Invalid roomId ${roomId}`)
     return room
   }
 

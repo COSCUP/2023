@@ -111,33 +111,35 @@ export function formatTimeString (date: Date, joinChar = '') {
     .map((digit) => digit.toString().padStart(2, '0')).join(joinChar)
 }
 
-export function getTimePoints (sessions: SessionBase[]) {
+export function getTimePoints (sessions: SessionBase[], fixedTimezone?: (date: Date | string) => Date) {
+  const createDate = (date: Date | string) => fixedTimezone ? fixedTimezone(date) : new Date(date)
   return [...new Set([
     ...sessions.flatMap((session) => {
-      return [formatTimeString(new Date(session.start)), formatTimeString(new Date(session.end))]
+      return [formatTimeString(createDate(session.start)), formatTimeString(createDate(session.end))]
     })
   ])]
     .sort((strA, strB) => parseInt(strA) - parseInt(strB))
     .map((timeStr) => `t-${timeStr}`)
 }
 
-export function generateSession (sessionData: SessionData, timeZoneOffsetMinutes: number): Session {
+export function generateSession (sessionData: SessionData, fixedTimezone?: (date: Date | string) => Date): Session {
+  const createDate = (date: Date | string) => fixedTimezone ? fixedTimezone(date) : new Date(date)
   const type: TypeData | undefined = rawData.session_types.find((typeData: TypeData) => typeData.id === sessionData.type)
-  if (type === undefined) throw new Error()
+  if (type === undefined) throw new Error(`Session: ${sessionData.id} has an unknown type`)
 
   const room: RoomData | undefined = rawData.rooms.find((roomData: RoomData) => roomData.id === sessionData.room)
-  if (room === undefined) throw new Error()
+  if (room === undefined) throw new Error(`Session: ${sessionData.id} has an unknown room`)
 
   const speakers: SpeakerData[] = rawData.speakers.filter((speakerData: SpeakerData) => sessionData.speakers.includes(speakerData.id))
-  if (speakers.length === 0) throw new Error()
+  if (speakers.length === 0) throw new Error(`Session: ${sessionData.id} has no speakers`)
 
   const tags: TagData[] = rawData.tags.filter((tagData: TagData) => sessionData.tags.includes(tagData.id))
 
-  const start: Date = fixedTimeZoneDate(new Date(sessionData.start), timeZoneOffsetMinutes)
-  if (start.toString() === 'Invalid Date') throw new Error()
+  const start: Date = createDate(sessionData.start)
+  if (start.toString() === 'Invalid Date') throw new Error(`Session: ${sessionData.id} has an invalid start date string`)
 
-  const end: Date = fixedTimeZoneDate(new Date(sessionData.end), timeZoneOffsetMinutes)
-  if (end.toString() === 'Invalid Date') throw new Error()
+  const end: Date = createDate(sessionData.end)
+  if (end.toString() === 'Invalid Date') throw new Error(`Session: ${sessionData.id} has an invalid end date string`)
 
   return {
     ...sessionData,
@@ -150,19 +152,20 @@ export function generateSession (sessionData: SessionData, timeZoneOffsetMinutes
   }
 }
 
-export function generateSessions (timeZoneOffsetMinutes: number): Session[] {
-  return rawData.sessions.map((sessionData) => generateSession(sessionData, timeZoneOffsetMinutes))
+export function generateSessions (fixedTimezone?: (date: Date | string) => Date): Session[] {
+  return rawData.sessions.map((sessionData) => generateSession(sessionData, fixedTimezone))
 }
 
 export function generateAgendaTableData (sessions: SessionBase[], fixedTimezone?: (date: Date | string) => Date, roomSequence?: string[]): AgendaTableData {
   const createDate = (date: Date | string) => fixedTimezone ? fixedTimezone(date) : new Date(date)
-  const timePoints = getTimePoints(sessions)
+  const timePoints = getTimePoints(sessions, fixedTimezone)
   let entries = Object.entries(groupBy(sessions, (session) => `r-${session.room}`))
-  if (roomSequence) {
+  if (roomSequence && roomSequence.length > 0) {
     entries = entries.sort((entryA, entryB) => {
       const indexA = roomSequence.indexOf(entryA[0].slice(2))
       const indexB = roomSequence.indexOf(entryB[0].slice(2))
-      if (indexA === -1 || indexB === -1) throw new Error()
+      if (indexA === -1) throw new Error(`Room: ${entryA[0].slice(2)} is not exist in roomSequence`)
+      if (indexB === -1) throw new Error(`Room: ${entryB[0].slice(2)} is not exist in roomSequence`)
 
       return indexA - indexB
     })
@@ -178,14 +181,17 @@ export function generateAgendaTableData (sessions: SessionBase[], fixedTimezone?
       .sort((sessionA, sessionB) => {
         const indexA = timePoints.indexOf(`t-${formatTimeString(createDate(sessionA.start))}`)
         const indexB = timePoints.indexOf(`t-${formatTimeString(createDate(sessionB.start))}`)
-        if (indexA === -1 || indexB === -1) throw new Error(`${indexA}, ${indexB}`)
+        if (indexA === -1) throw new Error(`Session: ${sessionA.id}'s start time: t-${formatTimeString(createDate(sessionA.start))} is not exist in time points`)
+        if (indexB === -1) throw new Error(`Session: ${sessionB.id}'s start time: t-${formatTimeString(createDate(sessionB.start))} is not exist in time points`)
 
         return indexA - indexB
       })
       .forEach((session) => {
-        const indexStart = timePoints.indexOf(`t-${formatTimeString(new Date(session.start))}`)
-        const indexEnd = timePoints.indexOf(`t-${formatTimeString(new Date(session.end))}`)
-        if (indexStart === -1 || indexEnd === -1 || indexStart >= indexEnd) throw new Error()
+        const indexStart = timePoints.indexOf(`t-${formatTimeString(createDate(session.start))}`)
+        const indexEnd = timePoints.indexOf(`t-${formatTimeString(createDate(session.end))}`)
+        if (indexStart === -1) throw new Error(`Session: ${session.id}'s start time: t-${formatTimeString(createDate(session.start))} is not exist in time points`)
+        if (indexEnd === -1) throw new Error(`Session: ${session.id}'s end time: t-${formatTimeString(createDate(session.end))} is not exist in time points`)
+        if (indexStart >= indexEnd) throw new Error(`Session: ${session.id}'s start time: t-${formatTimeString(createDate(session.end))} is later than end time: t-${formatTimeString(createDate(session.end))}`)
 
         const rowSpan = indexEnd - indexStart
 
@@ -218,7 +224,8 @@ export function generateAgendaListData (sessions: SessionBase[], fixedTimezone?:
           ? entry[1].sort((sessionA, sessionB) => {
             const indexA = roomSequence.indexOf(sessionA.room)
             const indexB = roomSequence.indexOf(sessionB.room)
-            if (indexA === -1 || indexB === -1) throw new Error()
+            if (indexA === -1) throw new Error(`Room: ${sessionA.room} is not exist in roomSequence`)
+            if (indexB === -1) throw new Error(`Room: ${sessionB.room} is not exist in roomSequence`)
 
             return indexA - indexB
           })

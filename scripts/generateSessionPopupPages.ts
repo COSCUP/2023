@@ -7,7 +7,7 @@ import cheerio from 'cheerio'
 import fs from 'fs'
 import path from 'path'
 import { origin } from '../package.json'
-import { generateSessions, generateSessionPopupData } from '@/services/agenda'
+import { generateSessions, generateSessionPopupData, fixedTimeZoneDate } from '@/services/agenda'
 import { availableLanguageTypes } from '@/services/language'
 import { MetaDomSetterSet, MetaType, defaultMetaValues, createMetaService } from '@/services/meta'
 import { GeneralPopupContentData } from '@/services/popup'
@@ -48,9 +48,10 @@ async function run () {
       return languageData
     })
     .map(async (languageData) => {
-      const timezoneOffsetMinutes = -480
+      const timeZoneOffsetMinutes = -480
+      const fixedTimeZone = (date: Date | string) => fixedTimeZoneDate(date, timeZoneOffsetMinutes)
       const datas = await Promise.all(
-        generateSessions(timezoneOffsetMinutes)
+        generateSessions(fixedTimeZone)
           .map(async (session) => {
             return {
               sessionId: session.id,
