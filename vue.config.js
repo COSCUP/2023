@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const fs = require('fs')
 const path = require('path')
+const languages = require(path.join(__dirname, 'languages/languages.json'))
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const minify = require('html-minifier').minify
 
@@ -20,13 +21,17 @@ const renderRoutes = (() => {
     '/staff'
   ].map((route) => route.replace(/\/$/, ''))
 
-  const zhRoutes = routes.map((route) => path.join(publicPath, 'zh-TW', route))
-  const enRoutes = routes.map((route) => path.join(publicPath, 'en', route))
+  routes.push(...routes.map((route) => `${route}/`))
 
-  const r1 = [...zhRoutes, ...enRoutes]
-  const r2 = r1.map((route) => path.join(route, '/'))
+  Array.from(languages)
+    .map((language) => {
+      return routes.map((route) => path.join(publicPath, language, route))
+    })
+    .forEach((languageRoutes) => {
+      routes.push(...languageRoutes)
+    })
 
-  return [...r1, ...r2]
+  return routes
 })()
 
 module.exports = {
@@ -50,6 +55,23 @@ module.exports = {
         route.html = route.html
           .replace('<noscript>{{{ %GA_TEMPLATE% }}}</noscript>', gaTempHTML)
         return route
+      },
+      customRendererConfig: {
+        async consoleHandler (route, message) {
+          console.log(`\nRoute: ${route}\n`)
+          // serialize my args the way I want
+          const args = await message.args()
+          args.forEach(async (arg) => {
+            const val = await arg.jsonValue()
+            // value is serializable
+            if (JSON.stringify(val) !== JSON.stringify({})) console.log(val)
+            // value is unserializable (or an empty oject)
+            else {
+              const { type, subtype, description } = arg._remoteObject
+              console.log(`type: ${type}, subtype: ${subtype}, description:\n ${description}`)
+            }
+          })
+        }
       }
     }
   }
