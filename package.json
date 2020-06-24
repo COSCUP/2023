@@ -5,9 +5,9 @@
   "origin": "https://coscup.org",
   "scripts": {
     "serve": "npm run pre-build && vue-cli-service serve",
-    "build": "npm run pre-build && vue-cli-service build && npm run after-build && npm run end-build",
-    "lint": "npm run pre-build && vue-cli-service lint",
+    "build": "npm run pre-build && vue-cli-service build && npm run after-build && npm run end-build && npm run generate:sitemap",
     "build:bundle-analysis": "npm run pre-build && vue-cli-service build --analyze",
+    "lint": "npm run pre-build && vue-cli-service lint",
     "generate:icons-import": "npm run ts-script -- ./scripts/generateIconsImport.ts",
     "generate:languages-import": "npm run ts-script -- ./scripts/generateLanguagesImport.ts",
     "generate:session": "[ -n \"$PRETALX_TOKEN\" ] && node ./scripts/generateSession.js > public/json/session.json || curl -o public/json/session.json https://coscup.org/2020/json/session.json",
@@ -16,7 +16,7 @@
     "generate:session-popup-pages": "npm run ts-script -- ./scripts/generateSessionPopupPages.ts",
     "after-build": "npm run generate:session-popup-pages",
     "generate:sitemap": "node ./scripts/generateSitemap.js",
-    "end-build": "mv ./dist/2020/* ./dist && rm -rf ./dist/2020 && cp -R ./dist/zh-TW/* ./dist/ && npm run generate:sitemap",
+    "end-build": "mv ./dist/2020/* ./dist && rm -rf ./dist/2020 && cp -R ./dist/zh-TW/* ./dist/",
     "ts-script": "ts-node -r tsconfig-paths/register --project ./scripts/tsconfig.json"
   },
   "dependencies": {
@@ -81,13 +81,13 @@
     "node-sass": "^4.12.0",
     "npm": "^6.14.5",
     "ora": "^4.0.4",
-    "prerender-spa-plugin": "^3.2.1",
+    "prerender-spa-plugin": "^3.4.0",
     "sass-loader": "^8.0.2",
     "sitemap-generator": "^8.4.2",
     "ts-node": "^8.10.2",
     "tsconfig-paths": "^3.9.0",
     "typescript": "~3.9.3",
-    "vue-cli-plugin-prerender-spa": "~1.1.6",
+    "vue-cli-plugin-prerender-spa": "^1.1.6",
     "vue-template-compiler": "^2.6.11",
     "webpack-bundle-analyzer": "^3.8.0"
   },
