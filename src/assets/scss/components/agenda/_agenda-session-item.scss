@@ -17,6 +17,7 @@
       position: sticky;
       top: calc(var(--navbar-height) + var(--room-list-height));
       padding: 1rem;
+      word-break: break-word;
 
       .track {
         color: var(--color-coscup-green-lighten-1);
