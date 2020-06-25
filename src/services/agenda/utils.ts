@@ -286,7 +286,7 @@ const generateSessionPopupContentHtml = async (session: Session, language: 'en' 
         ${speaker.bio}
       </div>
     </div>
-    `.trim())}
+    `.trim()).join('')}
   </section>
 </article>
 `.trim()
