@@ -136,7 +136,9 @@ export default Vue.extend({
       }
     },
     onAppRender (): void {
-      this.detectAnnouncementUpdate()
+      setTimeout(() => {
+        this.detectAnnouncementUpdate()
+      }, 1000)
     }
   },
   async mounted () {
