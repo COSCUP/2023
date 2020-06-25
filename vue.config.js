@@ -18,6 +18,7 @@ const renderRoutes = (() => {
     '/agenda',
     '/agenda/template',
     '/venue',
+    '/sponsor',
     '/staff'
   ].map((route) => route.replace(/\/$/, ''))
 
