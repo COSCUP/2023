@@ -5,6 +5,7 @@
 
 @import "./shared";
 @import "./components/app/navbar";
+@import "./components/app/sponsor-footer";
 @import "./components/app/footer";
 @import "./components/app/full-page-progress";
 @import "./components/app/popup";
@@ -39,5 +40,6 @@ body {
   @include full-page-progress;
   @include popup;
   @include navbar;
+  @include sponsor-footer;
   @include footer;
 }

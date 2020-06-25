@@ -29,6 +29,7 @@
           <router-view></router-view>
         </keep-alive>
       </transition>
+      <SponsorFooter></SponsorFooter>
       <Footer></Footer>
     </div>
     <FullPageProgress v-show="fullPageProgressService.isLoading">
@@ -41,6 +42,7 @@
 import Vue from 'vue'
 import { Route, Location } from 'vue-router'
 import Navbar from '@/components/App/Navbar/index.vue'
+import SponsorFooter from '@/components/App/SponsorFooter.vue'
 import Footer from '@/components/App/Footer.vue'
 import FullPageProgress from '@/components/App/FullPageProgress.vue'
 import Popup from '@/components/App/Popup/index.vue'
@@ -81,6 +83,7 @@ export default Vue.extend({
   ],
   components: {
     Navbar,
+    SponsorFooter,
     Footer,
     FullPageProgress,
     Popup

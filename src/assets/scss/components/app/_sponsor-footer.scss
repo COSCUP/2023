@@ -1,0 +1,48 @@
+// Copyright (c) 2020 DevilTea
+//
+// This software is released under the MIT License.
+// https://opensource.org/licenses/MIT
+
+@mixin sponsor-footer {
+  #sponsor-footer {
+    position: sticky;
+    left: 0;
+    width: 100vw;
+    background-color: var(--color-footer-background);
+
+    .outer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 960px;
+      padding: 3rem 0;
+      margin: auto;
+
+      .sponsor {
+        display: inline-block;
+        margin: 0.5rem;
+
+        img {
+          width: 180px;
+          background: rgba(#fff, 0.8);
+          border-radius: 10px;
+          transition: all 0.1s;
+
+          &:hover {
+            background: #fff;
+            transform: scale(1.05);
+            transition: all 0.1s;
+          }
+
+          @include smOnly {
+            width: 150px;
+          }
+
+          @include xsOnly {
+            width: 100px;
+          }
+        }
+      }
+    }
+  }
+}
