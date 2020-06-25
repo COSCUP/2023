@@ -6,4 +6,104 @@
 @import "../shared";
 
 @include page("sponsor") {
+  .card {
+    padding: 2rem;
+    color: #000;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+  }
+
+  a {
+    word-break: break-word;
+    text-decoration: none;
+    color: var(--color-markdown-link);
+    transition: all 0.2s;
+
+    &:hover {
+      color: var(--color-markdown-link-hover);
+      transition: all 0.2s;
+    }
+  }
+
+  .outer-container {
+    max-width: 900px;
+    margin: 2rem auto;
+
+    .title {
+      font-size: 1.5rem;
+      font-weight: 500;
+      margin-bottom: 2rem;
+
+      &.level {
+        font-size: 2rem;
+      }
+    }
+
+    .sponsor-container {
+      &::after {
+        content: "";
+        clear: both;
+        display: table;
+      }
+
+      .img-container {
+        position: relative;
+        width: 30%;
+        margin: 0 0.5rem 0.5rem 0;
+        padding-top: 20%;
+        float: left;
+        z-index: 1;
+
+        img {
+          display: block;
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      .content-container {
+        a {
+          h2 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            font-weight: 500;
+          }
+        }
+      }
+    }
+  }
+
+  @include smOnly {
+    .outer-container {
+      max-width: 90%;
+      margin: inherit auto;
+
+      .sponsor-container {
+        .img-container {
+          width: 30%;
+          padding-top: 20%;
+        }
+      }
+    }
+  }
+
+  @include xsOnly {
+    .outer-container {
+      max-width: calc(100% - 2rem);
+      margin: inherit auto;
+
+      .sponsor-container {
+        .img-container {
+          width: 99%;
+          padding-top: 66%;
+          margin: auto;
+        }
+      }
+    }
+  }
 }
