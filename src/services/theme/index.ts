@@ -15,15 +15,16 @@ export interface ThemeService {
   readonly themePack: ThemePack;
   startDetect: () => void;
   stopDetect: () => void;
+  savePreference: () => void;
 }
 
 class ThemeServiceConcrete implements ThemeService {
-  public themeType: ThemeType = 'light'
+  private _themeType: ThemeType = 'light'
   public themePackSet: ThemePackSet = themePackSet
   private _debouncedDetectTheme = debounce(() => {
-    const themeType: ThemeType = this._detectColorSchema()
+    this.themeType = this._detectColorSchema()
     const variableStyleDom = (document.getElementById('variable') as HTMLElement)
-    const themePack: ThemePack = this.themePackSet[themeType]
+    const themePack: ThemePack = this.themePack
     const themePackProperties = Object.entries(themePack)
       .map((entry) => `--color-${entry[0]}: ${entry[1]};`)
       .join('')
@@ -33,8 +34,16 @@ class ThemeServiceConcrete implements ThemeService {
     variableStyleDom.innerHTML = `:root {${themePackProperties + colorPackProperties}}`
     const themeClassNameList = Array.from(document.body.classList).filter((className) => className.startsWith('theme-'))
     document.body.classList.remove(...themeClassNameList)
-    document.body.classList.add(`theme-${themeType}`)
+    document.body.classList.add(`theme-${this.themeType}`)
   }, 30)
+
+  public get themeType () {
+    return this._themeType
+  }
+
+  public set themeType (value: ThemeType) {
+    this._themeType = value
+  }
 
   public get themePack (): ThemePack {
     return this.themePackSet[this.themeType]
@@ -71,6 +80,11 @@ class ThemeServiceConcrete implements ThemeService {
 
   public stopDetect () {
     window.matchMedia('(prefers-color-scheme: dark)').removeListener(this._debouncedDetectTheme)
+  }
+
+  public savePreference () {
+    localStorage.setItem('colorSchema', this.themeType)
+    this._debouncedDetectTheme()
   }
 }
 

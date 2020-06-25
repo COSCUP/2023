@@ -44,6 +44,15 @@
               2020
             </p>
           </template>
+
+          <template
+            v-else-if="navbarItem.name === 'themeToggle'"
+            v-slot:default
+          >
+            <Icon
+              :name="themeService.themeType === 'light' ? 'sun' : 'moon'"
+            ></Icon>
+          </template>
         </NavbarItem>
       </div>
     </div>
@@ -65,8 +74,15 @@
             2020
           </p>
         </template>
+
         <template v-else-if="navbarItem.name === 'menuToggle'" v-slot:default>
           <Icon name="bars"></Icon>
+        </template>
+
+        <template v-else-if="navbarItem.name === 'themeToggle'" v-slot:default>
+          <Icon
+            :name="themeService.themeType === 'light' ? 'sun' : 'moon'"
+          ></Icon>
         </template>
       </NavbarItem>
     </div>
@@ -81,17 +97,19 @@ import { navbarItems, NavbarItemData, NavbarAction } from './navbar'
 import { BreakpointService } from '@/services/breakpoint'
 import { ScrollLockService } from '@/services/scrollLock'
 import { injectedThis } from '@/utils/common'
+import { ThemeService } from '../../../services/theme'
 
 function injected (thisArg: unknown) {
   return injectedThis<{
     breakpointService: BreakpointService;
     scrollLockService: ScrollLockService;
+    themeService: ThemeService;
   }>(thisArg)
 }
 
 export default Vue.extend({
   name: 'Navbar',
-  inject: ['breakpointService', 'scrollLockService'],
+  inject: ['breakpointService', 'scrollLockService', 'themeService'],
   components: {
     NavbarItem
   },
@@ -118,7 +136,11 @@ export default Vue.extend({
   methods: {
     commitAction (action: NavbarAction, args?: never) {
       const actions: { [action in NavbarAction]: Function } = {
-        [NavbarAction.ToggleMenu]: () => { this.setMenuOpen(!this.isMenuOpen) }
+        [NavbarAction.ToggleMenu]: () => { this.setMenuOpen(!this.isMenuOpen) },
+        [NavbarAction.ToggleTheme]: () => {
+          injected(this).themeService.themeType = injected(this).themeService.themeType === 'light' ? 'dark' : 'light'
+          injected(this).themeService.savePreference()
+        }
       }
       if (!actions[action]) return
       actions[action].apply(this, args)

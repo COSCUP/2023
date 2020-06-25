@@ -54,5 +54,13 @@
   "redo": [
     "fas",
     "redo"
+  ],
+  "sun": [
+    "far",
+    "sun"
+  ],
+  "moon": [
+    "far",
+    "moon"
   ]
 }

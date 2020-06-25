@@ -16,7 +16,8 @@ export enum NavbarItemType {
 }
 
 export enum NavbarAction {
-  ToggleMenu
+  ToggleMenu,
+  ToggleTheme
 }
 
 export type NavbarItemData = NavbarActionItem | NavbarInternalLinkItem | NavbarExternalLinkItem | NavbarLanguageSwitchItem
@@ -93,6 +94,13 @@ export const navbarItems: NavbarItemData[] = [
     name: 'languageSwitch',
     fixedInNavbar: true,
     hiddenInMenu: true
+  },
+  {
+    type: NavbarItemType.Action,
+    name: 'themeToggle',
+    fixedInNavbar: true,
+    hiddenInMenu: true,
+    action: NavbarAction.ToggleTheme
   },
   {
     type: NavbarItemType.Action,

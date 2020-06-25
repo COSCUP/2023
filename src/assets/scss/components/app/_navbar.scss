@@ -69,6 +69,12 @@
               font-size: 0.75rem;
             }
           }
+
+          &.theme-toggle {
+            .navbar-item {
+              font-size: 1.25rem;
+            }
+          }
         }
       }
     }
@@ -138,6 +144,12 @@
         }
 
         &.menu-toggle {
+          .navbar-item {
+            font-size: 1.25rem;
+          }
+        }
+
+        &.theme-toggle {
           .navbar-item {
             font-size: 1.25rem;
           }
