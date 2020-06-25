@@ -75,6 +75,7 @@ export default Vue.extend({
   data () {
     return {
       sponsorGroups: {} as object
+
     }
   },
   methods: {
@@ -84,7 +85,11 @@ export default Vue.extend({
           data.intro[languageType] = await markdown(data.intro[languageType])
         }
       }
-      this.sponsorGroups = groupBy<SopnsorData>(sponsorDatas, 'level')
+      this.sponsorGroups = Object.fromEntries(Object.entries(groupBy<SopnsorData>(sponsorDatas, 'level'))
+        .sort((entryA, entryB) => {
+          const sponsorSequence = ['titanium', 'diamond', 'gold', 'silver', 'bronze', 'co-organizer', 'special-thanks']
+          return sponsorSequence.indexOf(entryA[0]) - sponsorSequence.indexOf(entryB[0])
+        }))
     }
   },
   async mounted () {
