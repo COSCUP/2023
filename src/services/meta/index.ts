@@ -28,7 +28,7 @@ export const defaultMetaValues: MetaValues = {
   [MetaType.Title]: 'COSCUP 2020 | Conference for Open Source Coders, Users, and Promoters',
   [MetaType.Description]: 'Conference for Open Source Coders, Users, and Promoters is a free annual conference providing a platform to connect FLOSS folks across Asia since 2006. It\'s a major force of free software movement advocacy in Taiwan.',
   [MetaType.OgUrl]: 'https://coscup.org/2020',
-  [MetaType.OgImage]: 'https://coscup.org/2020/img/og.png',
+  [MetaType.OgImage]: 'https://coscup.org/2020/images/og.png',
   [MetaType.OgType]: 'website',
   [MetaType.OgSiteName]: 'COSCUP 2020'
 }
