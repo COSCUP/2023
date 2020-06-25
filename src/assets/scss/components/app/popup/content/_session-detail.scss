@@ -5,6 +5,8 @@
 
 @mixin session-detail {
   .session-detail {
+    word-break: break-word;
+
     .detail-header {
       padding-bottom: 0.5rem;
       border-bottom: 1px solid #ccc;
@@ -36,6 +38,7 @@
             padding: 4px 8px;
             color: #fff;
             background-color: var(--color-coscup-green);
+            margin: 4px 0;
             border-radius: 4px;
           }
         }
