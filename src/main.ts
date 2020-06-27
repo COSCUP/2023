@@ -4,6 +4,7 @@
 // https://opensource.org/licenses/MIT
 
 import Vue from 'vue'
+import VueCompositionAPI from '@vue/composition-api'
 import App from './App.vue'
 import Icon from '@/components/Basic/Icon/index.vue'
 import { RenderedEventDispatcher } from '@/plugins/renderedEventDispatcher'
@@ -18,6 +19,7 @@ import { createScrollLockService, ScrollLockService } from '@/services/scrollLoc
 import { createThemeService, ThemeService } from '@/services/theme'
 
 Vue.use(RenderedEventDispatcher)
+Vue.use(VueCompositionAPI)
 
 Vue.component('Icon', Icon)
 
