@@ -131,7 +131,6 @@ export function generateSession (sessionData: SessionData, fixedTimezone?: (date
   if (room === undefined) throw new Error(`Session: ${sessionData.id} has an unknown room`)
 
   const speakers: SpeakerData[] = rawData.speakers.filter((speakerData: SpeakerData) => sessionData.speakers.includes(speakerData.id))
-  if (speakers.length === 0) throw new Error(`Session: ${sessionData.id} has no speakers`)
 
   const tags: TagData[] = rawData.tags.filter((tagData: TagData) => sessionData.tags.includes(tagData.id))
 
