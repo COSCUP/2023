@@ -39,48 +39,26 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import { Route, Location } from 'vue-router'
+import { defineComponent, ref, Ref, onMounted, nextTick, onBeforeUnmount, watch } from '@vue/composition-api'
+import { Location } from 'vue-router'
 import Navbar from '@/components/App/Navbar/index.vue'
 import SponsorFooter from '@/components/App/SponsorFooter.vue'
 import Footer from '@/components/App/Footer.vue'
 import FullPageProgress from '@/components/App/FullPageProgress.vue'
 import Popup from '@/components/App/Popup/index.vue'
-import { pageRouteNameList } from '@/router'
-import { AnnouncementService } from '@/services/announcement'
-import { BreakpointService } from '@/services/breakpoint'
-import { FullPageProgressService } from '@/services/fullPageProgress'
-import { LanguageService } from '@/services/language'
-import { PopupService } from '@/services/popup'
-import { ScrollLockService } from '@/services/scrollLock'
-import { ThemeService } from '@/services/theme'
-import { injectedThis } from '@/utils/common'
+import { useRouter, pageRouteNameList } from '@/router'
+import { useAnnouncementService } from '@/services/announcement'
+import { useBreakpointService } from '@/services/breakpoint'
+import { useFullPageProgressService } from '@/services/fullPageProgress'
+import { useLanguageService } from '@/services/language'
+import { usePopupService } from '@/services/popup'
+import { useScrollLockService } from '@/services/scrollLock'
+import { useThemeService } from '@/services/theme'
 
 import '@/assets/scss/app.scss'
 
-function injected (thisArg: unknown) {
-  return injectedThis<{
-    languageService: LanguageService;
-    themeService: ThemeService;
-    breakpointService: BreakpointService;
-    scrollLockService: ScrollLockService;
-    fullPageProgressService: FullPageProgressService;
-    popupService: PopupService;
-    announcementService: AnnouncementService;
-  }>(thisArg)
-}
-
-export default Vue.extend({
+export default defineComponent({
   name: 'App',
-  inject: [
-    'languageService',
-    'themeService',
-    'breakpointService',
-    'scrollLockService',
-    'fullPageProgressService',
-    'popupService',
-    'announcementService'
-  ],
   components: {
     Navbar,
     SponsorFooter,
@@ -88,72 +66,91 @@ export default Vue.extend({
     FullPageProgress,
     Popup
   },
-  data () {
-    return {
-      isInApp: false,
-      pageTransitionName: 'slide-left' as 'slide-left' | 'slide-right' | 'fade'
-    }
-  },
-  watch: {
-    '$route' (newRoute: Route, oldRoute: Route): void {
-      this.updatePageTransitionName(newRoute.name ?? '', oldRoute.name ?? '')
-      this.detectAnnouncementRoute()
-    }
-  },
-  methods: {
-    updatePageTransitionName (newRouteName: string, oldRouteName: string): void {
-      if (injected(this).breakpointService.xsOnly) {
-        this.pageTransitionName = 'fade'
+  setup () {
+    const router = useRouter()
+    const languageService = useLanguageService()
+    const themeService = useThemeService()
+    const breakpointService = useBreakpointService()
+    const scrollLockService = useScrollLockService()
+    const fullPageProgressService = useFullPageProgressService()
+    const popupService = usePopupService()
+    const announcementService = useAnnouncementService()
+
+    const isInApp = ref(false)
+    const pageTransitionName: Ref<'slide-left' | 'slide-right' | 'fade'> = ref('fade')
+
+    const updatePageTransitionName = (newRouteName: string, oldRouteName: string) => {
+      if (breakpointService.xsOnly) {
+        pageTransitionName.value = 'fade'
         return
       }
 
       const newIndex = pageRouteNameList.indexOf(newRouteName)
       const oldIndex = pageRouteNameList.indexOf(oldRouteName)
       if (oldIndex < newIndex) {
-        this.pageTransitionName = 'slide-left'
+        pageTransitionName.value = 'slide-left'
       } else {
-        this.pageTransitionName = 'slide-right'
+        pageTransitionName.value = 'slide-right'
       }
-    },
-    detectAnnouncementRoute () {
-      if (this.$route.query.popUp === 'announcement') {
+    }
+
+    const detectAnnouncementRoute = () => {
+      if (router.currentRoute.query.popUp === 'announcement') {
         const onClose: () => void = () => {
-          const query = { ...this.$route.query }
+          const query = { ...router.currentRoute.query }
           delete query.popUp
-          this.$router.push({
-            ...(this.$route as Location),
+          router.push({
+            ...(router.currentRoute as Location),
             query
           })
         }
-        injected(this).announcementService.showAnnouncement(onClose)
+        announcementService.showAnnouncement(onClose)
       }
-    },
-    detectAnnouncementUpdate () {
-      if (injected(this).announcementService.hasUpdated) {
-        this.$router.push({
+    }
+
+    const detectAnnouncementUpdate = () => {
+      if (announcementService.hasUpdated) {
+        router.push({
           query: {
-            ...this.$route.query,
+            ...router.currentRoute.query,
             popUp: 'announcement'
           }
         })
       }
-    },
-    onAppRender (): void {
+    }
+
+    const onAppRender = () => {
       setTimeout(() => {
-        this.detectAnnouncementUpdate()
+        detectAnnouncementUpdate()
       }, 1000)
     }
-  },
-  async mounted () {
-    document.addEventListener('x-app-rendered', () => { this.onAppRender() })
-    injected(this).breakpointService.startDetect()
-    injected(this).themeService.startDetect()
-    await this.$nextTick()
-    this.isInApp = this.$route.query.mode === 'app'
-  },
-  beforeDestroy () {
-    injected(this).breakpointService.stopDetect()
-    injected(this).themeService.stopDetect()
+
+    watch(() => router.currentRoute, (route, prevRoute) => {
+      updatePageTransitionName(prevRoute.name ?? '', route.name ?? '')
+      detectAnnouncementRoute()
+    })
+
+    onMounted(async () => {
+      document.addEventListener('x-app-rendered', onAppRender)
+      breakpointService.startDetect()
+      themeService.startDetect()
+      await nextTick()
+      isInApp.value = router.currentRoute.query.mode === 'app'
+    })
+
+    onBeforeUnmount(() => {
+      breakpointService.stopDetect()
+      themeService.stopDetect()
+    })
+
+    return {
+      languageService,
+      fullPageProgressService,
+      scrollLockService,
+      popupService,
+      isInApp,
+      pageTransitionName
+    }
   }
 })
 </script>
