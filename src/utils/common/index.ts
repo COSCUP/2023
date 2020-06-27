@@ -30,3 +30,5 @@ export function getFullUrl (relativeUrl = ''): string {
   if (typeof window === 'undefined') return productionOrigin
   return `${isProduction ? productionOrigin : window.location.origin}${join(process.env.BASE_URL, relativeUrl).toString()}`
 }
+
+export { default as createRootInjections } from './createRootInjections'
