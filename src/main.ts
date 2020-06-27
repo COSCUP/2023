@@ -8,7 +8,6 @@ import VueCompositionAPI from '@vue/composition-api'
 import App from './App.vue'
 import Icon from '@/components/Basic/Icon/index.vue'
 import { RenderedEventDispatcher } from '@/plugins/renderedEventDispatcher'
-import { createRouter } from '@/router'
 import { createRootInjections } from '@/utils/common'
 
 Vue.use(RenderedEventDispatcher)
@@ -19,8 +18,7 @@ Vue.component('Icon', Icon)
 Vue.config.productionTip = false
 
 const rootInjections = createRootInjections()
-
-const router = createRouter(rootInjections)
+const router = rootInjections.router
 
 const root = new Vue({
   provide: rootInjections,

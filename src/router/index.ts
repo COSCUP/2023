@@ -12,6 +12,7 @@ import { MetaService } from '@/services/meta'
 import { PopupService } from '@/services/popup'
 import { delay } from '@/utils/common'
 import { scrollTo } from '@/utils/scrollTo'
+import { inject } from '@vue/composition-api'
 
 Vue.use(VueRouter)
 
@@ -187,5 +188,11 @@ export function createRouter (injects: Inject): VueRouter {
     }
   })
 
+  return router
+}
+
+export function useRouter (): VueRouter {
+  const router = inject<VueRouter>('router')
+  if (!router) throw new Error('"router" is not provided')
   return router
 }
