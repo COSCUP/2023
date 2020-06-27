@@ -6,6 +6,7 @@
 import { debounce } from 'lodash-es'
 import colors from './colors'
 import { ThemePack, ThemePackSet, ThemeType, themePackSet } from './themes'
+import { useService } from '@/utils/common'
 export * from './themes'
 export * from './utils'
 
@@ -90,4 +91,8 @@ class ThemeServiceConcrete implements ThemeService {
 
 export function createThemeService (): ThemeService {
   return new ThemeServiceConcrete()
+}
+
+export function useThemeService (): ThemeService {
+  return useService<ThemeService>('themeService')
 }

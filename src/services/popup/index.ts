@@ -5,6 +5,7 @@
 
 import { ScrollLockService } from '@/services/scrollLock'
 import { MetaOptions, MetaService } from '@/services/meta'
+import { useService } from '@/utils/common'
 
 export enum PopupContentType {
   Empty = 'Empty',
@@ -95,4 +96,8 @@ class PopupServiceConcrete implements PopupService {
 
 export function createPopupService (inject: Inject): PopupService {
   return new PopupServiceConcrete(inject)
+}
+
+export function usePopupService (): PopupService {
+  return useService<PopupService>('popupService')
 }

@@ -4,6 +4,7 @@
 // https://opensource.org/licenses/MIT
 
 import { ScrollLockService } from '@/services/scrollLock'
+import { useService } from '@/utils/common'
 
 export interface FullPageProgressService {
   readonly isLoading: boolean;
@@ -30,4 +31,8 @@ class FullPageProgressServiceConcrete implements FullPageProgressService {
 
 export function createFullPageProgressService (scrollLockService: ScrollLockService): FullPageProgressService {
   return new FullPageProgressServiceConcrete(scrollLockService)
+}
+
+export function useFullPageProgressService (): FullPageProgressService {
+  return useService<FullPageProgressService>('fullPageProgressService')
 }

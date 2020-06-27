@@ -6,6 +6,7 @@
 import groupBy from 'lodash/groupBy'
 import { formatDateString, fixedTimeZoneDate, generateAgendaTableData, generateAgendaListData, AgendaTableData, AgendaListData, RoomData, Session, SessionData, rawData, generateSessionPopupData, generateSession } from './utils'
 import { PopupData } from '@/services/popup'
+import { useService } from '@/utils/common'
 
 export * from './utils'
 
@@ -158,4 +159,8 @@ class AgendaServiceConcrete implements AgendaService {
 
 export function createAgendaService (roomSequence?: string[]): AgendaService {
   return new AgendaServiceConcrete(roomSequence)
+}
+
+export function useAgendaService (): AgendaService {
+  return useService<AgendaService>('agendaService')
 }
