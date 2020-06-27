@@ -53,6 +53,7 @@ import { LanguageService } from '@/services/language'
 import '@/assets/scss/pages/staff.scss'
 
 export default defineComponent({
+  name: 'Staff',
   setup () {
     const languageService = inject<LanguageService>('languageService')
 
