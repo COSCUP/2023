@@ -46,15 +46,17 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { defineComponent, computed, onMounted, inject, ref } from '@vue/composition-api'
 import _staffData from '@/../public/json/staff.json'
+import { LanguageService } from '@/services/language'
 
 import '@/assets/scss/pages/staff.scss'
 
-export default Vue.extend({
-  name: 'Staff',
-  inject: ['languageService'],
-  computed: {
-    staffData () {
+export default defineComponent({
+  setup () {
+    const languageService = inject<LanguageService>('languageService')
+
+    const staffData = computed(() => {
       const groupSequence = ['coordinator', 'secretary', 'program', 'field', 'finance', 'it', 'marketing', 'photo', 'sponsor', 'streaming']
       return _staffData
         .sort((a, b) => groupSequence.indexOf(a.tid) - groupSequence.indexOf(b.tid))
@@ -68,10 +70,16 @@ export default Vue.extend({
             ]
           }
         })
+    })
+
+    onMounted(() => {
+      Vue.prototype.$dispatchRenderedEvent()
+    })
+
+    return {
+      languageService,
+      staffData
     }
-  },
-  mounted () {
-    this.$dispatchRenderedEvent()
   }
 })
 </script>
