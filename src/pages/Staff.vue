@@ -45,17 +45,17 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import { defineComponent, computed, onMounted, inject, ref } from '@vue/composition-api'
+import { defineComponent, computed, onMounted } from '@vue/composition-api'
 import _staffData from '@/../public/json/staff.json'
-import { LanguageService } from '@/services/language'
+import { useLanguageService } from '@/services/language'
+import { useRenderedEventDispatcher } from '@/plugins/renderedEventDispatcher'
 
 import '@/assets/scss/pages/staff.scss'
 
 export default defineComponent({
   name: 'Staff',
   setup () {
-    const languageService = inject<LanguageService>('languageService')
+    const languageService = useLanguageService()
 
     const staffData = computed(() => {
       const groupSequence = ['coordinator', 'secretary', 'program', 'field', 'finance', 'it', 'marketing', 'photo', 'sponsor', 'streaming']
@@ -73,8 +73,10 @@ export default defineComponent({
         })
     })
 
+    const dispatchRenderedEvent = useRenderedEventDispatcher()
+
     onMounted(() => {
-      Vue.prototype.$dispatchRenderedEvent()
+      dispatchRenderedEvent()
     })
 
     return {

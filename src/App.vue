@@ -56,6 +56,7 @@ import { useScrollLockService } from '@/services/scrollLock'
 import { useThemeService } from '@/services/theme'
 
 import '@/assets/scss/app.scss'
+import { provideRenderedEventDispatcher } from './plugins/renderedEventDispatcher'
 
 export default defineComponent({
   name: 'App',
@@ -67,6 +68,8 @@ export default defineComponent({
     Popup
   },
   setup () {
+    provideRenderedEventDispatcher()
+
     const router = useRouter()
     const languageService = useLanguageService()
     const themeService = useThemeService()
@@ -125,8 +128,9 @@ export default defineComponent({
       }, 1000)
     }
 
+    // TODO: Fix the page transition
     watch(() => router.currentRoute, (route, prevRoute) => {
-      updatePageTransitionName(prevRoute.name ?? '', route.name ?? '')
+      updatePageTransitionName(route.name ?? '', prevRoute.name ?? '')
       detectAnnouncementRoute()
     })
 
