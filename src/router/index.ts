@@ -5,51 +5,18 @@
 
 import { camelCase } from 'lodash-es'
 import Vue from 'vue'
-import VueRouter, { RouteConfig } from 'vue-router'
+import VueRouter from 'vue-router'
 import { FullPageProgressService } from '@/services/fullPageProgress'
 import { LanguageService, LanguageType, defaultLanguageType, availableLanguageTypes } from '@/services/language'
 import { MetaService } from '@/services/meta'
 import { PopupService } from '@/services/popup'
-import { delay } from '@/utils/common'
-import { scrollTo } from '@/utils/scrollTo'
+import { scrollTo, Position } from '@/utils/scrollTo'
 import { inject } from '@vue/composition-api'
+import { createRoutes, pageRouteNameList } from './routes'
+
+export { pageRouteNameList } from './routes'
 
 Vue.use(VueRouter)
-
-const pageRoutes: Array<RouteConfig> = [
-  {
-    path: '/',
-    name: 'Home'
-  },
-  {
-    path: '/agenda',
-    name: 'Agenda',
-    children: [
-      {
-        path: ':sessionId',
-        name: 'AgendaDetail'
-      }
-    ]
-  },
-  {
-    path: '/venue',
-    name: 'Venue'
-  },
-  {
-    path: '/map',
-    name: 'Map'
-  },
-  {
-    path: '/sponsor',
-    name: 'Sponsor'
-  },
-  {
-    path: '/staff',
-    name: 'Staff'
-  }
-].filter((route: RouteConfig) => process.env.NODE_ENV === 'development' || !['Map'].includes(route.name || ''))
-
-export const pageRouteNameList: Array<string> = pageRoutes.map((route) => route.name as string)
 
 interface Inject {
   metaService: MetaService;
@@ -60,87 +27,13 @@ interface Inject {
 
 export function createRouter (injects: Inject): VueRouter {
   const { languageService, fullPageProgressService, metaService, popupService } = injects
+  const routes = createRoutes(fullPageProgressService)
 
-  const PageComponent: { [name: string]: () => Promise<typeof import('*.vue')> } = {
-    Home: () => import(
-      /* webpackChunkName: "home" */
-      /* webpackPrefetch: true */
-      '@/pages/Home.vue'),
-    Agenda: () => import(
-      /* webpackChunkName: "agenda" */
-      /* webpackPrefetch: true */
-      '@/pages/Agenda.vue'),
-    Venue: () => import(
-      /* webpackChunkName: "venue" */
-      /* webpackPrefetch: true */
-      '@/pages/Venue.vue'),
-    Map: () => import(
-      /* webpackChunkName: "map" */
-      /* webpackPrefetch: true */
-      '@/pages/Map.vue'),
-    Sponsor: () => import(
-      /* webpackChunkName: "sponsor" */
-      /* webpackPrefetch: true */
-      '@/pages/Sponsor.vue'),
-    Staff: () => import(
-      /* webpackChunkName: "staff" */
-      /* webpackPrefetch: true */
-      '@/pages/Staff.vue')
-  }
-
-  pageRoutes.forEach((route) => {
-    route.component = async () => {
-      let didLoad = false
-      delay(100).then(() => {
-        didLoad || (fullPageProgressService.setStatus(true))
-      })
-      const component = await PageComponent[route.name as string]().then((component) => {
-        didLoad = true
-        return component
-      })
-      if (fullPageProgressService.isLoading) {
-        await delay(300)
-        fullPageProgressService.setStatus(false)
-      }
-      return component
-    }
-  })
-
-  const routes: Array<RouteConfig> = [
-    ...pageRoutes
-  ]
-
-  const expandedRoutes: Array<RouteConfig> = []
-
-  // map original routes to redirection routes
-  expandedRoutes.push(...routes.map((route) => ({
-    path: route.path,
-    redirect: `/${defaultLanguageType}${route.path}`
-  })))
-
-  // map original routes to multi-language routes
-  expandedRoutes.push(...routes.map((route) => ({
-    ...route,
-    path: `/:languageType${route.path}`
-  })))
-
-  expandedRoutes.push({
-    name: 'NotFound',
-    path: '*',
-    redirect (to) {
-      const languageType = to.params.languageType
-      return {
-        path: languageType ? `/${languageType}/` : '/'
-      }
-    }
-  })
-
-  let mySavedPosition: { x: number; y: number } = { x: 0, y: 0 }
-
+  let prevPosition: Position = { x: 0, y: 0 }
   const router = new VueRouter({
     mode: 'history',
     base: process.env.BASE_URL,
-    routes: expandedRoutes,
+    routes,
     scrollBehavior (to, from, savedPosition) {
       setTimeout(() => {
         if (savedPosition) {
@@ -148,8 +41,8 @@ export function createRouter (injects: Inject): VueRouter {
         } else if (to.name === from.name) {
           const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent)
           const { cancel } = scrollTo({
-            from: isSafari ? mySavedPosition : { x: 0, y: 0 },
-            to: mySavedPosition
+            from: isSafari ? prevPosition : { x: 0, y: 0 },
+            to: prevPosition
           })
           const events = ['wheel', 'mousewheel', 'DOMMouseScroll']
           const onScrolling = () => {
@@ -180,7 +73,7 @@ export function createRouter (injects: Inject): VueRouter {
         })
       }
 
-      mySavedPosition = {
+      prevPosition = {
         x: window.scrollX,
         y: window.scrollY
       }

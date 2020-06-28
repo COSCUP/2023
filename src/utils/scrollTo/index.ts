@@ -1,10 +1,10 @@
-type Vector2D = { x: number; y: number }
+export type Position = { x: number; y: number }
 interface ScrollToOptions {
   container?: HTMLElement | null;
-  from?: HTMLElement | Vector2D | null;
-  to: HTMLElement | Vector2D | null;
+  from?: HTMLElement | Position | null;
+  to: HTMLElement | Position | null;
   duration?: number;
-  offset?: Vector2D;
+  offset?: Position;
 }
 
 function easeInOutQuad (currentTime: number, start: number, delta: number, duration: number) {
@@ -22,9 +22,9 @@ export function scrollTo (options: ScrollToOptions) {
   if (options.to === null) return emptyResult
 
   const container: HTMLElement = options.container || document.documentElement
-  const from: Vector2D = options.from ? (options.from instanceof HTMLElement ? (options.from.parentElement === container ? { x: options.from.scrollLeft, y: options.from.scrollTop } : { x: container.scrollLeft, y: container.scrollTop }) : options.from) : { x: container.scrollLeft, y: container.scrollTop }
+  const from: Position = options.from ? (options.from instanceof HTMLElement ? (options.from.parentElement === container ? { x: options.from.scrollLeft, y: options.from.scrollTop } : { x: container.scrollLeft, y: container.scrollTop }) : options.from) : { x: container.scrollLeft, y: container.scrollTop }
   const { offset = { x: 0, y: 0 } } = options
-  const to: Vector2D | null = options.to instanceof HTMLElement ? { x: options.to.offsetLeft + offset.x, y: options.to.offsetTop + offset.y } : { x: options.to.x + offset.x, y: options.to.y + offset.y }
+  const to: Position | null = options.to instanceof HTMLElement ? { x: options.to.offsetLeft + offset.x, y: options.to.offsetTop + offset.y } : { x: options.to.x + offset.x, y: options.to.y + offset.y }
   if (to === null) return emptyResult
   const { duration = 500 } = options
   const delta = { x: to.x - from.x, y: to.y - from.y }
