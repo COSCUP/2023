@@ -58,43 +58,47 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { defineComponent, onMounted, reactive } from '@vue/composition-api'
 import { groupBy } from 'lodash-es'
-import { availableLanguageTypes } from '@/services/language'
+import { availableLanguageTypes, useLanguageService } from '@/services/language'
 import markdown from '@/utils/markdown'
 import sponsorDatas from '@/../public/json/sponsor.json'
 
 import '@/assets/scss/pages/sponsor.scss'
+import { useRenderedEventDispatcher } from '../plugins/renderedEventDispatcher'
 
-export type ArrayElement<ArrayType extends readonly unknown[]> = ArrayType[number];
+type ArrayElement<ArrayType extends readonly unknown[]> = ArrayType[number];
 type SopnsorData = ArrayElement<typeof sponsorDatas>
 
-export default Vue.extend({
+export default defineComponent({
   name: 'Sponsor',
-  inject: ['languageService'],
-  data () {
-    return {
-      sponsorGroups: {} as object
+  setup () {
+    const despatchRenderedEvent = useRenderedEventDispatcher()
+    const languageService = useLanguageService()
 
-    }
-  },
-  methods: {
-    async initSponsors () {
+    const sponsorGroups = reactive(Object.fromEntries(Object.entries(groupBy<SopnsorData>(sponsorDatas, 'level'))
+      .sort((entryA, entryB) => {
+        const sponsorSequence = ['titanium', 'diamond', 'gold', 'silver', 'bronze', 'co-organizer', 'special-thanks']
+        return sponsorSequence.indexOf(entryA[0]) - sponsorSequence.indexOf(entryB[0])
+      })))
+
+    const renderSponsorsIntro = async () => {
       for (const data of sponsorDatas) {
         for (const languageType of availableLanguageTypes) {
           data.intro[languageType] = await markdown(data.intro[languageType])
         }
       }
-      this.sponsorGroups = Object.fromEntries(Object.entries(groupBy<SopnsorData>(sponsorDatas, 'level'))
-        .sort((entryA, entryB) => {
-          const sponsorSequence = ['titanium', 'diamond', 'gold', 'silver', 'bronze', 'co-organizer', 'special-thanks']
-          return sponsorSequence.indexOf(entryA[0]) - sponsorSequence.indexOf(entryB[0])
-        }))
     }
-  },
-  async mounted () {
-    await this.initSponsors()
-    this.$dispatchRenderedEvent()
+
+    onMounted(async () => {
+      await renderSponsorsIntro()
+      despatchRenderedEvent()
+    })
+
+    return {
+      languageService,
+      sponsorGroups
+    }
   }
 })
 </script>
