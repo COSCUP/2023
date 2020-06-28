@@ -24,7 +24,7 @@ import { Route } from 'vue-router'
 import { createMap, Map, MapOptions } from '@/utils/map'
 
 export default Vue.extend({
-  name: 'Map',
+  name: 'VenueMap',
   props: {
     options: {
       type: Object as PropType<MapOptions>,

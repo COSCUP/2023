@@ -7,7 +7,7 @@
 
 <template>
   <main id="venue" class="page-container">
-    <Map id="map-component" :options="mapOptions"></Map>
+    <VenueMap id="map-component" :options="mapOptions"></VenueMap>
     <div class="plan-container">
       <div class="plan address">
         <h2>{{ languageService.languagePack.venue.name }}</h2>
@@ -26,29 +26,24 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import Map from '@/components/Venue/Map.vue'
-import { LanguageService } from '@/services/language'
-import { injectedThis } from '@/utils/common'
+import { defineComponent, reactive, onMounted, watch, ref } from '@vue/composition-api'
+import VenueMap from '@/components/Venue/VenueMap.vue'
+import { useLanguageService } from '@/services/language'
+import { useRenderedEventDispatcher } from '../plugins/renderedEventDispatcher'
 import { MapOptions } from '@/utils/map'
 import markdown from '@/utils/markdown'
 
 import '@/assets/scss/pages/venue.scss'
 
-function injected (thisArg: unknown) {
-  return injectedThis<{
-    languageService: LanguageService;
-  }>(thisArg)
-}
-
-export default Vue.extend({
+export default defineComponent({
   name: 'Venue',
-  inject: ['languageService'],
   components: {
-    Map
+    VenueMap
   },
-  data () {
-    const mapOptions: MapOptions = {
+  setup () {
+    const dispatchRenderedEvent = useRenderedEventDispatcher()
+    const languageService = useLanguageService()
+    const mapOptions: MapOptions = reactive({
       target: 'map-component',
       center: {
         lng: 121.540551,
@@ -70,33 +65,33 @@ export default Vue.extend({
           }
         }
       ]
+    })
+    const plansHtml = ref(
+      Object.fromEntries(languageService.languagePack.venue.plans.map((plan) => [plan.name, plan.description]))
+    )
+
+    const renderMarkdownContent = async () => {
+      const _plansHtml = {}
+      for (const plan of languageService.languagePack.venue.plans) {
+        _plansHtml[plan.name] = await markdown(plan.description)
+      }
+      plansHtml.value = _plansHtml
     }
 
-    const plansHtml: { [name: string]: string } = {}
+    watch(() => languageService.languageType, async () => {
+      await renderMarkdownContent()
+    })
+
+    onMounted(async () => {
+      await renderMarkdownContent()
+      dispatchRenderedEvent()
+    })
 
     return {
+      languageService,
       mapOptions,
       plansHtml
     }
-  },
-  methods: {
-    async parseMarkdownContent () {
-      const plansHtml = {}
-      for (const plan of injected(this).languageService.languagePack.venue.plans) {
-        plansHtml[plan.name] = await markdown(plan.description)
-      }
-
-      this.plansHtml = plansHtml
-    }
-  },
-  watch: {
-    'languageService.languageType' () {
-      this.parseMarkdownContent()
-    }
-  },
-  async mounted () {
-    await this.parseMarkdownContent()
-    this.$dispatchRenderedEvent()
   }
 })
 </script>
