@@ -43,6 +43,44 @@
 </template>
 
 <script lang="ts">
+import { defineComponent, inject, computed } from '@vue/composition-api'
+import { useAgendaService, TableCellType } from '@/services/agenda'
+import AgendaSessionItem from './AgendaSessionItem.vue'
+import AgendaTableRoomCell from './AgendaTableRoomCell.vue'
+import { useRouter } from '@/router'
+
+export default defineComponent({
+  name: 'AgendaTable',
+  components: {
+    AgendaTableRoomCell,
+    AgendaSessionItem
+  },
+  setup () {
+    const router = useRouter()
+    const agendaService = useAgendaService()
+    const languageType = inject<'zh' | 'en'>('languageType') || 'zh'
+    const table = computed(() => agendaService.table)
+    const tableStyle = computed(() => ({ '--table-column': agendaService.table.rooms.length }))
+    const getSessionLocation = (sessionId: string) => ({
+      name: 'AgendaDetail',
+      params: {
+        ...router.currentRoute.params,
+        sessionId
+      }
+    })
+
+    return {
+      TableCellType,
+      languageType,
+      table,
+      tableStyle,
+      getSessionLocation
+    }
+  }
+})
+</script>
+
+<!--script lang="ts">
 import Vue from 'vue'
 import { Location } from 'vue-router'
 import AgendaSessionItem from './AgendaSessionItem.vue'
@@ -92,4 +130,4 @@ export default Vue.extend({
     }
   }
 })
-</script>
+</script-->

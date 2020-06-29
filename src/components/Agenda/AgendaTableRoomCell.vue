@@ -13,6 +13,35 @@
 </template>
 
 <script lang="ts">
+import { defineComponent, ComputedRef, inject, computed } from '@vue/composition-api'
+import { useAgendaService } from '@/services/agenda'
+
+export default defineComponent({
+  name: 'AgendaTableRoomCell',
+  props: {
+    roomId: {
+      type: String,
+      required: true
+    }
+  },
+  setup (props) {
+    const languageType = inject<ComputedRef<'zh' | 'en'>>('languageType') || { value: 'zh' }
+    const agendaService = useAgendaService()
+    const room = computed(() => {
+      const room = agendaService.getRoomById(props.roomId)
+      if (room === null) throw new Error('Invalid Room')
+      return room
+    })
+    const roomName = computed(() => room.value[languageType.value].name.split(' / ')[0])
+
+    return {
+      roomName
+    }
+  }
+})
+</script>
+
+<!--script lang="ts">
 import Vue from 'vue'
 import { AgendaService, Room } from '@/services/agenda'
 import { LanguageService } from '@/services/language'
@@ -49,4 +78,4 @@ export default Vue.extend({
     }
   }
 })
-</script>
+</script-->

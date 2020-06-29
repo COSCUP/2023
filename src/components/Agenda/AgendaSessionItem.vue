@@ -45,69 +45,57 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import { Location } from 'vue-router'
-import { Session, AgendaService, formatTimeString } from '@/services/agenda'
-import { BreakpointService } from '@/services/breakpoint'
-import { LanguageService } from '@/services/language'
-import { injectedThis } from '@/utils/common'
+import { defineComponent, inject, computed, ComputedRef } from '@vue/composition-api'
+import { useBreakpointService } from '@/services/breakpoint'
+import { useAgendaService, formatTimeString } from '@/services/agenda'
+import { useRouter } from '@/router'
 
-function injected (thisArg: unknown) {
-  return injectedThis<{
-    languageService: LanguageService;
-    agendaService: AgendaService;
-    breakpointService: BreakpointService;
-  }>(thisArg)
-}
-
-export default Vue.extend({
+export default defineComponent({
   name: 'AgendaSessionItem',
-  inject: ['languageService', 'agendaService', 'breakpointService'],
   props: {
     sessionId: {
       type: String,
       required: true
     }
   },
-  computed: {
-    laugaugeType (): 'en' | 'zh' {
-      if (injected(this).languageService.languageType === 'en') return 'en'
-      else return 'zh'
-    },
-    session (): Session {
-      const session = injected(this).agendaService.getSessionById(this.sessionId)
+  setup (props) {
+    const router = useRouter()
+    const agendaService = useAgendaService()
+    const breakpointService = useBreakpointService()
+    const languageType = inject<ComputedRef<'zh' | 'en'>>('languageType') || { value: 'zh' }
+    const session = computed(() => {
+      const session = agendaService.getSessionById(props.sessionId)
       if (session === null) throw new Error('Invalid Session')
       return session
-    },
-    location (): Location {
+    })
+    const location = computed(() => {
       return {
         name: 'AgendaDetail',
         params: {
-          ...this.$route.params,
-          sessionId: this.sessionId
+          ...router.currentRoute.params,
+          sessionId: props.sessionId
         }
       }
-    },
-    track (): string {
-      return this.session.type[this.laugaugeType].name
-    },
-    period (): string {
-      return `${formatTimeString(this.session.start, '：')} ~ ${formatTimeString(this.session.end, '：')}`
-    },
-    title (): string {
-      return this.session[this.laugaugeType].title
-    },
-    speakers (): string[] {
-      return this.session.speakers.map((speaker) => speaker[this.laugaugeType].name)
-    },
-    tags (): string[] {
-      return this.session.tags.map((tag) => tag[this.laugaugeType].name)
-    },
-    language (): string {
-      return this.session.language
-    },
-    room (): string {
-      return this.session.room[this.laugaugeType].name.split(' / ')[0]
+    })
+    const track = computed(() => session.value.type[languageType.value].name)
+    const period = computed(() => `${formatTimeString(session.value.start, '：')} ~ ${formatTimeString(session.value.end, '：')}`)
+    const title = computed(() => session.value[languageType.value].title)
+    const speakers = computed(() => session.value.speakers.map((speaker) => speaker[languageType.value].name))
+    const tags = computed(() => session.value.tags.map((tag) => tag[languageType.value].name))
+    const language = computed(() => session.value.language)
+    const room = computed(() => session.value.room[languageType.value].name.split(' / ')[0])
+
+    return {
+      breakpointService,
+      session,
+      location,
+      track,
+      period,
+      title,
+      speakers,
+      tags,
+      language,
+      room
     }
   }
 })

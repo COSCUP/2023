@@ -27,6 +27,28 @@
 </template>
 
 <script lang="ts">
+import { defineComponent, computed } from '@vue/composition-api'
+import { formatTimeString, useAgendaService } from '@/services/agenda'
+import AgendaSessionItem from '@/components/Agenda/AgendaSessionItem.vue'
+
+export default defineComponent({
+  name: 'AgendaList',
+  components: {
+    AgendaSessionItem
+  },
+  setup () {
+    const agendaService = useAgendaService()
+    const list = computed(() => agendaService.list)
+
+    return {
+      list,
+      formatTimeString
+    }
+  }
+})
+</script>
+
+<!--script lang="ts">
 import Vue from 'vue'
 import AgendaSessionItem from '@/components/Agenda/AgendaSessionItem.vue'
 import { AgendaService, formatTimeString } from '@/services/agenda'
@@ -61,5 +83,5 @@ export default Vue.extend({
 })
 </script>
 
-<style scoped>
-</style>
+<style-- scoped>
+</style-->

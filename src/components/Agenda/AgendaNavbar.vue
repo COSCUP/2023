@@ -23,11 +23,18 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { defineComponent } from '@vue/composition-api'
+import { useAgendaService } from '@/services/agenda'
 
-export default Vue.extend({
+export default defineComponent({
   name: 'AgendaNavbar',
-  inject: ['agendaService']
+  setup () {
+    const agendaService = useAgendaService()
+
+    return {
+      agendaService
+    }
+  }
 })
 </script>
 
