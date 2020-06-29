@@ -12,16 +12,21 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { defineComponent, onMounted } from '@vue/composition-api'
 
 import '@/assets/scss/pages/map.scss'
+import { useRenderedEventDispatcher } from '@/plugins/renderedEventDispatcher'
 
-export default Vue.extend({
+export default defineComponent({
   name: 'Map',
   components: {
   },
-  mounted () {
-    this.$dispatchRenderedEvent()
+  setup () {
+    const dispatchRenderedEvent = useRenderedEventDispatcher()
+
+    onMounted(() => {
+      dispatchRenderedEvent()
+    })
   }
 })
 </script>
