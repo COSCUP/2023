@@ -59,18 +59,12 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import { LanguageService } from '@/services/language'
-import { injectedThis } from '@/utils/common'
+import { defineComponent, ref, computed, watch, onMounted } from '@vue/composition-api'
 import markdown from '@/utils/markdown'
+import { useLanguageService } from '@/services/language'
+import { useRenderedEventDispatcher } from '@/plugins/renderedEventDispatcher'
 
 import '@/assets/scss/pages/home.scss'
-
-function injected (thisArg: unknown) {
-  return injectedThis<{
-    languageService: LanguageService;
-  }>(thisArg)
-}
 
 interface Section {
   name: 'notice' | 'about';
@@ -78,45 +72,42 @@ interface Section {
   content: string;
 }
 
-export default Vue.extend({
+export default defineComponent({
   name: 'Home',
-  inject: ['languageService'],
-  computed: {
-    sections (): Section[] {
-      return [
-        {
-          name: 'notice',
-          title: injected(this).languageService.languagePack.home.notice.title,
-          content: this.noticeHtml
-        },
-        {
-          name: 'about',
-          title: injected(this).languageService.languagePack.home.about.title,
-          content: this.aboutHtml
-        }
-      ]
+  setup () {
+    const despatchRenderedEvent = useRenderedEventDispatcher()
+    const languageService = useLanguageService()
+    const noticeHtml = ref('')
+    const aboutHtml = ref('')
+    const sections = computed<Section[]>(() => [
+      {
+        name: 'notice',
+        title: languageService.languagePack.home.notice.title,
+        content: noticeHtml.value
+      },
+      {
+        name: 'about',
+        title: languageService.languagePack.home.about.title,
+        content: aboutHtml.value
+      }
+    ])
+
+    const parseMarkdownContent = async () => {
+      noticeHtml.value = await markdown(languageService.languagePack.home.notice.content)
+      aboutHtml.value = await markdown(languageService.languagePack.home.about.content)
     }
-  },
-  data () {
+
+    watch(() => languageService.languageType, parseMarkdownContent)
+
+    onMounted(async () => {
+      await parseMarkdownContent()
+      despatchRenderedEvent()
+    })
+
     return {
-      noticeHtml: '',
-      aboutHtml: ''
+      languageService,
+      sections
     }
-  },
-  methods: {
-    async parseMarkdownContent () {
-      this.noticeHtml = `<div class="markdown">${await markdown(injected(this).languageService.languagePack.home.notice.content)}</div>`
-      this.aboutHtml = `<div class="markdown">${await markdown(injected(this).languageService.languagePack.home.about.content)}</div>`
-    }
-  },
-  watch: {
-    'languageService.languageType' () {
-      this.parseMarkdownContent()
-    }
-  },
-  async mounted () {
-    await this.parseMarkdownContent()
-    this.$dispatchRenderedEvent()
   }
 })
 </script>
