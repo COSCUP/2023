@@ -37,11 +37,11 @@ function injected (thisArg: unknown) {
 }
 
 const agendaService = Vue.observable(createAgendaService([
+  'RB105',
   'AU',
   'TR209', 'TR211', 'TR212', 'TR213', 'TR214',
-  'TR309', 'TR313',
-  'TR409-2', 'TR410', 'TR411', 'TR412-1', 'TR412-2', 'TR413-1', 'TR413-2',
-  'TR510', 'TR511'
+  'TR309', 'TR310-2', 'TR311', 'TR313',
+  'TR409-2', 'TR410', 'TR411', 'TR412-1', 'TR412-2', 'TR413-1', 'TR413-2'
 ]))
 
 export default Vue.extend({
