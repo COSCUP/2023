@@ -10,13 +10,13 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { defineComponent, computed } from '@vue/composition-api'
 import FontAwesomeIcon from './FontAwesomeIcon.vue'
-import { icons, IconSource, FontAwesomeIconData } from '@/utils/icon'
+import { icons, IconSource } from '@/utils/icon'
 
 type IconComponent = typeof FontAwesomeIcon
 
-export default Vue.extend({
+export default defineComponent({
   name: 'Icon',
   components: {
     FontAwesomeIcon
@@ -30,21 +30,19 @@ export default Vue.extend({
       }
     }
   },
-  computed: {
-    icon (): FontAwesomeIconData {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      return this.icons.find((icon) => icon.name === this.name)!
-    },
-    iconComponent (): IconComponent {
+  setup (props) {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const icon = computed(() => icons.find((icon) => icon.name === props.name)!)
+    const iconComponent = computed(() => {
       const componentMap: { [source in IconSource]: IconComponent } = {
         fontAwesome: FontAwesomeIcon
       }
-      return componentMap[this.icon.source]
-    }
-  },
-  data () {
+      return componentMap[icon.value.source]
+    })
+
     return {
-      icons
+      icon,
+      iconComponent
     }
   }
 })

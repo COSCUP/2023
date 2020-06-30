@@ -10,10 +10,10 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
 import { FontAwesomeIcon as FontAwesomeIconOriginal } from '@fortawesome/vue-fontawesome'
+import { defineComponent } from '@vue/composition-api'
 
-export default Vue.extend({
+export default defineComponent({
   name: 'FontAwesomeIcon',
   props: {
     iconValue: {

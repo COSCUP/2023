@@ -9,10 +9,7 @@
   <div
     :class="{
       [kebabCase(navbarItem.name)]: true,
-      active:
-        navbarItem.type === NavbarItemType.InternalLink &&
-        $route.name &&
-        $route.name.startsWith(navbarItem.location($route).name)
+      active: isActiveInternalLink
     }"
     class="navbar-item-container"
     @click="$emit('click', $event)"
@@ -94,48 +91,49 @@
 
 <script lang="ts">
 import { kebabCase } from 'lodash-es'
-import Vue, { PropType } from 'vue'
-import { Location } from 'vue-router'
-import { NavbarItemType, NavbarItemData } from './navbar'
-import { LanguageService, LanguageType, availableLanguageTypes, defaultLanguageType } from '@/services/language'
-import { injectedThis } from '@/utils/common'
-
-function injected (thisArg: unknown) {
-  return injectedThis<{ languageService: LanguageService }>(thisArg)
-}
-
-export default Vue.extend({
+import { NavbarItemType } from './navbar'
+import { useLanguageService, availableLanguageTypes, defaultLanguageType } from '@/services/language'
+import { useRouter } from '@/router'
+import { computed, defineComponent } from '@vue/composition-api'
+export default defineComponent({
   name: 'NavbarItem',
-  inject: ['languageService'],
   props: {
     navbarItem: {
-      type: Object as PropType<NavbarItemData>,
+      type: Object,
       required: true
     }
   },
-  computed: {
-    nextLanguageType (): LanguageType {
-      const currentLanguageType = injected(this).languageService.languageType
+  setup (props) {
+    const router = useRouter()
+    const languageService = useLanguageService()
+    const nextLanguageType = computed(() => {
+      const currentLanguageType = languageService.languageType
       const nextLanguageType = [...availableLanguageTypes, ...availableLanguageTypes]
         .find((languageType, index, array) => array.indexOf(currentLanguageType) === index - 1) || defaultLanguageType
       return nextLanguageType
-    },
-    nextLanguageLocation (): Location {
+    })
+    const nextLanguageLocation = computed(() => {
       return {
-        name: this.$route.name || 'Home',
+        name: router.currentRoute.name || 'Home',
         params: {
-          languageType: this.nextLanguageType
+          languageType: nextLanguageType.value
         }
       }
-    }
-  },
-  data () {
+    })
+    const isActiveInternalLink = computed(() => {
+      return props.navbarItem.type === NavbarItemType.InternalLink &&
+        router.currentRoute.name &&
+        router.currentRoute.name.startsWith(props.navbarItem.location(router.currentRoute).name)
+    })
+
     return {
-      NavbarItemType
+      NavbarItemType,
+      languageService,
+      kebabCase,
+      nextLanguageType,
+      nextLanguageLocation,
+      isActiveInternalLink
     }
-  },
-  methods: {
-    kebabCase
   }
 })
 </script>

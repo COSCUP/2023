@@ -21,12 +21,12 @@
         <div class="content past">
           <a
             v-for="i in numOfPast"
-            :href="`https://coscup.org/${2006 + i}/`"
-            :key="`website-${2006 + i}`"
+            :href="`https://coscup.org/${2006 + i - 1}/`"
+            :key="`website-${2006 + i - 1}`"
             class="past-link"
             target="_blank"
             rel="noopener"
-            >{{ 2006 + i }}</a
+            >{{ 2006 + i - 1 }}</a
           >
         </div>
       </section>
@@ -52,18 +52,18 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { defineComponent } from '@vue/composition-api'
+import { useLanguageService } from '@/services/language'
 
-export default Vue.extend({
+export default defineComponent({
   name: 'Footer',
-  inject: ['languageService'],
-  computed: {
-    numOfPast () {
-      return new Date().getFullYear() - 2006 - 1
-    }
-  },
-  data () {
+  setup () {
+    const languageService = useLanguageService()
+    const numOfPast = 2020 - 2006
+
     return {
+      languageService,
+      numOfPast,
       communityMedia: [
         {
           name: 'blogger',

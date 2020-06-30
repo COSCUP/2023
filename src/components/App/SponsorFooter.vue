@@ -17,7 +17,7 @@
       >
         <a :href="`${sponsor.link}`" target="_blank" rel="noopener">
           <img
-            :alt="sponsor.name"
+            :alt="sponsor.image"
             :src="`/2020/images/sponsors/${sponsor.image}`"
           />
         </a>
@@ -27,38 +27,31 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
 import { groupBy } from 'lodash-es'
 import sponsorDatas from '@/../public/json/sponsor.json'
+import { defineComponent } from '@vue/composition-api'
 
-export default Vue.extend({
+export default defineComponent({
   name: 'SponsorFooter',
-  data () {
+  setup () {
+    const sponsors = Object.entries(groupBy(sponsorDatas, 'level'))
+      .sort((entryA, entryB) => {
+        const sponsorSequence = ['titanium', 'diamond', 'gold', 'silver', 'bronze', 'co-organizer', 'special-thanks']
+        return sponsorSequence.indexOf(entryA[0]) - sponsorSequence.indexOf(entryB[0])
+      })
+      .flatMap((entry) => {
+        return entry[1]
+      })
+      .map((sponsor) => ({
+        id: sponsor.id,
+        name: sponsor.name,
+        link: sponsor.link,
+        image: sponsor.image
+      }))
+
     return {
-      sponsors: [] as unknown[]
+      sponsors
     }
-  },
-  methods: {
-    async initSponsors () {
-      this.sponsors = Object.entries(groupBy(sponsorDatas, 'level'))
-        .sort((entryA, entryB) => {
-          const sponsorSequence = ['titanium', 'diamond', 'gold', 'silver', 'bronze', 'co-organizer', 'special-thanks']
-          return sponsorSequence.indexOf(entryA[0]) - sponsorSequence.indexOf(entryB[0])
-        })
-        .flatMap((entry) => {
-          return entry[1]
-        })
-        .map((sponsor) => ({
-          id: sponsor.id,
-          name: sponsor.name,
-          link: sponsor.link,
-          image: sponsor.image
-        }))
-    }
-  },
-  async mounted () {
-    await this.initSponsors()
-    this.$dispatchRenderedEvent()
   }
 })
 </script>

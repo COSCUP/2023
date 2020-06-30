@@ -19,15 +19,15 @@
 </template>
 
 <script lang="ts">
-import Vue, { PropType } from 'vue'
-import { Route } from 'vue-router'
+import { defineComponent, ref, watch, onMounted, onBeforeUnmount } from '@vue/composition-api'
 import { createMap, Map, MapOptions } from '@/utils/map'
+import { useRouter } from '@/router'
 
-export default Vue.extend({
+export default defineComponent({
   name: 'VenueMap',
   props: {
     options: {
-      type: Object as PropType<MapOptions>,
+      type: Object,
       required: true,
       validator (value: MapOptions): boolean {
         const rules = [
@@ -38,25 +38,29 @@ export default Vue.extend({
       }
     }
   },
-  data () {
-    return {
-      mapInstance: null as Map | null
-    }
-  },
-  watch: {
-    '$route' (to: Route) {
+  setup (props) {
+    const router = useRouter()
+    const mapInstance = ref<Map | null>(null)
+
+    watch(() => router.currentRoute, (to) => {
       if (to.name === 'Venue') {
-        this.mapInstance === null && (this.mapInstance = createMap(this.options))
-        this.mapInstance && this.mapInstance.resetView()
+        mapInstance.value === null && (mapInstance.value = createMap(props.options))
+        mapInstance.value && mapInstance.value.resetView()
       }
+    })
+
+    onMounted(() => {
+      mapInstance.value = createMap(props.options)
+    })
+
+    onBeforeUnmount(() => {
+      mapInstance.value !== null && mapInstance.value.destroy()
+      mapInstance.value = null
+    })
+
+    return {
+      mapInstance
     }
-  },
-  mounted () {
-    this.mapInstance = createMap(this.options)
-  },
-  beforeDestroy () {
-    this.mapInstance !== null && this.mapInstance.destroy()
-    this.mapInstance = null
   }
 })
 </script>

@@ -91,89 +91,85 @@
 
 <script lang="ts">
 import { debounce } from 'lodash-es'
-import Vue from 'vue'
+import { defineComponent, ref, computed, watch, onMounted, onBeforeUnmount } from '@vue/composition-api'
 import NavbarItem from './NavbarItem.vue'
-import { navbarItems, NavbarItemData, NavbarAction } from './navbar'
-import { BreakpointService } from '@/services/breakpoint'
-import { ScrollLockService } from '@/services/scrollLock'
-import { injectedThis } from '@/utils/common'
-import { ThemeService } from '../../../services/theme'
+import { navbarItems, NavbarAction } from './navbar'
+import { useBreakpointService } from '@/services/breakpoint'
+import { useScrollLockService } from '@/services/scrollLock'
+import { useThemeService } from '@/services/theme'
 
-function injected (thisArg: unknown) {
-  return injectedThis<{
-    breakpointService: BreakpointService;
-    scrollLockService: ScrollLockService;
-    themeService: ThemeService;
-  }>(thisArg)
-}
-
-export default Vue.extend({
+export default defineComponent({
   name: 'Navbar',
-  inject: ['breakpointService', 'scrollLockService', 'themeService'],
   components: {
     NavbarItem
   },
-  computed: {
-    navbarItemsInMenu (): NavbarItemData[] {
-      if (injected(this).breakpointService.smAndUp) return this.navbarItems
-      return this.navbarItems.filter(item => !item.hiddenInMenu)
-    },
-    navbarItemsFixedInNavbar (): NavbarItemData[] {
-      if (injected(this).breakpointService.smAndUp) return []
-      return this.navbarItems.filter(item => item.fixedInNavbar)
+  setup () {
+    const breakpointService = useBreakpointService()
+    const scrollLockService = useScrollLockService()
+    const themeService = useThemeService()
+    const isMenuOpen = ref(false)
+    const isOverflow = ref(false)
+    const navbarItemsInMenu = computed(() => {
+      if (breakpointService.smAndUp) return navbarItems
+      return navbarItems.filter(item => !item.hiddenInMenu)
+    })
+    const navbarItemsFixedInNavbar = computed(() => {
+      if (breakpointService.smAndUp) return []
+      return navbarItems.filter(item => item.fixedInNavbar)
+    })
+    const setMenuOpen = (isOpen: boolean) => {
+      isMenuOpen.value = isOpen
+      isOpen ? scrollLockService.lock() : scrollLockService.unlock()
     }
-  },
-  data () {
-    return {
-      isMenuOpen: false,
-      isOverflow: false,
-      debouncedDetectOverflow: () => {
-        /**/
-      },
-      navbarItems
-    }
-  },
-  methods: {
-    commitAction (action: NavbarAction, args?: never) {
-      const actions: { [action in NavbarAction]: Function } = {
-        [NavbarAction.ToggleMenu]: () => { this.setMenuOpen(!this.isMenuOpen) },
+    const commitAction = (action: NavbarAction, args?: never) => {
+      const actions: { [action in NavbarAction]: () => void } = {
+        [NavbarAction.ToggleMenu]: () => { setMenuOpen(!isMenuOpen.value) },
         [NavbarAction.ToggleTheme]: () => {
-          injected(this).themeService.themeType = injected(this).themeService.themeType === 'light' ? 'dark' : 'light'
-          injected(this).themeService.savePreference()
+          themeService.themeType = themeService.themeType === 'light' ? 'dark' : 'light'
+          themeService.savePreference()
         }
       }
       if (!actions[action]) return
-      actions[action].apply(this, args)
-    },
-    setMenuOpen (isOpen: boolean) {
-      this.isMenuOpen = isOpen
-      isOpen ? injected(this).scrollLockService.lock() : injected(this).scrollLockService.unlock()
-    },
-    detectOverflow () {
-      if (injected(this).breakpointService.xsOnly) return
+      actions[action].apply(null, args || [])
+    }
+    const detectOverflow = debounce(() => {
+      if (breakpointService.xsOnly) return
       const windowWidth = window.innerWidth
       const menuItemTotalWidth = Array.from<HTMLElement>(
         document.querySelectorAll('#navbar .menu .navbar-item-container')
       )
         .map(element => element.offsetWidth)
         .reduce((a, b) => a + b, 0)
-      this.isOverflow = windowWidth < menuItemTotalWidth
-    }
-  },
-  watch: {
-    xsOnly (newValue: boolean) {
+      isOverflow.value = windowWidth < menuItemTotalWidth
+    }, 300)
+
+    watch(() => breakpointService.xsOnly, (newValue: boolean) => {
       if (!newValue) {
-        this.setMenuOpen(false)
+        setMenuOpen(false)
       }
+    })
+
+    onMounted(() => {
+      detectOverflow()
+      window.addEventListener('resize', detectOverflow)
+    })
+
+    onBeforeUnmount(() => {
+      window.removeEventListener('resize', detectOverflow)
+    })
+
+    return {
+      breakpointService,
+      scrollLockService,
+      themeService,
+      isMenuOpen,
+      isOverflow,
+      navbarItems,
+      navbarItemsInMenu,
+      navbarItemsFixedInNavbar,
+      setMenuOpen,
+      commitAction
     }
-  },
-  mounted () {
-    this.debouncedDetectOverflow = debounce(this.detectOverflow, 300)
-    this.debouncedDetectOverflow()
-    window.addEventListener('resize', this.debouncedDetectOverflow)
-  },
-  beforeDestroy () {
-    window.removeEventListener('resize', this.debouncedDetectOverflow)
   }
 })
 </script>

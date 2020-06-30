@@ -8,52 +8,47 @@
 <template>
   <div v-show="popupService.isPopup" id="popup" @click.self="onClose">
     <component :is="popupContainerComponent" @close="onClose">
-      <component
-        :is="popupContentComponent"
-        :popup-content-data="popupService.popupData.contentData"
-      ></component>
+      <component :is="popupContentComponent"></component>
     </component>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { defineComponent, computed } from '@vue/composition-api'
 import GeneralPopupContent from '@/components/App/Popup/Content/GeneralPopupContent.vue'
 import EmptyPopupContent from '@/components/App/Popup/Content/EmptyPopupContent.vue'
 import DefaultPopupContainer from '@/components/App/Popup/Container/DefaultPopupContainer.vue'
-import { PopupService, PopupContentType, PopupContainerType } from '@/services/popup'
-import { injectedThis } from '@/utils/common'
+import { PopupContentType, PopupContainerType, usePopupService } from '@/services/popup'
 
-function injected (thisArg: unknown) {
-  return injectedThis<{
-    popupService: PopupService;
-  }>(thisArg)
-}
-
-export default Vue.extend({
+export default defineComponent({
   name: 'Popup',
-  inject: ['popupService'],
   components: {
     DefaultPopupContainer,
     EmptyPopupContent,
     GeneralPopupContent
   },
-  computed: {
-    popupContainerComponent () {
+  setup () {
+    const popupService = usePopupService()
+    const popupContainerComponent = computed(() => {
       return {
         [PopupContainerType.Default]: DefaultPopupContainer
-      }[injected(this).popupService.popupData.containerType]
-    },
-    popupContentComponent () {
+      }[popupService.popupData.containerType]
+    })
+    const popupContentComponent = computed(() => {
       return {
         [PopupContentType.Empty]: EmptyPopupContent,
         [PopupContentType.General]: GeneralPopupContent
-      }[injected(this).popupService.popupData.contentData.type]
+      }[popupService.popupData.contentData.type]
+    })
+    const onClose = () => {
+      popupService.close()
     }
-  },
-  methods: {
-    onClose () {
-      injected(this).popupService.close()
+
+    return {
+      popupService,
+      popupContainerComponent,
+      popupContentComponent,
+      onClose
     }
   }
 })

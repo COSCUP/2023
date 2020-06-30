@@ -14,23 +14,22 @@
 </template>
 
 <script lang="ts">
-import Vue, { PropType } from 'vue'
-import { GeneralPopupContentData, PopupContentType } from '@/services/popup'
+import { defineComponent, computed } from '@vue/composition-api'
+import { usePopupService, PopupContentType } from '@/services/popup'
 
-export default Vue.extend({
+export default defineComponent({
   name: 'GeneralPopupContent',
-  props: {
-    popupContentData: {
-      type: Object as PropType<GeneralPopupContentData>,
-      required: true,
-      validator (value: GeneralPopupContentData): boolean {
-        return value.type && value.type === PopupContentType.General
+  setup () {
+    const popupService = usePopupService()
+    const html = computed(() => {
+      if (popupService.popupData.contentData.type === PopupContentType.General) {
+        return popupService.popupData.contentData.html
       }
-    }
-  },
-  computed: {
-    html (): string {
-      return this.popupContentData.html
+      throw new Error('Invalid popup content data for "GeneralPopupContent" component.')
+    })
+
+    return {
+      html
     }
   }
 })
