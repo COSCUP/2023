@@ -33,6 +33,7 @@ export interface ThemePack {
   'agenda-session-item-background': Color;
   'venue-plan-card-title': Color;
   'venue-plan-card-background': Color;
+  'sponsor-card-background': Color;
   'staff-group-background': Color;
   'staff-avatar-border': Color;
 }
@@ -68,6 +69,7 @@ const defaultThemePack: ThemePack = {
   'agenda-session-item-background': '#f0f9ef',
   'venue-plan-card-title': colors['coscup-green'],
   'venue-plan-card-background': '#fff',
+  'sponsor-card-background': '#fff',
   'staff-group-background': adjustAlpha(colors['coscup-secondary'], 0.2),
   'staff-avatar-border': adjustAlpha(colors['coscup-green'], 0.3)
 }
@@ -87,6 +89,7 @@ export const themePackSet: ThemePackSet = {
     'agenda-session-item-background': colors['dark-blue-lighten-2'],
     'venue-plan-card-title': '#fff',
     'venue-plan-card-background': colors['dark-blue-lighten-2'],
+    'sponsor-card-background': 'rgba(0, 0, 0, 0.3)',
     'staff-group-background': colors['dark-blue-lighten-2'],
     'staff-avatar-border': colors['dark-blue-lighten-4']
   }

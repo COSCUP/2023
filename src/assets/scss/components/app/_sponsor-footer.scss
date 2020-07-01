@@ -8,24 +8,41 @@
     position: sticky;
     left: 0;
     width: 100vw;
+    padding: 3rem 0;
     background-color: var(--color-footer-background);
 
     .outer-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      max-width: 960px;
-      padding: 3rem 0;
-      margin: auto;
+      padding: 1rem 1rem;
 
-      .sponsor {
-        display: inline-block;
-        margin: 0.5rem;
+      .level-container {
+        max-width: 960px;
+        margin: auto;
 
-        img {
-          width: 180px;
+        .level {
+          display: inline-block;
+          font-size: 1.25rem;
+          font-weight: 500;
+          margin-bottom: 0.75rem;
+          padding: 0 1rem 0.25rem 0;
+          border-bottom: solid 3px;
+        }
+      }
+
+      .inner-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        max-width: 960px;
+        margin: auto;
+
+        .sponsor {
+          display: inline-block;
+          width: calc(180px - 1rem);
+          margin: 0.5rem;
           background: rgba(#fff, 0.8);
-          border-radius: 10px;
+          border-radius: 5px;
+          text-decoration: none;
+          color: #666;
           transition: all 0.1s;
 
           &:hover {
@@ -35,11 +52,30 @@
           }
 
           @include smOnly {
-            width: 150px;
+            width: calc(25% - 1rem);
+
+            .name {
+              font-size: 0.85rem;
+            }
           }
 
           @include xsOnly {
-            width: 100px;
+            width: calc(33.33% - 1rem);
+
+            .name {
+              font-size: 0.75rem;
+            }
+          }
+
+          .name {
+            border-top: solid 1px #5555;
+            padding: 0.5rem 0.25rem;
+            text-align: center;
+            font-weight: 500;
+          }
+
+          img {
+            width: 100%;
           }
         }
       }

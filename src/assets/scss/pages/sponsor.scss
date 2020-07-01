@@ -8,10 +8,9 @@
 @include page("sponsor") {
   .card {
     padding: 2rem;
-    color: #000;
-    background-color: #fff;
+    background-color: var(--color-sponsor-card-background);
     border-radius: 10px;
-    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 2rem rgba(0, 0, 0, 0.1);
   }
 
   a {
@@ -50,10 +49,12 @@
       .img-container {
         position: relative;
         width: 30%;
-        margin: 0 0.5rem 0.5rem 0;
+        margin: 0 1rem 1rem 0;
         padding-top: 20%;
         float: left;
         z-index: 1;
+        background-color: #fff;
+        border-radius: 5px;
 
         img {
           display: block;
@@ -70,7 +71,7 @@
         a {
           h2 {
             margin-bottom: 1rem;
-            font-size: 1.5rem;
+            font-size: 1.75rem;
             font-weight: 500;
           }
         }

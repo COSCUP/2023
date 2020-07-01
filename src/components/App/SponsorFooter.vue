@@ -7,19 +7,28 @@
 
 <template>
   <section id="sponsor-footer">
-    <div class="outer-container">
-      <div
-        v-for="sponsor in sponsors"
-        :key="sponsor.id"
-        class="sponsor"
-        target="_blank"
-        rel="noopener"
-      >
-        <a :href="`${sponsor.link}`" target="_blank" rel="noopener">
+    <div
+      v-for="groupEntry in Object.entries(sponsorGroups)"
+      :key="`sponsor-group-${groupEntry[0]}`"
+      class="outer-container"
+    >
+      <div class="level-container">
+        <p class="level">{{ groupEntry[0] }}</p>
+      </div>
+      <div class="inner-container">
+        <a
+          v-for="sponsor in groupEntry[1]"
+          :key="sponsor.id"
+          class="sponsor"
+          :href="`${sponsor.link}`"
+          target="_blank"
+          rel="noopener"
+        >
           <img
-            :alt="sponsor.image"
+            :alt="sponsor.name"
             :src="`/2020/images/sponsors/${sponsor.image}`"
           />
+          <p class="name">{{ sponsor.name }}</p>
         </a>
       </div>
     </div>
@@ -29,28 +38,29 @@
 <script lang="ts">
 import { groupBy } from 'lodash'
 import sponsorDatas from '@/../public/json/sponsor.json'
-import { defineComponent } from '@vue/composition-api'
+import { defineComponent, computed } from '@vue/composition-api'
+import { useLanguageService } from '@/services/hooks'
 
 export default defineComponent({
   name: 'SponsorFooter',
   setup () {
-    const sponsors = Object.entries(groupBy(sponsorDatas, 'level'))
+    const languageService = useLanguageService()
+    const sponsorGroups = computed(() => Object.fromEntries(Object.entries(groupBy(sponsorDatas.map((data) => {
+      return {
+        level: languageService.languagePack.sponsor.level[data.level],
+        id: data.id,
+        name: data.name[languageService.languageType],
+        link: data.link,
+        image: data.image
+      }
+    }), 'level'))
       .sort((entryA, entryB) => {
         const sponsorSequence = ['titanium', 'diamond', 'gold', 'silver', 'bronze', 'co-organizer', 'special-thanks']
         return sponsorSequence.indexOf(entryA[0]) - sponsorSequence.indexOf(entryB[0])
-      })
-      .flatMap((entry) => {
-        return entry[1]
-      })
-      .map((sponsor) => ({
-        id: sponsor.id,
-        name: sponsor.name,
-        link: sponsor.link,
-        image: sponsor.image
-      }))
+      })))
 
     return {
-      sponsors
+      sponsorGroups
     }
   }
 })
