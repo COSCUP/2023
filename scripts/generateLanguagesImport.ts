@@ -6,7 +6,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import fs from 'fs'
 import path from 'path'
-import camelCase from 'lodash/camelCase'
+import { camelCase } from 'lodash'
 
 interface RawLanguagePackUnit {
   [key: string]: RawLanguagePackUnit;

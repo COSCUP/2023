@@ -3,7 +3,7 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-import { debounce } from 'lodash-es'
+import { debounce } from 'lodash'
 import colors from './colors'
 import { ThemePack, ThemePackSet, ThemeType, themePackSet } from './themes'
 import { useService } from '@/utils/common'

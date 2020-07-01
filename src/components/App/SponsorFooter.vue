@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts">
-import { groupBy } from 'lodash-es'
+import { groupBy } from 'lodash'
 import sponsorDatas from '@/../public/json/sponsor.json'
 import { defineComponent } from '@vue/composition-api'
 

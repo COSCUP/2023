@@ -90,7 +90,7 @@
 </template>
 
 <script lang="ts">
-import { kebabCase } from 'lodash-es'
+import { kebabCase } from 'lodash'
 import { NavbarItemType } from './navbar'
 import { useLanguageService, availableLanguageTypes, defaultLanguageType } from '@/services/language'
 import { useRouter } from '@/router'

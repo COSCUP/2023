@@ -3,7 +3,7 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-import groupBy from 'lodash/groupBy'
+import { groupBy } from 'lodash'
 import _rawData from '@/../public/json/session.json'
 import { PopupData, PopupContainerType, PopupContentType } from '@/services/popup'
 import markdown from '@/utils/markdown'

@@ -90,7 +90,7 @@
 </template>
 
 <script lang="ts">
-import { debounce } from 'lodash-es'
+import { debounce } from 'lodash'
 import { defineComponent, ref, computed, watch, onMounted, onBeforeUnmount } from '@vue/composition-api'
 import NavbarItem from './NavbarItem.vue'
 import { navbarItems, NavbarAction } from './navbar'

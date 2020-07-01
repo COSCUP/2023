@@ -3,7 +3,7 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-import { camelCase } from 'lodash-es'
+import { camelCase } from 'lodash'
 import { Location, Route } from 'vue-router'
 import { pageRouteNameList } from '@/router'
 import { defaultLanguageType } from '@/services/language'
