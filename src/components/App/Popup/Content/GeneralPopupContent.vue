@@ -15,7 +15,8 @@
 
 <script lang="ts">
 import { defineComponent, computed } from '@vue/composition-api'
-import { usePopupService, PopupContentType } from '@/services/popup'
+import { PopupContentType } from '@/services/popup'
+import { usePopupService } from '@/services/hooks'
 
 export default defineComponent({
   name: 'GeneralPopupContent',

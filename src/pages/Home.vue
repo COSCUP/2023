@@ -61,7 +61,7 @@
 <script lang="ts">
 import { defineComponent, ref, computed, watch, onMounted } from '@vue/composition-api'
 import markdown from '@/utils/markdown'
-import { useLanguageService } from '@/services/language'
+import { useLanguageService } from '@/services/hooks'
 import { useRenderedEventDispatcher } from '@/plugins/renderedEventDispatcher'
 
 import '@/assets/scss/pages/home.scss'

@@ -3,8 +3,6 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-import { useService } from '@/utils/common'
-
 export enum MetaType {
   Title = 'title',
   Description = 'description',
@@ -94,8 +92,4 @@ class MetaServiceConcrete implements MetaService {
 
 export function createMetaService (metaDomSetterSet = vanillaMetaDomSetterSet): MetaService {
   return new MetaServiceConcrete(metaDomSetterSet)
-}
-
-export function useMetaService (): MetaService {
-  return useService<MetaService>('metaService')
 }

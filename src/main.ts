@@ -8,7 +8,7 @@ import VueCompositionAPI from '@vue/composition-api'
 import App from './App.vue'
 import Icon from '@/components/Basic/Icon/index.vue'
 import { RenderedEventDispatcher } from '@/plugins/renderedEventDispatcher'
-import { createRootInjections } from '@/utils/common'
+import createRootInjections from '@/utils/common/createRootInjections'
 
 Vue.use(RenderedEventDispatcher)
 Vue.use(VueCompositionAPI)

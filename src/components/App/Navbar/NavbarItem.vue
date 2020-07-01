@@ -92,7 +92,8 @@
 <script lang="ts">
 import { kebabCase } from 'lodash'
 import { NavbarItemType } from './navbar'
-import { useLanguageService, availableLanguageTypes, defaultLanguageType } from '@/services/language'
+import { availableLanguageTypes, defaultLanguageType } from '@/services/language'
+import { useLanguageService } from '@/services/hooks'
 import { useRouter } from '@/router'
 import { computed, defineComponent } from '@vue/composition-api'
 export default defineComponent({

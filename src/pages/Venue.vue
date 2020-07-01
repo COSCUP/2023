@@ -28,7 +28,7 @@
 <script lang="ts">
 import { defineComponent, reactive, onMounted, watch, ref } from '@vue/composition-api'
 import VenueMap from '@/components/Venue/VenueMap.vue'
-import { useLanguageService } from '@/services/language'
+import { useLanguageService } from '@/services/hooks'
 import { useRenderedEventDispatcher } from '../plugins/renderedEventDispatcher'
 import { MapOptions } from '@/utils/map'
 import markdown from '@/utils/markdown'

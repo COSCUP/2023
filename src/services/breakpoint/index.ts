@@ -4,7 +4,6 @@
 // https://opensource.org/licenses/MIT
 
 import { debounce } from 'lodash'
-import { useService } from '@/utils/common'
 
 export type Breakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 
@@ -108,8 +107,4 @@ class BreakpointServiceConcrete implements BreakpointService {
 
 export function createBreakpointService (): BreakpointService {
   return new BreakpointServiceConcrete()
-}
-
-export function useBreakpointService (): BreakpointService {
-  return useService<BreakpointService>('breakpointService')
 }

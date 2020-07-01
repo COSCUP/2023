@@ -47,16 +47,10 @@ import Footer from '@/components/App/Footer.vue'
 import FullPageProgress from '@/components/App/FullPageProgress.vue'
 import Popup from '@/components/App/Popup/index.vue'
 import { useRouter, pageRouteNameList } from '@/router'
-import { useAnnouncementService } from '@/services/announcement'
-import { useBreakpointService } from '@/services/breakpoint'
-import { useFullPageProgressService } from '@/services/fullPageProgress'
-import { useLanguageService } from '@/services/language'
-import { usePopupService } from '@/services/popup'
-import { useScrollLockService } from '@/services/scrollLock'
-import { useThemeService } from '@/services/theme'
+import { useAnnouncementService, useBreakpointService, useFullPageProgressService, useLanguageService, usePopupService, useThemeService, useScrollLockService } from '@/services/hooks'
+import { provideRenderedEventDispatcher } from './plugins/renderedEventDispatcher'
 
 import '@/assets/scss/app.scss'
-import { provideRenderedEventDispatcher } from './plugins/renderedEventDispatcher'
 
 export default defineComponent({
   name: 'App',

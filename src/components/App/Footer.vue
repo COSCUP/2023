@@ -53,7 +53,7 @@
 
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api'
-import { useLanguageService } from '@/services/language'
+import { useLanguageService } from '@/services/hooks'
 
 export default defineComponent({
   name: 'Footer',

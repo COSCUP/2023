@@ -46,8 +46,8 @@
 
 <script lang="ts">
 import { defineComponent, inject, computed, ComputedRef } from '@vue/composition-api'
-import { useBreakpointService } from '@/services/breakpoint'
-import { useAgendaService, formatTimeString } from '@/services/agenda'
+import { useBreakpointService, useAgendaService } from '@/services/hooks'
+import { formatTimeString } from '@/services/agenda'
 import { useRouter } from '@/router'
 
 export default defineComponent({

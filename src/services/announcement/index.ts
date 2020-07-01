@@ -7,7 +7,6 @@ import announcement from '@/assets/json/announcement.json'
 import { LanguageService, LanguageType } from '@/services/language'
 import { PopupService, PopupData, PopupContainerType, PopupContentType } from '@/services/popup'
 import markdown from '@/utils/markdown'
-import { useService } from '@/utils/common'
 
 interface Inject {
   popupService: PopupService;
@@ -55,8 +54,4 @@ class AnnouncementServiceConcrete implements AnnouncementService {
 
 export function createAnnouncementService (inject: Inject) {
   return new AnnouncementServiceConcrete(inject)
-}
-
-export function useAnnouncementService (): AnnouncementService {
-  return useService<AnnouncementService>('announcementService')
 }

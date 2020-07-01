@@ -47,7 +47,7 @@
 <script lang="ts">
 import { defineComponent, computed, onMounted } from '@vue/composition-api'
 import _staffData from '@/../public/json/staff.json'
-import { useLanguageService } from '@/services/language'
+import { useLanguageService } from '@/services/hooks'
 import { useRenderedEventDispatcher } from '@/plugins/renderedEventDispatcher'
 
 import '@/assets/scss/pages/staff.scss'

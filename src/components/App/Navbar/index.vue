@@ -94,9 +94,7 @@ import { debounce } from 'lodash'
 import { defineComponent, ref, computed, watch, onMounted, onBeforeUnmount } from '@vue/composition-api'
 import NavbarItem from './NavbarItem.vue'
 import { navbarItems, NavbarAction } from './navbar'
-import { useBreakpointService } from '@/services/breakpoint'
-import { useScrollLockService } from '@/services/scrollLock'
-import { useThemeService } from '@/services/theme'
+import { useBreakpointService, useScrollLockService, useThemeService } from '@/services/hooks'
 
 export default defineComponent({
   name: 'Navbar',

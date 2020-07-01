@@ -28,7 +28,8 @@
 
 <script lang="ts">
 import { defineComponent, computed } from '@vue/composition-api'
-import { formatTimeString, useAgendaService } from '@/services/agenda'
+import { formatTimeString } from '@/services/agenda'
+import { useAgendaService } from '@/services/hooks'
 import AgendaSessionItem from '@/components/Agenda/AgendaSessionItem.vue'
 
 export default defineComponent({

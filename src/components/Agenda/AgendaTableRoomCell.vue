@@ -14,7 +14,7 @@
 
 <script lang="ts">
 import { defineComponent, ComputedRef, inject, computed } from '@vue/composition-api'
-import { useAgendaService } from '@/services/agenda'
+import { useAgendaService } from '@/services/hooks'
 
 export default defineComponent({
   name: 'AgendaTableRoomCell',

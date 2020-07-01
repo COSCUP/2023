@@ -4,7 +4,6 @@
 // https://opensource.org/licenses/MIT
 
 import { LanguageType, defaultLanguageType, languagePackSet, LanguagePackSet, LanguagePack } from './languages'
-import { useService } from '@/utils/common'
 export * from './languages'
 
 export interface LanguageService {
@@ -24,8 +23,4 @@ class LanguageServiceConcrete implements LanguageService {
 
 export function createLanguageService (): LanguageService {
   return new LanguageServiceConcrete()
-}
-
-export function useLanguageService (): LanguageService {
-  return useService<LanguageService>('languageService')
 }

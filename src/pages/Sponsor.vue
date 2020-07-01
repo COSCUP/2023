@@ -60,7 +60,8 @@
 <script lang="ts">
 import { defineComponent, onMounted, reactive } from '@vue/composition-api'
 import { groupBy } from 'lodash'
-import { availableLanguageTypes, useLanguageService } from '@/services/language'
+import { availableLanguageTypes } from '@/services/language'
+import { useLanguageService } from '@/services/hooks'
 import markdown from '@/utils/markdown'
 import sponsorDatas from '@/../public/json/sponsor.json'
 

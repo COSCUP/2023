@@ -18,7 +18,8 @@ import { defineComponent, computed } from '@vue/composition-api'
 import GeneralPopupContent from '@/components/App/Popup/Content/GeneralPopupContent.vue'
 import EmptyPopupContent from '@/components/App/Popup/Content/EmptyPopupContent.vue'
 import DefaultPopupContainer from '@/components/App/Popup/Container/DefaultPopupContainer.vue'
-import { PopupContentType, PopupContainerType, usePopupService } from '@/services/popup'
+import { PopupContentType, PopupContainerType } from '@/services/popup'
+import { usePopupService } from '@/services/hooks'
 
 export default defineComponent({
   name: 'Popup',

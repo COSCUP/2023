@@ -3,8 +3,6 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-import { useService } from '@/utils/common'
-
 export interface Position {
   x: number;
   y: number;
@@ -55,8 +53,4 @@ class ScrollLockServiceConcrete implements ScrollLockService {
 
 export function createScrollLockService (): ScrollLockService {
   return new ScrollLockServiceConcrete()
-}
-
-export function useScrollLockService (): ScrollLockService {
-  return useService<ScrollLockService>('scrollLockService')
 }

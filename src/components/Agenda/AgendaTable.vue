@@ -44,7 +44,8 @@
 
 <script lang="ts">
 import { defineComponent, inject, computed } from '@vue/composition-api'
-import { useAgendaService, TableCellType } from '@/services/agenda'
+import { TableCellType } from '@/services/agenda'
+import { useAgendaService } from '@/services/hooks'
 import AgendaSessionItem from './AgendaSessionItem.vue'
 import AgendaTableRoomCell from './AgendaTableRoomCell.vue'
 import { useRouter } from '@/router'

@@ -4,7 +4,6 @@
 // https://opensource.org/licenses/MIT
 
 import { join } from 'path-browserify'
-import { inject } from '@vue/composition-api'
 
 /**
  * A workaround method to let typescript type checking for Vue inject not throw error
@@ -30,12 +29,4 @@ export function getFullUrl (relativeUrl = ''): string {
   // this condition is for running scripts in node environment without 'window'
   if (typeof window === 'undefined') return productionOrigin
   return `${isProduction ? productionOrigin : window.location.origin}${join(process.env.BASE_URL, relativeUrl).toString()}`
-}
-
-export { default as createRootInjections } from './createRootInjections'
-
-export function useService<S> (serviceName: string): S {
-  const service = inject<S>(serviceName)
-  if (!service) throw new Error(`"${serviceName}" is not provided`)
-  return service
 }

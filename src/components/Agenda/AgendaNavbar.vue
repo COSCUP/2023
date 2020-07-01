@@ -24,7 +24,7 @@
 
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api'
-import { useAgendaService } from '@/services/agenda'
+import { useAgendaService } from '@/services/hooks'
 
 export default defineComponent({
   name: 'AgendaNavbar',
