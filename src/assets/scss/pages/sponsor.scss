@@ -83,13 +83,6 @@
     .outer-container {
       max-width: 90%;
       margin: inherit auto;
-
-      .sponsor-container {
-        .img-container {
-          width: 30%;
-          padding-top: 20%;
-        }
-      }
     }
   }
 
@@ -103,6 +96,7 @@
           width: 99%;
           padding-top: 66%;
           margin: auto;
+          margin-bottom: 1rem;
         }
       }
     }
