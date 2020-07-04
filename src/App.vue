@@ -39,7 +39,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, Ref, onMounted, nextTick, onBeforeUnmount, watch } from '@vue/composition-api'
+import { defineComponent, onMounted, nextTick, onBeforeUnmount, watch, onBeforeUpdate, reactive, toRefs } from '@vue/composition-api'
 import { Location } from 'vue-router'
 import Navbar from '@/components/App/Navbar/index.vue'
 import SponsorFooter from '@/components/App/SponsorFooter.vue'
@@ -73,21 +73,25 @@ export default defineComponent({
     const popupService = usePopupService()
     const announcementService = useAnnouncementService()
 
-    const isInApp = ref(false)
-    const pageTransitionName: Ref<'slide-left' | 'slide-right' | 'fade'> = ref('fade')
+    const data = reactive({
+      isInApp: false,
+      currentRouteName: router.currentRoute.name,
+      prevRouteName: router.currentRoute.name,
+      pageTransitionName: 'fade' as 'slide-left' | 'slide-right' | 'fade'
+    })
 
     const updatePageTransitionName = (newRouteName: string, oldRouteName: string) => {
       if (breakpointService.xsOnly) {
-        pageTransitionName.value = 'fade'
+        data.pageTransitionName = 'fade'
         return
       }
 
       const newIndex = pageRouteNameList.indexOf(newRouteName)
       const oldIndex = pageRouteNameList.indexOf(oldRouteName)
       if (oldIndex < newIndex) {
-        pageTransitionName.value = 'slide-left'
+        data.pageTransitionName = 'slide-left'
       } else {
-        pageTransitionName.value = 'slide-right'
+        data.pageTransitionName = 'slide-right'
       }
     }
 
@@ -122,10 +126,16 @@ export default defineComponent({
       }, 1000)
     }
 
-    // TODO: Fix the page transition
-    watch(() => router.currentRoute, (route, prevRoute) => {
-      updatePageTransitionName(route.name ?? '', prevRoute.name ?? '')
+    watch(() => router.currentRoute, () => {
       detectAnnouncementRoute()
+    })
+
+    onBeforeUpdate(() => {
+      if (data.currentRouteName !== router.currentRoute.name) {
+        data.prevRouteName = data.currentRouteName
+        data.currentRouteName = router.currentRoute.name
+        updatePageTransitionName(data.currentRouteName ?? '', data.prevRouteName ?? '')
+      }
     })
 
     onMounted(async () => {
@@ -133,7 +143,7 @@ export default defineComponent({
       breakpointService.startDetect()
       themeService.startDetect()
       await nextTick()
-      isInApp.value = router.currentRoute.query.mode === 'app'
+      data.isInApp = router.currentRoute.query.mode === 'app'
     })
 
     onBeforeUnmount(() => {
@@ -146,8 +156,7 @@ export default defineComponent({
       fullPageProgressService,
       scrollLockService,
       popupService,
-      isInApp,
-      pageTransitionName
+      ...toRefs(data)
     }
   }
 })
