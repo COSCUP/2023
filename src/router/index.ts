@@ -36,9 +36,7 @@ export function createRouter (injects: Inject): VueRouter {
     routes,
     scrollBehavior (to, from, savedPosition) {
       setTimeout(() => {
-        if (savedPosition) {
-          return { x: 0, y: 0 }
-        } else if (to.name === from.name) {
+        if (to.name === from.name) {
           const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent)
           const { cancel } = scrollTo({
             from: isSafari ? prevPosition : { x: 0, y: 0 },
@@ -53,6 +51,8 @@ export function createRouter (injects: Inject): VueRouter {
         } else if (popupService.isPopup) {
           const popupDom = document.getElementById('popup')
           popupDom && popupDom.scrollTo(0, 0)
+        } else {
+          return savedPosition ?? { x: 0, y: 0 }
         }
       })
     }
