@@ -40,6 +40,10 @@
     }
 
     .sponsor-container {
+      &:not(:first-child) {
+        margin-top: 1rem;
+      }
+
       &::after {
         content: "";
         clear: both;
