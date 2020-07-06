@@ -21,6 +21,7 @@ import { createAgendaService } from '@/services/agenda'
 import { useLanguageService, usePopupService, useBreakpointService } from '@/services/hooks'
 import { PopupData, PopupContainerType, PopupContentType } from '@/services/popup'
 import { useRenderedEventDispatcher } from '@/plugins/renderedEventDispatcher'
+import { scrollTo } from '@/utils/scrollTo'
 import AgendaNavbar from '@/components/Agenda/AgendaNavbar.vue'
 import AgendaTable from '@/components/Agenda/AgendaTable.vue'
 import AgendaList from '@/components/Agenda/AgendaList.vue'
@@ -89,6 +90,20 @@ export default defineComponent({
         }
       }
     }
+
+    watch(() => agendaService.dayIndex, () => {
+      const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent)
+      const { cancel } = scrollTo({
+        to: { x: 0, y: 0 },
+        duration: isSafari ? 10 : undefined
+      })
+      const events = ['wheel', 'mousewheel', 'DOMMouseScroll']
+      const onScrolling = () => {
+        events.forEach((event) => window.removeEventListener(event, onScrolling))
+        cancel()
+      }
+      events.forEach((event) => window.addEventListener(event, onScrolling))
+    })
 
     watch(() => router.currentRoute, (to) => {
       processByRoute(to)
