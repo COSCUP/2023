@@ -8,12 +8,14 @@
 <template>
   <section id="sponsor-footer">
     <div
-      v-for="groupEntry in Object.entries(sponsorGroups)"
+      v-for="groupEntry in sponsorGroups"
       :key="`sponsor-group-${groupEntry[0]}`"
       class="outer-container"
     >
       <div class="level-container">
-        <p class="level">{{ groupEntry[0] }}</p>
+        <p class="level">
+          {{ languageService.languagePack.sponsor.level[groupEntry[0]] }}
+        </p>
       </div>
       <div class="inner-container">
         <a
@@ -45,9 +47,9 @@ export default defineComponent({
   name: 'SponsorFooter',
   setup () {
     const languageService = useLanguageService()
-    const sponsorGroups = computed(() => Object.fromEntries(Object.entries(groupBy(sponsorDatas.map((data) => {
+    const sponsorGroups = computed(() => Object.entries(groupBy(sponsorDatas.map((data) => {
       return {
-        level: languageService.languagePack.sponsor.level[data.level],
+        level: data.level,
         id: data.id,
         name: data.name[languageService.languageType],
         link: data.link,
@@ -57,10 +59,12 @@ export default defineComponent({
       .sort((entryA, entryB) => {
         const sponsorSequence = ['titanium', 'diamond', 'gold', 'silver', 'bronze', 'co-organizer', 'special-thanks']
         return sponsorSequence.indexOf(entryA[0]) - sponsorSequence.indexOf(entryB[0])
-      })))
+      })
+    )
 
     return {
-      sponsorGroups
+      sponsorGroups,
+      languageService
     }
   }
 })
