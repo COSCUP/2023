@@ -152,7 +152,7 @@
     min-height: 500px;
     margin: 0 auto 5rem auto;
     padding: 5rem;
-    padding-bottom: 20%;
+    padding-bottom: 10%;
     color: #fff;
     background-color: var(--color-home-section-background);
     clip-path: polygon(20px 20px, 100% 0%, 100% 100%, 0% 100%);
@@ -194,7 +194,7 @@
       font-size: 1.25rem;
 
       &.markdown.notice {
-        a {
+        a:not(.header-anchor) {
           position: relative;
           left: 50%;
           transform: translateX(-50%);
