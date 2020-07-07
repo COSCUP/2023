@@ -291,10 +291,12 @@ const generateSessionPopupContentHtml = async (session: Session, language: 'en' 
 `.trim()
 
 export async function generateSessionPopupData (session: Session, language: 'en' | 'zh'): Promise<PopupData> {
+  const languageType = language === 'zh' ? 'zh-TW' : language
   return {
     popupId: `session-${session.id}`,
     metaOptions: {
-      title: session[language].title
+      title: session[language].title,
+      ogUrl: `${process.env.VUE_APP_PRODUCTION_ORIGIN}/2020/${languageType}/agenda/${session.id}`
     },
     containerType: PopupContainerType.Default,
     contentData: {
