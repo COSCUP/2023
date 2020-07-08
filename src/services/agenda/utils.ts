@@ -3,7 +3,7 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-import { groupBy } from 'lodash'
+import { groupBy, escape, truncate } from 'lodash'
 import _rawData from '@/../public/json/session.json'
 import { PopupData, PopupContainerType, PopupContentType } from '@/services/popup'
 import markdown from '@/utils/markdown'
@@ -296,7 +296,9 @@ export async function generateSessionPopupData (session: Session, language: 'en'
     popupId: `session-${session.id}`,
     metaOptions: {
       title: session[language].title,
-      ogUrl: `${process.env.VUE_APP_PRODUCTION_ORIGIN}/2020/${languageType}/agenda/${session.id}`
+      description: escape(truncate(session[language].description, { length: 80 })),
+      ogUrl: `${process.env.VUE_APP_PRODUCTION_ORIGIN}${process.env.BASE_URL}${languageType}/agenda/${session.id}`,
+      ogImage: session.speakers.length > 0 ? session.speakers[Math.floor(Math.random() * session.speakers.length)].avatar : undefined
     },
     containerType: PopupContainerType.Default,
     contentData: {
