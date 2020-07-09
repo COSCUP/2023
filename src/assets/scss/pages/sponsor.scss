@@ -46,7 +46,8 @@
 
       .img-container {
         display: inline-block;
-        position: relative;
+        position: sticky;
+        top: calc(var(--navbar-height) + 2rem);
         width: 240px;
         height: 160px;
         margin-right: 1rem;
@@ -92,6 +93,7 @@
 
       .sponsor-container {
         .img-container {
+          position: static;
           width: 100%;
           height: auto;
           margin-bottom: 1rem;
