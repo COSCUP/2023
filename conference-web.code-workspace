@@ -8,9 +8,7 @@
     "recommendations": [
       "dbaeumer.vscode-eslint",
       "octref.vetur",
-      "dariofuzinato.vue-peek",
       "Syler.sass-indented",
-      "glen-84.sass-lint",
       "sibiraj-s.vscode-scss-formatter",
       "editorconfig.editorconfig",
       "wix.vscode-import-cost",
@@ -93,7 +91,7 @@
       "aria-.+",
       "$unknown$"
     ],
-    "auto-close-tag.enableAutoCloseTag": false,
+    "auto-close-tag.enableAutoCloseTag": true,
     "auto-close-tag.excludedTags": [
       "area",
       "base",
@@ -110,13 +108,7 @@
       "param",
       "source",
       "track",
-      "wbr",
-      "%",
-      "%_",
-      "%=",
-      "%-",
-      "%#",
-      "%%"
+      "wbr"
     ],
     "todohighlight.isEnable": true,
     "todohighlight.include": [
@@ -130,6 +122,6 @@
       "**/*.scss",
       "**/*.vue",
       "**/*.styl"
-    ],
+    ]
   }
 }
