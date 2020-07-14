@@ -300,7 +300,9 @@ export async function generateSessionPopupData (session: Session, language: 'en'
       ogUrl: `${process.env.VUE_APP_PRODUCTION_ORIGIN}${process.env.BASE_URL}${languageType}/agenda/${session.id}`,
       ogImage: session.speakers.length > 0 ? session.speakers[Math.floor(Math.random() * session.speakers.length)].avatar : undefined
     },
-    containerType: PopupContainerType.Default,
+    containerData: {
+      type: PopupContainerType.Default
+    },
     contentData: {
       type: PopupContentType.General,
       html: await generateSessionPopupContentHtml(session, language)

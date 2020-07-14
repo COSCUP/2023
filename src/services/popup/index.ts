@@ -15,6 +15,14 @@ export enum PopupContainerType {
   Default = 'Default'
 }
 
+interface PopupContainerDataBase {
+  type: PopupContainerType;
+}
+
+export interface DefaultPopupContainerData extends PopupContainerDataBase {
+  type: PopupContainerType.Default;
+}
+
 interface PopupContentDataBase {
   type: PopupContentType;
 }
@@ -28,12 +36,14 @@ export interface GeneralPopupContentData extends PopupContentDataBase {
   html: string;
 }
 
+export type PopupContainerData = DefaultPopupContainerData
+
 export type PopupContentData = EmptyPopupContentData | GeneralPopupContentData
 
 export interface PopupData {
   popupId?: string;
   metaOptions: MetaOptions;
-  containerType: PopupContainerType;
+  containerData: PopupContainerData;
   contentData: PopupContentData;
   onClose?: () => void;
 }
@@ -53,7 +63,9 @@ interface Inject {
 class PopupServiceConcrete implements PopupService {
   private _popupDataStack: PopupData[] = [{
     metaOptions: {},
-    containerType: PopupContainerType.Default,
+    containerData: {
+      type: PopupContainerType.Default
+    },
     contentData: {
       type: PopupContentType.Empty
     }

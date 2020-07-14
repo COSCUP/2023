@@ -64,7 +64,9 @@ export default defineComponent({
           metaOptions: {
             title: 'Template'
           },
-          containerType: PopupContainerType.Default,
+          containerData: {
+            type: PopupContainerType.Default
+          },
           contentData: {
             type: PopupContentType.General,
             html: '<article id="session-detail" class="session-detail"><h1>Session Popup Template</h1></article>'

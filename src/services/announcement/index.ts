@@ -40,7 +40,9 @@ class AnnouncementServiceConcrete implements AnnouncementService {
         title: announcement.meta.title[languageType],
         description: announcement.meta.description[languageType]
       },
-      containerType: PopupContainerType.Default,
+      containerData: {
+        type: PopupContainerType.Default
+      },
       contentData: {
         type: PopupContentType.General,
         html: `<div class="markdown">${await markdown(announcement.content[languageType])}</div>`

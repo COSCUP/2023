@@ -33,7 +33,7 @@ export default defineComponent({
     const popupContainerComponent = computed(() => {
       return {
         [PopupContainerType.Default]: DefaultPopupContainer
-      }[popupService.popupData.containerType]
+      }[popupService.popupData.containerData.type]
     })
     const popupContentComponent = computed(() => {
       return {
