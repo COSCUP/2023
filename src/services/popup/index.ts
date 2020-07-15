@@ -12,7 +12,8 @@ export enum PopupContentType {
 }
 
 export enum PopupContainerType {
-  Default = 'Default'
+  Default = 'Default',
+  Session = 'Session'
 }
 
 interface PopupContainerDataBase {
@@ -22,6 +23,12 @@ interface PopupContainerDataBase {
 export interface DefaultPopupContainerData extends PopupContainerDataBase {
   type: PopupContainerType.Default;
 }
+
+export interface SessionPopupContainerData extends PopupContainerDataBase {
+  type: PopupContainerType.Session;
+}
+
+export type PopupContainerData = DefaultPopupContainerData | SessionPopupContainerData
 
 interface PopupContentDataBase {
   type: PopupContentType;
@@ -35,8 +42,6 @@ export interface GeneralPopupContentData extends PopupContentDataBase {
   type: PopupContentType.General;
   html: string;
 }
-
-export type PopupContainerData = DefaultPopupContainerData
 
 export type PopupContentData = EmptyPopupContentData | GeneralPopupContentData
 

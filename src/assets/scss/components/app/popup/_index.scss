@@ -5,6 +5,7 @@
 
 @import "./mixins";
 @import "./container/default-popup-container";
+@import "./container/session-popup-container";
 @import "./content/session-detail";
 
 @mixin popup {

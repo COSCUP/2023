@@ -301,7 +301,7 @@ export async function generateSessionPopupData (session: Session, language: 'en'
       ogImage: session.speakers.length > 0 ? session.speakers[Math.floor(Math.random() * session.speakers.length)].avatar : undefined
     },
     containerData: {
-      type: PopupContainerType.Default
+      type: PopupContainerType.Session
     },
     contentData: {
       type: PopupContentType.General,
