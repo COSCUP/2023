@@ -77,10 +77,10 @@ const originalRoutes: RouteConfig[] = [
     }
   }
 ]
-  // filtered routes for production
-  .filter((route: RouteConfig) => {
-    return process.env.NODE_ENV === 'development' || !['Map'].includes(route.name || '')
-  })
+// filtered routes for production
+// .filter((route: RouteConfig) => {
+//   return process.env.NODE_ENV === 'development' || !['Map'].includes(route.name || '')
+// })
 
 export const pageRouteNameList: Array<string> = originalRoutes
   .filter((route) => route.meta && route.meta.type === 'page')
