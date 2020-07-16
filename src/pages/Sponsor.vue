@@ -59,7 +59,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, reactive, watch, nextTick } from '@vue/composition-api'
+import { defineComponent, onMounted, reactive, watch } from '@vue/composition-api'
 import { groupBy } from 'lodash'
 import { availableLanguageTypes } from '@/services/language'
 import { useLanguageService, useBreakpointService } from '@/services/hooks'
@@ -96,10 +96,11 @@ export default defineComponent({
     const detectOverflowContentElements = () => {
       const elements = Array.from(document.querySelectorAll('#sponsor .content-container'))
       elements.forEach((element) => {
+        element.classList.remove('folded')
+      })
+      elements.forEach((element) => {
         if (element.getBoundingClientRect().height > 300) {
           element.classList.add('folded')
-        } else {
-          element.classList.remove('folded')
         }
       })
     }
@@ -110,13 +111,11 @@ export default defineComponent({
     }
 
     watch(() => breakpointService.breakpoint, async () => {
-      await nextTick()
       detectOverflowContentElements()
     })
 
     onMounted(async () => {
       await renderSponsorsIntro()
-      await nextTick()
       detectOverflowContentElements()
       despatchRenderedEvent()
     })
