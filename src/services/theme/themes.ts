@@ -89,7 +89,7 @@ export const themePackSet: ThemePackSet = {
     'agenda-session-item-background': colors['dark-blue-lighten-2'],
     'venue-plan-card-title': '#fff',
     'venue-plan-card-background': colors['dark-blue-lighten-2'],
-    'sponsor-card-background': 'rgba(0, 0, 0, 0.3)',
+    'sponsor-card-background': 'rgb(25, 41, 57)',
     'staff-group-background': colors['dark-blue-lighten-2'],
     'staff-avatar-border': colors['dark-blue-lighten-4']
   }

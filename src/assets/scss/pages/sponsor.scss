@@ -65,8 +65,35 @@
 
       .content-container {
         display: inline-block;
+        position: relative;
 
         width: calc(100% - 240px - 1rem);
+
+        &.folded {
+          max-height: 300px;
+          overflow: hidden;
+
+          .readmore {
+            display: block;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            color: var(--color-coscup-green);
+            text-align: center;
+            padding: 2rem 0 0.5rem 0;
+            background: linear-gradient(
+              rgba(0, 0, 0, 0) 0%,
+              var(--color-sponsor-card-background) 70%,
+              var(--color-sponsor-card-background) 100%
+            );
+            cursor: pointer;
+          }
+        }
+
+        .readmore {
+          display: none;
+        }
 
         a {
           h2 {

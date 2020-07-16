@@ -51,6 +51,7 @@
             v-html="sponsor.intro[languageService.languageType]"
             class="markdown"
           ></article>
+          <div class="readmore" @click="onReadmoreClick">Read More</div>
         </div>
       </div>
     </div>
@@ -58,10 +59,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, reactive } from '@vue/composition-api'
+import { defineComponent, onMounted, reactive, watch, nextTick } from '@vue/composition-api'
 import { groupBy } from 'lodash'
 import { availableLanguageTypes } from '@/services/language'
-import { useLanguageService } from '@/services/hooks'
+import { useLanguageService, useBreakpointService } from '@/services/hooks'
 import markdown from '@/utils/markdown'
 import sponsorDatas from '@/../public/json/sponsor.json'
 
@@ -76,6 +77,7 @@ export default defineComponent({
   setup () {
     const despatchRenderedEvent = useRenderedEventDispatcher()
     const languageService = useLanguageService()
+    const breakpointService = useBreakpointService()
 
     const sponsorGroups = reactive(Object.fromEntries(Object.entries(groupBy<SopnsorData>(sponsorDatas, 'level'))
       .sort((entryA, entryB) => {
@@ -91,14 +93,38 @@ export default defineComponent({
       }
     }
 
+    const detectOverflowContentElements = () => {
+      const elements = Array.from(document.querySelectorAll('#sponsor .content-container'))
+      elements.forEach((element) => {
+        if (element.getBoundingClientRect().height > 300) {
+          element.classList.add('folded')
+        } else {
+          element.classList.remove('folded')
+        }
+      })
+    }
+
+    const onReadmoreClick = (event: MouseEvent) => {
+      const contentContainer = (event.target as HTMLElement).parentElement as HTMLElement
+      contentContainer.classList.remove('folded')
+    }
+
+    watch(() => breakpointService.breakpoint, async () => {
+      await nextTick()
+      detectOverflowContentElements()
+    })
+
     onMounted(async () => {
       await renderSponsorsIntro()
+      await nextTick()
+      detectOverflowContentElements()
       despatchRenderedEvent()
     })
 
     return {
       languageService,
-      sponsorGroups
+      sponsorGroups,
+      onReadmoreClick
     }
   }
 })
