@@ -122,12 +122,12 @@ export default defineComponent({
 
     const onAppRender = () => {
       setTimeout(() => {
-        detectAnnouncementUpdate()
+        data.isInApp || detectAnnouncementUpdate()
       }, 1000)
     }
 
     watch(() => router.currentRoute, () => {
-      detectAnnouncementRoute()
+      data.isInApp || detectAnnouncementRoute()
     })
 
     onBeforeUpdate(() => {
@@ -144,6 +144,7 @@ export default defineComponent({
       themeService.startDetect()
       await nextTick()
       data.isInApp = router.currentRoute.query.mode === 'app'
+      data.isInApp || detectAnnouncementRoute()
     })
 
     onBeforeUnmount(() => {
