@@ -18,7 +18,7 @@
     "generate:sitemap": "node ./scripts/generateSitemap.js",
     "pre-build": "npm run generate:languages-import && npm run generate:icons-import && npm run generate:session && npm run generate:staff && npm run generate:sponsor",
     "after-build": "npm run generate:session-popup-pages",
-    "end-build": "mv ./dist/2020/* ./dist && rm -rf ./dist/2020 && cp -R ./dist/zh-TW/* ./dist/",
+    "end-build": "mv ./dist/2020/* ./dist && rm -rf ./dist/2020 && cp -R ./dist/zh-TW/* ./dist/ && cp ./dist/index.html ./dist/404.html",
     "ts-script": "ts-node -r tsconfig-paths/register --project ./scripts/tsconfig.json"
   },
   "dependencies": {
