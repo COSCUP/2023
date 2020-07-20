@@ -50,11 +50,13 @@ export default defineComponent({
     ]))
     const languageType = computed(() => languageService.languageType === 'zh-TW' ? 'zh' : languageService.languageType)
 
-    const closeSessionPopup = () => {
-      router.push({
-        ...router.currentRoute,
-        name: 'Agenda'
-      })
+    const onSessionPopupClose = () => {
+      if (router.currentRoute.name === 'AgendaDetail') {
+        router.push({
+          ...router.currentRoute,
+          name: 'Agenda'
+        })
+      }
     }
 
     const popupSession = async (sessionId = '') => {
@@ -76,7 +78,7 @@ export default defineComponent({
 
       popupService.popup({
         ...popupData,
-        onClose: () => closeSessionPopup()
+        onClose: onSessionPopupClose
       })
     }
 
@@ -90,6 +92,8 @@ export default defineComponent({
             name: 'Agenda'
           })
         }
+      } else if (route.name === 'Agenda') {
+        popupService.close()
       }
     }
 
@@ -107,9 +111,7 @@ export default defineComponent({
       events.forEach((event) => window.addEventListener(event, onScrolling))
     })
 
-    watch(() => router.currentRoute, (to) => {
-      processByRoute(to)
-    })
+    watch(() => router.currentRoute, processByRoute)
 
     onMounted(async () => {
       await processByRoute(router.currentRoute)
