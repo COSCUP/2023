@@ -32,23 +32,23 @@ const originalRoutes: RouteConfig[] = [
     }
   },
   {
-    path: '/venue',
-    name: 'Venue',
-    component: () => import(
-      /* webpackChunkName: "venue" */
-      /* webpackPrefetch: true */
-      '@/pages/Venue.vue'),
-    meta: {
-      type: 'page'
-    }
-  },
-  {
     path: '/map',
     name: 'Map',
     component: () => import(
       /* webpackChunkName: "map" */
       /* webpackPrefetch: true */
       '@/pages/Map.vue'),
+    meta: {
+      type: 'page'
+    }
+  },
+  {
+    path: '/venue',
+    name: 'Venue',
+    component: () => import(
+      /* webpackChunkName: "venue" */
+      /* webpackPrefetch: true */
+      '@/pages/Venue.vue'),
     meta: {
       type: 'page'
     }

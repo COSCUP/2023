@@ -6,42 +6,91 @@
 -->
 
 <template>
-  <main
-    id="map"
-    class="page-container"
-  >
-    <div
-      v-for="map in maps"
-      :key="map"
-      class="map-container"
-    >
-      <img
-        :src="`/2020/images/maps/${map}.png`"
-        alt="Map"
+  <main id="map" class="page-container">
+    <OlMap id="map-component" :options="mapOptions"></OlMap>
+    <div class="plan-container">
+      <div class="plan address">
+        <h2>{{ languageService.languagePack.map.name }}</h2>
+        <h3>{{ languageService.languagePack.map.address }}</h3>
+      </div>
+      <div
+        v-for="plan in languageService.languagePack.map.plans"
+        :key="plan.name"
+        class="plan"
       >
+        <h3>{{ plan.name }}</h3>
+        <section v-html="plansHtml[plan.name]" class="markdown"></section>
+      </div>
     </div>
   </main>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from '@vue/composition-api'
+import { defineComponent, reactive, onMounted, watch, ref } from '@vue/composition-api'
+import OlMap from '@/components/Map/OlMap.vue'
+import { useLanguageService } from '@/services/hooks'
+import { useRenderedEventDispatcher } from '../plugins/renderedEventDispatcher'
+import { MapOptions } from '@/utils/map'
+import markdown from '@/utils/markdown'
 
 import '@/assets/scss/pages/map.scss'
-import { useRenderedEventDispatcher } from '@/plugins/renderedEventDispatcher'
 
 export default defineComponent({
   name: 'Map',
   components: {
+    OlMap
   },
   setup () {
     const dispatchRenderedEvent = useRenderedEventDispatcher()
-    const maps = ['map-all', 'map-tr-2f', 'map-tr-3f', 'map-tr-4f', 'map-tr-5f']
-    onMounted(() => {
+    const languageService = useLanguageService()
+    const mapOptions: MapOptions = reactive({
+      target: 'map-component',
+      center: {
+        lng: 121.540551,
+        lat: 25.01374
+      },
+      zoom: 17,
+      mapMarkers: [
+        {
+          name: 'main',
+          imageSrc: '/2020/images/map-marker.svg',
+          position: {
+            lng: 121.540551,
+            lat: 25.01374
+          },
+          scale: 3,
+          anchor: {
+            x: 0.5,
+            y: 1
+          }
+        }
+      ]
+    })
+    const plansHtml = ref(
+      Object.fromEntries(languageService.languagePack.map.plans.map((plan) => [plan.name, plan.description]))
+    )
+
+    const renderMarkdownContent = async () => {
+      const _plansHtml = {}
+      for (const plan of languageService.languagePack.map.plans) {
+        _plansHtml[plan.name] = await markdown(plan.description)
+      }
+      plansHtml.value = _plansHtml
+    }
+
+    watch(() => languageService.languageType, async () => {
+      await renderMarkdownContent()
+    })
+
+    onMounted(async () => {
+      await renderMarkdownContent()
       dispatchRenderedEvent()
     })
 
     return {
-      maps
+      languageService,
+      mapOptions,
+      plansHtml
     }
   }
 })
