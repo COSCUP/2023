@@ -65,6 +65,12 @@ interface Inject {
   metaService: MetaService;
 }
 
+interface MethodInject {
+  lockScrolling: () => void;
+  unlockScrolling: () => void;
+  setMeta: (options: MetaOptions) => void;
+}
+
 class PopupServiceConcrete implements PopupService {
   private _popupDataStack: PopupData[] = [{
     metaOptions: {},
@@ -76,13 +82,14 @@ class PopupServiceConcrete implements PopupService {
     }
   }]
 
-  private _scrollLockService: ScrollLockService
-  private _metaService: MetaService
+  private _lockScrolling: () => void
+  private _unlockScrolling: () => void
+  private _setMeta: (options: MetaOptions) => void
 
-  constructor (inject: Inject) {
-    const { scrollLockService, metaService } = inject
-    this._scrollLockService = scrollLockService
-    this._metaService = metaService
+  constructor (inject: MethodInject) {
+    this._lockScrolling = inject.lockScrolling
+    this._unlockScrolling = inject.unlockScrolling
+    this._setMeta = inject.setMeta
   }
 
   public get isPopup (): boolean {
@@ -96,20 +103,20 @@ class PopupServiceConcrete implements PopupService {
   public popup (popupData: PopupData) {
     if (popupData.popupId && this._popupDataStack.some((data) => data.popupId === popupData.popupId)) return
     this._popupDataStack.push(popupData)
-    this._scrollLockService.lock()
-    this._metaService.setMeta(this.popupData.metaOptions)
+    this._lockScrolling()
+    this._setMeta(this.popupData.metaOptions)
   }
 
   public close (): void {
     if (this._popupDataStack.length > 1) {
       (this.popupData.onClose || (() => { /**/ }))()
       this._popupDataStack.pop()
-      this._scrollLockService.unlock()
-      this._metaService.setMeta(this.popupData.metaOptions)
+      this._unlockScrolling()
+      this._setMeta(this.popupData.metaOptions)
     }
   }
 }
 
-export function createPopupService (inject: Inject): PopupService {
+export function createPopupService (inject: MethodInject): PopupService {
   return new PopupServiceConcrete(inject)
 }

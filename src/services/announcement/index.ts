@@ -4,13 +4,13 @@
 // https://opensource.org/licenses/MIT
 
 import announcement from '@/assets/json/announcement.json'
-import { LanguageService, LanguageType } from '@/services/language'
-import { PopupService, PopupData, PopupContainerType, PopupContentType } from '@/services/popup'
+import { LanguageType } from '@/services/language'
+import { PopupData, PopupContainerType, PopupContentType } from '@/services/popup'
 import markdown from '@/utils/markdown'
 
-interface Inject {
-  popupService: PopupService;
-  languageService: LanguageService;
+interface MethodInject {
+  popup: (data: PopupData) => void;
+  getLanguageType: () => LanguageType;
 }
 
 export interface AnnouncementService {
@@ -19,12 +19,12 @@ export interface AnnouncementService {
 }
 
 class AnnouncementServiceConcrete implements AnnouncementService {
-  private _languageService: LanguageService
-  private _popupService: PopupService
+  private _getLanguageType: () => LanguageType
+  private _popup: (data: PopupData) => void
 
-  constructor (inject: Inject) {
-    this._languageService = inject.languageService
-    this._popupService = inject.popupService
+  constructor (inject: MethodInject) {
+    this._getLanguageType = inject.getLanguageType
+    this._popup = inject.popup
   }
 
   public get hasUpdated (): boolean {
@@ -33,7 +33,7 @@ class AnnouncementServiceConcrete implements AnnouncementService {
   }
 
   public async showAnnouncement (onClose?: () => void) {
-    const languageType: LanguageType = this._languageService.languageType
+    const languageType: LanguageType = this._getLanguageType()
     const popupData: PopupData = {
       popupId: 'announcement',
       metaOptions: {
@@ -49,11 +49,11 @@ class AnnouncementServiceConcrete implements AnnouncementService {
       },
       onClose
     }
-    this._popupService.popup(popupData)
+    this._popup(popupData)
     localStorage.setItem('announcement', announcement.uuid)
   }
 }
 
-export function createAnnouncementService (inject: Inject) {
+export function createAnnouncementService (inject: MethodInject) {
   return new AnnouncementServiceConcrete(inject)
 }

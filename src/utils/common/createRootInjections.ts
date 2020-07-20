@@ -15,11 +15,27 @@ export default function () {
   const themeService: ThemeService = reactive(createThemeService())
   const breakpointService: BreakpointService = reactive(createBreakpointService())
   const scrollLockService: ScrollLockService = reactive(createScrollLockService())
-  const fullPageProgressService: FullPageProgressService = reactive(createFullPageProgressService(scrollLockService))
   const metaService: MetaService = reactive(createMetaService())
-  const popupService: PopupService = reactive(createPopupService({ scrollLockService, metaService }))
-  const announcementService: AnnouncementService = reactive(createAnnouncementService({ languageService, popupService }))
-  const router: VueRouter = reactive(createRouter({ languageService, popupService, metaService, fullPageProgressService }))
+  const fullPageProgressService: FullPageProgressService = reactive(createFullPageProgressService({
+    lockScrolling: () => scrollLockService.lock(),
+    unlockScrolling: () => scrollLockService.unlock()
+  }))
+  const popupService: PopupService = reactive(createPopupService({
+    lockScrolling: () => scrollLockService.lock(),
+    unlockScrolling: () => scrollLockService.unlock(),
+    setMeta: (options) => metaService.setMeta(options)
+  }))
+  const announcementService: AnnouncementService = reactive(createAnnouncementService({
+    getLanguageType: () => languageService.languageType,
+    popup: (data) => popupService.popup(data)
+  }))
+  const router: VueRouter = reactive(createRouter({
+    setIsLoading: (isLoading) => fullPageProgressService.setStatus(isLoading),
+    setLanguageType: (languageType) => (languageService.languageType = languageType),
+    setMeta: (options) => metaService.setMeta(options),
+    getPageTitle: (key) => languageService.languagePack[key].meta.title,
+    isPopup: () => popupService.isPopup
+  }))
 
   return {
     router,
