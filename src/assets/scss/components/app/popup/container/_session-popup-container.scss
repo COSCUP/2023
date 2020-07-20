@@ -5,15 +5,47 @@
 
 @include popup-container {
   &#session-popup-container {
+    display: flex;
+    justify-content: center;
+    position: relative;
     width: 100%;
-    max-width: 760px;
-    margin: auto;
+    max-width: 1264px;
+    margin-left: auto;
+    margin-right: auto;
     padding: 3rem 0;
+
+    $content-container-width: 760px;
+
+    .sponsor-ad {
+      display: inline-block;
+
+      img {
+        display: inline-block;
+        width: 100%;
+        height: auto;
+      }
+
+      &.vertical {
+        width: calc((100% - #{$content-container-width}) / 2);
+        max-width: 200px;
+
+        img {
+          position: sticky;
+          top: 0;
+        }
+      }
+
+      &.horizontal {
+        display: none;
+        max-width: $content-container-width;
+        font-size: 0;
+      }
+    }
 
     .inner-container {
       position: relative;
       width: 100%;
-      height: fit-content;
+      max-width: $content-container-width;
       min-height: 80vh;
       padding: 3rem;
       background-color: #fafafa;
@@ -34,17 +66,23 @@
       }
     }
 
-    @include mdOnly {
-      .inner-container {
-        padding: 3rem;
-      }
-    }
-
     @include smAndDown {
+      flex-direction: column;
+      align-items: center;
       max-width: 90%;
 
       .inner-container {
         padding: 3rem 2rem 2rem 2rem;
+      }
+
+      .sponsor-ad {
+        &.vertical {
+          display: none;
+        }
+
+        &.horizontal {
+          display: inline-block;
+        }
       }
     }
 
