@@ -107,7 +107,6 @@ export default defineComponent({
       const updateData = async () => {
         const { data } = await axios.get(`${baseUrl}/api/rooms_status`)
         rawRoomsStatus.value = data.roomsStatus
-        console.log(roomsStatus.value)
       }
 
       try {
@@ -115,7 +114,7 @@ export default defineComponent({
         socket.on('connect', updateData)
         socket.on('update', updateData)
       } catch (error) {
-        console.log(error)
+        console.error(error)
       }
     }
 
