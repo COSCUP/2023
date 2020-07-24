@@ -1,5 +1,9 @@
 {
   "meta": {
     "title": "議程表"
+  },
+  "room-status": {
+    "vacancy": "尚有空位",
+    "full": "沒有空位"
   }
 }

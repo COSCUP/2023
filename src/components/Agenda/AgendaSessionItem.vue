@@ -9,7 +9,16 @@
   <router-link class="agenda-session-item" :to="location">
     <section class="content-section">
       <h4 class="track">
-        <span v-show="breakpointService.xsOnly" class="room">{{ room }}</span>
+        <div
+          v-show="breakpointService.xsOnly"
+          class="room"
+          :class="{
+            full: isFull,
+          }"
+        >
+          <span class="status">{{ statusText }}</span>
+          <span class="name">{{ room }}</span>
+        </div>
         <span>{{ track }}</span>
       </h4>
       <!--  -->
@@ -46,7 +55,7 @@
 
 <script lang="ts">
 import { defineComponent, inject, computed, ComputedRef } from '@vue/composition-api'
-import { useBreakpointService, useAgendaService } from '@/services/hooks'
+import { useBreakpointService, useAgendaService, useLanguageService } from '@/services/hooks'
 import { formatTimeString } from '@/services/agenda'
 import { useRouter } from '@/router'
 
@@ -63,6 +72,8 @@ export default defineComponent({
     const agendaService = useAgendaService()
     const breakpointService = useBreakpointService()
     const languageType = inject<ComputedRef<'zh' | 'en'>>('languageType') || { value: 'zh' }
+    const roomsStatus = inject<ComputedRef<{ [k: string]: boolean }>>('roomsStatus') || { value: {} }
+    const languageService = useLanguageService()
     const session = computed(() => {
       const session = agendaService.getSessionById(props.sessionId)
       if (session === null) throw new Error('Invalid Session')
@@ -85,6 +96,9 @@ export default defineComponent({
     const language = computed(() => session.value.language)
     const room = computed(() => session.value.room[languageType.value].name.split(' / ')[0])
 
+    const isFull = computed(() => !!(roomsStatus.value[session.value.room.id]))
+    const statusText = computed(() => languageService.languagePack.agenda['room-status'][isFull.value ? 'full' : 'vacancy'])
+
     return {
       breakpointService,
       session,
@@ -95,7 +109,9 @@ export default defineComponent({
       speakers,
       tags,
       language,
-      room
+      room,
+      isFull,
+      statusText
     }
   }
 })

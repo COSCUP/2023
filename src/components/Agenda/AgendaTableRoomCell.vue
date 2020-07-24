@@ -7,6 +7,10 @@
 
 <template>
   <div class="agenda-table-room-cell">
+    <div class="status">
+      <span class="bubble" :class="{ full: isFull }"></span>
+      <span class="text">{{ statusText }}</span>
+    </div>
     <span>Room</span>
     <span>{{ roomName }}</span>
   </div>
@@ -14,7 +18,7 @@
 
 <script lang="ts">
 import { defineComponent, ComputedRef, inject, computed } from '@vue/composition-api'
-import { useAgendaService } from '@/services/hooks'
+import { useAgendaService, useLanguageService } from '@/services/hooks'
 
 export default defineComponent({
   name: 'AgendaTableRoomCell',
@@ -26,6 +30,8 @@ export default defineComponent({
   },
   setup (props) {
     const languageType = inject<ComputedRef<'zh' | 'en'>>('languageType') || { value: 'zh' }
+    const roomsStatus = inject<ComputedRef<{ [k: string]: boolean }>>('roomsStatus') || { value: {} }
+    const languageService = useLanguageService()
     const agendaService = useAgendaService()
     const room = computed(() => {
       const room = agendaService.getRoomById(props.roomId)
@@ -33,9 +39,13 @@ export default defineComponent({
       return room
     })
     const roomName = computed(() => room.value[languageType.value].name.split(' / ')[0])
+    const isFull = computed(() => !!(roomsStatus.value[props.roomId]))
+    const statusText = computed(() => languageService.languagePack.agenda['room-status'][isFull.value ? 'full' : 'vacancy'])
 
     return {
-      roomName
+      roomName,
+      isFull,
+      statusText
     }
   }
 })
