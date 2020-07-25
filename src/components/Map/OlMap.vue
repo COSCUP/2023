@@ -24,7 +24,7 @@ import { createMap, Map, MapOptions } from '@/utils/map'
 import { useRouter } from '@/router'
 
 export default defineComponent({
-  name: 'VenueMap',
+  name: 'OlMap',
   props: {
     options: {
       type: Object,
@@ -64,6 +64,3 @@ export default defineComponent({
   }
 })
 </script>
-
-<style scoped>
-</style>

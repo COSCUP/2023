@@ -1,5 +1,4 @@
 import { RouteConfig } from 'vue-router'
-import { FullPageProgressService } from '@/services/fullPageProgress'
 import { delay } from '@/utils/common'
 import { defaultLanguageType } from '@/services/language'
 
@@ -33,23 +32,23 @@ const originalRoutes: RouteConfig[] = [
     }
   },
   {
-    path: '/venue',
-    name: 'Venue',
-    component: () => import(
-      /* webpackChunkName: "venue" */
-      /* webpackPrefetch: true */
-      '@/pages/Venue.vue'),
-    meta: {
-      type: 'page'
-    }
-  },
-  {
     path: '/map',
     name: 'Map',
     component: () => import(
       /* webpackChunkName: "map" */
       /* webpackPrefetch: true */
       '@/pages/Map.vue'),
+    meta: {
+      type: 'page'
+    }
+  },
+  {
+    path: '/venue',
+    name: 'Venue',
+    component: () => import(
+      /* webpackChunkName: "venue" */
+      /* webpackPrefetch: true */
+      '@/pages/Venue.vue'),
     meta: {
       type: 'page'
     }
@@ -86,7 +85,7 @@ export const pageRouteNameList: Array<string> = originalRoutes
   .filter((route) => route.meta && route.meta.type === 'page')
   .map((route) => route.name as string)
 
-export function createRoutes (fullPageProgressService: FullPageProgressService): RouteConfig[] {
+export function createRoutes (setIsLoading: (isLoading: boolean) => void): RouteConfig[] {
   const finalRoutes: RouteConfig[] = []
 
   // inject fullPageProgress loading feature for pages
@@ -100,7 +99,7 @@ export function createRoutes (fullPageProgressService: FullPageProgressService):
         delay(100)
           .then(() => {
             didLoad || (() => {
-              fullPageProgressService.setStatus(true)
+              setIsLoading(true)
               ifSetLoading = true
             })()
           })
@@ -109,7 +108,7 @@ export function createRoutes (fullPageProgressService: FullPageProgressService):
 
         if (ifSetLoading) {
           await delay(300)
-          fullPageProgressService.setStatus(false)
+          setIsLoading(false)
         }
 
         return component

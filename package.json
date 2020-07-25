@@ -18,7 +18,7 @@
     "generate:sitemap": "node ./scripts/generateSitemap.js",
     "pre-build": "npm run generate:languages-import && npm run generate:icons-import && npm run generate:session && npm run generate:staff && npm run generate:sponsor",
     "after-build": "npm run generate:session-popup-pages",
-    "end-build": "mv ./dist/2020/* ./dist && rm -rf ./dist/2020 && cp -R ./dist/zh-TW/* ./dist/",
+    "end-build": "mv ./dist/2020/* ./dist && rm -rf ./dist/2020 && cp -R ./dist/zh-TW/* ./dist/ && cp ./dist/index.html ./dist/404.html",
     "ts-script": "ts-node -r tsconfig-paths/register --project ./scripts/tsconfig.json"
   },
   "dependencies": {
@@ -27,6 +27,7 @@
     "@fortawesome/free-regular-svg-icons": "^5.13.0",
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "@fortawesome/vue-fontawesome": "^0.1.9",
+    "@types/socket.io-client": "^1.4.33",
     "@vue/composition-api": "^0.6.7",
     "axios": "^0.19.2",
     "core-js": "^3.6.5",
@@ -47,6 +48,7 @@
     "ol": "^6.3.1",
     "path-browserify": "^1.0.1",
     "prismjs": "^1.20.0",
+    "socket.io-client": "^2.3.0",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0"
   },
@@ -76,13 +78,11 @@
     "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-vue": "^6.2.2",
     "html-minifier": "^4.0.0",
-    "i": "^0.3.6",
     "js-md5": "^0.7.3",
     "koa": "^2.13.0",
     "koa-static-server": "^1.5.2",
     "lint-staged": "^9.5.0",
     "node-sass": "^4.12.0",
-    "npm": "^6.14.5",
     "ora": "^4.0.4",
     "prerender-spa-plugin": "^3.4.0",
     "sass-loader": "^8.0.2",

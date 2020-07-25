@@ -20,24 +20,36 @@
       word-break: break-word;
 
       .track {
+        display: flex;
+        align-items: center;
         color: var(--color-coscup-green-lighten-1);
         line-height: 1.15;
         margin-bottom: 0.5rem;
+
+        .room {
+          border-radius: 4px;
+          padding: 4px 8px;
+          margin-right: 1rem;
+          color: #fff;
+          background-color: var(--color-coscup-green);
+
+          &.full {
+            background-color: #d33a3a;
+          }
+
+          .status {
+            display: block;
+            margin-bottom: 2px;
+            font-size: 0.65rem;
+            font-weight: 400;
+            white-space: nowrap;
+          }
+        }
 
         span {
           display: inline-block;
           font-weight: 600;
           font-size: 1rem;
-          vertical-align: middle;
-
-          &.room {
-            padding: 4px 8px;
-            color: #fff;
-            background-color: var(--color-coscup-green);
-            border-radius: 4px;
-            margin: 4px 0;
-            margin-right: 1rem;
-          }
         }
       }
 

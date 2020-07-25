@@ -34,8 +34,20 @@
       }
     }
 
-    a {
+    a,
+    p,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    div,
+    span {
       word-break: break-word;
+    }
+
+    a {
       text-decoration: none;
       color: var(--color-markdown-link);
       transition: all 0.2s;

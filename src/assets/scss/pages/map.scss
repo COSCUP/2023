@@ -4,29 +4,80 @@
 // https://opensource.org/licenses/MIT
 
 @import "../shared";
+@import "../components/venue/map";
 
 @include page("map") {
-  .map-container {
-    max-width: 900px;
-    opacity: 0.8;
+  #map-component {
+    width: 100%;
+    height: 550px;
+  }
+
+  @include map;
+
+  .plan-container {
     margin: auto;
-    img {
-      display: block;
+    padding: 2rem;
+    max-width: 900px;
+    column-count: 2;
+
+    .plan {
+      display: inline-block;
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      padding: 2rem;
+      margin: 1rem 0;
+      background-color: var(--color-venue-plan-card-background);
+      color: var(--color-text);
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+      h3 {
+        display: inline-block;
+        margin-bottom: 1rem;
+        padding: 0 1rem 0.5rem 0;
+        border-bottom: solid 2px;
+        color: var(--color-venue-plan-card-title);
+        font-size: 1.75rem;
+        font-weight: 600;
+      }
+    }
+
+    .plan.address {
+      h2 {
+        color: var(--color-venue-plan-card-title);
+        display: inline-block;
+        font-size: 1.75rem;
+        font-weight: 700;
+        margin-bottom: 0.75rem;
+        padding: 0 1rem 0.5rem 0;
+        border-bottom: solid 2px;
+      }
+
+      h3 {
+        display: inline-block;
+        margin-bottom: 0;
+        padding: 0;
+        border-bottom: none;
+        color: var(--color-text);
+        font-size: 1.15rem;
+        font-weight: 500;
+        line-height: 1.25;
+      }
     }
   }
 
-  @include smOnly {
-    .map-container {
-      max-width: 90%;
+  @include smAndDown {
+    #map-component {
+      height: 300px;
     }
-  }
 
-  @include xsOnly {
-    .outer-container {
-      max-width: calc(100% - 2rem);
+    .plan-container {
+      column-count: 1;
+      max-width: 600px;
+      padding: 1rem;
+
+      .plan {
+        padding: 1.5rem;
+      }
     }
   }
 }

@@ -7,6 +7,7 @@ import cheerio from 'cheerio'
 import fs from 'fs'
 import path from 'path'
 import { origin } from '../package.json'
+import { publicPath } from '../vue.config.js'
 import { generateSessions, generateSessionPopupData, fixedTimeZoneDate } from '@/services/agenda'
 import { availableLanguageTypes } from '@/services/language'
 import { MetaDomSetterSet, MetaType, defaultMetaValues, createMetaService } from '@/services/meta'
@@ -36,6 +37,7 @@ function createCheerioMetaDomSetterSet ($: CheerioStatic) {
 
 async function run () {
   process.env.VUE_APP_PRODUCTION_ORIGIN = origin
+  process.env.BASE_URL = publicPath
 
   await Promise.all(availableLanguageTypes
     .map((languageType) => {

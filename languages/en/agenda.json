@@ -1,5 +1,9 @@
 {
   "meta": {
     "title": "Agenda"
+  },
+  "room-status": {
+    "vacancy": "Available",
+    "full": "Full"
   }
 }

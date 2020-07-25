@@ -6,10 +6,8 @@
 import { camelCase } from 'lodash'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import { FullPageProgressService } from '@/services/fullPageProgress'
-import { LanguageService, LanguageType, defaultLanguageType, availableLanguageTypes } from '@/services/language'
-import { MetaService } from '@/services/meta'
-import { PopupService } from '@/services/popup'
+import { LanguageType, defaultLanguageType, availableLanguageTypes, LanguagePack } from '@/services/language'
+import { MetaOptions } from '@/services/meta'
 import { scrollTo, Position } from '@/utils/scrollTo'
 import { inject } from '@vue/composition-api'
 import { createRoutes, pageRouteNameList } from './routes'
@@ -18,16 +16,17 @@ export { pageRouteNameList } from './routes'
 
 Vue.use(VueRouter)
 
-interface Inject {
-  metaService: MetaService;
-  languageService: LanguageService;
-  fullPageProgressService: FullPageProgressService;
-  popupService: PopupService;
+type PageTitleKey = Exclude<(keyof LanguagePack), 'app'>
+interface MethodInject {
+  setLanguageType: (languageType: LanguageType) => void;
+  setIsLoading: (isLoading: boolean) => void;
+  setMeta: (options: MetaOptions) => void;
+  getPageTitle: (pageTitleKey: PageTitleKey) => string;
+  isPopup: () => boolean;
 }
 
-export function createRouter (injects: Inject): VueRouter {
-  const { languageService, fullPageProgressService, metaService, popupService } = injects
-  const routes = createRoutes(fullPageProgressService)
+export function createRouter (inject: MethodInject): VueRouter {
+  const routes = createRoutes(inject.setIsLoading)
 
   let prevPosition: Position = { x: 0, y: 0 }
   const router = new VueRouter({
@@ -48,7 +47,7 @@ export function createRouter (injects: Inject): VueRouter {
             cancel()
           }
           events.forEach((event) => window.addEventListener(event, onScrolling))
-        } else if (popupService.isPopup) {
+        } else if (inject.isPopup()) {
           const popupDom = document.getElementById('popup')
           popupDom && popupDom.scrollTo(0, 0)
         } else {
@@ -63,13 +62,12 @@ export function createRouter (injects: Inject): VueRouter {
     if (languageType && !(availableLanguageTypes as string[]).includes(languageType)) {
       next('/')
     } else {
-      languageService.languageType = languageType as LanguageType || defaultLanguageType
+      inject.setLanguageType(languageType as LanguageType || defaultLanguageType)
 
       const routeName = to.name ?? ''
       if (pageRouteNameList.includes(routeName)) {
-        type LanguagePackKeys = Exclude<(keyof typeof languageService.languagePack), 'app'>
-        metaService.setMeta({
-          title: languageService.languagePack[camelCase(routeName) as LanguagePackKeys].meta.title
+        inject.setMeta({
+          title: inject.getPageTitle(camelCase(routeName) as PageTitleKey)
         })
       }
 

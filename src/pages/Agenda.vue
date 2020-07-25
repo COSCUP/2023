@@ -14,7 +14,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, computed, watch, onMounted, provide } from '@vue/composition-api'
+import io from 'socket.io-client'
+import axios from 'axios'
+import { defineComponent, reactive, computed, watch, onMounted, provide, ref, onBeforeUnmount, nextTick } from '@vue/composition-api'
 import { Route } from 'vue-router'
 import { useRouter } from '@/router'
 import { createAgendaService } from '@/services/agenda'
@@ -49,12 +51,17 @@ export default defineComponent({
       'TR409-2', 'TR410', 'TR411', 'TR412-1', 'TR412-2', 'TR413-1', 'TR413-2'
     ]))
     const languageType = computed(() => languageService.languageType === 'zh-TW' ? 'zh' : languageService.languageType)
+    const rawRoomsStatus = ref<{ id: string; isFull: boolean }[]>([])
+    const roomsStatus = computed(() => Object.fromEntries(rawRoomsStatus.value.map((room) => [room.id, room.isFull])))
+    let socket: SocketIOClient.Socket | null = null
 
-    const closeSessionPopup = () => {
-      router.push({
-        ...router.currentRoute,
-        name: 'Agenda'
-      })
+    const onSessionPopupClose = () => {
+      if (router.currentRoute.name === 'AgendaDetail') {
+        router.push({
+          ...router.currentRoute,
+          name: 'Agenda'
+        })
+      }
     }
 
     const popupSession = async (sessionId = '') => {
@@ -76,7 +83,7 @@ export default defineComponent({
 
       popupService.popup({
         ...popupData,
-        onClose: () => closeSessionPopup()
+        onClose: onSessionPopupClose
       })
     }
 
@@ -90,6 +97,31 @@ export default defineComponent({
             name: 'Agenda'
           })
         }
+      } else if (route.name === 'Agenda') {
+        popupService.close()
+      }
+    }
+
+    const registerSocket = () => {
+      const baseUrl = 'https://coscup2020-room.deviltea.me'
+      const updateData = async () => {
+        const { data } = await axios.get(`${baseUrl}/api/rooms_status`)
+        rawRoomsStatus.value = data.roomsStatus
+      }
+
+      try {
+        socket = io(baseUrl)
+        socket.on('connect', updateData)
+        socket.on('update', updateData)
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    const unregisterSocket = () => {
+      if (socket && socket.connected) {
+        socket.disconnect()
+        socket = null
       }
     }
 
@@ -107,20 +139,26 @@ export default defineComponent({
       events.forEach((event) => window.addEventListener(event, onScrolling))
     })
 
-    watch(() => router.currentRoute, (to) => {
-      processByRoute(to)
-    })
+    watch(() => router.currentRoute, processByRoute)
 
     onMounted(async () => {
       await processByRoute(router.currentRoute)
       dispatchRenderedEvent()
+      await nextTick()
+      registerSocket()
+    })
+
+    onBeforeUnmount(() => {
+      unregisterSocket()
     })
 
     provide('agendaService', agendaService)
     provide('languageType', languageType)
+    provide('roomsStatus', roomsStatus)
 
     return {
-      breakpointService
+      breakpointService,
+      roomsStatus
     }
   }
 })
