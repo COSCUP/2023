@@ -3,7 +3,7 @@
     "title": "Agenda"
   },
   "room-status": {
-    "vacancy": "Vacancy",
-    "full": "No Vacancies"
+    "vacancy": "Available",
+    "full": "Full"
   }
 }
