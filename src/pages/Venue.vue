@@ -8,7 +8,7 @@
 <template>
   <main id="venue" class="page-container">
     <div v-for="map in maps" :key="map" class="map-container">
-      <img :src="`/2020/images/maps/${map}.png`" alt="Map" />
+      <img :src="`/2020/images/venues/${map}.png`" alt="Map" />
     </div>
   </main>
 </template>
