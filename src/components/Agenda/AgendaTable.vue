@@ -27,7 +27,7 @@
           <div
             class="cell-content"
             :class="{
-              blank: cell.type === TableCellType.Blank
+              blank: cell.type === TableCellType.Blank,
             }"
           >
             <AgendaSessionItem
@@ -44,8 +44,7 @@
 
 <script lang="ts">
 import { defineComponent, inject, computed } from '@vue/composition-api'
-import { TableCellType } from '@/services/agenda'
-import { useAgendaService } from '@/services/hooks'
+import { TableCellType, AgendaTableData } from '@/services/agenda'
 import AgendaSessionItem from './AgendaSessionItem.vue'
 import AgendaTableRoomCell from './AgendaTableRoomCell.vue'
 import { useRouter } from '@/router'
@@ -56,12 +55,16 @@ export default defineComponent({
     AgendaTableRoomCell,
     AgendaSessionItem
   },
-  setup () {
+  props: {
+    table: {
+      type: Object,
+      required: true
+    }
+  },
+  setup (props) {
     const router = useRouter()
-    const agendaService = useAgendaService()
     const languageType = inject<'zh' | 'en'>('languageType') || 'zh'
-    const table = computed(() => agendaService.table)
-    const tableStyle = computed(() => ({ '--table-column': agendaService.table.rooms.length }))
+    const tableStyle = computed(() => ({ '--table-column': (props.table as AgendaTableData).rooms.length }))
     const getSessionLocation = (sessionId: string) => ({
       name: 'AgendaDetail',
       params: {
@@ -73,7 +76,6 @@ export default defineComponent({
     return {
       TableCellType,
       languageType,
-      table,
       tableStyle,
       getSessionLocation
     }

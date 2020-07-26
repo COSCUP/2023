@@ -18,12 +18,9 @@ export interface DayData {
 }
 
 export interface AgendaService {
-  dayIndex: number;
   readonly sessionSet: { [sessionId: string]: Session };
   readonly days: [number, number, number][];
-  readonly day: [number, number, number];
-  readonly table: AgendaTableData;
-  readonly list: AgendaListData;
+  getDayData: (dayIndex: number) => DayData;
   getSessionById: (sessionId: string) => Readonly<Session> | null;
   getRoomById: (roomId: string) => Readonly<Room> | null;
   getSessionPopupData: (sessionId: string, language: 'en' | 'zh') => Promise<PopupData>;
@@ -34,7 +31,6 @@ class AgendaServiceConcrete implements AgendaService {
   private readonly _timeZoneOffsetMinutes = -480
   private _roomSequence: string[] | undefined
   private _roomSet: { [roomId: string]: Room} = {}
-  private _dayIndex = 0
   private _days: [number, number, number][] = []
   private _sessionDataListByDays: SessionData[][] = []
   private _dayDataCache: { [dateString: string]: DayData } = {}
@@ -44,7 +40,6 @@ class AgendaServiceConcrete implements AgendaService {
     this._roomSequence = roomSequence
     this._initRooms()
     this._initDays()
-    this.dayIndex = 0
   }
 
   private _initDays (): void {
@@ -103,36 +98,21 @@ class AgendaServiceConcrete implements AgendaService {
     return (date: Date | string) => fixedTimeZoneDate(date, this._timeZoneOffsetMinutes)
   }
 
-  public get dayIndex (): number {
-    return this._dayIndex
-  }
-
-  public set dayIndex (value: number) {
-    if (value < 0 || value > this._days.length) throw new Error(`Invalid dayIndex ${value}`)
-    if (!this._dayDataCache[value]) {
-      this._dayDataCache[this._days[value].join('')] = this._generateDayData(value)
-    }
-    this._dayIndex = value
-  }
-
   public get days (): [number, number, number][] {
     return this._days
   }
 
-  public get day (): [number, number, number] {
-    return this._days[this.dayIndex]
-  }
-
-  public get table (): AgendaTableData {
-    return this._dayDataCache[`${this._days[this.dayIndex].join('')}`].table
-  }
-
-  public get list (): AgendaListData {
-    return this._dayDataCache[`${this._days[this.dayIndex].join('')}`].list
-  }
-
   public get sessionSet () {
     return this._sessionsCache
+  }
+
+  public getDayData (dayIndex: number): DayData {
+    if (dayIndex < 0 || dayIndex > this._days.length) throw new Error(`Invalid dayIndex ${dayIndex}`)
+    const day = this._days[dayIndex].join('')
+    if (!this._dayDataCache[day]) {
+      this._dayDataCache[day] = this._generateDayData(dayIndex)
+    }
+    return this._dayDataCache[day]
   }
 
   public getSessionById (sessionId: string): Readonly<Session> {

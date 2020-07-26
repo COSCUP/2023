@@ -7,9 +7,21 @@
 
 <template>
   <main id="agenda" class="page-container">
-    <AgendaNavbar />
-    <AgendaTable v-show="breakpointService.smAndUp" />
-    <AgendaList v-show="breakpointService.xsOnly" />
+    <AgendaNavbar v-model="dayIndex" />
+    <template v-for="(dayData, index) in daysData">
+      <AgendaTable
+        v-if="dayData !== null"
+        v-show="dayIndex === index && breakpointService.smAndUp"
+        :key="`table-${dayData.day.join('')}`"
+        :table="dayData.table"
+      />
+      <AgendaList
+        v-if="dayData !== null"
+        v-show="dayIndex === index && breakpointService.xsOnly"
+        :key="`list-${dayData.day.join('')}`"
+        :list="dayData.list"
+      />
+    </template>
   </main>
 </template>
 
@@ -19,7 +31,7 @@ import axios from 'axios'
 import { defineComponent, reactive, computed, watch, onMounted, provide, ref, onBeforeUnmount, nextTick } from '@vue/composition-api'
 import { Route } from 'vue-router'
 import { useRouter } from '@/router'
-import { createAgendaService } from '@/services/agenda'
+import { createAgendaService, DayData } from '@/services/agenda'
 import { useLanguageService, usePopupService, useBreakpointService } from '@/services/hooks'
 import { PopupData, PopupContainerType, PopupContentType } from '@/services/popup'
 import { useRenderedEventDispatcher } from '@/plugins/renderedEventDispatcher'
@@ -54,6 +66,8 @@ export default defineComponent({
     const rawRoomsStatus = ref<{ id: string; isFull: boolean }[]>([])
     const roomsStatus = computed(() => Object.fromEntries(rawRoomsStatus.value.map((room) => [room.id, room.isFull])))
     let socket: SocketIOClient.Socket | null = null
+    const dayIndex = ref(0)
+    const daysData = ref<(DayData | null)[]>(agendaService.days.map(() => null))
 
     const onSessionPopupClose = () => {
       if (router.currentRoute.name === 'AgendaDetail') {
@@ -125,7 +139,7 @@ export default defineComponent({
       }
     }
 
-    watch(() => agendaService.dayIndex, () => {
+    watch(() => dayIndex.value, (value) => {
       const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent)
       const { cancel } = scrollTo({
         to: { x: 0, y: 0 },
@@ -137,11 +151,16 @@ export default defineComponent({
         cancel()
       }
       events.forEach((event) => window.addEventListener(event, onScrolling))
+
+      if (daysData.value[value] === null) {
+        daysData.value.splice(value, 1, agendaService.getDayData(value))
+      }
     })
 
     watch(() => router.currentRoute, processByRoute)
 
     onMounted(async () => {
+      daysData.value.splice(dayIndex.value, 1, agendaService.getDayData(dayIndex.value))
       await processByRoute(router.currentRoute)
       dispatchRenderedEvent()
       await nextTick()
@@ -158,6 +177,8 @@ export default defineComponent({
 
     return {
       breakpointService,
+      dayIndex,
+      daysData,
       roomsStatus
     }
   }

@@ -27,9 +27,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from '@vue/composition-api'
+import { defineComponent } from '@vue/composition-api'
 import { formatTimeString } from '@/services/agenda'
-import { useAgendaService } from '@/services/hooks'
 import AgendaSessionItem from '@/components/Agenda/AgendaSessionItem.vue'
 
 export default defineComponent({
@@ -37,12 +36,14 @@ export default defineComponent({
   components: {
     AgendaSessionItem
   },
+  props: {
+    list: {
+      type: Object,
+      required: true
+    }
+  },
   setup () {
-    const agendaService = useAgendaService()
-    const list = computed(() => agendaService.list)
-
     return {
-      list,
       formatTimeString
     }
   }

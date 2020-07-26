@@ -10,10 +10,10 @@
     <div class="tabs">
       <div
         class="tab"
-        :class="{ active: agendaService.day.join('') === day.join('') }"
-        v-for="(day, index) in agendaService.days"
+        :class="{ active: selectedDay.join('') === day.join('') }"
+        v-for="(day, index) in days"
         :key="`day-option-${index}`"
-        @click="agendaService.dayIndex = index"
+        @click="onTabClick(index)"
       >
         <span class="day-text">{{ `Day ${index + 1}` }}</span>
         <span class="date">{{ day.join(" / ") }}</span>
@@ -23,16 +23,31 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api'
+import { defineComponent, computed } from '@vue/composition-api'
 import { useAgendaService } from '@/services/hooks'
 
 export default defineComponent({
   name: 'AgendaNavbar',
-  setup () {
+  props: {
+    value: {
+      type: Number,
+      required: true
+    }
+  },
+  setup (props, context) {
     const agendaService = useAgendaService()
 
+    const days = computed(() => agendaService.days)
+    const selectedDay = computed(() => days.value[props.value])
+
+    const onTabClick = (dayIndex: number) => {
+      context.emit('input', dayIndex)
+    }
+
     return {
-      agendaService
+      days,
+      selectedDay,
+      onTabClick
     }
   }
 })
