@@ -12,18 +12,6 @@
     @click.self="$emit('close')"
   >
     <a
-      v-if="ads.horizontalTop"
-      class="sponsor-ad horizontal"
-      :href="ads.horizontalTop.link"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <img
-        :src="`/2020/images/sponsor-ads/${ads.horizontalTop.sponsor}/horizontal.png`"
-        :alt="`${ads.horizontalTop.sponsor}'s AD`"
-      />
-    </a>
-    <a
       v-if="ads.verticalLeft"
       class="sponsor-ad vertical"
       :href="ads.verticalLeft.link"
@@ -78,7 +66,6 @@ type AdData = ArrayElement<typeof sponsorAdsData.ads>
 interface AdList {
   verticalLeft: AdData | null;
   verticalRight: AdData | null;
-  horizontalTop: AdData | null;
   horizontalBottom: AdData | null;
 }
 
@@ -88,7 +75,6 @@ export default defineComponent({
     const ads: AdList = reactive({
       verticalLeft: null,
       verticalRight: null,
-      horizontalTop: null,
       horizontalBottom: null
     })
 
@@ -96,7 +82,6 @@ export default defineComponent({
       const numOfAds = sponsorAdsData.ads.length
       ads.verticalLeft = sponsorAdsData.ads[Math.floor(Math.random() * numOfAds)]
       ads.verticalRight = sponsorAdsData.ads[Math.floor(Math.random() * numOfAds)]
-      ads.horizontalTop = sponsorAdsData.ads[Math.floor(Math.random() * numOfAds)]
       ads.horizontalBottom = sponsorAdsData.ads[Math.floor(Math.random() * numOfAds)]
     })
 
