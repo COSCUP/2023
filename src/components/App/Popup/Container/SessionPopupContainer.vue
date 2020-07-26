@@ -19,23 +19,19 @@
       rel="noopener noreferrer"
     >
       <img
-        :src="
-          `/2020/images/sponsor-ads/${ads.horizontalTop.sponsor}/horizontal.png`
-        "
+        :src="`/2020/images/sponsor-ads/${ads.horizontalTop.sponsor}/horizontal.png`"
         :alt="`${ads.horizontalTop.sponsor}'s AD`"
       />
     </a>
     <a
       v-if="ads.verticalLeft"
       class="sponsor-ad vertical"
-      :href="ads.horizontalTop.link"
+      :href="ads.verticalLeft.link"
       target="_blank"
       rel="noopener noreferrer"
     >
       <img
-        :src="
-          `/2020/images/sponsor-ads/${ads.verticalLeft.sponsor}/vertical.png`
-        "
+        :src="`/2020/images/sponsor-ads/${ads.verticalLeft.sponsor}/vertical.png`"
         :alt="`${ads.verticalLeft.sponsor}'s AD`"
       />
     </a>
@@ -48,28 +44,24 @@
     <a
       v-if="ads.horizontalBottom"
       class="sponsor-ad horizontal"
-      :href="ads.horizontalTop.link"
+      :href="ads.horizontalBottom.link"
       target="_blank"
       rel="noopener noreferrer"
     >
       <img
-        :src="
-          `/2020/images/sponsor-ads/${ads.horizontalBottom.sponsor}/horizontal.png`
-        "
+        :src="`/2020/images/sponsor-ads/${ads.horizontalBottom.sponsor}/horizontal.png`"
         :alt="`${ads.horizontalBottom.sponsor}'s AD`"
       />
     </a>
     <a
       v-if="ads.verticalRight"
       class="sponsor-ad vertical"
-      :href="ads.horizontalTop.link"
+      :href="ads.verticalRight.link"
       target="_blank"
       rel="noopener noreferrer"
     >
       <img
-        :src="
-          `/2020/images/sponsor-ads/${ads.verticalRight.sponsor}/vertical.png`
-        "
+        :src="`/2020/images/sponsor-ads/${ads.verticalRight.sponsor}/vertical.png`"
         :alt="`${ads.verticalRight.sponsor}'s AD`"
       />
     </a>
