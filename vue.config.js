@@ -17,6 +17,7 @@ const renderRoutes = (() => {
     '/',
     '/agenda',
     '/agenda/template',
+    '/room',
     '/venue',
     '/map',
     '/sponsor',

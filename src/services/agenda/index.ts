@@ -4,26 +4,31 @@
 // https://opensource.org/licenses/MIT
 
 import { groupBy } from 'lodash'
-import { formatDateString, fixedTimeZoneDate, generateAgendaTableData, generateAgendaListData, AgendaTableData, AgendaListData, RoomData, Session, SessionData, rawData, generateSessionPopupData, generateSession } from './utils'
+import { Day, formatDateString, fixedTimeZoneDate, generateAgendaTableData, generateAgendaListData, AgendaTableData, AgendaListData, RoomData, Session, SessionData, rawData, generateSessionPopupData, generateSession } from './utils'
 import { PopupData } from '@/services/popup'
 
 export * from './utils'
 
 export type Room = RoomData
-
 export interface DayData {
-  day: [number, number, number];
+  day: Day;
   table: AgendaTableData;
   list: AgendaListData;
 }
 
+export interface RoomSession {
+  room: Room;
+  session: Session | null;
+}
+
 export interface AgendaService {
   readonly sessionSet: { [sessionId: string]: Session };
-  readonly days: [number, number, number][];
+  readonly days: Day[];
   getDayData: (dayIndex: number) => DayData;
   getSessionById: (sessionId: string) => Readonly<Session> | null;
   getRoomById: (roomId: string) => Readonly<Room> | null;
   getSessionPopupData: (sessionId: string, language: 'en' | 'zh') => Promise<PopupData>;
+  getRoomsInProgressSession: () => RoomSession[];
 }
 
 class AgendaServiceConcrete implements AgendaService {
@@ -31,7 +36,7 @@ class AgendaServiceConcrete implements AgendaService {
   private readonly _timeZoneOffsetMinutes = -480
   private _roomSequence: string[] | undefined
   private _roomSet: { [roomId: string]: Room} = {}
-  private _days: [number, number, number][] = []
+  private _days: Day[] = []
   private _sessionDataListByDays: SessionData[][] = []
   private _dayDataCache: { [dateString: string]: DayData } = {}
   private _sessionsCache: { [sessionId: string]: Session } = {}
@@ -60,7 +65,7 @@ class AgendaServiceConcrete implements AgendaService {
         return [
           entry[0].split(',').map((numStr) => parseInt(numStr)),
           entry[1]
-        ] as [[number, number, number], SessionData[]]
+        ] as [Day, SessionData[]]
       })
       .forEach(([day, sessionDataList]) => {
         this._days.push(day)
@@ -98,7 +103,7 @@ class AgendaServiceConcrete implements AgendaService {
     return (date: Date | string) => fixedTimeZoneDate(date, this._timeZoneOffsetMinutes)
   }
 
-  public get days (): [number, number, number][] {
+  public get days (): Day[] {
     return this._days
   }
 
@@ -133,6 +138,29 @@ class AgendaServiceConcrete implements AgendaService {
   public async getSessionPopupData (sessionId: string, language: 'en' | 'zh'): Promise<PopupData> {
     const session = this.getSessionById(sessionId)
     return await generateSessionPopupData(session, language)
+  }
+
+  public getRoomsInProgressSession (): RoomSession[] {
+    const currentMoment = this._fixedTimeZone(new Date())
+    const roomSessionMap: { [roomId: string]: Session } = Object.fromEntries(rawData.sessions
+      .filter((sessionData) => {
+        const start = this._fixedTimeZone(sessionData.start)
+        const end = this._fixedTimeZone(sessionData.end)
+        return start.getTime() <= currentMoment.getTime() && currentMoment.getTime() <= end.getTime()
+      })
+      .map((sessionData) => {
+        const session = this.getSessionById(sessionData.id)
+        return [session.room.id, session]
+      })
+    )
+
+    return (this._roomSequence || Object.keys(this._roomSet))
+      .map((roomId) => {
+        return {
+          room: this.getRoomById(roomId),
+          session: roomSessionMap[roomId] || null
+        }
+      })
   }
 }
 

@@ -1,0 +1,19 @@
+{
+  "meta": {
+    "title": "Room"
+  },
+  "table": {
+    "header": {
+      "room": "Room",
+      "status": "Status",
+      "session": "Session"
+    },
+    "body": {
+      "status": {
+        "full": "Full",
+        "available": "Available"
+      },
+      "empty": "Empty"
+    }
+  }
+}

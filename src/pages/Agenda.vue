@@ -59,7 +59,7 @@ export default defineComponent({
       'RB105',
       'AU',
       'TR209', 'TR211', 'TR212', 'TR213', 'TR214',
-      'TR309', 'TR310-2', 'TR311', 'TR313',
+      'TR309', 'TR311', 'TR313',
       'TR409-2', 'TR410', 'TR411', 'TR412-1', 'TR412-2', 'TR413-1', 'TR413-2'
     ]))
     const languageType = computed(() => languageService.languageType === 'zh-TW' ? 'zh' : languageService.languageType)
@@ -71,9 +71,14 @@ export default defineComponent({
 
     const onSessionPopupClose = () => {
       if (router.currentRoute.name === 'AgendaDetail') {
+        const isFromRoomPage = router.currentRoute.query.from === 'room'
         router.push({
           ...router.currentRoute,
-          name: 'Agenda'
+          name: isFromRoomPage ? 'Room' : 'Agenda',
+          query: {
+            ...router.currentRoute.query,
+            from: undefined
+          }
         })
       }
     }

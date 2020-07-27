@@ -32,6 +32,17 @@ const originalRoutes: RouteConfig[] = [
     }
   },
   {
+    path: '/room',
+    name: 'Room',
+    component: () => import(
+      /* webpackChunkName: "room" */
+      /* webpackPrefetch: true */
+      '@/pages/Room.vue'),
+    meta: {
+      type: 'page'
+    }
+  },
+  {
     path: '/map',
     name: 'Map',
     component: () => import(

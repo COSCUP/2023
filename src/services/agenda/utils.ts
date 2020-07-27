@@ -16,6 +16,8 @@ export type SpeakerData = ArrayElement<typeof _rawData.speakers>
 export type RoomData = ArrayElement<typeof _rawData.rooms>
 export type TagData = ArrayElement<typeof _rawData.tags>
 
+export type Day = [number, number, number]
+
 export const rawData = Object.freeze(_rawData)
 export interface SessionBase {
   id: string;
@@ -85,9 +87,9 @@ export function fixedTimeZoneDate (date: Date | string, timeZoneOffsetMinutes: n
  * Retrieve tuple of [year, month, day] from a date object.
  *
  * @param {Date} dateObj Source Date object
- * @returns {[number, number, number]} Tuple of [year, month, day]. For example, the Date of '2020/6/21' would get [2020, 6, 21].
+ * @returns {Day} Tuple of [year, month, day]. For example, the Date of '2020/6/21' would get [2020, 6, 21].
  */
-export function getYearMonthDate (dateObj: Date): [number, number, number] {
+export function getYearMonthDate (dateObj: Date): Day {
   return [dateObj.getFullYear(), dateObj.getMonth() + 1, dateObj.getDate()]
 }
 

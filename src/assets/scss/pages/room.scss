@@ -1,0 +1,122 @@
+// Copyright (c) 2020 DevilTea
+//
+// This software is released under the MIT License.
+// https://opensource.org/licenses/MIT
+
+@import "../shared";
+@import "../components/agenda/agenda-table-room-cell";
+@import "../components/agenda/agenda-session-item";
+
+@include page("room") {
+  padding: 2rem 0.5rem;
+
+  .room-table {
+    max-width: 900px;
+    margin: auto;
+
+    th,
+    td {
+      padding: 1rem 0.5rem;
+      border: solid 1px rgba(143, 143, 143, 0.201);
+    }
+
+    tr:hover {
+      background-color: rgba(143, 143, 143, 0.201);
+    }
+
+    thead {
+      max-width: 100%;
+      border-bottom: solid 1px;
+
+      th {
+        font-weight: 500;
+      }
+    }
+
+    tbody {
+      max-width: 100%;
+      .room,
+      .status {
+        white-space: nowrap;
+
+        .bubble {
+          display: inline-block;
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          background-color: #3ca054;
+          margin-right: 0.5rem;
+          vertical-align: middle;
+
+          &.full {
+            background-color: #d33a3a;
+          }
+        }
+      }
+
+      .room {
+        .bubble {
+          display: none;
+        }
+      }
+
+      .status {
+        .text {
+          font-size: 0.75rem;
+          font-weight: 500;
+        }
+      }
+
+      .session {
+        .content {
+          display: inline-block;
+          width: 100%;
+          vertical-align: middle;
+
+          text-decoration: none;
+          color: var(--color-coscup-green-lighten-1);
+
+          &.empty {
+            text-align: center;
+          }
+
+          &:hover {
+            color: var(--color-coscup-green-lighten-3);
+          }
+
+          .period {
+            color: var(--color-text);
+            font-size: 0.75rem;
+            line-height: 1.15;
+          }
+
+          .title {
+            font-size: 0.95rem;
+            font-weight: 500;
+            line-height: 1.15;
+          }
+        }
+      }
+    }
+  }
+
+  @include xsOnly {
+    .room-table {
+      thead {
+        .status {
+          display: none;
+        }
+      }
+
+      tbody {
+        .room .bubble {
+          display: inline-block;
+        }
+
+        .status {
+          display: none;
+        }
+      }
+    }
+  }
+}

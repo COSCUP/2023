@@ -1,0 +1,19 @@
+{
+  "meta": {
+    "title": "會議室"
+  },
+  "table": {
+    "header": {
+      "room": "會議室",
+      "status": "狀態",
+      "session": "進行中議程"
+    },
+    "body": {
+      "status": {
+        "full": "沒有空位",
+        "available": "尚有空位"
+      },
+      "empty": "無"
+    }
+  }
+}
