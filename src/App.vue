@@ -160,12 +160,13 @@ export default defineComponent({
       }
     })
 
-    onMounted(() => {
+    onMounted(async () => {
       document.addEventListener('x-app-rendered', onAppRender)
       breakpointService.startDetect()
       themeService.startDetect()
-      // data.isInApp = router.currentRoute.query.mode === 'app'
-      // data.isInApp || detectAnnouncementRoute()
+      await nextTick()
+      data.isInApp || (data.isInApp = router.currentRoute.query.mode === 'app')
+      data.isInApp || detectAnnouncementRoute()
     })
 
     onBeforeUnmount(() => {

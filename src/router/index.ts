@@ -5,7 +5,7 @@
 
 import { camelCase } from 'lodash'
 import Vue from 'vue'
-import VueRouter, { Location } from 'vue-router'
+import VueRouter from 'vue-router'
 import { LanguageType, defaultLanguageType, availableLanguageTypes, LanguagePack } from '@/services/language'
 import { MetaOptions } from '@/services/meta'
 import { scrollTo, Position } from '@/utils/scrollTo'
