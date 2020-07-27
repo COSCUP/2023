@@ -9,18 +9,18 @@
   <div
     id="app"
     :class="{
-      'in-app': isInApp
+      'in-app': isInApp,
     }"
   >
     <Navbar v-if="!isInApp"></Navbar>
     <div
       :class="{
         'scroll-lock': scrollLockService.isLocked,
-        popupped: popupService.isPopup
+        popupped: popupService.isPopup,
       }"
       :style="{
         '--current-scroll-x': `${scrollLockService.currentScrollPosition.x}px`,
-        '--current-scroll-y': `${scrollLockService.currentScrollPosition.y}px`
+        '--current-scroll-y': `${scrollLockService.currentScrollPosition.y}px`,
       }"
       class="main-container"
     >
@@ -127,6 +127,7 @@ export default defineComponent({
     }
 
     watch(() => router.currentRoute, () => {
+      data.isInApp || (data.isInApp = router.currentRoute.query.mode === 'app')
       data.isInApp || detectAnnouncementRoute()
     })
 
@@ -138,13 +139,12 @@ export default defineComponent({
       }
     })
 
-    onMounted(async () => {
+    onMounted(() => {
       document.addEventListener('x-app-rendered', onAppRender)
       breakpointService.startDetect()
       themeService.startDetect()
-      await nextTick()
-      data.isInApp = router.currentRoute.query.mode === 'app'
-      data.isInApp || detectAnnouncementRoute()
+      // data.isInApp = router.currentRoute.query.mode === 'app'
+      // data.isInApp || detectAnnouncementRoute()
     })
 
     onBeforeUnmount(() => {
