@@ -9,19 +9,27 @@
   <nav
     id="navbar"
     :class="{
-      overflow: isOverflow
+      overflow: isOverflow,
     }"
   >
-    <div v-show="isOverflow" class="overflow-left-container">
+    <div
+      v-show="isOverflow"
+      class="overflow-left-container"
+      @click="onArrowLeftClick"
+    >
       <Icon :name="'angle-left'" />
     </div>
-    <div v-show="isOverflow" class="overflow-right-container">
+    <div
+      v-show="isOverflow"
+      class="overflow-right-container"
+      @click="onArrowRightClick"
+    >
       <Icon :name="'angle-right'" />
     </div>
     <div
       class="menu"
       :class="{
-        open: isMenuOpen
+        open: isMenuOpen,
       }"
     >
       <div class="menu-mask" @click="setMenuOpen(false)"></div>
@@ -39,7 +47,12 @@
           <template v-if="navbarItem.name === 'home'" v-slot:default>
             <p style="font-weight: 900;">COSCUP</p>
             <p
-              style="font-weight: 300; font-size: 0.75rem; text-align: left; color: var(--color-text);"
+              style="
+                font-weight: 300;
+                font-size: 0.75rem;
+                text-align: left;
+                color: var(--color-text);
+              "
             >
               2020
             </p>
@@ -69,7 +82,12 @@
         <template v-if="navbarItem.name === 'home'" v-slot:default>
           <p style="font-weight: 900;">COSCUP</p>
           <p
-            style="font-weight: 300; font-size: 0.75rem; text-align: left; color: var(--color-text);"
+            style="
+              font-weight: 300;
+              font-size: 0.75rem;
+              text-align: left;
+              color: var(--color-text);
+            "
           >
             2020
           </p>
@@ -147,6 +165,24 @@ export default defineComponent({
       }
     })
 
+    const scrollNavbar = (deltaX: number) => {
+      const el = document.querySelector('#navbar .menu')
+      if (!el) return
+      const scrollLeft = el.scrollLeft
+      el.scrollTo({
+        left: scrollLeft + deltaX,
+        behavior: 'smooth'
+      })
+    }
+
+    const onArrowLeftClick = () => {
+      scrollNavbar(-150)
+    }
+
+    const onArrowRightClick = () => {
+      scrollNavbar(150)
+    }
+
     onMounted(() => {
       detectOverflow()
       window.addEventListener('resize', detectOverflow)
@@ -166,7 +202,9 @@ export default defineComponent({
       navbarItemsInMenu,
       navbarItemsFixedInNavbar,
       setMenuOpen,
-      commitAction
+      commitAction,
+      onArrowLeftClick,
+      onArrowRightClick
     }
   }
 })
