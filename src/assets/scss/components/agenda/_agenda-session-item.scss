@@ -37,12 +37,15 @@
             background-color: #d33a3a;
           }
 
+          span {
+            white-space: nowrap;
+          }
+
           .status {
             display: block;
             margin-bottom: 2px;
             font-size: 0.65rem;
             font-weight: 400;
-            white-space: nowrap;
           }
         }
 
