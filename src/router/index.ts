@@ -5,7 +5,7 @@
 
 import { camelCase } from 'lodash'
 import Vue from 'vue'
-import VueRouter from 'vue-router'
+import VueRouter, { Location } from 'vue-router'
 import { LanguageType, defaultLanguageType, availableLanguageTypes, LanguagePack } from '@/services/language'
 import { MetaOptions } from '@/services/meta'
 import { scrollTo, Position } from '@/utils/scrollTo'
@@ -58,10 +58,15 @@ export function createRouter (inject: MethodInject): VueRouter {
   })
 
   router.beforeEach((to, from, next) => {
-    const languageType = to.params.languageType
+    let languageType = to.params.languageType
+    const forceLanguageType = to.query.lang as string
     if (languageType && !(availableLanguageTypes as string[]).includes(languageType)) {
       next('/')
     } else {
+      if (forceLanguageType && (availableLanguageTypes as string[]).includes(forceLanguageType)) {
+        languageType = forceLanguageType
+      }
+
       inject.setLanguageType(languageType as LanguageType || defaultLanguageType)
 
       const routeName = to.name ?? ''

@@ -126,8 +126,29 @@ export default defineComponent({
       }, 1000)
     }
 
-    watch(() => router.currentRoute, () => {
-      data.isInApp || (data.isInApp = router.currentRoute.query.mode === 'app')
+    watch(() => router.currentRoute, (to) => {
+      if (to.params.languageType !== languageService.languageType) {
+        router.replace({
+          ...to as Location,
+          params: {
+            ...to.params,
+            languageType: languageService.languageType
+          },
+          query: {
+            ...to.query,
+            lang: undefined
+          }
+        })
+      } else if (to.query.lang) {
+        router.replace({
+          ...to as Location,
+          query: {
+            ...to.query,
+            lang: undefined
+          }
+        })
+      }
+      data.isInApp || (data.isInApp = to.query.mode === 'app')
       data.isInApp || detectAnnouncementRoute()
     })
 
