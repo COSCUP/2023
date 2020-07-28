@@ -29,7 +29,7 @@
           <router-view></router-view>
         </keep-alive>
       </transition>
-      <SponsorFooter></SponsorFooter>
+      <SponsorFooter v-if="!isInApp"></SponsorFooter>
       <Footer v-if="!isInApp"></Footer>
     </div>
     <FullPageProgress v-show="fullPageProgressService.isLoading">

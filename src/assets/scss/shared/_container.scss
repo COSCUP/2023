@@ -23,6 +23,7 @@
 
     .page-container {
       width: 100%;
+      min-width: 100vw;
       min-height: calc(100vh - var(--navbar-height));
       transition-property: transform, opacity;
       transition-duration: 0.3s;
