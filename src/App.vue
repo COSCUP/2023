@@ -30,7 +30,7 @@
         </keep-alive>
       </transition>
       <SponsorFooter></SponsorFooter>
-      <Footer></Footer>
+      <Footer v-if="!isInApp"></Footer>
     </div>
     <FullPageProgress v-show="fullPageProgressService.isLoading">
     </FullPageProgress>
@@ -39,8 +39,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, nextTick, onBeforeUnmount, watch, onBeforeUpdate, reactive, toRefs } from '@vue/composition-api'
-import { Location } from 'vue-router'
+import { defineComponent, onMounted, onBeforeUnmount, watch, onBeforeUpdate, reactive, toRefs, nextTick } from '@vue/composition-api'
+import { Location, Route } from 'vue-router'
 import Navbar from '@/components/App/Navbar/index.vue'
 import SponsorFooter from '@/components/App/SponsorFooter.vue'
 import Footer from '@/components/App/Footer.vue'
@@ -120,37 +120,18 @@ export default defineComponent({
       }
     }
 
+    const onRouteChange = (to: Route) => {
+      data.isInApp || (data.isInApp = to.query.mode === 'app')
+      data.isInApp || detectAnnouncementRoute()
+    }
+
     const onAppRender = () => {
       setTimeout(() => {
         data.isInApp || detectAnnouncementUpdate()
       }, 1000)
     }
 
-    watch(() => router.currentRoute, (to) => {
-      if (to.params.languageType !== languageService.languageType) {
-        router.replace({
-          ...to as Location,
-          params: {
-            ...to.params,
-            languageType: languageService.languageType
-          },
-          query: {
-            ...to.query,
-            lang: undefined
-          }
-        })
-      } else if (to.query.lang) {
-        router.replace({
-          ...to as Location,
-          query: {
-            ...to.query,
-            lang: undefined
-          }
-        })
-      }
-      data.isInApp || (data.isInApp = to.query.mode === 'app')
-      data.isInApp || detectAnnouncementRoute()
-    })
+    watch(() => router.currentRoute, onRouteChange)
 
     onBeforeUpdate(() => {
       if (data.currentRouteName !== router.currentRoute.name) {
@@ -165,8 +146,7 @@ export default defineComponent({
       breakpointService.startDetect()
       themeService.startDetect()
       await nextTick()
-      data.isInApp || (data.isInApp = router.currentRoute.query.mode === 'app')
-      data.isInApp || detectAnnouncementRoute()
+      onRouteChange(router.currentRoute)
     })
 
     onBeforeUnmount(() => {
