@@ -4,6 +4,10 @@
 // https://opensource.org/licenses/MIT
 
 @mixin sponsor-footer {
+  &.in-app #sponsor-footer {
+    display: none;
+  }
+
   #sponsor-footer {
     position: sticky;
     left: 0;

@@ -12,7 +12,7 @@
       'in-app': isInApp,
     }"
   >
-    <Navbar v-if="!isInApp"></Navbar>
+    <Navbar></Navbar>
     <div
       :class="{
         'scroll-lock': scrollLockService.isLocked,
@@ -29,8 +29,8 @@
           <router-view></router-view>
         </keep-alive>
       </transition>
-      <SponsorFooter v-if="!isInApp"></SponsorFooter>
-      <Footer v-if="!isInApp"></Footer>
+      <SponsorFooter></SponsorFooter>
+      <Footer></Footer>
     </div>
     <FullPageProgress v-show="fullPageProgressService.isLoading">
     </FullPageProgress>

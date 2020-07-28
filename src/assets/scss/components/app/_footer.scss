@@ -4,6 +4,10 @@
 // https://opensource.org/licenses/MIT
 
 @mixin footer {
+  &.in-app #footer {
+    display: none;
+  }
+
   #footer {
     position: sticky;
     top: 100vh;

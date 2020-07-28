@@ -4,6 +4,16 @@
 // https://opensource.org/licenses/MIT
 
 @mixin navbar {
+  &.in-app #navbar {
+    .items {
+      justify-content: flex-end;
+
+      .navbar-item-container:not(.language-switch):not(.theme-toggle) {
+        display: none;
+      }
+    }
+  }
+
   #navbar {
     z-index: 2;
     display: flex;

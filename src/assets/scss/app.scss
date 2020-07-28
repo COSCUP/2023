@@ -32,9 +32,9 @@ body {
   height: 100%;
   padding-top: var(--navbar-height);
 
-  &.in-app {
-    --navbar-height: 0;
-  }
+  // &.in-app {
+  //   --navbar-height: 0;
+  // }
 
   @include container;
   @include full-page-progress;
