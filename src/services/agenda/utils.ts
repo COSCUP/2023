@@ -270,6 +270,14 @@ const generateSessionPopupContentHtml = async (session: Session, language: 'en' 
           .join('')
       }
     </div>
+    ${
+      session.co_write
+        ? `<div class="collaborative-note">
+            <span>${language === 'en' ? 'Collaborative note' : '共筆'}</span>
+            <a href="${session.co_write}" target="_blank" rel="noopener noreferrer">${session.co_write}</a>
+          </div>`
+        : ''
+    }
   </header>
   <section class="detail-description markdown">
     ${await markdown(session[language].description)}

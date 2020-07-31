@@ -80,6 +80,15 @@
           border-radius: 16px;
         }
       }
+
+      .collaborative-note {
+        margin-top: 2rem;
+
+        a {
+          text-decoration: none;
+          color: var(--color-coscup-green);
+        }
+      }
     }
 
     .detail-description {
