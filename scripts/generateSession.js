@@ -94,7 +94,8 @@ function genResult (talks, rooms, speakers) {
           '\n\n---\n\n' + ((s.answers.find(a => a.question.id === 467) || {}).answer || s.description)
       },
       speakers: s.speakers.map(ss => ss.code),
-      tags: s.answers.find(a => a.question.id === 413) !== undefined ? [s.answers.find(a => a.question.id === 413).options[0].answer.en] : []
+      tags: s.answers.find(a => a.question.id === 413) !== undefined ? [s.answers.find(a => a.question.id === 413).options[0].answer.en] : [],
+      co_write: s.answers.find(a => a.question.id === 550) !== undefined ? s.answers.find(a => a.question.id === 550).answer : null
     }
   })
 
