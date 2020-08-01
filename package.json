@@ -14,7 +14,7 @@
     "pre-build:generate-session": "[ -n \"$PRETALX_TOKEN\" ] && node ./scripts/generateSession.js > public/json/session.json || curl -o public/json/session.json https://coscup.org/2020/json/session.json",
     "pre-build:generate-staff": "node ./scripts/generateStaff.js > public/json/staff.json",
     "pre-build:generate-sponsor": "node ./scripts/generateSponsor.js > public/json/sponsor.json",
-    "pre-build:optimize-png": "node ./scripts/optimizePng.js",
+    "utility:optimize-png": "node ./scripts/optimizePng.js",
     "after-build:generate-session-popup-pages": "npm run ts-script -- ./scripts/generateSessionPopupPages.ts",
     "end-build:generate-sitemap": "node ./scripts/generateSitemap.js",
     "pre-build": "run-p pre-build:*",
