@@ -31,13 +31,9 @@
     "editor.formatOnPaste": true,
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": true,
+      "source.fixAll.eslint": true
     },
-    "eslint.validate": [
-      "typescript",
-      "javascript",
-      "vue"
-    ],
+    "eslint.validate": ["typescript", "javascript", "vue"],
     "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
     "javascript.format.placeOpenBraceOnNewLineForControlBlocks": false,
     "javascript.format.placeOpenBraceOnNewLineForFunctions": false,
@@ -48,6 +44,7 @@
     "vetur.format.defaultFormatter.scss": "prettier",
     "vetur.format.defaultFormatter.js": "none",
     "vetur.format.defaultFormatter.ts": "none",
+    "vetur.completion.autoImport": true,
     "attrsSorter.order": [
       "is",
       "v-for",
