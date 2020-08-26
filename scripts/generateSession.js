@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 /* eslint-disable @typescript-eslint/no-var-requires */
 const axios = require('axios')
 const md5 = require('js-md5')
@@ -95,7 +96,9 @@ function genResult (talks, rooms, speakers) {
       },
       speakers: s.speakers.map(ss => ss.code),
       tags: s.answers.find(a => a.question.id === 413) !== undefined ? [s.answers.find(a => a.question.id === 413).options[0].answer.en] : [],
-      co_write: s.answers.find(a => a.question.id === 550) !== undefined ? s.answers.find(a => a.question.id === 550).answer : null
+      co_write: s.answers.find(a => a.question.id === 550) !== undefined ? s.answers.find(a => a.question.id === 550).answer : null,
+      slide: s.answers.find(a => a.question.id === 566) !== undefined ? s.answers.find(a => a.question.id === 566).answer : null,
+      record: s.answers.find(a => a.question.id === 567) !== undefined ? s.answers.find(a => a.question.id === 567).answer : null
     }
   })
 
