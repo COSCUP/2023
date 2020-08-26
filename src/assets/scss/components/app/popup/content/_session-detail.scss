@@ -152,7 +152,8 @@
     }
 
     @include xsOnly {
-      .detail-description {
+      .detail-description,
+      .detail-attachment {
         padding: 2rem 0;
       }
 
