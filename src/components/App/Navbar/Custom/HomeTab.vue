@@ -15,7 +15,6 @@
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api'
 import InternalLink from '../Basic/InternalLink.vue'
-import { useBreakpointService } from '@/services/hooks'
 
 export default defineComponent({
   name: 'HomeTab',
@@ -23,11 +22,7 @@ export default defineComponent({
     InternalLink
   },
   setup () {
-    const breakpointService = useBreakpointService()
-
-    return {
-
-    }
+    return {}
   }
 })
 </script>
