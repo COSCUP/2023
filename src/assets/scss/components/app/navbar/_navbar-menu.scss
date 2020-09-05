@@ -1,0 +1,43 @@
+@mixin navbar-menu {
+  $menu-width: 300px;
+
+  .navbar-menu {
+    position: relative;
+
+    .menu-container {
+      position: fixed;
+      top: 0;
+      right: -$menu-width;
+      width: 80%;
+      max-width: $menu-width;
+      height: 100%;
+      padding: 2rem 0;
+      background-color: var(--color-navbar-background);
+      overflow-y: auto;
+      z-index: 10;
+      transition: all 0.3s;
+    }
+
+    .menu-mask {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.3);
+      z-index: 9;
+    }
+
+    &.open {
+      .menu-container {
+        right: 0;
+        transition: all 0.3s;
+      }
+
+      .menu-mask {
+        display: block;
+      }
+    }
+  }
+}

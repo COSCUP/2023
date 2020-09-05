@@ -26,121 +26,110 @@
     >
       <Icon :name="'angle-right'" />
     </div>
-    <div
-      class="menu"
-      :class="{
-        open: isMenuOpen,
-      }"
-    >
-      <div class="menu-mask" @click="setMenuOpen(false)"></div>
-      <div class="menu-container">
-        <NavbarItem
-          v-for="navbarItem in navbarItemsInMenu"
-          :key="navbarItem.name"
-          :navbar-item="navbarItem"
-          @action="commitAction"
-          @click="setMenuOpen(false)"
-        >
-          <template v-if="navbarItem.name === 'home'" v-slot:prefix>
-            <img class="logo-icon" :src="`/2020/images/logo.svg`" />
-          </template>
-          <template v-if="navbarItem.name === 'home'" v-slot:default>
-            <p style="font-weight: 900;">COSCUP</p>
-            <p
-              style="
-                font-weight: 300;
-                font-size: 0.75rem;
-                text-align: left;
-                color: var(--color-text);
-              "
-            >
-              2020
-            </p>
-          </template>
 
-          <template
-            v-else-if="navbarItem.name === 'themeToggle'"
-            v-slot:default
-          >
-            <Icon
-              :name="themeService.themeType === 'light' ? 'sun' : 'moon'"
-            ></Icon>
-          </template>
-        </NavbarItem>
-      </div>
-    </div>
-    <div class="items">
-      <NavbarItem
-        v-for="navbarItem in navbarItemsFixedInNavbar"
-        :key="navbarItem.name"
-        :navbar-item="navbarItem"
-        @action="commitAction"
-      >
-        <template v-if="navbarItem.name === 'home'" v-slot:prefix>
-          <img class="logo-icon" :src="`/2020/images/logo.svg`" />
-        </template>
-        <template v-if="navbarItem.name === 'home'" v-slot:default>
-          <p style="font-weight: 900;">COSCUP</p>
-          <p
-            style="
-              font-weight: 300;
-              font-size: 0.75rem;
-              text-align: left;
-              color: var(--color-text);
-            "
-          >
-            2020
-          </p>
-        </template>
+    <NavbarMenu
+      :value="isMenuOpen"
+      @input="setMenuOpen"
+      @action="commitAction"
+      :navbar-item-data-list="menuNavbarItemDataList"
+    ></NavbarMenu>
 
-        <template v-else-if="navbarItem.name === 'menuToggle'" v-slot:default>
-          <Icon name="bars"></Icon>
-        </template>
-
-        <template v-else-if="navbarItem.name === 'themeToggle'" v-slot:default>
-          <Icon
-            :name="themeService.themeType === 'light' ? 'sun' : 'moon'"
-          ></Icon>
-        </template>
-      </NavbarItem>
-    </div>
+    <NavbarItemList
+      :navbar-item-data-list="navbarItemDataList"
+      @action="commitAction"
+    ></NavbarItemList>
   </nav>
 </template>
 
 <script lang="ts">
 import { debounce } from 'lodash'
-import { defineComponent, ref, computed, watch, onMounted, onBeforeUnmount } from '@vue/composition-api'
+import { defineComponent, computed, watch, onMounted, onBeforeUnmount, reactive, toRefs } from '@vue/composition-api'
 import NavbarItem from './NavbarItem.vue'
-import { navbarItems, NavbarAction } from './navbar'
-import { useBreakpointService, useScrollLockService, useThemeService } from '@/services/hooks'
+import NavbarMenu from './NavbarMenu.vue'
+import NavbarItemList from './NavbarItemList.vue'
+import { useBreakpointService, useScrollLockService, useThemeService, useLanguageService } from '@/services/hooks'
+import { getInternalLinkDataList, getExternalLinkDataList, getLanguageSwitchData, getThemeToggleData, getMenuToggleData, ActionType } from './navbar'
+import { useRouter } from '@/router'
 
 export default defineComponent({
   name: 'Navbar',
   components: {
-    NavbarItem
+    NavbarItem,
+    NavbarMenu,
+    NavbarItemList
   },
   setup () {
+    const router = useRouter()
     const breakpointService = useBreakpointService()
+    const languageService = useLanguageService()
     const scrollLockService = useScrollLockService()
     const themeService = useThemeService()
-    const isMenuOpen = ref(false)
-    const isOverflow = ref(false)
-    const navbarItemsInMenu = computed(() => {
-      if (breakpointService.smAndUp) return navbarItems
-      return navbarItems.filter(item => !item.hiddenInMenu)
+    const data = reactive({
+      isMenuOpen: false,
+      isOverflow: false
     })
-    const navbarItemsFixedInNavbar = computed(() => {
-      if (breakpointService.smAndUp) return []
-      return navbarItems.filter(item => item.fixedInNavbar)
+
+    const getNavbarItemText = (itemName) => languageService.languagePack.app.navbar[itemName]
+
+    const internalLinkDataList = computed(() => {
+      return getInternalLinkDataList({
+        currentRoute: router.currentRoute,
+        getNavbarItemText
+      })
     })
+
+    const externalLinksDataList = computed(() => {
+      return getExternalLinkDataList({
+        getNavbarItemText
+      })
+    })
+
+    const languageSwitchData = computed(() => {
+      return getLanguageSwitchData({
+        currentLanguageType: languageService.languageType,
+        currentRoute: router.currentRoute,
+        getNextLanguageTypeText: (nextLanguageType) =>
+          languageService.languagePackSet[nextLanguageType].app.navbar.languageSwitch
+      })
+    })
+
+    const themeToggleData = computed(() => {
+      return getThemeToggleData({
+        currentThemeType: themeService.themeType
+      })
+    })
+
+    const menuToggleData = getMenuToggleData()
+
+    const fullNavbarItemDataList = computed(() => [
+      ...internalLinkDataList.value,
+      ...externalLinksDataList.value,
+      languageSwitchData.value,
+      themeToggleData.value,
+      menuToggleData
+    ])
+
+    const menuNavbarItemDataList = computed(() => {
+      return fullNavbarItemDataList.value.filter(data => !data.options.hiddenInMenu)
+    })
+
+    const navbarItemDataList = computed(() => {
+      if (breakpointService.smAndUp) {
+        return fullNavbarItemDataList.value
+          .filter((data) => data.options.name !== 'menuToggle')
+      }
+      return fullNavbarItemDataList.value.filter(data => data.options.fixedInNavbar)
+    })
+
     const setMenuOpen = (isOpen: boolean) => {
-      isMenuOpen.value = isOpen
+      data.isMenuOpen = isOpen
       isOpen ? scrollLockService.lock() : scrollLockService.unlock()
     }
-    const commitAction = (action: NavbarAction, args?: never) => {
-      const actions: { [action in NavbarAction]: () => void } = {
-        [NavbarAction.ToggleMenu]: () => { setMenuOpen(!isMenuOpen.value) },
-        [NavbarAction.ToggleTheme]: () => {
+
+    const commitAction = (action: ActionType, args?: never) => {
+      const actions: { [action in ActionType]: () => void } = {
+        'toggle-menu': () => { setMenuOpen(!data.isMenuOpen) },
+        'toggle-theme': () => {
           themeService.themeType = themeService.themeType === 'light' ? 'dark' : 'light'
           themeService.savePreference()
         }
@@ -148,15 +137,16 @@ export default defineComponent({
       if (!actions[action]) return
       actions[action].apply(null, args || [])
     }
+
     const detectOverflow = debounce(() => {
       if (breakpointService.xsOnly) return
       const windowWidth = window.innerWidth
       const menuItemTotalWidth = Array.from<HTMLElement>(
-        document.querySelectorAll('#navbar .menu .navbar-item-container')
+        document.querySelectorAll('#navbar .navbar-item-list .navbar-item-container')
       )
         .map(element => element.offsetWidth)
         .reduce((a, b) => a + b, 0)
-      isOverflow.value = windowWidth < menuItemTotalWidth
+      data.isOverflow = windowWidth < menuItemTotalWidth
     }, 300)
 
     watch(() => breakpointService.xsOnly, (newValue: boolean) => {
@@ -166,7 +156,7 @@ export default defineComponent({
     })
 
     const scrollNavbar = (deltaX: number) => {
-      const el = document.querySelector('#navbar .menu')
+      const el = document.querySelector('#navbar .navbar-item-list')
       if (!el) return
       const scrollLeft = el.scrollLeft
       el.scrollTo({
@@ -193,14 +183,12 @@ export default defineComponent({
     })
 
     return {
+      ...toRefs(data),
       breakpointService,
       scrollLockService,
       themeService,
-      isMenuOpen,
-      isOverflow,
-      navbarItems,
-      navbarItemsInMenu,
-      navbarItemsFixedInNavbar,
+      menuNavbarItemDataList,
+      navbarItemDataList,
       setMenuOpen,
       commitAction,
       onArrowLeftClick,

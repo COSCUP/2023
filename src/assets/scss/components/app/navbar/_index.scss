@@ -1,0 +1,83 @@
+// Copyright (c) 2020 DevilTea
+//
+// This software is released under the MIT License.
+// https://opensource.org/licenses/MIT
+@import "./navbar-menu";
+@import "./navbar-item-list";
+@import "./navbar-item";
+
+@mixin navbar {
+  &.in-app #navbar {
+    .navbar-item-list {
+      justify-content: flex-end;
+
+      .navbar-item-container:not(.language-switch):not(.theme-toggle) {
+        display: none;
+      }
+    }
+  }
+
+  #navbar {
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: var(--navbar-height);
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: var(--color-navbar-background);
+    box-shadow: 0 2px 4px rgba(65, 65, 65, 0.25);
+
+    @include navbar-menu;
+    @include navbar-item-list;
+    @include navbar-item;
+
+    @include smAndUp {
+      &.overflow {
+        padding: 0 2rem;
+
+        .overflow-left-container,
+        .overflow-right-container {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          width: 2rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+
+          animation: breathe 3s linear infinite;
+
+          @keyframes breathe {
+            0% {
+              opacity: 0;
+            }
+            50% {
+              opacity: 1;
+            }
+            100% {
+              opacity: 0;
+            }
+          }
+        }
+
+        .overflow-left-container {
+          left: 0;
+        }
+
+        .overflow-right-container {
+          right: 0;
+        }
+      }
+    }
+
+    @include xsOnly {
+      .overflow-left-container,
+      .overflow-right-container {
+        display: none;
+      }
+    }
+  }
+}

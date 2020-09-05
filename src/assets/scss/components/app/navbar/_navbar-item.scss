@@ -1,0 +1,112 @@
+@mixin navbar-item {
+  .navbar-menu {
+    .navbar-item-container {
+      transition: all 0.3s;
+
+      &.active .navbar-item,
+      &:hover .navbar-item {
+        color: var(--color-primary);
+        background-color: rgba(128, 128, 128, 0.2);
+        transition: all 0.2s;
+      }
+
+      .navbar-item {
+        display: block;
+        padding: 1rem 2rem;
+        text-decoration: none;
+        color: var(--color-text);
+        background-color: transparent;
+        outline: none;
+        border: none;
+
+        .navbar-item-content {
+          display: inline-flex;
+          align-items: center;
+
+          & * {
+            font-size: 1rem;
+            font-weight: 500;
+          }
+        }
+
+        &.external-link {
+          .navbar-item__suffix {
+            width: 0.75rem;
+            height: 0.75rem;
+            font-size: 0.75rem;
+            margin-left: 0.5rem;
+            transform: translate(0, -30%);
+          }
+        }
+      }
+    }
+  }
+
+  .navbar-item-list {
+    .navbar-item-container {
+      position: relative;
+      height: 100%;
+      transition: all 0.3s;
+
+      @include smAndUp {
+        &::after {
+          content: "";
+          display: block;
+          width: 0;
+          height: 3px;
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          background-color: var(--color-primary);
+          transition: all 0.2s;
+        }
+
+        &.active::after {
+          width: 100%;
+        }
+      }
+
+      &.active .navbar-item,
+      &:hover .navbar-item {
+        color: var(--color-primary);
+        background-color: rgba(128, 128, 128, 0.2);
+        transition: all 0.2s;
+      }
+
+      .navbar-item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-width: 60px;
+        height: 100%;
+        padding: 0 1rem;
+        text-decoration: none;
+        white-space: nowrap;
+        color: var(--color-text);
+        background-color: transparent;
+        outline: none;
+        border: none;
+        cursor: pointer;
+
+        .navbar-item-content {
+          display: flex;
+
+          & * {
+            font-size: 1rem;
+            font-weight: 500;
+          }
+        }
+
+        &.external-link {
+          .navbar-item__suffix {
+            width: 0.75rem;
+            height: 0.75rem;
+            font-size: 0.75rem;
+            margin-left: 0.5rem;
+            transform: translate(0, -30%);
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+@mixin navbar-item-list {
+  .navbar-item-list {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+
+    @include xsOnly {
+      justify-content: flex-start;
+    }
+  }
+
+  &.overflow .navbar-item-list {
+    justify-content: flex-start;
+    overflow-x: auto;
+
+    @include no-scrollbar;
+  }
+}
