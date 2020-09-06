@@ -1,3 +1,18 @@
+@mixin navbar-item-theme-colors {
+  @include theme-colors-of("all", ".navbar-item") {
+    --color-text-hover: #{$coscup-green};
+    --color-background: transparent;
+    --color-background-hover: #80808033;
+    --color-underline: #{$coscup-green};
+  }
+  @include theme-colors-of("light", ".navbar-item") {
+    --color-text: #{$text-light};
+  }
+  @include theme-colors-of("dark", ".navbar-item") {
+    --color-text: #{$text-dark};
+  }
+}
+
 @mixin navbar-item {
   .navbar-menu {
     .navbar-item-container {
@@ -5,8 +20,8 @@
 
       &.active .navbar-item,
       &:hover .navbar-item {
-        color: var(--color-primary);
-        background-color: rgba(128, 128, 128, 0.2);
+        color: var(--color-text-hover);
+        background-color: var(--color-background-hover);
         transition: all 0.2s;
       }
 
@@ -15,7 +30,7 @@
         padding: 1rem 2rem;
         text-decoration: none;
         color: var(--color-text);
-        background-color: transparent;
+        background-color: var(--color-background);
         outline: none;
         border: none;
 
@@ -57,7 +72,7 @@
           position: absolute;
           left: 0;
           bottom: 0;
-          background-color: var(--color-primary);
+          background-color: var(--color-underline);
           transition: all 0.2s;
         }
 
@@ -68,8 +83,8 @@
 
       &.active .navbar-item,
       &:hover .navbar-item {
-        color: var(--color-primary);
-        background-color: rgba(128, 128, 128, 0.2);
+        color: var(--color-text-hover);
+        background-color: var(--color-background-hover);
         transition: all 0.2s;
       }
 
@@ -83,7 +98,7 @@
         text-decoration: none;
         white-space: nowrap;
         color: var(--color-text);
-        background-color: transparent;
+        background-color: var(--color-background);
         outline: none;
         border: none;
         cursor: pointer;

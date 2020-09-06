@@ -2,6 +2,19 @@
 //
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
+@mixin footer-theme-colors {
+  @include theme-colors-of("all", "#footer") {
+    --color-text-hover: #{$coscup-green};
+  }
+  @include theme-colors-of("light", "#footer") {
+    --color-text: #{text-light};
+    --color-background: #{darken($background-light, 10)};
+  }
+  @include theme-colors-of("dark", "#footer") {
+    --color-text: #{text-dark};
+    --color-background: #{lighten($background-dark, 8)};
+  }
+}
 
 @mixin footer {
   &.in-app #footer {
@@ -17,7 +30,7 @@
     align-items: center;
     width: 100vw;
     padding: 2rem 0;
-    background-color: var(--color-footer-background);
+    background-color: var(--color-background);
 
     .footer__section {
       display: flex;
@@ -47,7 +60,7 @@
           transition: color 0.1s;
 
           &:hover {
-            color: var(--color-primary);
+            color: var(--color-text-hover);
             transition: color 0.1s;
           }
         }

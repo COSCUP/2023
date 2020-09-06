@@ -14,6 +14,21 @@
 @include native-variables;
 @include font;
 @include markdown;
+
+body[data-theme="light"] {
+  --color-text: #{$text-light};
+  --color-background: #{$background-light};
+}
+
+body[data-theme="dark"] {
+  --color-text: #{$text-dark};
+  --color-background: #{$background-dark};
+}
+
+@include navbar-theme-colors;
+@include footer-theme-colors;
+@include sponsor-footer-theme-colors;
+
 *,
 *::before,
 *::after {
@@ -31,10 +46,6 @@ body {
   position: relative;
   height: 100%;
   padding-top: var(--navbar-height);
-
-  // &.in-app {
-  //   --navbar-height: 0;
-  // }
 
   @include container;
   @include full-page-progress;

@@ -6,9 +6,11 @@
 @import "./reset";
 @import "./font";
 @import "./variables";
+@import "./colors";
 @import "./mixins";
 @import "./container";
 @import "./markdown";
+@import "./themes";
 
 @mixin native-variables {
   // native variables

@@ -1,3 +1,15 @@
+@mixin navbar-menu-theme-colors {
+  @include theme-colors-of("all", ".navbar-menu") {
+    --color-mask-background: #0000004d;
+  }
+  @include theme-colors-of("light", ".navbar-menu") {
+    --color-container-background: #fff;
+  }
+  @include theme-colors-of("dark", ".navbar-menu") {
+    --color-container-background: #{$coscup-dark-blue};
+  }
+}
+
 @mixin navbar-menu {
   $menu-width: 300px;
 
@@ -12,7 +24,7 @@
       max-width: $menu-width;
       height: 100%;
       padding: 2rem 0;
-      background-color: var(--color-navbar-background);
+      background-color: var(--color-container-background);
       overflow-y: auto;
       z-index: 10;
       transition: all 0.3s;
@@ -25,7 +37,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.3);
+      background-color: var(--color-mask-background);
       z-index: 9;
     }
 

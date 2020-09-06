@@ -1,0 +1,12 @@
+// $theme: 'light' | 'dark'
+@mixin theme-colors-of($theme, $css-selector) {
+  @if $theme == "all" {
+    #{$css-selector} {
+      @content;
+    }
+  } @else {
+    body[data-theme="#{$theme}"] #{$css-selector} {
+      @content;
+    }
+  }
+}

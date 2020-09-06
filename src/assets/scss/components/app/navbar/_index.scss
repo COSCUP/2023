@@ -6,6 +6,18 @@
 @import "./navbar-item-list";
 @import "./navbar-item";
 
+@mixin navbar-theme-colors {
+  @include theme-colors-of("light", "#navbar") {
+    --color-background: #{$background-light};
+  }
+  @include theme-colors-of("dark", "#navbar") {
+    --color-background: #{lighten($background-dark, 8)};
+  }
+
+  @include navbar-item-theme-colors;
+  @include navbar-menu-theme-colors;
+}
+
 @mixin navbar {
   &.in-app #navbar {
     .navbar-item-list {
@@ -26,7 +38,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    background-color: var(--color-navbar-background);
+    background-color: var(--color-background);
     box-shadow: 0 2px 4px rgba(65, 65, 65, 0.25);
 
     @include navbar-menu;
