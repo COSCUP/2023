@@ -49,7 +49,7 @@ export default defineComponent({
 
   .year {
     margin-top: 4px;
-    font-weight: 300 !important;
+    font-weight: 400 !important;
     font-size: 0.75rem !important;
     text-align: left;
     color: var(--color-text);
@@ -68,6 +68,10 @@ export default defineComponent({
   .navbar-item-list {
     .home-tab {
       margin-right: auto;
+
+      &:not(&::hover).active .navbar-item {
+        background-color: transparent !important;
+      }
     }
   }
 }
