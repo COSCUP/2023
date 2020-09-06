@@ -35,6 +35,7 @@ class ThemeServiceConcrete implements ThemeService {
     const themeClassNameList = Array.from(document.body.classList).filter((className) => className.startsWith('theme-'))
     document.body.classList.remove(...themeClassNameList)
     document.body.classList.add(`theme-${this.themeType}`)
+    document.body.setAttribute('data-theme', this.themeType)
   }, 30)
 
   public get themeType () {
