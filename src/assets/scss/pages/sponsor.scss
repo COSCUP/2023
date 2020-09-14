@@ -5,10 +5,32 @@
 
 @import "../shared";
 
+@mixin sponsor-theme-colors {
+  @include theme-colors-of("all", "#sponsor") {
+    --color-avatar-border: #eee;
+    --color-markdown-link: var(--color-markdown-link);
+    --color-markdown-link-hover: var(--color-markdown-link-hover);
+  }
+  @include theme-colors-of("light", "#sponsor") {
+    --color-card-background: #{$background-light};
+    --color-link: #{$coscup-green};
+    --color-link-hover: #{lighten($coscup-green, 8)};
+    --opacity-of-image: 1;
+  }
+  @include theme-colors-of("dark", "#sponsor") {
+    --color-card-background: #{lighten($background-dark, 8)};
+    --color-link: #{lighten($coscup-green, 8)};
+    --color-link-hover: #{lighten($coscup-green, 15)};
+    --opacity-of-image: 0.8;
+  }
+}
+
+@include sponsor-theme-colors;
+
 @include page("sponsor") {
   .card {
     padding: 2rem;
-    background-color: var(--color-sponsor-card-background);
+    background-color: var(--color-card-background);
     border-radius: 10px;
     box-shadow: 0 0 2rem rgba(0, 0, 0, 0.1);
   }
@@ -16,11 +38,11 @@
   a {
     word-break: break-word;
     text-decoration: none;
-    color: var(--color-markdown-link);
+    color: var(--color-link);
     transition: all 0.2s;
 
     &:hover {
-      color: var(--color-markdown-link-hover);
+      color: var(--color-link-hover);
       transition: all 0.2s;
     }
   }
@@ -36,6 +58,7 @@
 
       &.level {
         font-size: 2rem;
+        font-weight: 300;
       }
     }
 
@@ -54,6 +77,7 @@
         background-color: #fff;
         border-radius: 5px;
         vertical-align: top;
+        opacity: var(--opacity-of-image);
 
         img {
           display: block;
@@ -84,10 +108,23 @@
             padding: 2rem 0 0.5rem 0;
             background: linear-gradient(
               rgba(0, 0, 0, 0) 0%,
-              var(--color-sponsor-card-background) 70%,
-              var(--color-sponsor-card-background) 100%
+              var(--color-card-background) 60%,
+              var(--color-card-background) 100%
             );
             cursor: pointer;
+
+            span {
+              display: inline-block;
+              pointer-events: none;
+              color: var(--color-link);
+              transition: all 0.3s;
+            }
+
+            &:hover span {
+              color: var(--color-link-hover);
+              transform: scale(1.05);
+              transition: all 0.3s;
+            }
           }
         }
 
@@ -99,7 +136,7 @@
           h2 {
             margin-bottom: 1rem;
             font-size: 1.75rem;
-            font-weight: 500;
+            font-weight: 300;
           }
         }
       }

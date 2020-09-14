@@ -13,9 +13,7 @@
       </h2>
       <p class="call-for-sponsorship">
         {{ languageService.languagePack.sponsor.callForSponsorship.content }}
-        <a href="mailto:sponsorship@coscup.org">
-          sponsorship@coscup.org
-        </a>
+        <a href="mailto:sponsorship@coscup.org"> sponsorship@coscup.org </a>
       </p>
     </div>
     <div
@@ -35,9 +33,9 @@
           <a :href="`${sponsor.link}`" target="_blank" rel="noopener">
             <img
               :src="`/2020/images/sponsors/${sponsor.image}`"
-              :alt="
-                `Sponsor ${sponsor.name[languageService.languageType]}'s logo`
-              "
+              :alt="`Sponsor ${
+                sponsor.name[languageService.languageType]
+              }'s logo`"
             />
           </a>
         </div>
@@ -51,7 +49,9 @@
             v-html="sponsor.intro[languageService.languageType]"
             class="markdown"
           ></article>
-          <div class="readmore" @click="onReadmoreClick">Read More</div>
+          <div class="readmore" @click="onReadmoreClick">
+            <span>Read More</span>
+          </div>
         </div>
       </div>
     </div>
