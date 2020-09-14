@@ -7,6 +7,23 @@
 @import "../components/agenda/agenda-table-room-cell";
 @import "../components/agenda/agenda-session-item";
 
+@mixin room-theme-colors {
+  @include theme-colors-of("all", "#room") {
+    --color-logo-wrapper-background: #{$background-dark};
+    --color-logo: #{$coscup-green};
+  }
+  @include theme-colors-of("light", "#room") {
+    --color-link: #{$coscup-green};
+    --color-link-hover: #{lighten($coscup-green, 8)};
+  }
+  @include theme-colors-of("dark", "#room") {
+    --color-link: #{lighten($coscup-green, 8)};
+    --color-link-hover: #{lighten($coscup-green, 15)};
+  }
+}
+
+@include room-theme-colors;
+
 @include page("room") {
   padding: 2rem 0.5rem;
 
@@ -76,14 +93,16 @@
           vertical-align: middle;
 
           text-decoration: none;
-          color: var(--color-coscup-green-lighten-1);
+          color: var(--color-link);
+          transition: all 0.3s;
 
           &.empty {
             text-align: center;
           }
 
           &:hover {
-            color: var(--color-coscup-green-lighten-3);
+            color: var(--color-link-hover);
+            transition: all 0.3s;
           }
 
           .period {
