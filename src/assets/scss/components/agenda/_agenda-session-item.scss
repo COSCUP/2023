@@ -10,7 +10,7 @@
     height: 100%;
     border-radius: 5px;
     color: var(--color-text);
-    background-color: var(--color-agenda-session-item-background);
+    background-color: var(--color-session-background);
     text-decoration: none;
 
     .content-section {
@@ -22,7 +22,7 @@
       .track {
         display: flex;
         align-items: center;
-        color: var(--color-coscup-green-lighten-1);
+        color: var(--color-primary);
         line-height: 1.15;
         margin-bottom: 0.5rem;
 
@@ -31,7 +31,7 @@
           padding: 4px 8px;
           margin-right: 1rem;
           color: #fff;
-          background-color: var(--color-coscup-green);
+          background-color: #3ca054;
 
           &.full {
             background-color: #d33a3a;
@@ -69,7 +69,7 @@
       }
 
       .speaker-list {
-        color: var(--color-coscup-green-lighten-1);
+        color: var(--color-primary);
 
         span {
           display: inline;
@@ -93,7 +93,7 @@
           font-size: 0.8rem;
           margin-right: 0.5rem;
           padding: 4px 8px;
-          background-color: var(--color-coscup-green);
+          background-color: var(--color-primary);
           border-radius: 16px;
         }
       }

@@ -11,6 +11,7 @@
     align-items: center;
     width: 100%;
     height: 100%;
+    background-color: var(--color-room-cell-background);
 
     & > span:nth-child(1) {
       line-height: 1.5;
@@ -26,8 +27,6 @@
       align-items: center;
       margin-bottom: 0.5rem;
       padding: 4px 8px;
-      // border: solid 1px var(--color-text);
-      // border-radius: 10px;
 
       .bubble {
         display: inline-block;

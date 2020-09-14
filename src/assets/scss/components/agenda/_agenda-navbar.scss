@@ -13,7 +13,7 @@
       align-items: center;
       width: 100vw;
       padding: 2rem;
-      background-color: var(--color-navbar-background);
+      background-color: var(--color-nav-background);
 
       .tab {
         display: flex;
@@ -42,13 +42,13 @@
         }
 
         &.active {
-          border-color: var(--color-coscup-green);
+          border-color: var(--color-primary);
           transition: all 0.1s;
         }
 
         &.active,
         &:hover {
-          color: var(--color-coscup-green);
+          color: var(--color-primary);
           transition: all 0.1s;
         }
       }
