@@ -3,6 +3,19 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
+@mixin session-detail-theme-colors {
+  @include theme-colors-of("all", ".session-detail") {
+  }
+  @include theme-colors-of("light", ".session-detail") {
+    --color-primary: #{$coscup-green};
+  }
+  @include theme-colors-of("dark", ".session-detail") {
+    --color-primary: #{lighten($coscup-green, 8)};
+  }
+}
+
+@include session-detail-theme-colors;
+
 @mixin session-detail {
   .session-detail {
     word-break: break-word;
@@ -29,7 +42,7 @@
       }
 
       .track {
-        color: var(--color-coscup-green-lighten-1);
+        color: var(--color-primary);
         line-height: 1.15;
         margin-bottom: 0.5rem;
 
@@ -42,7 +55,7 @@
           &.room {
             padding: 4px 8px;
             color: #fff;
-            background-color: var(--color-coscup-green);
+            background-color: var(--color-primary);
             margin: 4px 0;
             border-radius: 4px;
           }
@@ -57,7 +70,7 @@
       }
 
       .speaker-list {
-        color: var(--color-coscup-green-lighten-1);
+        color: var(--color-primary);
 
         span {
           display: inline;
@@ -81,7 +94,7 @@
           font-size: 0.8rem;
           margin-right: 0.5rem;
           padding: 4px 8px;
-          background-color: var(--color-coscup-green);
+          background-color: var(--color-primary);
           border-radius: 16px;
         }
       }
@@ -101,7 +114,7 @@
 
         a {
           text-decoration: none;
-          color: var(--color-coscup-green);
+          color: var(--color-primary);
         }
       }
 
