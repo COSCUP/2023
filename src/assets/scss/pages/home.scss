@@ -9,8 +9,8 @@
   @include theme-colors-of("all", "#home") {
     --color-logo-wrapper-background: #{$background-dark};
     --color-logo: #{$coscup-green};
-    --color-markdown-link: var(--color-markdown-link);
-    --color-markdown-link-hover: var(--color-markdown-link-hover);
+    --color-markdown-link: var(--color-link);
+    --color-markdown-link-hover: var(--color-link-hover);
   }
   @include theme-colors-of("light", "#home") {
     --color-section-background: #{$coscup-green};
