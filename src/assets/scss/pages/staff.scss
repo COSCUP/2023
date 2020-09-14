@@ -5,6 +5,20 @@
 
 @import "../shared";
 
+@mixin staff-theme-colors {
+  @include theme-colors-of("all", "#staff") {
+    --color-avatar-border: #eee;
+  }
+  @include theme-colors-of("light", "#staff") {
+    --color-background: #{lighten($coscup-green, 50)};
+  }
+  @include theme-colors-of("dark", "#staff") {
+    --color-background: #{lighten($background-dark, 8)};
+  }
+}
+
+@include staff-theme-colors;
+
 @include page("staff") {
   .group-box-wrapper {
     position: relative;
@@ -16,7 +30,7 @@
     }
 
     &:nth-child(even) {
-      background-color: var(--color-staff-group-background);
+      background-color: var(--color-background);
     }
 
     .group-box {
@@ -58,7 +72,7 @@
                 height: 100%;
 
                 border-radius: 50%;
-                border: var(--color-staff-avatar-border) 2px solid;
+                border: var(--color-avatar-border) 5px solid;
               }
             }
           }
