@@ -3,6 +3,32 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
+@mixin markdown-theme-colors {
+  @include theme-colors-of("all", ".markdown") {
+    --color-markdown-hr: #cfcfcf;
+    --color-markdown-blockquote-side: #aaa;
+    --color-markdown-blockquote-text: #888;
+    --color-markdown-blockquote-background: #eee;
+    --color-markdown-code-text: #70996c;
+    --color-markdown-code-background: #e6e6e6;
+    --color-markdown-code-block-text: #fff;
+    --color-markdown-code-block-background: #333;
+    --color-markdown-code-block-lang-text: #999;
+    --color-markdown-table-border: #666;
+    --color-markdown-mark-background: #{lighten($coscup-green, 8)};
+  }
+  @include theme-colors-of("light", ".markdown") {
+    --color-markdown-link: #{$coscup-green};
+    --color-markdown-link-hover: #{lighten($coscup-green, 8)};
+  }
+  @include theme-colors-of("dark", ".markdown") {
+    --color-markdown-link: #{lighten($coscup-green, 8)};
+    --color-markdown-link-hover: #{lighten($coscup-green, 15)};
+  }
+}
+
+@include markdown-theme-colors;
+
 @mixin markdown {
   .markdown {
     position: relative;
