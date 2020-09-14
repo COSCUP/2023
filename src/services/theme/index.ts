@@ -4,15 +4,11 @@
 // https://opensource.org/licenses/MIT
 
 import { debounce } from 'lodash'
-import colors from './colors'
-import { ThemePack, ThemePackSet, ThemeType, themePackSet } from './themes'
-export * from './themes'
-export * from './utils'
+
+export type ThemeType = 'light' | 'dark'
 
 export interface ThemeService {
   themeType: ThemeType;
-  themePackSet: ThemePackSet;
-  readonly themePack: ThemePack;
   startDetect: () => void;
   stopDetect: () => void;
   savePreference: () => void;
@@ -20,21 +16,8 @@ export interface ThemeService {
 
 class ThemeServiceConcrete implements ThemeService {
   private _themeType: ThemeType = 'light'
-  public themePackSet: ThemePackSet = themePackSet
   private _debouncedDetectTheme = debounce(() => {
     this.themeType = this._detectColorSchema()
-    const variableStyleDom = (document.getElementById('variable') as HTMLElement)
-    const themePack: ThemePack = this.themePack
-    const themePackProperties = Object.entries(themePack)
-      .map((entry) => `--color-${entry[0]}: ${entry[1]};`)
-      .join('')
-    const colorPackProperties = Object.entries(colors)
-      .map((entry) => `--color-${entry[0]}: ${entry[1]};`)
-      .join('')
-    variableStyleDom.innerHTML = `:root {${themePackProperties + colorPackProperties}}`
-    const themeClassNameList = Array.from(document.body.classList).filter((className) => className.startsWith('theme-'))
-    document.body.classList.remove(...themeClassNameList)
-    document.body.classList.add(`theme-${this.themeType}`)
     document.body.setAttribute('data-theme', this.themeType)
   }, 30)
 
@@ -44,10 +27,6 @@ class ThemeServiceConcrete implements ThemeService {
 
   public set themeType (value: ThemeType) {
     this._themeType = value
-  }
-
-  public get themePack (): ThemePack {
-    return this.themePackSet[this.themeType]
   }
 
   private _detectSystemPrefersColorSchema (): ThemeType {
