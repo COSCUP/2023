@@ -8,18 +8,21 @@
 <template>
   <main id="map" class="page-container">
     <OlMap id="map-component" :options="mapOptions"></OlMap>
-    <div class="plan-container">
-      <div class="plan address">
-        <h2>{{ languageService.languagePack.map.name }}</h2>
-        <h3>{{ languageService.languagePack.map.address }}</h3>
+    <div class="card-container">
+      <div class="card address">
+        <h2 class="title">{{ languageService.languagePack.map.name }}</h2>
+        <h3 class="content">{{ languageService.languagePack.map.address }}</h3>
       </div>
       <div
         v-for="plan in languageService.languagePack.map.plans"
         :key="plan.name"
-        class="plan"
+        class="card"
       >
-        <h3>{{ plan.name }}</h3>
-        <section v-html="plansHtml[plan.name]" class="markdown"></section>
+        <h3 class="title">{{ plan.name }}</h3>
+        <section
+          v-html="plansHtml[plan.name]"
+          class="markdown content"
+        ></section>
       </div>
     </div>
   </main>

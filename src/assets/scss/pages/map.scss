@@ -4,46 +4,51 @@
 // https://opensource.org/licenses/MIT
 
 @import "../shared";
-@import "../components/venue/map";
+@import "../components/map/map";
+
+@mixin map-theme-colors {
+  @include theme-colors-of("light", "#map") {
+    --color-card-background: #{$background-light};
+    --color-card-title: #{$coscup-green};
+    --color-card-content: #{$text-light};
+    --opacity-of-map-component: 1;
+  }
+  @include theme-colors-of("dark", "#map") {
+    --color-card-background: #{lighten($background-dark, 8)};
+    --color-card-title: #{lighten($coscup-green, 10)};
+    --color-card-content: #{$text-dark};
+    --opacity-of-map-component: 0.7;
+  }
+}
+
+@include map-theme-colors;
 
 @include page("map") {
   #map-component {
     width: 100%;
     height: 550px;
+    opacity: var(--opacity-of-map-component);
   }
 
   @include map;
 
-  .plan-container {
+  .card-container {
     margin: auto;
     padding: 2rem;
     max-width: 900px;
     column-count: 2;
 
-    .plan {
+    .card {
       display: inline-block;
       width: 100%;
       padding: 2rem;
-      margin: 1rem 0;
-      background-color: var(--color-venue-plan-card-background);
-      color: var(--color-text);
+      margin: 0.5rem 0;
+      background-color: var(--color-card-background);
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 
-      h3 {
-        display: inline-block;
-        margin-bottom: 1rem;
-        padding: 0 1rem 0.5rem 0;
-        border-bottom: solid 2px;
-        color: var(--color-venue-plan-card-title);
-        font-size: 1.75rem;
-        font-weight: 600;
-      }
-    }
-
-    .plan.address {
-      h2 {
-        color: var(--color-venue-plan-card-title);
+      .title {
+        color: var(--color-card-title);
         display: inline-block;
         font-size: 1.75rem;
         font-weight: 700;
@@ -52,15 +57,18 @@
         border-bottom: solid 2px;
       }
 
-      h3 {
+      .content {
         display: inline-block;
         margin-bottom: 0;
         padding: 0;
         border-bottom: none;
-        color: var(--color-text);
-        font-size: 1.15rem;
+        color: var(--color-card-content);
         font-weight: 500;
         line-height: 1.25;
+      }
+
+      &.address .content {
+        font-size: 1.15rem;
       }
     }
   }
@@ -70,12 +78,12 @@
       height: 300px;
     }
 
-    .plan-container {
+    .card-container {
       column-count: 1;
       max-width: 600px;
       padding: 1rem;
 
-      .plan {
+      .card {
         padding: 1.5rem;
       }
     }
