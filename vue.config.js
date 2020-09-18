@@ -4,6 +4,7 @@ const path = require('path')
 const languages = require(path.join(__dirname, 'languages/languages.json'))
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const minify = require('html-minifier').minify
+const { DefinePlugin } = require('webpack')
 
 const isProduction = process.env.NODE_ENV === 'production'
 const publicPath = isProduction ? '/2020/' : '/2020/'
@@ -11,6 +12,7 @@ const needBundleAnalysis = process.argv.includes('--analyze')
 const gaTempHTML = minify(fs.readFileSync(path.join(__dirname, './template/ga.html')).toString())
 
 process.env.VUE_APP_PRODUCTION_ORIGIN = require('./package.json').origin
+process.env.__VUE_OPTIONS_API__ = require('./package.json').origin
 
 const renderRoutes = (() => {
   const routes = [
@@ -42,8 +44,17 @@ module.exports = {
 
   chainWebpack: config => {
     if (isProduction && needBundleAnalysis) {
-      config.plugin('analyzer').use(new BundleAnalyzerPlugin())
+      config
+        .plugin('analyzer')
+        .use(new BundleAnalyzerPlugin())
     }
+
+    config
+      .plugin('defined')
+      .use(DefinePlugin, [{
+        __VUE_OPTIONS_API__: JSON.stringify(false),
+        __VUE_PROD_DEVTOOLS__: JSON.stringify(false)
+      }])
   },
 
   pluginOptions: {
