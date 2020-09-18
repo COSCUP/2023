@@ -3,29 +3,24 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-import Vue from 'vue'
-import VueCompositionAPI from '@vue/composition-api'
+import { createApp } from 'vue'
 import App from './App.vue'
 import Icon from '@/components/Basic/Icon/index.vue'
 import { RenderedEventDispatcher } from '@/plugins/renderedEventDispatcher'
 import createRootInjections from '@/utils/common/createRootInjections'
 
-Vue.use(RenderedEventDispatcher)
-Vue.use(VueCompositionAPI)
+const { router, ...rootInjections } = createRootInjections()
 
-Vue.component('Icon', Icon)
+const root = createApp(App)
+  .use(RenderedEventDispatcher)
+  .use(router)
+  .component('Icon', Icon)
 
-Vue.config.productionTip = false
+Object.entries(rootInjections)
+  .forEach(([key, value]) => {
+    root.provide(key, value)
+  })
 
-const rootInjections = createRootInjections()
-const router = rootInjections.router
-
-const root = new Vue({
-  provide: rootInjections,
-  router,
-  render: h => h(App)
-})
-
-document.addEventListener('DOMContentLoaded', () => {
-  root.$mount('#app')
-})
+root.mount('body')
+// document.addEventListener('DOMContentLoaded', () => {
+// })

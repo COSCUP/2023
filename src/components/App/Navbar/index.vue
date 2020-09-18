@@ -43,18 +43,16 @@
 
 <script lang="ts">
 import { debounce } from 'lodash'
-import { defineComponent, computed, watch, onMounted, onBeforeUnmount, reactive, toRefs } from '@vue/composition-api'
-import NavbarItem from './NavbarItem.vue'
+import { defineComponent, computed, watch, onMounted, onBeforeUnmount, reactive, toRefs } from 'vue'
 import NavbarMenu from './NavbarMenu.vue'
 import NavbarItemList from './NavbarItemList.vue'
 import { useBreakpointService, useScrollLockService, useThemeService, useLanguageService } from '@/services/hooks'
 import { getInternalLinkDataList, getExternalLinkDataList, getLanguageSwitchData, getThemeToggleData, getMenuToggleData, ActionType } from './navbar'
-import { useRouter } from '@/router'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
   name: 'Navbar',
   components: {
-    NavbarItem,
     NavbarMenu,
     NavbarItemList
   },
@@ -73,7 +71,7 @@ export default defineComponent({
 
     const internalLinkDataList = computed(() => {
       return getInternalLinkDataList({
-        currentRoute: router.currentRoute,
+        currentRoute: router.currentRoute.value,
         getNavbarItemText
       })
     })
@@ -87,7 +85,7 @@ export default defineComponent({
     const languageSwitchData = computed(() => {
       return getLanguageSwitchData({
         currentLanguageType: languageService.languageType,
-        currentRoute: router.currentRoute,
+        currentRoute: router.currentRoute.value,
         getNextLanguageTypeText: (nextLanguageType) =>
           languageService.languagePackSet[nextLanguageType].app.navbar.languageSwitch
       })

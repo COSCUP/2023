@@ -54,10 +54,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, computed, ComputedRef } from '@vue/composition-api'
+import { defineComponent, inject, computed, ComputedRef } from 'vue'
 import { useBreakpointService, useAgendaService, useLanguageService } from '@/services/hooks'
 import { formatTimeString } from '@/services/agenda'
-import { useRouter } from '@/router'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
   name: 'AgendaSessionItem',
@@ -83,7 +83,7 @@ export default defineComponent({
       return {
         name: 'AgendaDetail',
         params: {
-          ...router.currentRoute.params,
+          ...router.currentRoute.value.params,
           sessionId: props.sessionId
         }
       }

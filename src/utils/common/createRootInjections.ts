@@ -7,8 +7,8 @@ import { createMetaService, MetaService } from '@/services/meta'
 import { createPopupService, PopupService } from '@/services/popup'
 import { createScrollLockService, ScrollLockService } from '@/services/scrollLock'
 import { createThemeService, ThemeService } from '@/services/theme'
-import { reactive } from '@vue/composition-api'
-import VueRouter from 'vue-router'
+import { reactive } from 'vue'
+import { Router } from 'vue-router'
 
 export default function () {
   const languageService: LanguageService = reactive(createLanguageService())
@@ -29,13 +29,14 @@ export default function () {
     getLanguageType: () => languageService.languageType,
     popup: (data) => popupService.popup(data)
   }))
-  const router: VueRouter = reactive(createRouter({
+  const router: Router = createRouter({
     setIsLoading: (isLoading) => fullPageProgressService.setStatus(isLoading),
     setLanguageType: (languageType) => (languageService.languageType = languageType),
     setMeta: (options) => metaService.setMeta(options),
     getPageTitle: (key) => languageService.languagePack[key].meta.title,
-    isPopup: () => popupService.isPopup
-  }))
+    isPopup: () => popupService.isPopup,
+    isMobile: () => breakpointService.xsOnly
+  })
 
   return {
     router,

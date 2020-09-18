@@ -1,4 +1,4 @@
-export type Position = { x: number; y: number }
+export type Position = { left: number; top: number }
 interface ScrollToOptions {
   container?: HTMLElement | null;
   from?: HTMLElement | Position | null;
@@ -22,12 +22,12 @@ export function scrollTo (options: ScrollToOptions) {
   if (options.to === null) return emptyResult
 
   const container: HTMLElement = options.container || document.documentElement
-  const from: Position = options.from ? (options.from instanceof HTMLElement ? (options.from.parentElement === container ? { x: options.from.scrollLeft, y: options.from.scrollTop } : { x: container.scrollLeft, y: container.scrollTop }) : options.from) : { x: container.scrollLeft, y: container.scrollTop }
-  const { offset = { x: 0, y: 0 } } = options
-  const to: Position | null = options.to instanceof HTMLElement ? { x: options.to.offsetLeft + offset.x, y: options.to.offsetTop + offset.y } : { x: options.to.x + offset.x, y: options.to.y + offset.y }
+  const from: Position = options.from ? (options.from instanceof HTMLElement ? (options.from.parentElement === container ? { left: options.from.scrollLeft, top: options.from.scrollTop } : { left: container.scrollLeft, top: container.scrollTop }) : options.from) : { left: container.scrollLeft, top: container.scrollTop }
+  const { offset = { left: 0, top: 0 } } = options
+  const to: Position | null = options.to instanceof HTMLElement ? { left: options.to.offsetLeft + offset.left, top: options.to.offsetTop + offset.top } : { left: options.to.left + offset.left, top: options.to.top + offset.top }
   if (to === null) return emptyResult
   const { duration = 500 } = options
-  const delta = { x: to.x - from.x, y: to.y - from.y }
+  const delta: Position = { left: to.left - from.left, top: to.top - from.top }
   const increment = 10
   let currentTime = 0
   let terminated = false
@@ -37,8 +37,8 @@ export function scrollTo (options: ScrollToOptions) {
       function animateScroll () {
         currentTime += increment
         const value = {
-          x: easeInOutQuad(currentTime, from.x, delta.x, duration),
-          y: easeInOutQuad(currentTime, from.y, delta.y, duration)
+          x: easeInOutQuad(currentTime, from.left, delta.left, duration),
+          y: easeInOutQuad(currentTime, from.top, delta.top, duration)
         }
         container.scrollTo(value.x, value.y)
 

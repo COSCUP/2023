@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api'
+import { defineComponent } from 'vue'
 import { formatTimeString } from '@/services/agenda'
 import AgendaSessionItem from '@/components/Agenda/AgendaSessionItem.vue'
 

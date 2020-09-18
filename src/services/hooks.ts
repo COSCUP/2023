@@ -1,4 +1,4 @@
-import { inject } from '@vue/composition-api'
+import { inject } from 'vue'
 import { AgendaService } from './agenda'
 import { AnnouncementService } from './announcement'
 import { BreakpointService } from './breakpoint'

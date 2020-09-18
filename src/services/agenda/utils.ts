@@ -5,7 +5,7 @@
 
 import { groupBy, escape, truncate } from 'lodash'
 import _rawData from '@/../public/json/session.json'
-import { PopupData, PopupContainerType, PopupContentType } from '@/services/popup'
+import { PopupData } from '@/services/popup'
 import markdown from '@/utils/markdown'
 
 export type RawData = typeof _rawData
@@ -340,10 +340,10 @@ export async function generateSessionPopupData (session: Session, language: 'en'
       ogImage: session.speakers.length > 0 ? session.speakers[Math.floor(Math.random() * session.speakers.length)].avatar : undefined
     },
     containerData: {
-      type: PopupContainerType.Session
+      type: 'session'
     },
     contentData: {
-      type: PopupContentType.General,
+      type: 'general',
       html: await generateSessionPopupContentHtml(session, language)
     }
   }

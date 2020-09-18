@@ -19,7 +19,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, computed } from '@vue/composition-api'
+import { defineComponent, PropType, computed } from 'vue'
 import NavbarItem from './NavbarItem.vue'
 import { NavbarItemData } from './navbar'
 

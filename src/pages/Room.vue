@@ -62,7 +62,7 @@
 <script lang="ts">
 import io from 'socket.io-client'
 import axios from 'axios'
-import { defineComponent, reactive, ref, onMounted, onBeforeUnmount, computed, nextTick } from '@vue/composition-api'
+import { defineComponent, reactive, ref, onMounted, onBeforeUnmount, computed, nextTick } from 'vue'
 import { createAgendaService, RoomSession, formatTimeString } from '@/services/agenda'
 
 import '@/assets/scss/pages/room.scss'

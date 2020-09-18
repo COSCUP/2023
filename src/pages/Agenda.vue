@@ -28,12 +28,11 @@
 <script lang="ts">
 import io from 'socket.io-client'
 import axios from 'axios'
-import { defineComponent, reactive, computed, watch, onMounted, provide, ref, onBeforeUnmount, nextTick } from '@vue/composition-api'
-import { Route } from 'vue-router'
-import { useRouter } from '@/router'
+import { defineComponent, reactive, computed, watch, onMounted, provide, ref, onBeforeUnmount, nextTick } from 'vue'
+import { RouteLocationNormalized, useRouter } from 'vue-router'
 import { createAgendaService, DayData } from '@/services/agenda'
 import { useLanguageService, usePopupService, useBreakpointService } from '@/services/hooks'
-import { PopupData, PopupContainerType, PopupContentType } from '@/services/popup'
+import { PopupData } from '@/services/popup'
 import { useRenderedEventDispatcher } from '@/plugins/renderedEventDispatcher'
 import { scrollTo } from '@/utils/scrollTo'
 import AgendaNavbar from '@/components/Agenda/AgendaNavbar.vue'
@@ -70,13 +69,13 @@ export default defineComponent({
     const daysData = ref<(DayData | null)[]>(agendaService.days.map(() => null))
 
     const onSessionPopupClose = () => {
-      if (router.currentRoute.name === 'AgendaDetail') {
-        const isFromRoomPage = router.currentRoute.query.from === 'room'
+      if (router.currentRoute.value.name === 'AgendaDetail') {
+        const isFromRoomPage = router.currentRoute.value.query.from === 'room'
         router.push({
           ...router.currentRoute,
           name: isFromRoomPage ? 'Room' : 'Agenda',
           query: {
-            ...router.currentRoute.query,
+            ...router.currentRoute.value.query,
             from: undefined
           }
         })
@@ -91,10 +90,10 @@ export default defineComponent({
             title: 'Template'
           },
           containerData: {
-            type: PopupContainerType.Default
+            type: 'default'
           },
           contentData: {
-            type: PopupContentType.General,
+            type: 'general',
             html: '<article id="session-detail" class="session-detail"><h1>Session Popup Template</h1></article>'
           }
         }
@@ -106,10 +105,10 @@ export default defineComponent({
       })
     }
 
-    const processByRoute = async (route: Route) => {
+    const processByRoute = async (route: RouteLocationNormalized) => {
       if (route.name === 'AgendaDetail') {
         try {
-          await popupSession(route.params.sessionId)
+          await popupSession(route.params.sessionId as string)
         } catch (error) {
           await router.replace({
             ...router.currentRoute,
@@ -162,11 +161,11 @@ export default defineComponent({
       }
     })
 
-    watch(() => router.currentRoute, processByRoute)
+    watch(() => router.currentRoute.value, processByRoute)
 
     onMounted(async () => {
       daysData.value.splice(dayIndex.value, 1, agendaService.getDayData(dayIndex.value))
-      await processByRoute(router.currentRoute)
+      await processByRoute(router.currentRoute.value)
       dispatchRenderedEvent()
       await nextTick()
       registerSocket()

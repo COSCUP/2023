@@ -5,7 +5,7 @@
 
 import announcement from '@/assets/json/announcement.json'
 import { LanguageType } from '@/services/language'
-import { PopupData, PopupContainerType, PopupContentType } from '@/services/popup'
+import { PopupData } from '@/services/popup'
 import markdown from '@/utils/markdown'
 
 interface MethodInject {
@@ -41,10 +41,10 @@ class AnnouncementServiceConcrete implements AnnouncementService {
         description: announcement.meta.description[languageType]
       },
       containerData: {
-        type: PopupContainerType.Default
+        type: 'default'
       },
       contentData: {
-        type: PopupContentType.General,
+        type: 'general',
         html: `<div class="markdown">${await markdown(announcement.content[languageType])}</div>`
       },
       onClose

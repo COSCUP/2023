@@ -7,7 +7,7 @@
 
 <template>
   <main id="map" class="page-container">
-    <OlMap id="map-component" :options="mapOptions"></OlMap>
+    <OlMap id="map-component" :mapOptions="mapOptions"></OlMap>
     <div class="card-container">
       <div class="card address">
         <h2 class="title">{{ languageService.languagePack.map.name }}</h2>
@@ -29,7 +29,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, onMounted, watch, ref } from '@vue/composition-api'
+import { defineComponent, reactive, onMounted, watch, ref } from 'vue'
 import OlMap from '@/components/Map/OlMap.vue'
 import { useLanguageService } from '@/services/hooks'
 import { useRenderedEventDispatcher } from '../plugins/renderedEventDispatcher'

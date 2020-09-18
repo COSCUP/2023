@@ -1,130 +1,102 @@
-import { RouteConfig } from 'vue-router'
+import { RouteRecordRaw } from 'vue-router'
 import { delay } from '@/utils/common'
 import { defaultLanguageType } from '@/services/language'
+import { createAsyncPages, InjectLoadingPromiseFunction, pageRoutesNameList } from '@/pages'
 
-const originalRoutes: RouteConfig[] = [
-  {
-    path: '/',
-    name: 'Home',
-    component: () => import(
-      /* webpackChunkName: "home" */
-      /* webpackPrefetch: true */
-      '@/pages/Home.vue'),
-    meta: {
-      type: 'page'
+export const pageRouteNameList: Array<string> = pageRoutesNameList
+
+export function createRoutes (setIsLoading: (isLoading: boolean) => void): RouteRecordRaw[] {
+  const injectLoadingPromise: InjectLoadingPromiseFunction = async (asyncPageComponent) => {
+    let didLoad = false
+    let ifSetLoading = false
+    delay(100)
+      .then(() => {
+        didLoad || (() => {
+          setIsLoading(true)
+          ifSetLoading = true
+        })()
+      })
+    const component = await asyncPageComponent()
+    didLoad = true
+
+    if (ifSetLoading) {
+      await delay(300)
+      setIsLoading(false)
     }
-  },
-  {
-    path: '/agenda',
-    name: 'Agenda',
-    children: [
-      {
-        path: ':sessionId',
-        name: 'AgendaDetail'
-      }
-    ],
-    component: () => import(
-      /* webpackChunkName: "agenda" */
-      /* webpackPrefetch: true */
-      '@/pages/Agenda.vue'),
-    meta: {
-      type: 'page'
-    }
-  },
-  {
-    path: '/room',
-    name: 'Room',
-    component: () => import(
-      /* webpackChunkName: "room" */
-      /* webpackPrefetch: true */
-      '@/pages/Room.vue'),
-    meta: {
-      type: 'page'
-    }
-  },
-  {
-    path: '/map',
-    name: 'Map',
-    component: () => import(
-      /* webpackChunkName: "map" */
-      /* webpackPrefetch: true */
-      '@/pages/Map.vue'),
-    meta: {
-      type: 'page'
-    }
-  },
-  {
-    path: '/venue',
-    name: 'Venue',
-    component: () => import(
-      /* webpackChunkName: "venue" */
-      /* webpackPrefetch: true */
-      '@/pages/Venue.vue'),
-    meta: {
-      type: 'page'
-    }
-  },
-  {
-    path: '/sponsor',
-    name: 'Sponsor',
-    component: () => import(
-      /* webpackChunkName: "sponsor" */
-      /* webpackPrefetch: true */
-      '@/pages/Sponsor.vue'),
-    meta: {
-      type: 'page'
-    }
-  },
-  {
-    path: '/staff',
-    name: 'Staff',
-    component: () => import(
-      /* webpackChunkName: "staff" */
-      /* webpackPrefetch: true */
-      '@/pages/Staff.vue'),
-    meta: {
-      type: 'page'
-    }
+
+    return component
   }
-]
-// filtered routes for production
-// .filter((route: RouteConfig) => {
-//   return process.env.NODE_ENV === 'development' || !['Map'].includes(route.name || '')
-// })
-
-export const pageRouteNameList: Array<string> = originalRoutes
-  .filter((route) => route.meta && route.meta.type === 'page')
-  .map((route) => route.name as string)
-
-export function createRoutes (setIsLoading: (isLoading: boolean) => void): RouteConfig[] {
-  const finalRoutes: RouteConfig[] = []
-
-  // inject fullPageProgress loading feature for pages
-  originalRoutes
-    .filter((route) => route.meta && route.meta.type === 'page')
-    .forEach((route) => {
-      const importComponent = route.component as (() => Promise<typeof import('*.vue')>)
-      route.component = async () => {
-        let didLoad = false
-        let ifSetLoading = false
-        delay(100)
-          .then(() => {
-            didLoad || (() => {
-              setIsLoading(true)
-              ifSetLoading = true
-            })()
-          })
-        const component = await importComponent()
-        didLoad = true
-
-        if (ifSetLoading) {
-          await delay(300)
-          setIsLoading(false)
-        }
-
-        return component
+  const pages = createAsyncPages(injectLoadingPromise)
+  const finalRoutes: RouteRecordRaw[] = []
+  const originalRoutes: RouteRecordRaw[] = [
+    {
+      path: '/',
+      name: 'Home',
+      component: pages.home,
+      meta: {
+        type: 'page'
       }
-    })
+    },
+    {
+      path: '/agenda',
+      name: 'Agenda',
+      component: pages.agenda,
+      meta: {
+        type: 'page'
+      },
+      children: [
+        {
+          path: ':sessionId',
+          name: 'AgendaDetail',
+          component: pages.agenda
+        }
+      ]
+    },
+    {
+      path: '/room',
+      name: 'Room',
+      component: pages.room,
+      meta: {
+        type: 'page'
+      }
+    },
+    {
+      path: '/map',
+      name: 'Map',
+      component: pages.map,
+      meta: {
+        type: 'page'
+      }
+    },
+    {
+      path: '/venue',
+      name: 'Venue',
+      component: pages.venue,
+      meta: {
+        type: 'page'
+      }
+    },
+    {
+      path: '/sponsor',
+      name: 'Sponsor',
+      component: pages.sponsor,
+      meta: {
+        type: 'page'
+      }
+    },
+    {
+      path: '/staff',
+      name: 'Staff',
+      component: pages.staff,
+      meta: {
+        type: 'page'
+      }
+    }
+  ]
+  // filtered routes for production
+  // .filter((route: RouteConfig) => {
+  //   return process.env.NODE_ENV === 'development' || !['Map'].includes(route.name || '')
+  // })
 
   // map original routes to redirection routes
   finalRoutes.push(...originalRoutes.map((route) => ({
@@ -141,7 +113,7 @@ export function createRoutes (setIsLoading: (isLoading: boolean) => void): Route
   // add fallback route
   finalRoutes.push({
     name: 'NotFound',
-    path: '*',
+    path: '/:catchAll(.*)',
     redirect (to) {
       const languageType = to.params.languageType
       return {

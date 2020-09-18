@@ -52,7 +52,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api'
+import { defineComponent } from 'vue'
 import { useLanguageService } from '@/services/hooks'
 
 export default defineComponent({

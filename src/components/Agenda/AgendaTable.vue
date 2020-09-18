@@ -16,7 +16,7 @@
         </th>
       </tr>
     </thead>
-    <div style="height: 0.5rem;"></div>
+    <div style="height: 0.5rem"></div>
     <tbody class="table-body">
       <tr v-for="(row, rowIndex) in table.rows" :key="`table-row-${rowIndex}`">
         <td
@@ -43,11 +43,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, computed } from '@vue/composition-api'
+import { defineComponent, inject, computed } from 'vue'
 import { TableCellType, AgendaTableData } from '@/services/agenda'
 import AgendaSessionItem from './AgendaSessionItem.vue'
 import AgendaTableRoomCell from './AgendaTableRoomCell.vue'
-import { useRouter } from '@/router'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
   name: 'AgendaTable',
@@ -68,7 +68,7 @@ export default defineComponent({
     const getSessionLocation = (sessionId: string) => ({
       name: 'AgendaDetail',
       params: {
-        ...router.currentRoute.params,
+        ...router.currentRoute.value.params,
         sessionId
       }
     })

@@ -31,8 +31,8 @@
         class="announcement-toggle"
         :to="{
           query: {
-            popUp: 'announcement'
-          }
+            popUp: 'announcement',
+          },
         }"
       >
         <span>
@@ -59,7 +59,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed, watch, onMounted } from '@vue/composition-api'
+import { defineComponent, ref, computed, watch, onMounted } from 'vue'
 import markdown from '@/utils/markdown'
 import { useLanguageService } from '@/services/hooks'
 import { useRenderedEventDispatcher } from '@/plugins/renderedEventDispatcher'

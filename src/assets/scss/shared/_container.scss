@@ -29,19 +29,19 @@
       transition-duration: 0.3s;
       transition-timing-function: ease-out;
 
-      &.slide-left-enter,
+      &.slide-left-enter-from,
       &.slide-right-leave-active {
         opacity: 0;
         transform: translateX(30%) translateZ(0);
       }
 
       &.slide-left-leave-active,
-      &.slide-right-enter {
+      &.slide-right-enter-from {
         opacity: 0;
         transform: translateX(-30%) translateZ(0);
       }
 
-      &.fade-enter,
+      &.fade-enter-from,
       &.fade-leave-active {
         opacity: 0;
       }

@@ -1,16 +1,11 @@
-import { VueConstructor } from 'vue'
-import { provide, inject } from '@vue/composition-api'
+import { App, inject } from 'vue'
 
 export const RenderedEventDispatcher = {
-  install (Vue: VueConstructor) {
-    Vue.prototype.$dispatchRenderedEvent = function () {
-      document.dispatchEvent(new Event('x-app-rendered'))
-    }
+  install (app: App) {
+    const dispatch = () => { document.dispatchEvent(new Event('x-app-rendered')) }
+    app.config.globalProperties.$dispatchRenderedEvent = dispatch
+    app.provide('dispatchRenderedEvent', dispatch)
   }
-}
-
-export function provideRenderedEventDispatcher () {
-  provide('dispatchRenderedEvent', () => { document.dispatchEvent(new Event('x-app-rendered')) })
 }
 
 export function useRenderedEventDispatcher () {
@@ -19,10 +14,4 @@ export function useRenderedEventDispatcher () {
     throw new Error('RenderedEventDispatcher is not provided')
   }
   return dispatchRenderedEvent
-}
-
-declare module 'vue/types/vue' {
-  interface Vue {
-    $dispatchRenderedEvent: () => void;
-  }
 }

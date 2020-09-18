@@ -59,7 +59,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, reactive, watch } from '@vue/composition-api'
+import { defineComponent, onMounted, reactive, watch } from 'vue'
 import { groupBy } from 'lodash'
 import { availableLanguageTypes } from '@/services/language'
 import { useLanguageService, useBreakpointService } from '@/services/hooks'

@@ -5,15 +5,13 @@
     </template>
     <template v-slot:default>
       <p class="coscup">COSCUP</p>
-      <p class="year">
-        2020
-      </p>
+      <p class="year">2020</p>
     </template>
   </InternalLink>
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api'
+import { defineComponent } from 'vue'
 import InternalLink from '../Basic/InternalLink.vue'
 
 export default defineComponent({

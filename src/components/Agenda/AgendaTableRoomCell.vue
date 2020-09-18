@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ComputedRef, inject, computed } from '@vue/composition-api'
+import { defineComponent, ComputedRef, inject, computed } from 'vue'
 import { useAgendaService, useLanguageService } from '@/services/hooks'
 
 export default defineComponent({

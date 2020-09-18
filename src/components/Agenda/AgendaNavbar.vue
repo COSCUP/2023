@@ -23,13 +23,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from '@vue/composition-api'
+import { defineComponent, computed } from 'vue'
 import { useAgendaService } from '@/services/hooks'
 
 export default defineComponent({
   name: 'AgendaNavbar',
   props: {
-    value: {
+    modelValue: {
       type: Number,
       required: true
     }
@@ -38,10 +38,10 @@ export default defineComponent({
     const agendaService = useAgendaService()
 
     const days = computed(() => agendaService.days)
-    const selectedDay = computed(() => days.value[props.value])
+    const selectedDay = computed(() => days.value[props.modelValue])
 
     const onTabClick = (dayIndex: number) => {
-      context.emit('input', dayIndex)
+      context.emit('update:modelValue', dayIndex)
     }
 
     return {

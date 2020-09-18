@@ -40,7 +40,7 @@
 <script lang="ts">
 import { groupBy } from 'lodash'
 import sponsorDatas from '@/../public/json/sponsor.json'
-import { defineComponent, computed } from '@vue/composition-api'
+import { defineComponent, computed } from 'vue'
 import { useLanguageService } from '@/services/hooks'
 
 export default defineComponent({

@@ -57,7 +57,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeMount, reactive } from '@vue/composition-api'
+import { defineComponent, onBeforeMount, reactive } from 'vue'
 import sponsorAdsData from '@/../public/json/sponsor-ads.json'
 
 type ArrayElement<ArrayType extends readonly unknown[]> = ArrayType[number];

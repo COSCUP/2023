@@ -1,5 +1,5 @@
 <template>
-  <Action v-bind="$attrs" v-on="$listeners">
+  <Action v-bind="$attrs">
     <template v-slot:default>
       <Icon name="bars"></Icon>
     </template>
@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api'
+import { defineComponent } from 'vue'
 import Action from '../Basic/Action.vue'
 
 export default defineComponent({

@@ -14,8 +14,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from '@vue/composition-api'
-import { PopupContentType } from '@/services/popup'
+import { defineComponent, computed } from 'vue'
 import { usePopupService } from '@/services/hooks'
 
 export default defineComponent({
@@ -23,7 +22,7 @@ export default defineComponent({
   setup () {
     const popupService = usePopupService()
     const html = computed(() => {
-      if (popupService.popupData.contentData.type === PopupContentType.General) {
+      if (popupService.popupData.contentData.type === 'general') {
         return popupService.popupData.contentData.html
       }
       throw new Error('Invalid popup content data for "GeneralPopupContent" component.')

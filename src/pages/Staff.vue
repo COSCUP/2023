@@ -22,16 +22,14 @@
             :key="`${group.tid}-${staff.name}`"
             class="staff"
             :class="{
-              chief: staff.isChief
+              chief: staff.isChief,
             }"
           >
             <div class="staff-avatar-wrapper">
               <div class="staff-avatar-container">
                 <img
                   class="staff-avatar"
-                  :src="
-                    `https://www.gravatar.com/avatar/${staff.email_hash}?s=320&d=identicon&r=g`
-                  "
+                  :src="`https://www.gravatar.com/avatar/${staff.email_hash}?s=320&d=identicon&r=g`"
                   :alt="`${staff.name}'s Avatar`"
                 />
               </div>
@@ -45,7 +43,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, onMounted } from '@vue/composition-api'
+import { defineComponent, computed, onMounted } from 'vue'
 import _staffData from '@/../public/json/staff.json'
 import { useLanguageService } from '@/services/hooks'
 import { useRenderedEventDispatcher } from '@/plugins/renderedEventDispatcher'

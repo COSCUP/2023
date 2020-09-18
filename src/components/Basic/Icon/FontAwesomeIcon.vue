@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import { FontAwesomeIcon as FontAwesomeIconOriginal } from '@fortawesome/vue-fontawesome'
-import { defineComponent } from '@vue/composition-api'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'FontAwesomeIcon',

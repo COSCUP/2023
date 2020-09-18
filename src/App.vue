@@ -24,11 +24,13 @@
       }"
       class="main-container"
     >
-      <transition :name="pageTransitionName" mode="out-in">
-        <keep-alive>
-          <router-view></router-view>
-        </keep-alive>
-      </transition>
+      <router-view v-slot="{ Component, route }">
+        <transition :name="route.meta.transitionName" mode="out-in">
+          <keep-alive>
+            <component :is="Component"></component>
+          </keep-alive>
+        </transition>
+      </router-view>
       <SponsorFooter></SponsorFooter>
       <Footer></Footer>
     </div>
@@ -39,16 +41,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, onBeforeUnmount, watch, onBeforeUpdate, reactive, toRefs, nextTick } from '@vue/composition-api'
-import { Location, Route } from 'vue-router'
+import { defineComponent, onMounted, onBeforeUnmount, watch, reactive, toRefs, nextTick } from 'vue'
+import { useRouter, RouteLocationNormalized } from 'vue-router'
 import Navbar from '@/components/App/Navbar/index.vue'
 import SponsorFooter from '@/components/App/SponsorFooter.vue'
 import Footer from '@/components/App/Footer.vue'
 import FullPageProgress from '@/components/App/FullPageProgress.vue'
 import Popup from '@/components/App/Popup/index.vue'
-import { useRouter, pageRouteNameList } from '@/router'
 import { useAnnouncementService, useBreakpointService, useFullPageProgressService, useLanguageService, usePopupService, useThemeService, useScrollLockService } from '@/services/hooks'
-import { provideRenderedEventDispatcher } from './plugins/renderedEventDispatcher'
 
 import '@/assets/scss/app.scss'
 
@@ -62,8 +62,6 @@ export default defineComponent({
     Popup
   },
   setup () {
-    provideRenderedEventDispatcher()
-
     const router = useRouter()
     const languageService = useLanguageService()
     const themeService = useThemeService()
@@ -74,34 +72,16 @@ export default defineComponent({
     const announcementService = useAnnouncementService()
 
     const data = reactive({
-      isInApp: false,
-      currentRouteName: router.currentRoute.name,
-      prevRouteName: router.currentRoute.name,
-      pageTransitionName: 'fade' as 'slide-left' | 'slide-right' | 'fade'
+      isInApp: false
     })
 
-    const updatePageTransitionName = (newRouteName: string, oldRouteName: string) => {
-      if (breakpointService.xsOnly) {
-        data.pageTransitionName = 'fade'
-        return
-      }
-
-      const newIndex = pageRouteNameList.indexOf(newRouteName)
-      const oldIndex = pageRouteNameList.indexOf(oldRouteName)
-      if (oldIndex < newIndex) {
-        data.pageTransitionName = 'slide-left'
-      } else {
-        data.pageTransitionName = 'slide-right'
-      }
-    }
-
     const detectAnnouncementRoute = () => {
-      if (router.currentRoute.query.popUp === 'announcement') {
+      if (router.currentRoute.value.query.popUp === 'announcement') {
         const onClose: () => void = () => {
-          const query = { ...router.currentRoute.query }
+          const query = { ...router.currentRoute.value.query }
           delete query.popUp
           router.push({
-            ...(router.currentRoute as Location),
+            ...(router.currentRoute.value),
             query
           })
         }
@@ -113,14 +93,14 @@ export default defineComponent({
       if (announcementService.hasUpdated) {
         router.push({
           query: {
-            ...router.currentRoute.query,
+            ...router.currentRoute.value.query,
             popUp: 'announcement'
           }
         })
       }
     }
 
-    const onRouteChange = (to: Route) => {
+    const onRouteChange = (to: RouteLocationNormalized) => {
       data.isInApp || (data.isInApp = to.query.mode === 'app')
       data.isInApp || detectAnnouncementRoute()
     }
@@ -131,22 +111,14 @@ export default defineComponent({
       }, 1000)
     }
 
-    watch(() => router.currentRoute, onRouteChange)
-
-    onBeforeUpdate(() => {
-      if (data.currentRouteName !== router.currentRoute.name) {
-        data.prevRouteName = data.currentRouteName
-        data.currentRouteName = router.currentRoute.name
-        updatePageTransitionName(data.currentRouteName ?? '', data.prevRouteName ?? '')
-      }
-    })
+    watch(() => router.currentRoute.value, onRouteChange)
 
     onMounted(async () => {
       document.addEventListener('x-app-rendered', onAppRender)
       breakpointService.startDetect()
       themeService.startDetect()
       await nextTick()
-      onRouteChange(router.currentRoute)
+      onRouteChange(router.currentRoute.value)
     })
 
     onBeforeUnmount(() => {

@@ -13,14 +13,13 @@
     }"
     :is="navbarItemData.component"
     v-bind="navbarItemData.options"
-    v-on="$listeners"
   ></component>
 </template>
 
 <script lang="ts">
 import { kebabCase } from 'lodash'
 import { NavbarItemData } from './navbar'
-import { computed, defineComponent, PropType } from '@vue/composition-api'
+import { computed, defineComponent, PropType } from 'vue'
 export default defineComponent({
   name: 'NavbarItem',
   props: {

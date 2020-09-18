@@ -1,6 +1,6 @@
 import { camelCase } from 'lodash'
-import { RawLocation, Location, Route } from 'vue-router'
-import { VueConstructor } from 'vue'
+import { RouteLocationRaw, RouteLocationNormalized } from 'vue-router'
+import { defineComponent } from 'vue'
 import { pageRouteNameList } from '@/router'
 import { defaultLanguageType, availableLanguageTypes, LanguageType } from '@/services/language'
 import InternalLink from '@/components/App/Navbar/Basic/InternalLink.vue'
@@ -23,7 +23,7 @@ interface BasicOptions {
 }
 
 export interface InternalLinkOptions extends BasicOptions {
-  to: RawLocation;
+  to: RouteLocationRaw;
   active: boolean;
 }
 
@@ -39,7 +39,7 @@ export interface ActionOptions extends BasicOptions {
 interface BasicNavbarItemData {
   type: NavbarItemType;
   options: NavbarItemOptions;
-  component: VueConstructor;
+  component: typeof InternalLink;
 }
 
 export interface InternalLinkData extends BasicNavbarItemData {
@@ -64,7 +64,7 @@ export function getInternalLinkDataList ({
   currentRoute,
   getNavbarItemText
 }: {
-  currentRoute: Route;
+  currentRoute: RouteLocationNormalized;
   getNavbarItemText: (itemName: string) => string;
 }) {
   const internalLinkDataList = pageRouteNameList.map((routeName): InternalLinkData => {
@@ -81,8 +81,8 @@ export function getInternalLinkDataList ({
           params: {
             languageType: currentRoute.params.languageType || defaultLanguageType
           }
-        } as Location,
-        active: currentRoute.name?.startsWith(routeName) ?? false
+        },
+        active: currentRoute.name?.toString().startsWith(routeName) ?? false
       },
       component: InternalLink
     }
@@ -144,7 +144,7 @@ export function getLanguageSwitchData ({
   getNextLanguageTypeText
 }: {
   currentLanguageType: LanguageType;
-  currentRoute: Route;
+  currentRoute: RouteLocationNormalized;
   getNextLanguageTypeText: (nextLanguageType: LanguageType) => string;
 }) {
   const nextLanguageType = [...availableLanguageTypes, ...availableLanguageTypes]

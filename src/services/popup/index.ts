@@ -3,29 +3,22 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-import { ScrollLockService } from '@/services/scrollLock'
-import { MetaOptions, MetaService } from '@/services/meta'
+import { MetaOptions } from '@/services/meta'
 
-export enum PopupContentType {
-  Empty = 'Empty',
-  General = 'General'
-}
+export type PopupContentType = 'empty' | 'general'
 
-export enum PopupContainerType {
-  Default = 'Default',
-  Session = 'Session'
-}
+export type PopupContainerType = 'default' | 'session'
 
 interface PopupContainerDataBase {
   type: PopupContainerType;
 }
 
 export interface DefaultPopupContainerData extends PopupContainerDataBase {
-  type: PopupContainerType.Default;
+  type: 'default';
 }
 
 export interface SessionPopupContainerData extends PopupContainerDataBase {
-  type: PopupContainerType.Session;
+  type: 'session';
 }
 
 export type PopupContainerData = DefaultPopupContainerData | SessionPopupContainerData
@@ -35,11 +28,11 @@ interface PopupContentDataBase {
 }
 
 export interface EmptyPopupContentData extends PopupContentDataBase {
-  type: PopupContentType.Empty;
+  type: 'empty';
 }
 
 export interface GeneralPopupContentData extends PopupContentDataBase {
-  type: PopupContentType.General;
+  type: 'general';
   html: string;
 }
 
@@ -60,11 +53,6 @@ export interface PopupService {
   close: () => void;
 }
 
-interface Inject {
-  scrollLockService: ScrollLockService;
-  metaService: MetaService;
-}
-
 interface MethodInject {
   lockScrolling: () => void;
   unlockScrolling: () => void;
@@ -75,10 +63,10 @@ class PopupServiceConcrete implements PopupService {
   private _popupDataStack: PopupData[] = [{
     metaOptions: {},
     containerData: {
-      type: PopupContainerType.Default
+      type: 'default'
     },
     contentData: {
-      type: PopupContentType.Empty
+      type: 'empty'
     }
   }]
 
@@ -97,7 +85,7 @@ class PopupServiceConcrete implements PopupService {
   }
 
   public get popupData (): PopupData {
-    return Object.freeze(this._popupDataStack.slice(-1)[0])
+    return this._popupDataStack.slice(-1)[0]
   }
 
   public popup (popupData: PopupData) {
