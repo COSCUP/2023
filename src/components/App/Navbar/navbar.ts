@@ -1,6 +1,5 @@
 import { camelCase } from 'lodash'
 import { RouteLocationRaw, RouteLocationNormalized } from 'vue-router'
-import { defineComponent } from 'vue'
 import { pageRouteNameList } from '@/router'
 import { defaultLanguageType, availableLanguageTypes, LanguageType } from '@/services/language'
 import InternalLink from '@/components/App/Navbar/Basic/InternalLink.vue'
