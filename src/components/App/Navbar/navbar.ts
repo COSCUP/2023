@@ -8,6 +8,7 @@ import HomeTab from '@/components/App/Navbar/Custom/HomeTab.vue'
 import ThemeToggle from '@/components/App/Navbar/Custom/ThemeToggle.vue'
 import MenuToggle from '@/components/App/Navbar/Custom/MenuToggle.vue'
 import { ThemeType } from '@/services/theme'
+import { defineAsyncComponent } from 'vue'
 
 export type NavbarItemType = 'internal-link' | 'external-link' | 'action'
 export type NavbarItemOptions = InternalLinkOptions | ExternalLinkOptions | ActionOptions
@@ -38,7 +39,7 @@ export interface ActionOptions extends BasicOptions {
 interface BasicNavbarItemData {
   type: NavbarItemType;
   options: NavbarItemOptions;
-  component: typeof InternalLink;
+  component: ReturnType<typeof defineAsyncComponent>;
 }
 
 export interface InternalLinkData extends BasicNavbarItemData {

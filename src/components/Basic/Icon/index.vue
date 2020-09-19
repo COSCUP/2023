@@ -25,7 +25,7 @@ export default defineComponent({
     name: {
       type: String,
       required: true,
-      validator (value: string): boolean {
+      validator: (value: string): boolean => {
         return icons.some((icon) => icon.name === value)
       }
     }

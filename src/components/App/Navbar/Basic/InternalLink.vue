@@ -22,7 +22,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
-import { RawLocation } from 'vue-router'
+import { RouteLocationRaw } from 'vue-router'
 import NavbarItemContent from './NavbarItemContent.vue'
 
 export default defineComponent({
@@ -37,7 +37,7 @@ export default defineComponent({
       default: ''
     },
     to: {
-      type: Object as PropType<RawLocation>,
+      type: Object as PropType<RouteLocationRaw>,
       required: true
     },
     active: {

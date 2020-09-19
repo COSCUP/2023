@@ -146,7 +146,7 @@ export default defineComponent({
     watch(() => dayIndex.value, (value) => {
       const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent)
       const { cancel } = scrollTo({
-        to: { x: 0, y: 0 },
+        to: { left: 0, top: 0 },
         duration: isSafari ? 10 : undefined
       })
       const events = ['wheel', 'mousewheel', 'DOMMouseScroll']

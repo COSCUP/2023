@@ -68,7 +68,7 @@ import { createAgendaService, RoomSession, formatTimeString } from '@/services/a
 import '@/assets/scss/pages/room.scss'
 import { useRenderedEventDispatcher } from '@/plugins/renderedEventDispatcher'
 import { useLanguageService } from '@/services/hooks'
-import { Location } from 'vue-router'
+import { RouteLocationRaw } from 'vue-router'
 
 export default defineComponent({
   name: 'Room',
@@ -116,7 +116,7 @@ export default defineComponent({
 
     const getSessionPeriod = (start: Date, end: Date) => `${formatTimeString(start, '：')} ~ ${formatTimeString(end, '：')}`
 
-    const getSessionLocation = (sessionId): Location => ({
+    const getSessionLocation = (sessionId): RouteLocationRaw => ({
       name: 'AgendaDetail',
       params: {
         sessionId
