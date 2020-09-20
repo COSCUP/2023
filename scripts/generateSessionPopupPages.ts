@@ -39,6 +39,8 @@ async function run () {
   process.env.VUE_APP_PRODUCTION_ORIGIN = origin
   process.env.BASE_URL = publicPath
 
+  const rawData = await import(path.join(__dirname, '../public/json/session.json'))
+
   await Promise.all(availableLanguageTypes
     .map((languageType) => {
       const languageData = {
@@ -53,7 +55,7 @@ async function run () {
       const timeZoneOffsetMinutes = -480
       const fixedTimeZone = (date: Date | string) => fixedTimeZoneDate(date, timeZoneOffsetMinutes)
       const datas = await Promise.all(
-        generateSessions(fixedTimeZone)
+        generateSessions(rawData, fixedTimeZone)
           .map(async (session) => {
             return {
               sessionId: session.id,

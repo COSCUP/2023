@@ -27,11 +27,11 @@
           <div
             class="cell-content"
             :class="{
-              blank: cell.type === TableCellType.Blank,
+              blank: cell.type === 'Blank',
             }"
           >
             <AgendaSessionItem
-              v-if="cell.type !== TableCellType.Blank"
+              v-if="cell.type !== 'Blank'"
               :session-id="cell.sessionId"
             >
             </AgendaSessionItem>
@@ -43,8 +43,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, computed } from 'vue'
-import { TableCellType, AgendaTableData } from '@/services/agenda'
+import { defineComponent, inject, computed, PropType } from 'vue'
+import { AgendaTableData } from '@/services/agenda'
 import AgendaSessionItem from './AgendaSessionItem.vue'
 import AgendaTableRoomCell from './AgendaTableRoomCell.vue'
 import { useRouter } from 'vue-router'
@@ -57,14 +57,14 @@ export default defineComponent({
   },
   props: {
     table: {
-      type: Object,
+      type: Object as PropType<AgendaTableData>,
       required: true
     }
   },
   setup (props) {
     const router = useRouter()
     const languageType = inject<'zh' | 'en'>('languageType') || 'zh'
-    const tableStyle = computed(() => ({ '--table-column': (props.table as AgendaTableData).rooms.length }))
+    const tableStyle = computed(() => ({ '--table-column': props.table.rooms.length }))
     const getSessionLocation = (sessionId: string) => ({
       name: 'AgendaDetail',
       params: {
@@ -74,7 +74,6 @@ export default defineComponent({
     })
 
     return {
-      TableCellType,
       languageType,
       tableStyle,
       getSessionLocation

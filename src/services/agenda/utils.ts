@@ -3,72 +3,13 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
+import { AgendaListData, AgendaTableData, Day, RawData, RoomData, Session, SessionBase, SessionData, SpeakerData, TableCell, TagData, TypeData } from './types'
 import { groupBy, escape, truncate } from 'lodash'
-import _rawData from '@/../public/json/session.json'
+// import _rawData from '@/../public/json/session.json'
 import { PopupData } from '@/services/popup'
 import markdown from '@/utils/markdown'
 
-export type RawData = typeof _rawData
-export type ArrayElement<ArrayType extends readonly unknown[]> = ArrayType[number];
-export type SessionData = ArrayElement<typeof _rawData.sessions>
-export type TypeData = ArrayElement<typeof _rawData['session_types']>
-export type SpeakerData = ArrayElement<typeof _rawData.speakers>
-export type RoomData = ArrayElement<typeof _rawData.rooms>
-export type TagData = ArrayElement<typeof _rawData.tags>
-
-export type Day = [number, number, number]
-
-export const rawData = Object.freeze(_rawData)
-export interface SessionBase {
-  id: string;
-  start: string;
-  end: string;
-  room: string;
-}
-
-export interface Session extends Omit<SessionData, 'type' | 'room' | 'speakers' | 'tags' | 'start' | 'end'> {
-  start: Date;
-  end: Date;
-  type: TypeData;
-  room: RoomData;
-  speakers: SpeakerData[];
-  tags: TagData[];
-}
-
-export enum TableCellType {
-  Blank = 'Blank',
-  Span = 'Span',
-  Session = 'Session'
-}
-
-export interface TableCellBlank {
-  type: TableCellType.Blank;
-  rowSpan: 1;
-}
-
-export interface TableCellSpan {
-  type: TableCellType.Span;
-}
-
-export interface TableCellSession {
-  type: TableCellType.Session;
-  sessionId: string;
-  rowSpan: number;
-}
-
-export type TableCell = TableCellBlank | TableCellSpan | TableCellSession
-
-export interface AgendaTableData {
-  rooms: string[];
-  rows: TableCell[][];
-}
-
-export interface AgendaListData {
-  sections: {
-    start: Date;
-    sessions: string[];
-  }[];
-}
+// export const rawData = Object.freeze(_rawData)
 
 /**
  * Return a time zone fixed Date object.
@@ -124,7 +65,7 @@ export function getTimePoints (sessions: SessionBase[], fixedTimezone?: (date: D
     .map((timeStr) => `t-${timeStr}`)
 }
 
-export function generateSession (sessionData: SessionData, fixedTimezone?: (date: Date | string) => Date): Session {
+export function generateSession (rawData: RawData, sessionData: SessionData, fixedTimezone?: (date: Date | string) => Date): Session {
   const createDate = (date: Date | string) => fixedTimezone ? fixedTimezone(date) : new Date(date)
   const type: TypeData | undefined = rawData.session_types.find((typeData: TypeData) => typeData.id === sessionData.type)
   if (type === undefined) throw new Error(`Session: ${sessionData.id} has an unknown type`)
@@ -153,8 +94,8 @@ export function generateSession (sessionData: SessionData, fixedTimezone?: (date
   }
 }
 
-export function generateSessions (fixedTimezone?: (date: Date | string) => Date): Session[] {
-  return rawData.sessions.map((sessionData) => generateSession(sessionData, fixedTimezone))
+export function generateSessions (rawData: RawData, fixedTimezone?: (date: Date | string) => Date): Session[] {
+  return rawData.sessions.map((sessionData) => generateSession(rawData, sessionData, fixedTimezone))
 }
 
 export function generateAgendaTableData (sessions: SessionBase[], fixedTimezone?: (date: Date | string) => Date, roomSequence?: string[]): AgendaTableData {
@@ -171,8 +112,8 @@ export function generateAgendaTableData (sessions: SessionBase[], fixedTimezone?
       return indexA - indexB
     })
   }
-  const blankCell: TableCell = { type: TableCellType.Blank, rowSpan: 1 }
-  const spanCell: TableCell = { type: TableCellType.Span }
+  const blankCell: TableCell = { type: 'Blank', rowSpan: 1 }
+  const spanCell: TableCell = { type: 'Span' }
   const rooms = entries.map((entry) => entry[0].slice(2))
   let rows = new Array<() => TableCell[]>(timePoints.length)
     .fill((): TableCell[] => new Array<TableCell>(rooms.length).fill(blankCell))
@@ -196,18 +137,18 @@ export function generateAgendaTableData (sessions: SessionBase[], fixedTimezone?
 
         const rowSpan = indexEnd - indexStart
 
-        if (rows[indexStart][columnIndex].type !== TableCellType.Blank) {
+        if (rows[indexStart][columnIndex].type !== 'Blank') {
           console.warn(`Session "${session.id}" conflicts with others, hidden for now.`)
           return
         }
-        rows[indexStart][columnIndex] = { type: TableCellType.Session, sessionId: session.id, rowSpan }
+        rows[indexStart][columnIndex] = { type: 'Session', sessionId: session.id, rowSpan }
         for (let i = 1; i < rowSpan; i++) {
           rows[indexStart + i][columnIndex] = spanCell
         }
       })
   })
 
-  rows = rows.map((row) => row.filter((cell) => cell.type !== TableCellType.Span))
+  rows = rows.map((row) => row.filter((cell) => cell.type !== 'Span'))
 
   return {
     rooms,

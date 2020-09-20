@@ -28,10 +28,10 @@
 <script lang="ts">
 import io from 'socket.io-client'
 import axios from 'axios'
-import { defineComponent, reactive, computed, watch, onMounted, provide, ref, onBeforeUnmount, nextTick } from 'vue'
+import { defineComponent, computed, watch, onMounted, provide, ref, onBeforeUnmount, nextTick } from 'vue'
 import { RouteLocationNormalized, useRouter } from 'vue-router'
-import { createAgendaService, DayData } from '@/services/agenda'
-import { useLanguageService, usePopupService, useBreakpointService } from '@/services/hooks'
+import { DayData } from '@/services/agenda'
+import { useLanguageService, usePopupService, useBreakpointService, useAgendaService, useFullPageProgressService } from '@/services/hooks'
 import { PopupData } from '@/services/popup'
 import { useRenderedEventDispatcher } from '@/plugins/renderedEventDispatcher'
 import { scrollTo } from '@/utils/scrollTo'
@@ -51,22 +51,17 @@ export default defineComponent({
   setup () {
     const dispatchRenderedEvent = useRenderedEventDispatcher()
     const router = useRouter()
+    const fullPageProgressService = useFullPageProgressService()
     const languageService = useLanguageService()
     const popupService = usePopupService()
     const breakpointService = useBreakpointService()
-    const agendaService = reactive(createAgendaService([
-      'RB105',
-      'AU',
-      'TR209', 'TR211', 'TR212', 'TR213', 'TR214',
-      'TR309', 'TR311', 'TR313',
-      'TR409-2', 'TR410', 'TR411', 'TR412-1', 'TR412-2', 'TR413-1', 'TR413-2'
-    ]))
+    const agendaService = useAgendaService()
     const languageType = computed(() => languageService.languageType === 'zh-TW' ? 'zh' : languageService.languageType)
     const rawRoomsStatus = ref<{ id: string; isFull: boolean }[]>([])
     const roomsStatus = computed(() => Object.fromEntries(rawRoomsStatus.value.map((room) => [room.id, room.isFull])))
     let socket: SocketIOClient.Socket | null = null
     const dayIndex = ref(0)
-    const daysData = ref<(DayData | null)[]>(agendaService.days.map(() => null))
+    const daysData = ref<(DayData | null)[]>([])
 
     const onSessionPopupClose = () => {
       if (router.currentRoute.value.name === 'AgendaDetail') {
@@ -164,8 +159,12 @@ export default defineComponent({
     watch(() => router.currentRoute.value, processByRoute)
 
     onMounted(async () => {
+      fullPageProgressService.setStatus(true)
+      await agendaService.init()
+      daysData.value = agendaService.days.map(() => null)
       daysData.value.splice(dayIndex.value, 1, agendaService.getDayData(dayIndex.value))
       await processByRoute(router.currentRoute.value)
+      fullPageProgressService.setStatus(false)
       dispatchRenderedEvent()
       await nextTick()
       registerSocket()

@@ -4,9 +4,11 @@
 // https://opensource.org/licenses/MIT
 
 import { groupBy } from 'lodash'
-import { Day, formatDateString, fixedTimeZoneDate, generateAgendaTableData, generateAgendaListData, AgendaTableData, AgendaListData, RoomData, Session, SessionData, rawData, generateSessionPopupData, generateSession } from './utils'
+import { formatDateString, fixedTimeZoneDate, generateAgendaTableData, generateAgendaListData, generateSessionPopupData, generateSession } from './utils'
+import { AgendaListData, AgendaTableData, Day, RawData, RoomData, Session, SessionData } from './types'
 import { PopupData } from '@/services/popup'
 
+export * from './types'
 export * from './utils'
 
 export type Room = RoomData
@@ -29,11 +31,13 @@ export interface AgendaService {
   getRoomById: (roomId: string) => Readonly<Room> | null;
   getSessionPopupData: (sessionId: string, language: 'en' | 'zh') => Promise<PopupData>;
   getRoomsInProgressSession: () => RoomSession[];
+  init: () => Promise<void>;
 }
 
 class AgendaServiceConcrete implements AgendaService {
   // the minutes of time zone offset for zh-TW
   private readonly _timeZoneOffsetMinutes = -480
+  private _rawData: RawData | null = null
   private _roomSequence: string[] | undefined
   private _roomSet: { [roomId: string]: Room} = {}
   private _days: Day[] = []
@@ -43,14 +47,21 @@ class AgendaServiceConcrete implements AgendaService {
 
   constructor (roomSequence?: string[]) {
     this._roomSequence = roomSequence
+  }
+
+  public async init () {
+    if (this._rawData !== null) return
+    this._rawData = await import('@/../public/json/session.json')
     this._initRooms()
     this._initDays()
   }
 
-  private _initDays (): void {
+  private _initDays () {
+    if (this._rawData === null) return
+
     Object.entries(
       groupBy(
-        rawData.sessions,
+        this._rawData.sessions,
         (sessionData) => formatDateString(
           fixedTimeZoneDate(
             new Date(sessionData.start),
@@ -74,18 +85,20 @@ class AgendaServiceConcrete implements AgendaService {
   }
 
   private _initRooms (): void {
-    rawData.rooms.forEach((room: Room) => {
+    if (this._rawData === null) return
+
+    this._rawData.rooms.forEach((room: Room) => {
       this._roomSet[room.id] = room
     })
   }
 
-  private _generateDayData (dayIndex: number): DayData {
+  private _generateDayData (rawData: RawData, dayIndex: number): DayData {
     const day = this._days[dayIndex]
     const sessionDataList = this._sessionDataListByDays[dayIndex]
 
     sessionDataList.forEach((sessionData) => {
       if (this._sessionsCache[sessionData.id]) return
-      this._sessionsCache[sessionData.id] = this._generateSession(sessionData)
+      this._sessionsCache[sessionData.id] = this._generateSession(rawData, sessionData)
     })
 
     return {
@@ -95,8 +108,8 @@ class AgendaServiceConcrete implements AgendaService {
     }
   }
 
-  private _generateSession (sessionData: SessionData): Session {
-    return generateSession(sessionData, this._fixedTimeZone)
+  private _generateSession (rawData: RawData, sessionData: SessionData): Session {
+    return generateSession(rawData, sessionData, this._fixedTimeZone)
   }
 
   private get _fixedTimeZone (): ((date: Date | string) => Date) {
@@ -112,20 +125,22 @@ class AgendaServiceConcrete implements AgendaService {
   }
 
   public getDayData (dayIndex: number): DayData {
+    if (this._rawData === null) throw new Error('AgendaService is not initialized')
     if (dayIndex < 0 || dayIndex > this._days.length) throw new Error(`Invalid dayIndex ${dayIndex}`)
     const day = this._days[dayIndex].join('')
     if (!this._dayDataCache[day]) {
-      this._dayDataCache[day] = this._generateDayData(dayIndex)
+      this._dayDataCache[day] = this._generateDayData(this._rawData, dayIndex)
     }
     return this._dayDataCache[day]
   }
 
   public getSessionById (sessionId: string): Readonly<Session> {
+    if (this._rawData === null) throw new Error('AgendaService is not initialized')
     const cache = this._sessionsCache[sessionId]
     if (cache) return cache
-    const sessionData = rawData.sessions.find((sessionData) => sessionData.id === sessionId)
+    const sessionData = this._rawData.sessions.find((sessionData) => sessionData.id === sessionId)
     if (!sessionData) throw new Error(`Invalid sessionId: ${sessionId}`)
-    this._sessionsCache[sessionId] = this._generateSession(sessionData)
+    this._sessionsCache[sessionId] = this._generateSession(this._rawData, sessionData)
     return this._sessionsCache[sessionId]
   }
 
@@ -141,8 +156,9 @@ class AgendaServiceConcrete implements AgendaService {
   }
 
   public getRoomsInProgressSession (): RoomSession[] {
+    if (this._rawData === null) throw new Error('AgendaService is not initialized')
     const currentMoment = this._fixedTimeZone(new Date())
-    const roomSessionMap: { [roomId: string]: Session } = Object.fromEntries(rawData.sessions
+    const roomSessionMap: { [roomId: string]: Session } = Object.fromEntries(this._rawData.sessions
       .filter((sessionData) => {
         const start = this._fixedTimeZone(sessionData.start)
         const end = this._fixedTimeZone(sessionData.end)

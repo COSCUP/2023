@@ -1,4 +1,5 @@
 import { createRouter } from '@/router'
+import { createAgendaService } from '@/services/agenda'
 import { createAnnouncementService, AnnouncementService } from '@/services/announcement'
 import { createBreakpointService, BreakpointService } from '@/services/breakpoint'
 import { createFullPageProgressService, FullPageProgressService } from '@/services/fullPageProgress'
@@ -29,6 +30,13 @@ export default function () {
     getLanguageType: () => languageService.languageType,
     popup: (data) => popupService.popup(data)
   }))
+  const agendaService = reactive(createAgendaService([
+    'RB105',
+    'AU',
+    'TR209', 'TR211', 'TR212', 'TR213', 'TR214',
+    'TR309', 'TR311', 'TR313',
+    'TR409-2', 'TR410', 'TR411', 'TR412-1', 'TR412-2', 'TR413-1', 'TR413-2'
+  ]))
   const router: Router = createRouter({
     setIsLoading: (isLoading) => fullPageProgressService.setStatus(isLoading),
     setLanguageType: (languageType) => (languageService.languageType = languageType),
@@ -47,6 +55,7 @@ export default function () {
     fullPageProgressService,
     metaService,
     popupService,
-    announcementService
+    announcementService,
+    agendaService
   }
 }
