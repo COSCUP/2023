@@ -36,12 +36,12 @@
           <td class="session">
             <router-link
               v-if="roomSession.session"
-              :to="getSessionLocation(roomSession.session.id)"
+              :to="locationOfSession(roomSession.session.id)"
               class="content"
             >
               <h3 class="period">
                 {{
-                  getSessionPeriod(
+                  timePeriodOf(
                     roomSession.session.start,
                     roomSession.session.end
                   )
@@ -107,9 +107,9 @@ export default defineComponent({
       }
     }
 
-    const getSessionPeriod = (start: Date, end: Date) => `${formatTimeString(start, '：')} ~ ${formatTimeString(end, '：')}`
+    const timePeriodOf = (start: Date, end: Date) => `${formatTimeString(start, '：')} ~ ${formatTimeString(end, '：')}`
 
-    const getSessionLocation = (sessionId): RouteLocationRaw => ({
+    const locationOfSession = (sessionId): RouteLocationRaw => ({
       name: 'AgendaDetail',
       params: {
         sessionId
@@ -140,8 +140,8 @@ export default defineComponent({
       languageType,
       roomsSession,
       roomsStatus,
-      getSessionPeriod,
-      getSessionLocation
+      timePeriodOf,
+      locationOfSession
     }
   }
 })
