@@ -21,6 +21,6 @@ Object.entries(rootInjections)
     root.provide(key, value)
   })
 
-root.mount('body')
-// document.addEventListener('DOMContentLoaded', () => {
-// })
+document.addEventListener('DOMContentLoaded', () => {
+  root.mount('#app-outer')
+})
