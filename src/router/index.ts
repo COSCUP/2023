@@ -4,11 +4,11 @@
 // https://opensource.org/licenses/MIT
 
 import { camelCase } from 'lodash'
-import { Router, createRouter as _createRouter, createWebHistory } from 'vue-router'
+import { Router, createRouter as _createRouter, createWebHistory, RouteLocationNormalized } from 'vue-router'
 import { LanguageType, defaultLanguageType, availableLanguageTypes, LanguagePack } from '@/services/language'
 import { MetaOptions } from '@/services/meta'
-import { scrollTo, Position } from '@/utils/scrollTo'
 import { createRoutes, pageRouteNameList } from './routes'
+import { delay } from '@/utils/common'
 
 export { pageRouteNameList } from './routes'
 
@@ -25,29 +25,21 @@ interface MethodInject {
 export function createRouter (inject: MethodInject): Router {
   const routes = createRoutes(inject.setIsLoading)
 
-  let prevPosition: Position = { left: 0, top: 0 }
   const router = _createRouter({
     history: createWebHistory(process.env.BASE_URL),
     routes,
 
-    scrollBehavior (to, from, savedPosition) {
-      if (to.name === from.name) {
-        const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent)
-        const { cancel } = scrollTo({
-          from: (isSafari ? prevPosition : { left: 0, top: 0 }) as Position,
-          to: prevPosition
-        })
-        const events = ['wheel', 'mousewheel', 'DOMMouseScroll']
-        const onScrolling = () => {
-          events.forEach((event) => window.removeEventListener(event, onScrolling))
-          cancel()
-        }
-        events.forEach((event) => window.addEventListener(event, onScrolling))
-      } else if (inject.isPopup()) {
-        const popupDom = document.querySelector('#popup')
-        popupDom && popupDom.scrollTo(0, 0)
-      } else {
-        return savedPosition ?? { left: 0, top: 0 }
+    async scrollBehavior (to, from) {
+      const toKeepPositionConditions: ((to: RouteLocationNormalized, from: RouteLocationNormalized) => boolean)[] = [
+        (to, from) => to.name === from.name && to.params.languageType !== from.params.languageType,
+        (to, from) => to.name === from.name && (to.query.popUp === 'announcement' || from.query.popUp === 'announcement'),
+        (to, from) => (to.name === 'Agenda' && from.name === 'AgendaDetail') || (to.name === 'AgendaDetail' && from.name === 'Agenda')
+      ]
+      if (toKeepPositionConditions.some((condition) => condition(to, from))) return
+      await delay(300)
+      return {
+        top: 0,
+        left: 0
       }
     }
   })
@@ -64,11 +56,6 @@ export function createRouter (inject: MethodInject): Router {
         inject.setMeta({
           title: inject.getPageTitle(camelCase(routeName) as PageTitleKey)
         })
-      }
-
-      prevPosition = {
-        left: window.scrollX,
-        top: window.scrollY
       }
       next()
     }
