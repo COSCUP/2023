@@ -10,7 +10,7 @@
     <section class="content-section">
       <h4 class="track">
         <div
-          v-show="breakpointService.xsOnly"
+          v-show="xsOnly"
           class="room"
           :class="{
             full: isFull,
@@ -55,9 +55,9 @@
 
 <script lang="ts">
 import { defineComponent, inject, computed, ComputedRef } from 'vue'
-import { useBreakpointService, useAgendaService, useLanguageService } from '@/services/hooks'
 import { formatTimeString } from '@/services/agenda'
 import { useRouter } from 'vue-router'
+import { useStore } from '@/store'
 
 export default defineComponent({
   name: 'AgendaSessionItem',
@@ -68,14 +68,13 @@ export default defineComponent({
     }
   },
   setup (props) {
+    const { getSessionById } = useStore()
     const router = useRouter()
-    const agendaService = useAgendaService()
-    const breakpointService = useBreakpointService()
+    const { xsOnly, languagePack } = useStore()
     const languageType = inject<ComputedRef<'zh' | 'en'>>('languageType') || { value: 'zh' }
     const roomsStatus = inject<ComputedRef<{ [k: string]: boolean }>>('roomsStatus') || { value: {} }
-    const languageService = useLanguageService()
     const session = computed(() => {
-      const session = agendaService.getSessionById(props.sessionId)
+      const session = getSessionById(props.sessionId)
       if (session === null) throw new Error('Invalid Session')
       return session
     })
@@ -97,10 +96,10 @@ export default defineComponent({
     const room = computed(() => session.value.room[languageType.value].name.split(' / ')[0])
 
     const isFull = computed(() => !!(roomsStatus.value[session.value.room.id]))
-    const statusText = computed(() => languageService.languagePack.agenda['room-status'][isFull.value ? 'full' : 'vacancy'])
+    const statusText = computed(() => languagePack.value.agenda['room-status'][isFull.value ? 'full' : 'vacancy'])
 
     return {
-      breakpointService,
+      xsOnly,
       session,
       location,
       track,

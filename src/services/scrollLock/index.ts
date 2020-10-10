@@ -3,19 +3,23 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
+import { EventEmitter, Listener } from 'events'
+
 export interface Position {
   x: number;
   y: number;
 }
 
 export interface ScrollLockService {
-  readonly isLocked: boolean;
-  readonly currentScrollPosition: Position;
+  isLocked: boolean;
+  currentScrollPosition: Position;
   lock: () => void;
   unlock: () => void;
+  onUpdated: (listener: Listener) => void;
 }
 
 class ScrollLockServiceConcrete implements ScrollLockService {
+  private _emitter = new EventEmitter()
   private _lockStack: Position[] = []
 
   public get isLocked (): boolean {
@@ -29,14 +33,23 @@ class ScrollLockServiceConcrete implements ScrollLockService {
     }
   }
 
+  public onUpdated (listener: Listener) {
+    this._emitter.on('update', listener)
+  }
+
   public lock (): void {
+    const currentStatus = this.isLocked
     this._lockStack.push({
       x: window.scrollX,
       y: window.scrollY
     })
+    if (currentStatus !== this.isLocked) {
+      this._emitter.emit('update')
+    }
   }
 
   public unlock (): void {
+    const currentStatus = this.isLocked
     const position: Position = this._lockStack.pop() ?? {
       x: 0,
       y: 0
@@ -48,6 +61,9 @@ class ScrollLockServiceConcrete implements ScrollLockService {
         behavior: 'auto'
       })
     })
+    if (currentStatus !== this.isLocked) {
+      this._emitter.emit('update')
+    }
   }
 }
 

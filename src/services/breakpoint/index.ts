@@ -4,6 +4,7 @@
 // https://opensource.org/licenses/MIT
 
 import { debounce } from 'lodash'
+import { EventEmitter, Listener } from 'events'
 
 export type Breakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 
@@ -13,26 +14,32 @@ export type BreakpointWith<T> = {
 
 export interface BreakpointService {
   breakpoint: Breakpoint;
-  readonly xsOnly: boolean;
-  readonly smOnly: boolean;
-  readonly smAndUp: boolean;
-  readonly smAndDown: boolean;
-  readonly mdOnly: boolean;
-  readonly mdAndUp: boolean;
-  readonly mdAndDown: boolean;
-  readonly lgOnly: boolean;
-  readonly lgAndUp: boolean;
-  readonly lgAndDown: boolean;
-  readonly xlOnly: boolean;
+  xsOnly: boolean;
+  smOnly: boolean;
+  smAndUp: boolean;
+  smAndDown: boolean;
+  mdOnly: boolean;
+  mdAndUp: boolean;
+  mdAndDown: boolean;
+  lgOnly: boolean;
+  lgAndUp: boolean;
+  lgAndDown: boolean;
+  xlOnly: boolean;
   startDetect: () => void;
   stopDetect: () => void;
+  onUpdated: (listener: Listener) => void;
 }
 
 class BreakpointServiceConcrete implements BreakpointService {
-  public breakpoint: Breakpoint = 'xl'
-  private _debouncedDetectBreakpoint = debounce(() => { this.breakpoint = this._detectBreakpoint() }, 300)
+  private _emitter = new EventEmitter()
+  private _breakpoint: Breakpoint = 'xl'
+  private _onBreakpointChanged = debounce(() => {
+    const newBreakpoint = this._getBreakpoint()
+    if (this.breakpoint === newBreakpoint) return
+    this.breakpoint = this._getBreakpoint()
+  })
 
-  private _detectBreakpoint (): Breakpoint {
+  private _getBreakpoint (): Breakpoint {
     // $xs-max-width: 600px;
     // $sm-max-width: 960px;
     // $md-max-width: 1264px;
@@ -49,6 +56,15 @@ class BreakpointServiceConcrete implements BreakpointService {
       .find((entry) => entry[1])
 
     return result ? result[0] : 'xl'
+  }
+
+  public get breakpoint () {
+    return this._breakpoint
+  }
+
+  public set breakpoint (value) {
+    this._breakpoint = value
+    this._emitter.emit('update')
   }
 
   public get xsOnly () {
@@ -95,13 +111,17 @@ class BreakpointServiceConcrete implements BreakpointService {
     return this.breakpoint === 'xl'
   }
 
+  public onUpdated (listener: Listener) {
+    this._emitter.on('update', listener)
+  }
+
   public startDetect () {
-    this._debouncedDetectBreakpoint()
-    window.addEventListener('resize', this._debouncedDetectBreakpoint)
+    this._onBreakpointChanged()
+    window.addEventListener('resize', this._onBreakpointChanged)
   }
 
   public stopDetect () {
-    window.removeEventListener('resize', this._debouncedDetectBreakpoint)
+    window.removeEventListener('resize', this._onBreakpointChanged)
   }
 }
 

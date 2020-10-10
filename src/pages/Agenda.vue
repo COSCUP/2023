@@ -11,13 +11,13 @@
     <template v-for="(dayData, index) in daysData">
       <AgendaTable
         v-if="dayData !== null"
-        v-show="dayIndex === index && breakpointService.smAndUp"
+        v-show="dayIndex === index && smAndUp"
         :key="`table-${dayData.day.join('')}`"
         :table="dayData.table"
       />
       <AgendaList
         v-if="dayData !== null"
-        v-show="dayIndex === index && breakpointService.xsOnly"
+        v-show="dayIndex === index && xsOnly"
         :key="`list-${dayData.day.join('')}`"
         :list="dayData.list"
       />
@@ -30,8 +30,6 @@ import io from 'socket.io-client'
 import axios from 'axios'
 import { defineComponent, computed, watch, onMounted, provide, ref, onBeforeUnmount, nextTick } from 'vue'
 import { RouteLocationNormalized, useRouter } from 'vue-router'
-import { DayData } from '@/services/agenda'
-import { useLanguageService, usePopupService, useBreakpointService, useAgendaService, useFullPageProgressService } from '@/services/hooks'
 import { PopupData } from '@/services/popup'
 import { useRenderedEventDispatcher } from '@/plugins/renderedEventDispatcher'
 import { scrollTo } from '@/utils/scrollTo'
@@ -40,6 +38,7 @@ import AgendaTable from '@/components/Agenda/AgendaTable.vue'
 import AgendaList from '@/components/Agenda/AgendaList.vue'
 
 import '@/assets/scss/pages/agenda.scss'
+import { useStore } from '@/store'
 
 export default defineComponent({
   name: 'Agenda',
@@ -51,17 +50,13 @@ export default defineComponent({
   setup () {
     const dispatchRenderedEvent = useRenderedEventDispatcher()
     const router = useRouter()
-    const fullPageProgressService = useFullPageProgressService()
-    const languageService = useLanguageService()
-    const popupService = usePopupService()
-    const breakpointService = useBreakpointService()
-    const agendaService = useAgendaService()
-    const languageType = computed(() => languageService.languageType === 'zh-TW' ? 'zh' : languageService.languageType)
+    const { smAndUp, xsOnly, setFullPageProgressStatus, popup, closePopup, getSessionPopupData, agendaDaysData: daysData, initAgenda } = useStore()
+    const { languageType: _languageType } = useStore()
+    const languageType = computed(() => _languageType.value === 'zh-TW' ? 'zh' : _languageType.value)
     const rawRoomsStatus = ref<{ id: string; isFull: boolean }[]>([])
     const roomsStatus = computed(() => Object.fromEntries(rawRoomsStatus.value.map((room) => [room.id, room.isFull])))
     let socket: SocketIOClient.Socket | null = null
     const dayIndex = ref(0)
-    const daysData = ref<(DayData | null)[]>([])
 
     const onSessionPopupClose = () => {
       if (router.currentRoute.value.name === 'AgendaDetail') {
@@ -92,9 +87,9 @@ export default defineComponent({
             html: '<article id="session-detail" class="session-detail"><h1>Session Popup Template</h1></article>'
           }
         }
-        : await agendaService.getSessionPopupData(sessionId, languageType.value)
+        : await getSessionPopupData(sessionId, languageType.value)
 
-      popupService.popup({
+      popup({
         ...popupData,
         onClose: onSessionPopupClose
       })
@@ -111,7 +106,7 @@ export default defineComponent({
           })
         }
       } else if (route.name === 'Agenda') {
-        popupService.close()
+        closePopup()
       }
     }
 
@@ -138,7 +133,7 @@ export default defineComponent({
       }
     }
 
-    watch(() => dayIndex.value, (value) => {
+    watch(() => dayIndex.value, () => {
       const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent)
       const { cancel } = scrollTo({
         to: { left: 0, top: 0 },
@@ -150,21 +145,15 @@ export default defineComponent({
         cancel()
       }
       events.forEach((event) => window.addEventListener(event, onScrolling))
-
-      if (daysData.value[value] === null) {
-        daysData.value.splice(value, 1, agendaService.getDayData(value))
-      }
     })
 
     watch(() => router.currentRoute.value, processByRoute)
 
     onMounted(async () => {
-      fullPageProgressService.setStatus(true)
-      await agendaService.init()
-      daysData.value = agendaService.days.map(() => null)
-      daysData.value.splice(dayIndex.value, 1, agendaService.getDayData(dayIndex.value))
+      setFullPageProgressStatus(true)
+      await initAgenda()
       await processByRoute(router.currentRoute.value)
-      fullPageProgressService.setStatus(false)
+      setFullPageProgressStatus(false)
       dispatchRenderedEvent()
       await nextTick()
       registerSocket()
@@ -174,12 +163,12 @@ export default defineComponent({
       unregisterSocket()
     })
 
-    provide('agendaService', agendaService)
     provide('languageType', languageType)
     provide('roomsStatus', roomsStatus)
 
     return {
-      breakpointService,
+      smAndUp,
+      xsOnly,
       dayIndex,
       daysData,
       roomsStatus

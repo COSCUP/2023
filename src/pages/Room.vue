@@ -67,17 +67,16 @@ import { RoomSession, formatTimeString } from '@/services/agenda'
 
 import '@/assets/scss/pages/room.scss'
 import { useRenderedEventDispatcher } from '@/plugins/renderedEventDispatcher'
-import { useAgendaService, useLanguageService } from '@/services/hooks'
 import { RouteLocationRaw } from 'vue-router'
+import { useStore } from '@/store'
 
 export default defineComponent({
   name: 'Room',
   setup () {
-    const agendaService = useAgendaService()
+    const { languageType: _languageType, languagePack, initAgenda, getRoomsInProgressSession } = useStore()
     const dispatchRenderedEvent = useRenderedEventDispatcher()
-    const languageService = useLanguageService()
-    const languageType = computed(() => languageService.languageType === 'zh-TW' ? 'zh' : languageService.languageType)
-    const text = computed(() => languageService.languagePack.room)
+    const languageType = computed(() => _languageType.value === 'zh-TW' ? 'zh' : _languageType.value)
+    const text = computed(() => languagePack.value.room)
     const timer = ref(-1)
     const roomsSession = ref<RoomSession[]>([])
     const rawRoomsStatus = ref<{ id: string; isFull: boolean }[]>([])
@@ -120,11 +119,11 @@ export default defineComponent({
     })
 
     onMounted(async () => {
-      await agendaService.init()
+      await initAgenda()
       dispatchRenderedEvent()
       await nextTick()
       timer.value = setInterval((function cb () {
-        roomsSession.value = agendaService.getRoomsInProgressSession()
+        roomsSession.value = getRoomsInProgressSession()
         return cb
       })(), 3000)
       registerSocket()

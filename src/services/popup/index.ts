@@ -4,6 +4,7 @@
 // https://opensource.org/licenses/MIT
 
 import { MetaOptions } from '@/services/meta'
+import { EventEmitter, Listener } from 'events'
 
 export type PopupContentType = 'empty' | 'general'
 
@@ -51,6 +52,7 @@ export interface PopupService {
   readonly popupData: PopupData;
   popup: (popupData: PopupData) => void;
   close: () => void;
+  onUpdated: (listener: Listener) => void;
 }
 
 interface MethodInject {
@@ -60,6 +62,7 @@ interface MethodInject {
 }
 
 class PopupServiceConcrete implements PopupService {
+  private _emitter = new EventEmitter()
   private _popupDataStack: PopupData[] = [{
     metaOptions: {},
     containerData: {
@@ -88,11 +91,16 @@ class PopupServiceConcrete implements PopupService {
     return this._popupDataStack.slice(-1)[0]
   }
 
+  public onUpdated (listener: Listener) {
+    this._emitter.on('update', listener)
+  }
+
   public popup (popupData: PopupData) {
     if (popupData.popupId && this._popupDataStack.some((data) => data.popupId === popupData.popupId)) return
     this._popupDataStack.push(popupData)
     this._lockScrolling()
     this._setMeta(this.popupData.metaOptions)
+    this._emitter.emit('update')
   }
 
   public close (): void {
@@ -101,6 +109,7 @@ class PopupServiceConcrete implements PopupService {
       this._popupDataStack.pop()
       this._unlockScrolling()
       this._setMeta(this.popupData.metaOptions)
+      this._emitter.emit('update')
     }
   }
 }

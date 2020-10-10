@@ -16,7 +16,7 @@
       </section>
       <section class="footer__section">
         <p class="title">
-          {{ languageService.languagePack.app.footer.websites }}
+          {{ languagePack.app.footer.websites }}
         </p>
         <div class="content past">
           <a
@@ -32,7 +32,7 @@
       </section>
       <section class="footer__section">
         <p class="title">
-          {{ languageService.languagePack.app.footer.social }}
+          {{ languagePack.app.footer.social }}
         </p>
         <div class="content">
           <a
@@ -52,17 +52,17 @@
 </template>
 
 <script lang="ts">
+import { useStore } from '@/store'
 import { defineComponent } from 'vue'
-import { useLanguageService } from '@/services/hooks'
 
 export default defineComponent({
   name: 'Footer',
   setup () {
-    const languageService = useLanguageService()
+    const { languagePack } = useStore()
     const numOfPast = 2020 - 2006
 
     return {
-      languageService,
+      languagePack,
       numOfPast,
       communityMedia: [
         {

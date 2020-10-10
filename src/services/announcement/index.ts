@@ -6,6 +6,7 @@
 import announcement from '@/assets/json/announcement.json'
 import { LanguageType } from '@/services/language'
 import { PopupData } from '@/services/popup'
+import { EventEmitter, Listener } from 'events'
 import markdown from '@/utils/markdown'
 
 interface MethodInject {
@@ -14,11 +15,13 @@ interface MethodInject {
 }
 
 export interface AnnouncementService {
-  readonly hasUpdated: boolean;
+  hasUpdated: boolean;
   showAnnouncement: (onClose?: () => void) => Promise<void>;
+  onUpdated: (listener: Listener) => void;
 }
 
 class AnnouncementServiceConcrete implements AnnouncementService {
+  private _emitter = new EventEmitter()
   private _getLanguageType: () => LanguageType
   private _popup: (data: PopupData) => void
 
@@ -30,6 +33,10 @@ class AnnouncementServiceConcrete implements AnnouncementService {
   public get hasUpdated (): boolean {
     const currentUUID = localStorage.getItem('announcement') ?? ''
     return currentUUID !== announcement.uuid
+  }
+
+  public onUpdated (listener: Listener) {
+    this._emitter.on('update', listener)
   }
 
   public async showAnnouncement (onClose?: () => void) {
@@ -50,7 +57,11 @@ class AnnouncementServiceConcrete implements AnnouncementService {
       onClose
     }
     this._popup(popupData)
-    localStorage.setItem('announcement', announcement.uuid)
+
+    if (this.hasUpdated) {
+      localStorage.setItem('announcement', announcement.uuid)
+      this._emitter.emit('update')
+    }
   }
 }
 

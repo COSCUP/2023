@@ -10,14 +10,10 @@
     <OlMap id="map-component" :mapOptions="mapOptions"></OlMap>
     <div class="card-container">
       <div class="card address">
-        <h2 class="title">{{ languageService.languagePack.map.name }}</h2>
-        <h3 class="content">{{ languageService.languagePack.map.address }}</h3>
+        <h2 class="title">{{ languagePack.map.name }}</h2>
+        <h3 class="content">{{ languagePack.map.address }}</h3>
       </div>
-      <div
-        v-for="plan in languageService.languagePack.map.plans"
-        :key="plan.name"
-        class="card"
-      >
+      <div v-for="plan in languagePack.map.plans" :key="plan.name" class="card">
         <h3 class="title">{{ plan.name }}</h3>
         <section
           v-html="plansHtml[plan.name]"
@@ -31,12 +27,12 @@
 <script lang="ts">
 import { defineComponent, reactive, onMounted, watch, ref } from 'vue'
 import OlMap from '@/components/Map/OlMap.vue'
-import { useLanguageService } from '@/services/hooks'
 import { useRenderedEventDispatcher } from '../plugins/renderedEventDispatcher'
 import { MapOptions } from '@/utils/map'
 import markdown from '@/utils/markdown'
 
 import '@/assets/scss/pages/map.scss'
+import { useStore } from '@/store'
 
 export default defineComponent({
   name: 'Map',
@@ -44,8 +40,8 @@ export default defineComponent({
     OlMap
   },
   setup () {
+    const { languageType, languagePack } = useStore()
     const dispatchRenderedEvent = useRenderedEventDispatcher()
-    const languageService = useLanguageService()
     const mapOptions: MapOptions = reactive({
       target: 'map-component',
       center: {
@@ -70,18 +66,18 @@ export default defineComponent({
       ]
     })
     const plansHtml = ref(
-      Object.fromEntries(languageService.languagePack.map.plans.map((plan) => [plan.name, plan.description]))
+      Object.fromEntries(languagePack.value.map.plans.map((plan) => [plan.name, plan.description]))
     )
 
     const renderMarkdownContent = async () => {
       const _plansHtml = {}
-      for (const plan of languageService.languagePack.map.plans) {
+      for (const plan of languagePack.value.map.plans) {
         _plansHtml[plan.name] = await markdown(plan.description)
       }
       plansHtml.value = _plansHtml
     }
 
-    watch(() => languageService.languageType, async () => {
+    watch(() => languageType.value, async () => {
       await renderMarkdownContent()
     })
 
@@ -91,7 +87,7 @@ export default defineComponent({
     })
 
     return {
-      languageService,
+      languagePack,
       mapOptions,
       plansHtml
     }

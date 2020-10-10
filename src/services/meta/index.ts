@@ -3,6 +3,8 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
+import { EventEmitter, Listener } from 'events'
+
 export enum MetaType {
   Title = 'title',
   Description = 'description',
@@ -53,9 +55,11 @@ export interface MetaService {
   readonly currentMetaValues: MetaValues;
   setMeta: (options: MetaOptions) => void;
   resetMeta: () => void;
+  onUpdated: (listener: Listener) => void;
 }
 
 class MetaServiceConcrete implements MetaService {
+  private _emitter = new EventEmitter()
   private __currentMetaValues: MetaValues = defaultMetaValues
   private _metaDomSetterSet: MetaDomSetterSet
 
@@ -72,10 +76,15 @@ class MetaServiceConcrete implements MetaService {
         const setter = this._metaDomSetterSet[metaDomType]
         setter(value)
       })
+    this._emitter.emit('update')
   }
 
   public get currentMetaValues (): MetaValues {
     return Object.freeze(this.__currentMetaValues)
+  }
+
+  public onUpdated (listener: Listener) {
+    this._emitter.on('update', listener)
   }
 
   public setMeta (options: MetaOptions): void {

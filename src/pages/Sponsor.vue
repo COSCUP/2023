@@ -9,10 +9,10 @@
   <main id="sponsor" class="page-container">
     <div class="card outer-container">
       <h2 class="title">
-        {{ languageService.languagePack.sponsor.callForSponsorship.title }}
+        {{ languagePack.sponsor.callForSponsorship.title }}
       </h2>
       <p class="call-for-sponsorship">
-        {{ languageService.languagePack.sponsor.callForSponsorship.content }}
+        {{ languagePack.sponsor.callForSponsorship.content }}
         <a href="mailto:sponsorship@coscup.org"> sponsorship@coscup.org </a>
       </p>
     </div>
@@ -22,7 +22,7 @@
       class="outer-container"
     >
       <h2 class="title level">
-        {{ languageService.languagePack.sponsor.level[level] }}
+        {{ languagePack.sponsor.level[level] }}
       </h2>
       <div
         v-for="sponsor in sponsorGroups[level]"
@@ -33,20 +33,18 @@
           <a :href="`${sponsor.link}`" target="_blank" rel="noopener">
             <img
               :src="`/2020/images/sponsors/${sponsor.image}`"
-              :alt="`Sponsor ${
-                sponsor.name[languageService.languageType]
-              }'s logo`"
+              :alt="`Sponsor ${sponsor.name[languageType]}'s logo`"
             />
           </a>
         </div>
         <div class="content-container">
           <a :href="`${sponsor.link}`" target="_blank" rel="noopener">
             <h2>
-              {{ sponsor.name[languageService.languageType] }}
+              {{ sponsor.name[languageType] }}
             </h2>
           </a>
           <article
-            v-html="sponsor.intro[languageService.languageType]"
+            v-html="sponsor.intro[languageType]"
             class="markdown"
           ></article>
           <div class="readmore" @click="onReadmoreClick">
@@ -62,12 +60,12 @@
 import { defineComponent, onMounted, reactive, watch } from 'vue'
 import { groupBy } from 'lodash'
 import { availableLanguageTypes } from '@/services/language'
-import { useLanguageService, useBreakpointService } from '@/services/hooks'
 import markdown from '@/utils/markdown'
 import sponsorDatas from '@/../public/json/sponsor.json'
 
 import '@/assets/scss/pages/sponsor.scss'
 import { useRenderedEventDispatcher } from '../plugins/renderedEventDispatcher'
+import { useStore } from '@/store'
 
 type ArrayElement<ArrayType extends readonly unknown[]> = ArrayType[number];
 type SopnsorData = ArrayElement<typeof sponsorDatas>
@@ -75,9 +73,8 @@ type SopnsorData = ArrayElement<typeof sponsorDatas>
 export default defineComponent({
   name: 'Sponsor',
   setup () {
+    const { breakpoint, languageType, languagePack } = useStore()
     const despatchRenderedEvent = useRenderedEventDispatcher()
-    const languageService = useLanguageService()
-    const breakpointService = useBreakpointService()
 
     const sponsorGroups = reactive(Object.fromEntries(Object.entries(groupBy<SopnsorData>(sponsorDatas, 'level'))
       .sort((entryA, entryB) => {
@@ -110,7 +107,7 @@ export default defineComponent({
       contentContainer.classList.remove('folded')
     }
 
-    watch(() => breakpointService.breakpoint, async () => {
+    watch(() => breakpoint.value, async () => {
       detectOverflowContentElements()
     })
 
@@ -121,7 +118,8 @@ export default defineComponent({
     })
 
     return {
-      languageService,
+      languageType,
+      languagePack,
       sponsorGroups,
       onReadmoreClick
     }

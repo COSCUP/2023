@@ -14,16 +14,16 @@
 </template>
 
 <script lang="ts">
+import { useStore } from '@/store'
 import { defineComponent, computed } from 'vue'
-import { usePopupService } from '@/services/hooks'
 
 export default defineComponent({
   name: 'GeneralPopupContent',
   setup () {
-    const popupService = usePopupService()
+    const { popupData } = useStore()
     const html = computed(() => {
-      if (popupService.popupData.contentData.type === 'general') {
-        return popupService.popupData.contentData.html
+      if (popupData.value.contentData.type === 'general') {
+        return popupData.value.contentData.html
       }
       throw new Error('Invalid popup content data for "GeneralPopupContent" component.')
     })

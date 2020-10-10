@@ -46,9 +46,9 @@ import { debounce } from 'lodash'
 import { defineComponent, computed, watch, onMounted, onBeforeUnmount, reactive, toRefs } from 'vue'
 import NavbarMenu from './NavbarMenu.vue'
 import NavbarItemList from './NavbarItemList.vue'
-import { useBreakpointService, useScrollLockService, useThemeService, useLanguageService } from '@/services/hooks'
 import { getInternalLinkDataList, getExternalLinkDataList, getLanguageSwitchData, getThemeToggleData, getMenuToggleData, ActionType } from './navbar'
 import { useRouter } from 'vue-router'
+import { useStore } from '@/store'
 
 export default defineComponent({
   name: 'Navbar',
@@ -58,16 +58,14 @@ export default defineComponent({
   },
   setup () {
     const router = useRouter()
-    const breakpointService = useBreakpointService()
-    const languageService = useLanguageService()
-    const scrollLockService = useScrollLockService()
-    const themeService = useThemeService()
+    const { languageType, languagePack, getLanguagePack } = useStore()
+    const { smAndUp, xsOnly, themeType, setThemeType, lockScroll, unlockScroll } = useStore()
     const data = reactive({
       isMenuOpen: false,
       isOverflow: false
     })
 
-    const getNavbarItemText = (itemName) => languageService.languagePack.app.navbar[itemName]
+    const getNavbarItemText = (itemName) => languagePack.value.app.navbar[itemName]
 
     const internalLinkDataList = computed(() => {
       return getInternalLinkDataList({
@@ -84,16 +82,16 @@ export default defineComponent({
 
     const languageSwitchData = computed(() => {
       return getLanguageSwitchData({
-        currentLanguageType: languageService.languageType,
+        currentLanguageType: languageType.value,
         currentRoute: router.currentRoute.value,
         getNextLanguageTypeText: (nextLanguageType) =>
-          languageService.languagePackSet[nextLanguageType].app.navbar.languageSwitch
+          getLanguagePack(nextLanguageType).app.navbar.languageSwitch
       })
     })
 
     const themeToggleData = computed(() => {
       return getThemeToggleData({
-        currentThemeType: themeService.themeType
+        currentThemeType: themeType.value
       })
     })
 
@@ -112,7 +110,7 @@ export default defineComponent({
     })
 
     const navbarItemDataList = computed(() => {
-      if (breakpointService.smAndUp) {
+      if (smAndUp.value) {
         return fullNavbarItemDataList.value
           .filter((data) => data.options.name !== 'menuToggle')
       }
@@ -121,15 +119,14 @@ export default defineComponent({
 
     const setMenuOpen = (isOpen: boolean) => {
       data.isMenuOpen = isOpen
-      isOpen ? scrollLockService.lock() : scrollLockService.unlock()
+      isOpen ? lockScroll() : unlockScroll()
     }
 
     const commitAction = (action: ActionType, args?: never) => {
       const actions: { [action in ActionType]: () => void } = {
         'toggle-menu': () => { setMenuOpen(!data.isMenuOpen) },
         'toggle-theme': () => {
-          themeService.themeType = themeService.themeType === 'light' ? 'dark' : 'light'
-          themeService.savePreference()
+          setThemeType(themeType.value === 'light' ? 'dark' : 'light')
         }
       }
       if (!actions[action]) return
@@ -137,7 +134,7 @@ export default defineComponent({
     }
 
     const detectOverflow = debounce(() => {
-      if (breakpointService.xsOnly) return
+      if (xsOnly.value) return
       const windowWidth = window.innerWidth
       const menuItemTotalWidth = Array.from<HTMLElement>(
         document.querySelectorAll('#navbar .navbar-item-list .navbar-item-container')
@@ -147,7 +144,7 @@ export default defineComponent({
       data.isOverflow = windowWidth < menuItemTotalWidth
     }, 300)
 
-    watch(() => breakpointService.xsOnly, (newValue: boolean) => {
+    watch(() => xsOnly.value, (newValue: boolean) => {
       if (!newValue) {
         setMenuOpen(false)
       }
@@ -182,9 +179,6 @@ export default defineComponent({
 
     return {
       ...toRefs(data),
-      breakpointService,
-      scrollLockService,
-      themeService,
       menuNavbarItemDataList,
       navbarItemDataList,
       setMenuOpen,

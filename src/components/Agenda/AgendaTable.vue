@@ -43,7 +43,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, computed, PropType } from 'vue'
+import { defineComponent, inject, computed, PropType, ComputedRef } from 'vue'
 import { AgendaTableData } from '@/services/agenda'
 import AgendaSessionItem from './AgendaSessionItem.vue'
 import AgendaTableRoomCell from './AgendaTableRoomCell.vue'
@@ -63,7 +63,7 @@ export default defineComponent({
   },
   setup (props) {
     const router = useRouter()
-    const languageType = inject<'zh' | 'en'>('languageType') || 'zh'
+    const languageType = inject<ComputedRef<'zh' | 'en'>>('languageType') || { value: 'zh' }
     const tableStyle = computed(() => ({ '--table-column': props.table.rooms.length }))
     const getSessionLocation = (sessionId: string) => ({
       name: 'AgendaDetail',

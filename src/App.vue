@@ -15,12 +15,12 @@
     <Navbar></Navbar>
     <div
       :class="{
-        'scroll-lock': scrollLockService.isLocked,
-        popupped: popupService.isPopup,
+        'scroll-lock': isScrollLocked,
+        popupped: isPopup,
       }"
       :style="{
-        '--current-scroll-x': `${scrollLockService.currentScrollPosition.x}px`,
-        '--current-scroll-y': `${scrollLockService.currentScrollPosition.y}px`,
+        '--current-scroll-x': `${currentScrollLockedPosition.x}px`,
+        '--current-scroll-y': `${currentScrollLockedPosition.y}px`,
       }"
       class="main-container"
     >
@@ -34,8 +34,7 @@
       <SponsorFooter></SponsorFooter>
       <Footer></Footer>
     </div>
-    <FullPageProgress v-show="fullPageProgressService.isLoading">
-    </FullPageProgress>
+    <FullPageProgress v-show="isFullPageProgressLoading"> </FullPageProgress>
     <Popup></Popup>
   </div>
 </template>
@@ -48,9 +47,9 @@ import SponsorFooter from '@/components/App/SponsorFooter.vue'
 import Footer from '@/components/App/Footer.vue'
 import FullPageProgress from '@/components/App/FullPageProgress.vue'
 import Popup from '@/components/App/Popup/index.vue'
-import { useAnnouncementService, useBreakpointService, useFullPageProgressService, useLanguageService, usePopupService, useThemeService, useScrollLockService } from '@/services/hooks'
 
 import '@/assets/scss/app.scss'
+import { useStore } from './store'
 
 export default defineComponent({
   name: 'App',
@@ -63,13 +62,14 @@ export default defineComponent({
   },
   setup () {
     const router = useRouter()
-    const languageService = useLanguageService()
-    const themeService = useThemeService()
-    const breakpointService = useBreakpointService()
-    const scrollLockService = useScrollLockService()
-    const fullPageProgressService = useFullPageProgressService()
-    const popupService = usePopupService()
-    const announcementService = useAnnouncementService()
+    const {
+      startDetectBreakpoint, stopDetectBreakpoint,
+      startDetectTheme, stopDetectTheme, showAnnouncement, announcementHasUpdated,
+      isFullPageProgressLoading,
+      isScrollLocked,
+      currentScrollLockedPosition,
+      isPopup
+    } = useStore()
 
     const data = reactive({
       isInApp: false
@@ -85,12 +85,12 @@ export default defineComponent({
             query
           })
         }
-        announcementService.showAnnouncement(onClose)
+        showAnnouncement(onClose)
       }
     }
 
     const detectAnnouncementUpdate = () => {
-      if (announcementService.hasUpdated) {
+      if (announcementHasUpdated.value) {
         router.push({
           query: {
             ...router.currentRoute.value.query,
@@ -115,22 +115,22 @@ export default defineComponent({
 
     onMounted(async () => {
       document.addEventListener('x-app-rendered', onAppRender)
-      breakpointService.startDetect()
-      themeService.startDetect()
+      startDetectBreakpoint()
+      startDetectTheme()
       await nextTick()
       onRouteChange(router.currentRoute.value)
     })
 
     onBeforeUnmount(() => {
-      breakpointService.stopDetect()
-      themeService.stopDetect()
+      stopDetectBreakpoint()
+      stopDetectTheme()
     })
 
     return {
-      languageService,
-      fullPageProgressService,
-      scrollLockService,
-      popupService,
+      isFullPageProgressLoading,
+      isScrollLocked,
+      currentScrollLockedPosition,
+      isPopup,
       ...toRefs(data)
     }
   }

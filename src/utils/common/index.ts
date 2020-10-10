@@ -23,6 +23,8 @@ export function delay (ms: number) {
   return new Promise((resolve) => { setTimeout(resolve, ms) })
 }
 
+export function immediatePromise () { return new Promise((resolve) => setImmediate(resolve)) }
+
 export function getFullUrl (relativeUrl = ''): string {
   if (process.env.VUE_APP_PRODUCTION_ORIGIN === undefined) throw new Error()
   const productionOrigin: string = process.env.VUE_APP_PRODUCTION_ORIGIN

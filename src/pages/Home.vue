@@ -24,7 +24,7 @@
       <div class="info">
         <span class="date">8 / 1 ~ 8 / 2</span>
         <span class="venue">
-          {{ languageService.languagePack.home.info.venue }}
+          {{ languagePack.home.info.venue }}
         </span>
       </div>
       <router-link
@@ -36,7 +36,7 @@
         }"
       >
         <span>
-          {{ languageService.languagePack.home.info.tabs.announcement }}
+          {{ languagePack.home.info.tabs.announcement }}
         </span>
       </router-link>
     </div>
@@ -61,10 +61,10 @@
 <script lang="ts">
 import { defineComponent, ref, computed, watch, onMounted } from 'vue'
 import markdown from '@/utils/markdown'
-import { useLanguageService } from '@/services/hooks'
 import { useRenderedEventDispatcher } from '@/plugins/renderedEventDispatcher'
 
 import '@/assets/scss/pages/home.scss'
+import { useStore } from '@/store'
 
 interface Section {
   name: 'notice' | 'about';
@@ -75,29 +75,29 @@ interface Section {
 export default defineComponent({
   name: 'Home',
   setup () {
+    const { languageType, languagePack } = useStore()
     const despatchRenderedEvent = useRenderedEventDispatcher()
-    const languageService = useLanguageService()
     const noticeHtml = ref('')
     const aboutHtml = ref('')
     const sections = computed<Section[]>(() => [
       {
         name: 'notice',
-        title: languageService.languagePack.home.notice.title,
+        title: languagePack.value.home.notice.title,
         content: noticeHtml.value
       },
       {
         name: 'about',
-        title: languageService.languagePack.home.about.title,
+        title: languagePack.value.home.about.title,
         content: aboutHtml.value
       }
     ])
 
     const parseMarkdownContent = async () => {
-      noticeHtml.value = await markdown(languageService.languagePack.home.notice.content)
-      aboutHtml.value = await markdown(languageService.languagePack.home.about.content)
+      noticeHtml.value = await markdown(languagePack.value.home.notice.content)
+      aboutHtml.value = await markdown(languagePack.value.home.about.content)
     }
 
-    watch(() => languageService.languageType, parseMarkdownContent)
+    watch(() => languageType.value, parseMarkdownContent)
 
     onMounted(async () => {
       await parseMarkdownContent()
@@ -105,7 +105,7 @@ export default defineComponent({
     })
 
     return {
-      languageService,
+      languagePack,
       sections
     }
   }

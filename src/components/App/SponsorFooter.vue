@@ -14,7 +14,7 @@
     >
       <div class="level-container">
         <p class="level">
-          {{ languageService.languagePack.sponsor.level[groupEntry[0]] }}
+          {{ languagePack.sponsor.level[groupEntry[0]] }}
         </p>
       </div>
       <div class="inner-container">
@@ -41,17 +41,17 @@
 import { groupBy } from 'lodash'
 import sponsorDatas from '@/../public/json/sponsor.json'
 import { defineComponent, computed } from 'vue'
-import { useLanguageService } from '@/services/hooks'
+import { useStore } from '@/store'
 
 export default defineComponent({
   name: 'SponsorFooter',
   setup () {
-    const languageService = useLanguageService()
+    const { languageType, languagePack } = useStore()
     const sponsorGroups = computed(() => Object.entries(groupBy(sponsorDatas.map((data) => {
       return {
         level: data.level,
         id: data.id,
-        name: data.name[languageService.languageType],
+        name: data.name[languageType.value],
         link: data.link,
         image: data.image
       }
@@ -64,7 +64,7 @@ export default defineComponent({
 
     return {
       sponsorGroups,
-      languageService
+      languagePack
     }
   }
 })

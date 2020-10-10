@@ -18,7 +18,7 @@
 
 <script lang="ts">
 import { defineComponent, ComputedRef, inject, computed } from 'vue'
-import { useAgendaService, useLanguageService } from '@/services/hooks'
+import { useStore } from '@/store'
 
 export default defineComponent({
   name: 'AgendaTableRoomCell',
@@ -29,18 +29,17 @@ export default defineComponent({
     }
   },
   setup (props) {
+    const { languagePack, getRoomById } = useStore()
     const languageType = inject<ComputedRef<'zh' | 'en'>>('languageType') || { value: 'zh' }
     const roomsStatus = inject<ComputedRef<{ [k: string]: boolean }>>('roomsStatus') || { value: {} }
-    const languageService = useLanguageService()
-    const agendaService = useAgendaService()
     const room = computed(() => {
-      const room = agendaService.getRoomById(props.roomId)
+      const room = getRoomById(props.roomId)
       if (room === null) throw new Error('Invalid Room')
       return room
     })
     const roomName = computed(() => room.value[languageType.value].name.split(' / ')[0])
     const isFull = computed(() => !!(roomsStatus.value[props.roomId]))
-    const statusText = computed(() => languageService.languagePack.agenda['room-status'][isFull.value ? 'full' : 'vacancy'])
+    const statusText = computed(() => languagePack.value.agenda['room-status'][isFull.value ? 'full' : 'vacancy'])
 
     return {
       roomName,

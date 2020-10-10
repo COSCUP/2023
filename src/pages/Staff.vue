@@ -14,7 +14,7 @@
     >
       <section class="group-box">
         <h2 class="group-name">
-          {{ languageService.languagePack.staff.groups[group.tid] }}
+          {{ languagePack.staff.groups[group.tid] }}
         </h2>
         <div class="staff-wrapper">
           <div
@@ -45,16 +45,15 @@
 <script lang="ts">
 import { defineComponent, computed, onMounted } from 'vue'
 import _staffData from '@/../public/json/staff.json'
-import { useLanguageService } from '@/services/hooks'
 import { useRenderedEventDispatcher } from '@/plugins/renderedEventDispatcher'
 
 import '@/assets/scss/pages/staff.scss'
+import { useStore } from '@/store'
 
 export default defineComponent({
   name: 'Staff',
   setup () {
-    const languageService = useLanguageService()
-
+    const { languagePack } = useStore()
     const staffData = computed(() => {
       const groupSequence = ['coordinator', 'secretary', 'program', 'field', 'finance', 'it', 'marketing', 'photo', 'sponsor', 'streaming']
       return _staffData
@@ -78,7 +77,7 @@ export default defineComponent({
     })
 
     return {
-      languageService,
+      languagePack,
       staffData
     }
   }

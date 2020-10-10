@@ -4,6 +4,7 @@
 // https://opensource.org/licenses/MIT
 
 import { debounce } from 'lodash'
+import { EventEmitter, Listener } from 'events'
 
 export type ThemeType = 'light' | 'dark'
 
@@ -11,14 +12,17 @@ export interface ThemeService {
   themeType: ThemeType;
   startDetect: () => void;
   stopDetect: () => void;
-  savePreference: () => void;
+  onUpdated: (listener: Listener) => void;
 }
 
 class ThemeServiceConcrete implements ThemeService {
+  private _emitter = new EventEmitter()
   private _themeType: ThemeType = 'light'
-  private _debouncedDetectTheme = debounce(() => {
-    this.themeType = this._detectColorSchema()
+  private _onThemeChanged = debounce(() => {
+    const newThemeType = this._getColorSchema()
+    this._themeType = newThemeType
     document.body.setAttribute('data-theme', this.themeType)
+    this._emitter.emit('update')
   }, 30)
 
   public get themeType () {
@@ -26,45 +30,45 @@ class ThemeServiceConcrete implements ThemeService {
   }
 
   public set themeType (value: ThemeType) {
-    this._themeType = value
+    localStorage.setItem('colorSchema', value)
+    this._onThemeChanged()
   }
 
-  private _detectSystemPrefersColorSchema (): ThemeType {
+  private _getSystemPrefersColorSchema (): ThemeType {
     if (!window.matchMedia) return 'light'
     const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
     return isDarkMode ? 'dark' : 'light'
   }
 
-  private _detectLocalStorageColorSchema (): ThemeType | 'auto' {
+  private _getLocalStorageColorSchema (): ThemeType | 'auto' {
     const availableValues = ['auto', 'light', 'dark']
     let colorSchema = localStorage.getItem('colorSchema') as ThemeType | 'auto'
     if (!availableValues.includes(colorSchema)) colorSchema = 'auto'
     return colorSchema
   }
 
-  private _detectColorSchema (): ThemeType {
+  private _getColorSchema (): ThemeType {
     let colorSchema: ThemeType = 'light'
-    const localStorageColorSchema = this._detectLocalStorageColorSchema()
+    const localStorageColorSchema = this._getLocalStorageColorSchema()
     if (localStorageColorSchema === 'auto') {
-      colorSchema = this._detectSystemPrefersColorSchema()
+      colorSchema = this._getSystemPrefersColorSchema()
     } else {
       colorSchema = localStorageColorSchema
     }
     return colorSchema
   }
 
+  public onUpdated (listener: Listener) {
+    this._emitter.on('update', listener)
+  }
+
   public startDetect () {
-    this._debouncedDetectTheme()
-    window.matchMedia('(prefers-color-scheme: dark)').addListener(this._debouncedDetectTheme)
+    this._onThemeChanged()
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', this._onThemeChanged)
   }
 
   public stopDetect () {
-    window.matchMedia('(prefers-color-scheme: dark)').removeListener(this._debouncedDetectTheme)
-  }
-
-  public savePreference () {
-    localStorage.setItem('colorSchema', this.themeType)
-    this._debouncedDetectTheme()
+    window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change', this._onThemeChanged)
   }
 }
 

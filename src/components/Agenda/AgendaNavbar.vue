@@ -23,8 +23,8 @@
 </template>
 
 <script lang="ts">
+import { useStore } from '@/store'
 import { defineComponent, computed } from 'vue'
-import { useAgendaService } from '@/services/hooks'
 
 export default defineComponent({
   name: 'AgendaNavbar',
@@ -35,9 +35,7 @@ export default defineComponent({
     }
   },
   setup (props, context) {
-    const agendaService = useAgendaService()
-
-    const days = computed(() => agendaService.days)
+    const { agendaDays: days } = useStore()
     const selectedDay = computed(() => days.value[props.modelValue])
 
     const onTabClick = (dayIndex: number) => {

@@ -6,7 +6,7 @@
 -->
 
 <template>
-  <div v-if="popupService.isPopup" id="popup" @click.self="onClose">
+  <div v-if="isPopup" id="popup" @click.self="onClose">
     <component :is="popupContainerComponent" @close="onClose">
       <component :is="popupContentComponent"></component>
     </component>
@@ -19,44 +19,33 @@ import GeneralPopupContent from '@/components/App/Popup/Content/GeneralPopupCont
 import EmptyPopupContent from '@/components/App/Popup/Content/EmptyPopupContent.vue'
 import DefaultPopupContainer from '@/components/App/Popup/Container/DefaultPopupContainer.vue'
 import SessionPopupContainer from '@/components/App/Popup/Container/SessionPopupContainer.vue'
-import { usePopupService } from '@/services/hooks'
+import { useStore } from '@/store'
 
 export default defineComponent({
   name: 'Popup',
-  components: {
-    // DefaultPopupContainer,
-    // SessionPopupContainer,
-    // EmptyPopupContent,
-    // GeneralPopupContent
-  },
   setup () {
-    const popupService = usePopupService()
+    const { isPopup, popupData, closePopup } = useStore()
     const popupContainerComponent = computed(() => {
       return {
         default: DefaultPopupContainer,
         session: SessionPopupContainer
-      }[popupService.popupData.containerData.type]
-      // return DefaultPopupContainer
+      }[popupData.value.containerData.type]
     })
     const popupContentComponent = computed(() => {
       return {
         empty: EmptyPopupContent,
         general: GeneralPopupContent
-      }[popupService.popupData.contentData.type]
-      // return EmptyPopupContent
+      }[popupData.value.contentData.type]
     })
     const onClose = () => {
-      popupService.close()
+      closePopup()
     }
 
-    const waa = () => { console.log('waa') }
-
     return {
-      popupService,
+      isPopup,
       popupContainerComponent,
       popupContentComponent,
-      onClose,
-      waa
+      onClose
     }
   }
 })
