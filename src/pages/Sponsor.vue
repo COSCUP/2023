@@ -44,7 +44,8 @@
             </h2>
           </a>
           <article
-            v-html="sponsor.intro[languageType]"
+            v-if="introSet[sponsor.id] && introSet[sponsor.id][languageType]"
+            v-html="introSet[sponsor.id][languageType]"
             class="markdown"
           ></article>
           <div class="readmore" @click="onReadmoreClick">
@@ -57,9 +58,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, reactive, watch } from 'vue'
+import { defineComponent, onMounted, reactive, ref, watch } from 'vue'
 import { groupBy } from 'lodash'
-import { availableLanguageTypes } from '@/services/language'
+import { availableLanguageTypes, LanguageType } from '@/services/language'
 import markdown from '@/utils/markdown'
 import sponsorDatas from '@/../public/json/sponsor.json'
 
@@ -69,6 +70,12 @@ import { useStore } from '@/store'
 
 type ArrayElement<ArrayType extends readonly unknown[]> = ArrayType[number];
 type SopnsorData = ArrayElement<typeof sponsorDatas>
+type Intro = {
+  [languageType in LanguageType]: string;
+}
+interface IntroSet {
+  [id: string]: Intro;
+}
 
 export default defineComponent({
   name: 'Sponsor',
@@ -82,12 +89,20 @@ export default defineComponent({
         return sponsorSequence.indexOf(entryA[0]) - sponsorSequence.indexOf(entryB[0])
       })))
 
+    const introSet = ref<IntroSet>({})
+
     const renderSponsorsIntro = async () => {
+      const intros: IntroSet = {}
       for (const data of sponsorDatas) {
+        intros[data.id] = {
+          en: '',
+          'zh-TW': ''
+        }
         for (const languageType of availableLanguageTypes) {
-          data.intro[languageType] = await markdown(data.intro[languageType])
+          intros[data.id][languageType] = await markdown(data.intro[languageType])
         }
       }
+      introSet.value = intros
     }
 
     const detectOverflowContentElements = () => {
@@ -120,6 +135,7 @@ export default defineComponent({
     return {
       languageType,
       languagePack,
+      introSet,
       sponsorGroups,
       onReadmoreClick
     }
