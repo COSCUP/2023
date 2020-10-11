@@ -8,10 +8,14 @@ import fs from 'fs'
 import path from 'path'
 import { origin } from '../package.json'
 import { publicPath } from '../vue.config.js'
-import { generateSessions, generateSessionPopupData, fixedTimeZoneDate } from '@/services/agenda'
+import { generateSessions, generateSessionPopupData, fixedTimeZoneDate } from '@/services/agenda/utils'
 import { availableLanguageTypes } from '@/services/language'
 import { MetaDomSetterSet, MetaType, defaultMetaValues, createMetaService } from '@/services/meta'
 import { GeneralPopupContentData } from '@/services/popup'
+
+declare module 'events' {
+  export type Listener = (...args) => void
+}
 
 function createCheerioMetaDomSetterSet ($: CheerioStatic) {
   const cheerioMetaDomSetterSet: MetaDomSetterSet = {
