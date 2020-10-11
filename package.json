@@ -4,13 +4,12 @@
   "private": true,
   "scripts": {
     "serve": "npm run pre-build && vue-cli-service serve",
-    "build": "npm run pre-build && vue-cli-service build && npm run after-build && npm run end-build && npm run end-build:generate-sitemap",
+    "build": "npm run pre-build && vue-cli-service build && npm run after-build && npm run end-build",
     "lint": "npm run pre-build && vue-cli-service lint",
     "after-build": "run-s after-build:generate-session-popup-pages",
     "after-build:generate-session-popup-pages": "npm run ts-script -- ./scripts/generateSessionPopupPages.ts",
     "build:bundle-analysis": "npm run pre-build && vue-cli-service build --analyze",
     "end-build": "mv ./dist/2020/* ./dist && rm -rf ./dist/2020 && cp -R ./dist/zh-TW/* ./dist/ && cp ./dist/index.html ./dist/404.html",
-    "end-build:generate-sitemap": "node ./scripts/generateSitemap.js",
     "pre-build": "run-p pre-build:*",
     "pre-build:generate-icons-import": "npm run ts-script -- ./scripts/generateIconsImport.ts",
     "pre-build:generate-languages-import": "npm run ts-script -- ./scripts/generateLanguagesImport.ts",
@@ -19,6 +18,8 @@
     "pre-build:generate-staff": "node ./scripts/generateStaff.js > public/json/staff.json",
     "replace-announcement-content": "node ./scripts/announcement/replaceContent.js",
     "ts-script": "ts-node -r tsconfig-paths/register --project ./scripts/tsconfig.json",
+    "utility:generate-sitemap": "node ./scripts/generateSitemap.js",
+    "utility:generate-sitemap:local": "node ./scripts/generateSitemap.js --local",
     "utility:optimize-png": "node ./scripts/optimizePng.js"
   },
   "dependencies": {
