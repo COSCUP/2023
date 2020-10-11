@@ -10,14 +10,14 @@
     <AgendaNavbar v-model="dayIndex" />
     <template v-for="(dayData, index) in daysData">
       <AgendaTable
-        v-if="dayData !== null"
-        v-show="dayIndex === index && smAndUp"
+        v-if="dayData !== null && smAndUp"
+        v-show="dayIndex === index"
         :key="`table-${dayData.day.join('')}`"
         :table="dayData.table"
       />
       <AgendaList
-        v-if="dayData !== null"
-        v-show="dayIndex === index && xsOnly"
+        v-if="dayData !== null && xsOnly"
+        v-show="dayIndex === index"
         :key="`list-${dayData.day.join('')}`"
         :list="dayData.list"
       />
