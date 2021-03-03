@@ -71,7 +71,7 @@ function fetchSponsorsData () {
 
 async function run () {
   if (!token) {
-    const { data } = axios.get('https://coscup.org/2020/json/sponsor.json')
+    const { data } = await axios.get('https://coscup.org/2020/json/sponsor.json')
     console.log(JSON.stringify(data, null, 2))
   } else {
     const sponsors = await fetchSponsorsData()
