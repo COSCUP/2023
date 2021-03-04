@@ -26,7 +26,7 @@
 </template>
 
 <script lang="ts">
-import io from 'socket.io-client'
+import io, { Socket } from 'socket.io-client'
 import axios from 'axios'
 import { defineComponent, computed, watch, onMounted, provide, ref, onBeforeUnmount, nextTick } from 'vue'
 import { RouteLocationNormalized, useRouter } from 'vue-router'
@@ -55,7 +55,7 @@ export default defineComponent({
     const languageType = computed(() => _languageType.value === 'zh-TW' ? 'zh' : _languageType.value)
     const rawRoomsStatus = ref<{ id: string; isFull: boolean }[]>([])
     const roomsStatus = computed(() => Object.fromEntries(rawRoomsStatus.value.map((room) => [room.id, room.isFull])))
-    let socket: SocketIOClient.Socket | null = null
+    let socket: typeof Socket | null = null
     const dayIndex = ref(0)
 
     const onSessionPopupClose = () => {
@@ -75,18 +75,18 @@ export default defineComponent({
     const popupSession = async (sessionId = '') => {
       const popupData: PopupData = sessionId === 'template'
         ? {
-          popupId: 'session-template',
-          metaOptions: {
-            title: 'Template'
-          },
-          containerData: {
-            type: 'default'
-          },
-          contentData: {
-            type: 'general',
-            html: '<article id="session-detail" class="session-detail"><h1>Session Popup Template</h1></article>'
+            popupId: 'session-template',
+            metaOptions: {
+              title: 'Template'
+            },
+            containerData: {
+              type: 'default'
+            },
+            contentData: {
+              type: 'general',
+              html: '<article id="session-detail" class="session-detail"><h1>Session Popup Template</h1></article>'
+            }
           }
-        }
         : await getSessionPopupData(sessionId, languageType.value)
 
       popup({

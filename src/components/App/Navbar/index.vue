@@ -123,7 +123,7 @@ export default defineComponent({
     }
 
     const commitAction = (action: ActionType, args?: never) => {
-      const actions: { [action in ActionType]: () => void } = {
+      const actions: Record<ActionType, () => void> = {
         'toggle-menu': () => { setMenuOpen(!data.isMenuOpen) },
         'toggle-theme': () => {
           setThemeType(themeType.value === 'light' ? 'dark' : 'light')

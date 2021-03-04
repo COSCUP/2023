@@ -33,7 +33,7 @@ export function scrollTo (options: ScrollToOptions) {
   let terminated = false
 
   return {
-    promise: new Promise((resolve) => {
+    promise: new Promise<void>((resolve) => {
       function animateScroll () {
         currentTime += increment
         const value = {
