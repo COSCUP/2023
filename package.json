@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "npm run pre-build && vue-cli-service serve",
+    "serve": "vue-cli-service serve",
+    "serve:pre-build": "npm run pre-build && vue-cli-service serve",
     "build": "npm run pre-build && vue-cli-service build && npm run after-build && npm run end-build",
     "lint": "vue-cli-service lint",
     "after-build": "run-s after-build:generate-session-popup-pages",
