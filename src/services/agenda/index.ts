@@ -43,11 +43,11 @@ class AgendaServiceConcrete implements AgendaService {
   private _isInitialized = false
   private _rawData: RawData | null = null
   private _roomSequence: string[] | undefined
-  private _roomSet: { [roomId: string]: Room} = {}
+  private _roomSet: Record<string, Room> = {}
   private _days: Day[] = []
   private _sessionDataListByDays: SessionData[][] = []
-  private _dayDataCache: { [dateString: string]: DayData } = {}
-  private _sessionsCache: { [sessionId: string]: Session } = {}
+  private _dayDataCache: Record<string, DayData> = {}
+  private _sessionsCache: Record<string, Session> = {}
 
   constructor (roomSequence?: string[]) {
     this._roomSequence = roomSequence
@@ -173,7 +173,7 @@ class AgendaServiceConcrete implements AgendaService {
   public getRoomsInProgressSession (): RoomSession[] {
     if (!this._isInitialized || this._rawData === null) throw new Error('AgendaService is not initialized')
     const currentMoment = this._fixedTimeZone(new Date())
-    const roomSessionMap: { [roomId: string]: Session } = Object.fromEntries(this._rawData.sessions
+    const roomSessionMap: Record<string, Session> = Object.fromEntries(this._rawData.sessions
       .filter((sessionData) => {
         const start = this._fixedTimeZone(sessionData.start)
         const end = this._fixedTimeZone(sessionData.end)

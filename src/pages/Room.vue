@@ -60,7 +60,7 @@
 </template>
 
 <script lang="ts">
-import io from 'socket.io-client'
+import io, { Socket } from 'socket.io-client'
 import axios from 'axios'
 import { defineComponent, ref, onMounted, onBeforeUnmount, computed, nextTick } from 'vue'
 import { RoomSession, formatTimeString } from '@/services/agenda'
@@ -81,7 +81,7 @@ export default defineComponent({
     const roomsSession = ref<RoomSession[]>([])
     const rawRoomsStatus = ref<{ id: string; isFull: boolean }[]>([])
     const roomsStatus = computed(() => Object.fromEntries(rawRoomsStatus.value.map((room) => [room.id, room.isFull])))
-    let socket: SocketIOClient.Socket | null = null
+    let socket: typeof Socket | null = null
 
     const registerSocket = () => {
       const baseUrl = 'https://coscup2020-room.deviltea.me'

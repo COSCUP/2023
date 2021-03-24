@@ -9,9 +9,9 @@ import path from 'path'
 
 const iconPacksDir = path.join(__dirname, '../icons/')
 
-const iconPackHandlerMap: { [iconPackName: string]: (iconPackName: string) => void } = {
+const iconPackHandlerMap: Record<string, (iconPackName: string) => void> = {
   'font-awesome' (iconPackName) {
-    const iconPackData: { [iconName: string]: [string, string] } =
+    const iconPackData: Record<string, [string, string]> =
       JSON.parse(fs.readFileSync(path.join(__dirname, `../icons/${iconPackName}.json`)).toString())
 
     const targetFilename =
@@ -23,7 +23,7 @@ const iconPackHandlerMap: { [iconPackName: string]: (iconPackName: string) => vo
         name: value[1]
       })), (a) => a.type)
 
-    const importTemplateMap: { [type: string]: (iconNameListString: string) => string } = {
+    const importTemplateMap: Record<string, (iconNameListString: string) => string> = {
       fab: (iconNameListString) => `import { ${iconNameListString} } from '@fortawesome/free-brands-svg-icons'`,
       fas: (iconNameListString) => `import { ${iconNameListString} } from '@fortawesome/free-solid-svg-icons'`,
       far: (iconNameListString) => `import { ${iconNameListString} } from '@fortawesome/free-regular-svg-icons'`,

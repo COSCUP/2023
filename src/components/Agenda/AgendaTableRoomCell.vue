@@ -31,7 +31,7 @@ export default defineComponent({
   setup (props) {
     const { languagePack, getRoomById } = useStore()
     const languageType = inject<ComputedRef<'zh' | 'en'>>('languageType') || { value: 'zh' }
-    const roomsStatus = inject<ComputedRef<{ [k: string]: boolean }>>('roomsStatus') || { value: {} }
+    const roomsStatus = inject<ComputedRef<Record<string, boolean>>>('roomsStatus') || { value: {} }
     const room = computed(() => {
       const room = getRoomById(props.roomId)
       if (room === null) throw new Error('Invalid Room')

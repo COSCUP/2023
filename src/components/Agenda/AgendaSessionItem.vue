@@ -72,7 +72,7 @@ export default defineComponent({
     const router = useRouter()
     const { xsOnly, languagePack } = useStore()
     const languageType = inject<ComputedRef<'zh' | 'en'>>('languageType') || { value: 'zh' }
-    const roomsStatus = inject<ComputedRef<{ [k: string]: boolean }>>('roomsStatus') || { value: {} }
+    const roomsStatus = inject<ComputedRef<Record<string, boolean>>>('roomsStatus') || { value: {} }
     const session = computed(() => {
       const session = getSessionById(props.sessionId)
       if (session === null) throw new Error('Invalid Session')

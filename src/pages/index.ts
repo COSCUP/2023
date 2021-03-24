@@ -5,9 +5,7 @@ export type InjectLoadingPromiseFunction = (asyncPageComponent: () => AsyncPageC
 
 export type Pages = 'home' | 'agenda' | 'room' | 'map' | 'venue' | 'sponsor' | 'staff'
 export type PageRoutes = 'Home' | 'Agenda' | 'Room' | 'Map' | 'Venue' | 'Sponsor' | 'Staff'
-export type PageComponents = {
-  [name in Pages]: () => ReturnType<typeof defineAsyncComponent>
-}
+export type PageComponents = Record<Pages, () => ReturnType<typeof defineAsyncComponent>>
 
 export const pageRoutesNameList: Array<PageRoutes> = ['Home', 'Agenda', 'Room', 'Map', 'Venue', 'Sponsor', 'Staff']
 

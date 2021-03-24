@@ -106,9 +106,7 @@ export const availableLanguageTypes: LanguageType[] = [${languages.map((language
 
 export type LanguagePack = typeof ${camelCase(defaultLanguage)}
 
-export type LanguagePackSet = {
-  [languageType in LanguageType]: LanguagePack
-}
+export type LanguagePackSet = Record<LanguageType, LanguagePack>
 
 export const languagePackSet: LanguagePackSet = {
   ${languages.map((language) => `${language === camelCase(language) ? language : `'${language}'`}: ${camelCase(language)}`).join(',\n  ')}

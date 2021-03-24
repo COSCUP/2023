@@ -70,12 +70,9 @@ import { useStore } from '@/store'
 
 type ArrayElement<ArrayType extends readonly unknown[]> = ArrayType[number];
 type SopnsorData = ArrayElement<typeof sponsorDatas>
-type Intro = {
-  [languageType in LanguageType]: string;
-}
-interface IntroSet {
-  [id: string]: Intro;
-}
+type Intro = Record<LanguageType, string>
+
+type IntroSet = Record<string, Intro>
 
 export default defineComponent({
   name: 'Sponsor',

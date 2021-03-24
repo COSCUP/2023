@@ -8,9 +8,7 @@ import { EventEmitter, Listener } from 'events'
 
 export type Breakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 
-export type BreakpointWith<T> = {
-  [breakpoint in Breakpoint]: T
-}
+export type BreakpointWith<T> = Record<Breakpoint, T>
 
 export interface BreakpointService {
   breakpoint: Breakpoint;

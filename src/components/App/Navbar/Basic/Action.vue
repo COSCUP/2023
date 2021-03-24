@@ -40,7 +40,7 @@ export default defineComponent({
       required: true
     },
     payloads: {
-      type: Object as PropType<{ [key: string]: unknown }>,
+      type: Object as PropType<Record<string, unknown>>,
       required: false
     }
   },

@@ -34,7 +34,7 @@ export default defineComponent({
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const icon = computed(() => icons.find((icon) => icon.name === props.name)!)
     const iconComponent = computed(() => {
-      const componentMap: { [source in IconSource]: IconComponent } = {
+      const componentMap: Record<IconSource, IconComponent> = {
         fontAwesome: FontAwesomeIcon
       }
       return componentMap[icon.value.source]

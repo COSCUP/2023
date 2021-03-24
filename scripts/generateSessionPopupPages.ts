@@ -10,16 +10,16 @@ import { origin } from '../package.json'
 import { publicPath } from '../vue.config.js'
 import { generateSessions, generateSessionPopupData, fixedTimeZoneDate } from '@/services/agenda/utils'
 import { availableLanguageTypes } from '@/services/language'
-import { MetaDomSetterSet, MetaType, defaultMetaValues, createMetaService } from '@/services/meta'
+import { MetaDomSetterSet, defaultMetaValues, createMetaService } from '@/services/meta'
 import { GeneralPopupContentData } from '@/services/popup'
 
 declare module 'events' {
   export type Listener = (...args) => void
 }
 
-function createCheerioMetaDomSetterSet ($: CheerioStatic) {
+function createCheerioMetaDomSetterSet ($: cheerio.Root) {
   const cheerioMetaDomSetterSet: MetaDomSetterSet = {
-    [MetaType.Title]: (value) => {
+    title: (value) => {
       const title: string = (value.length === 0 || value === defaultMetaValues.title)
         ? (defaultMetaValues.title)
         : (`${value} - ${defaultMetaValues.title}`)
@@ -27,14 +27,14 @@ function createCheerioMetaDomSetterSet ($: CheerioStatic) {
       $('title').html(title)
       $('meta[property="og:title"]').attr('content', title)
     },
-    [MetaType.Description]: (value) => {
+    description: (value) => {
       $('meta[name="description"]').attr('content', value)
       $('meta[property="og:description"]').attr('content', value)
     },
-    [MetaType.OgUrl]: (value) => { $('meta[property="og:url"]').attr('content', value) },
-    [MetaType.OgImage]: (value) => { $('meta[property="og:image"]').attr('content', value) },
-    [MetaType.OgType]: (value) => { $('meta[property="og:type"]').attr('content', value) },
-    [MetaType.OgSiteName]: (value) => { $('meta[property="og:site_name"]').attr('content', value) }
+    ogUrl: (value) => { $('meta[property="og:url"]').attr('content', value) },
+    ogImage: (value) => { $('meta[property="og:image"]').attr('content', value) },
+    ogType: (value) => { $('meta[property="og:type"]').attr('content', value) },
+    ogSiteName: (value) => { $('meta[property="og:site_name"]').attr('content', value) }
   }
   return cheerioMetaDomSetterSet
 }

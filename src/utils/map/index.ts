@@ -17,19 +17,19 @@ import IconAnchorUnits from 'ol/style/IconAnchorUnits'
 
 import 'ol/ol.css'
 
-export interface MapOptions {
-  target: string | HTMLElement;
-  center: { lng: number; lat: number };
-  zoom: number;
-  mapMarkers?: MapMarkerOptions[];
-}
-
 export interface MapMarkerOptions {
   name: string;
   imageSrc: string;
   position: { lng: number; lat: number };
   scale: number;
   anchor: { x: number; y: number };
+}
+
+export interface MapOptions {
+  target: string | HTMLElement;
+  center: { lng: number; lat: number };
+  zoom: number;
+  mapMarkers?: MapMarkerOptions[];
 }
 
 export interface Map {
@@ -40,7 +40,7 @@ export interface Map {
 class MapConcrete implements Map {
   private _options: MapOptions
   private _map: OlMap | null = null
-  private _mapMarkerOptionsSet: { [name: string]: MapMarkerOptions } = {}
+  private _mapMarkerOptionsSet: Record<string, MapMarkerOptions> = {}
 
   constructor (options: MapOptions) {
     this._options = options

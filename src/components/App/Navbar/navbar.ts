@@ -11,8 +11,6 @@ import { ThemeType } from '@/services/theme'
 import { defineAsyncComponent } from 'vue'
 
 export type NavbarItemType = 'internal-link' | 'external-link' | 'action'
-export type NavbarItemOptions = InternalLinkOptions | ExternalLinkOptions | ActionOptions
-export type NavbarItemData = InternalLinkData | ExternalLinkData | ActionData
 export type ActionType = 'toggle-theme' | 'toggle-menu'
 
 interface BasicOptions {
@@ -33,8 +31,10 @@ export interface ExternalLinkOptions extends BasicOptions {
 
 export interface ActionOptions extends BasicOptions {
   action: ActionType;
-  payloads?: { [key: string]: unknown };
+  payloads?: Record<string, unknown>;
 }
+
+export type NavbarItemOptions = InternalLinkOptions | ExternalLinkOptions | ActionOptions
 
 interface BasicNavbarItemData {
   type: NavbarItemType;
@@ -56,6 +56,8 @@ export interface ActionData extends BasicNavbarItemData {
   type: 'action';
   options: ActionOptions;
 }
+
+export type NavbarItemData = InternalLinkData | ExternalLinkData | ActionData
 
 const internalLinksThatFixedInNavbar: string[] = ['home']
 const internalLinksThatHiddenInMenu: string[] = []
