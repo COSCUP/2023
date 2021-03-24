@@ -1,0 +1,15 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "stylelint.vscode-stylelint",
+    "octref.vetur",
+    "editorconfig.editorconfig",
+    "wix.vscode-import-cost",
+    "formulahendry.auto-rename-tag",
+    "formulahendry.auto-close-tag",
+    "wayou.vscode-todo-highlight",
+    "CoenraadS.bracket-pair-colorizer",
+    "oderwat.indent-rainbow",
+    "naumovs.color-highlight"
+  ]
+}
