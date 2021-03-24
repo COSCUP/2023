@@ -2,9 +2,7 @@
 const fs = require('fs')
 const path = require('path')
 const languages = require(path.join(__dirname, 'languages/languages.json'))
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const minify = require('html-minifier').minify
-const { DefinePlugin } = require('webpack')
 
 const isProduction = process.env.NODE_ENV === 'production'
 const publicPath = isProduction ? '/2020/' : '/2020/'
@@ -43,6 +41,8 @@ module.exports = {
   publicPath,
 
   chainWebpack: config => {
+    const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+    const { DefinePlugin } = require('webpack')
     if (isProduction && needBundleAnalysis) {
       config
         .plugin('analyzer')
