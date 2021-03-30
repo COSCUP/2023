@@ -2,7 +2,7 @@
   "recommendations": [
     "dbaeumer.vscode-eslint",
     "stylelint.vscode-stylelint",
-    "octref.vetur",
+    "johnsoncodehk.volar",
     "editorconfig.editorconfig",
     "wix.vscode-import-cost",
     "formulahendry.auto-rename-tag",

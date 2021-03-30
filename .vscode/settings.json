@@ -14,12 +14,6 @@
   "typescript.format.insertSpaceBeforeFunctionParenthesis": true,
   "typescript.format.placeOpenBraceOnNewLineForControlBlocks": false,
   "typescript.format.placeOpenBraceOnNewLineForFunctions": false,
-  "vetur.format.defaultFormatter.html": "prettier",
-  "vetur.format.defaultFormatter.scss": "prettier",
-  "vetur.format.defaultFormatter.js": "none",
-  "vetur.format.defaultFormatter.ts": "none",
-  "vetur.completion.autoImport": true,
-  "vetur.validation.script": false,
   "auto-close-tag.enableAutoCloseTag": true,
   "auto-close-tag.excludedTags": [
     "area",
