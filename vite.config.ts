@@ -5,7 +5,6 @@ import Vue from '@vitejs/plugin-vue'
 import Components from 'vite-plugin-components'
 import ViteIcons, { ViteIconsResolver } from 'vite-plugin-icons'
 import dotenv from 'dotenv'
-import generateSessionPages from './scripts/after-build/generateSessionPages'
 
 const { parsed } = dotenv.config()
 
