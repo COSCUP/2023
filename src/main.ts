@@ -2,38 +2,22 @@
 //
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
-
-import 'setimmediate'
-import { createApp } from 'vue'
 import App from './App.vue'
-import Icon from '@/components/Basic/Icon/index.vue'
-import { RenderedEventDispatcher } from '@/plugins/renderedEventDispatcher'
-import { Router } from 'vue-router'
-import { createRouter } from './router'
-import { createStore } from './store'
+import { routerOptions } from '@/router'
+import { ViteSSG } from 'vite-ssg'
+import { installModules } from '@/modules'
 
-const store = createStore()
+if (globalThis.window) {
+  window.rootUrl = `${import.meta.env.VITE_ORIGIN}${import.meta.env.BASE_URL}`
+}
 
-const router: Router = createRouter({
-  setIsLoading: (isLoading) => store.setFullPageProgressStatus(isLoading),
-  setLanguageType: (languageType) => { store.setLanguageType(languageType) },
-  setMeta: (options) => store.setMeta(options),
-  getPageTitle: (key) => store.languagePack.value[key].meta.title,
-  isPopup: () => store.isPopup.value,
-  isMobile: () => store.xsOnly.value
-})
-
-const root = createApp(App)
-  .use(RenderedEventDispatcher)
-  .use(router)
-  .use(store)
-  .component('Icon', Icon)
-
-// Object.entries(services)
-//   .forEach(([key, value]) => {
-//     root.provide(key, value)
-//   })
-
-document.addEventListener('DOMContentLoaded', () => {
-  root.mount('#app-outer')
-})
+export const createApp = ViteSSG(
+  // the root component
+  App,
+  // vue-router options
+  routerOptions,
+  // function to have custom setups
+  (ctx) => {
+    installModules(ctx)
+  }
+)

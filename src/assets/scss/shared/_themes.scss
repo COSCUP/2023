@@ -4,8 +4,10 @@
     #{$css-selector} {
       @content;
     }
-  } @else {
-    body[data-theme="#{$theme}"] #{$css-selector} {
+  }
+
+  @else {
+    html.#{$theme} #{$css-selector} {
       @content;
     }
   }

@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar-item-container" @click="$emit('click', $event)">
+  <div class="navbar-item-container">
     <a
       class="navbar-item external-link"
       :href="url"
@@ -19,7 +19,7 @@
 
         <template v-slot:suffix>
           <slot name="suffix" v-bind="$props">
-            <Icon :name="'external-link-alt'" class="suffix-icon"> </Icon>
+            <icon-fa-solid-external-link-alt class="suffix-icon" />
           </slot>
         </template>
       </NavbarItemContent>
@@ -46,9 +46,6 @@ export default defineComponent({
       type: String,
       required: true
     }
-  },
-  setup () {
-    return {}
   }
 })
 </script>

@@ -1,0 +1,102 @@
+// Copyright (c) 2020 DevilTea
+//
+// This software is released under the MIT License.
+// https://opensource.org/licenses/MIT
+
+@mixin schedule-item {
+  .schedule-item {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    color: var(--color-text);
+    background-color: var(--color-session-background);
+    text-decoration: none;
+
+    .content-section {
+      position: sticky;
+      top: calc(var(--navbar-height) + var(--room-list-height));
+      padding: 1rem;
+      word-break: break-word;
+
+      .track {
+        display: flex;
+        align-items: center;
+        color: var(--color-primary);
+        line-height: 1.15;
+        margin-bottom: 0.5rem;
+
+        .room {
+          border-radius: 4px;
+          padding: 4px 8px;
+          margin-right: 1rem;
+          color: #fff;
+          background-color: #3ca054;
+
+          &.full {
+            background-color: #d33a3a;
+          }
+
+          span {
+            white-space: nowrap;
+          }
+
+          .status {
+            display: block;
+            margin-bottom: 2px;
+            font-size: 0.65rem;
+            font-weight: 400;
+          }
+        }
+
+        span {
+          display: inline-block;
+          font-weight: 600;
+          font-size: 1rem;
+        }
+      }
+
+      .period {
+        font-size: 0.8rem;
+        font-weight: 500;
+      }
+
+      .title {
+        line-height: 1.5;
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin: 2rem 0;
+      }
+
+      .speaker-list {
+        color: var(--color-primary);
+
+        span {
+          display: inline;
+          margin: 0 4px;
+          line-height: 1.5;
+          text-align: center;
+          font-weight: 600;
+        }
+
+        .speaker {
+          text-decoration: underline;
+        }
+      }
+
+      .tag-list {
+        color: #fff;
+        margin-top: 0.5rem;
+
+        span {
+          display: inline-block;
+          font-size: 0.8rem;
+          margin-right: 0.5rem;
+          padding: 4px 8px;
+          background-color: var(--color-primary);
+          border-radius: 16px;
+        }
+      }
+    }
+  }
+}

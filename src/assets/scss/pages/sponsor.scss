@@ -11,12 +11,14 @@
     --color-markdown-link: var(--color-markdown-link);
     --color-markdown-link-hover: var(--color-markdown-link-hover);
   }
+
   @include theme-colors-of("light", "#sponsor") {
     --color-card-background: #{$background-light};
     --color-link: #{$coscup-green};
     --color-link-hover: #{lighten($coscup-green, 8)};
     --opacity-of-image: 1;
   }
+
   @include theme-colors-of("dark", "#sponsor") {
     --color-card-background: #{lighten($background-dark, 8)};
     --color-link: #{lighten($coscup-green, 8)};
@@ -90,7 +92,6 @@
       .content-container {
         display: inline-block;
         position: relative;
-
         width: calc(100% - 240px - 1rem);
 
         &.folded {
@@ -106,11 +107,12 @@
             color: var(--color-coscup-green);
             text-align: center;
             padding: 2rem 0 0.5rem 0;
-            background: linear-gradient(
-              rgba(0, 0, 0, 0) 0%,
-              var(--color-card-background) 60%,
-              var(--color-card-background) 100%
-            );
+            background:
+              linear-gradient(
+                rgba(0, 0, 0, 0) 0%,
+                var(--color-card-background) 60%,
+                var(--color-card-background) 100%
+              );
             cursor: pointer;
 
             span {

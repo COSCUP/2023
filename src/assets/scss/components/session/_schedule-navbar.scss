@@ -1,0 +1,88 @@
+// Copyright (c) 2020 DevilTea
+//
+// This software is released under the MIT License.
+// https://opensource.org/licenses/MIT
+
+@mixin schedule-navbar {
+  .schedule-navbar {
+    .tabs {
+      position: sticky;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100vw;
+      padding: 2rem;
+      background-color: var(--color-nav-background);
+
+      .tab {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding: 1rem 2rem;
+        border-bottom: 4px solid;
+        border-color: transparent;
+        cursor: pointer;
+        transition: all 0.1s;
+
+        span {
+          display: inline-block;
+        }
+
+        .day-text {
+          font-size: 1.25rem;
+          font-weight: 500;
+          margin-bottom: 0.5rem;
+        }
+
+        .date {
+          color: var(--color-text);
+          font-size: 2rem;
+          font-weight: 500;
+        }
+
+        &.active {
+          border-color: var(--color-primary);
+          transition: all 0.1s;
+        }
+
+        &.active,
+        &:hover {
+          color: var(--color-primary);
+          transition: all 0.1s;
+        }
+      }
+    }
+
+    @include xsOnly {
+      .tabs {
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        padding: 0;
+        justify-content: space-around;
+        z-index: 2;
+
+        .tab {
+          width: 100%;
+          text-align: center;
+          padding: 0.5rem;
+          border-top: 4px solid;
+          border-color: transparent;
+          border-bottom: none;
+
+          .day-text {
+            font-size: 1.15rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+          }
+
+          .date {
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+  }
+}

@@ -16,7 +16,7 @@
       </section>
       <section class="footer__section">
         <p class="title">
-          {{ languagePack.app.footer.websites }}
+          {{ t('app.footer.websites') }}
         </p>
         <div class="content past">
           <a
@@ -32,7 +32,7 @@
       </section>
       <section class="footer__section">
         <p class="title">
-          {{ languagePack.app.footer.social }}
+          {{ t('app.footer.social') }}
         </p>
         <div class="content">
           <a
@@ -43,7 +43,7 @@
             target="_blank"
             rel="noopener"
           >
-            <Icon :name="media.icon"> </Icon>
+            <component :is="media.icon"></component>
           </a>
         </div>
       </section>
@@ -52,57 +52,65 @@
 </template>
 
 <script lang="ts">
-import { useStore } from '@/store'
+import { useI18n } from 'vue-i18n'
 import { defineComponent } from 'vue'
+import IconBlogger from 'virtual:vite-icons/fa-brands/blogger'
+import IconFacebook from 'virtual:vite-icons/fa-brands/facebook'
+import IconFlickr from 'virtual:vite-icons/fa-brands/flickr'
+import IconPlurk from 'virtual:vite-icons/el/plurk-alt'
+import IconTwitter from 'virtual:vite-icons/fa-brands/twitter'
+import IconYoutube from 'virtual:vite-icons/fa-brands/youtube'
+import IconTelegram from 'virtual:vite-icons/fa-brands/telegram-plane'
+import IconBullhorn from 'virtual:vite-icons/fa-solid/bullhorn'
 
 export default defineComponent({
   name: 'Footer',
   setup () {
-    const { languagePack } = useStore()
+    const { t } = useI18n()
     const numOfPast = 2020 - 2006
 
     return {
-      languagePack,
+      t,
       numOfPast,
       communityMedia: [
         {
           name: 'blogger',
-          icon: 'blogger',
+          icon: IconBlogger,
           link: 'http://blog.coscup.org/'
         },
         {
           name: 'facebook',
-          icon: 'facebook',
+          icon: IconFacebook,
           link: 'https://www.facebook.com/coscup/'
         },
         {
           name: 'flickr',
-          icon: 'flickr',
+          icon: IconFlickr,
           link: 'https://www.flickr.com/photos/coscup/'
         },
         {
           name: 'plurk',
-          icon: 'plurk',
+          icon: IconPlurk,
           link: 'https://www.plurk.com/coscup'
         },
         {
           name: 'twitter',
-          icon: 'twitter',
+          icon: IconTwitter,
           link: 'https://twitter.com/coscup'
         },
         {
           name: 'youtube',
-          icon: 'youtube',
+          icon: IconYoutube,
           link: 'https://www.youtube.com/user/thecoscup'
         },
         {
           name: 'telegram',
-          icon: 'telegram',
+          icon: IconTelegram,
           link: 'https://t.me/coscupchat'
         },
         {
           name: 'channel',
-          icon: 'bullhorn',
+          icon: IconBullhorn,
           link: 'https://t.me/coscup'
         }
       ]

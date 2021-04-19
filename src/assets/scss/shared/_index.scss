@@ -11,11 +11,13 @@
 @import "./container";
 @import "./themes";
 @import "./markdown";
+@import "./transitions";
 
 @mixin native-variables {
   // native variables
   :root {
     --navbar-height: 68px;
+    --color-primary: #{$coscup-green};
 
     @include xsOnly {
       --navbar-height: 54px;

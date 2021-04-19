@@ -9,97 +9,110 @@
   <main id="sponsor" class="page-container">
     <div class="card outer-container">
       <h2 class="title">
-        {{ languagePack.sponsor.callForSponsorship.title }}
+        {{ t('sponsor.callForSponsorship.title') }}
       </h2>
       <p class="call-for-sponsorship">
-        {{ languagePack.sponsor.callForSponsorship.content }}
+        {{ t('sponsor.callForSponsorship.content') }}
         <a href="mailto:sponsorship@coscup.org"> sponsorship@coscup.org </a>
       </p>
     </div>
-    <div
-      v-for="level in Object.keys(sponsorGroups)"
-      :key="`sponsor-level-${level}`"
-      class="outer-container"
-    >
-      <h2 class="title level">
-        {{ languagePack.sponsor.level[level] }}
-      </h2>
+    <template v-if="sponsorGroups">
       <div
-        v-for="sponsor in sponsorGroups[level]"
-        :key="sponsor.id"
-        class="card sponsor-container"
+        v-for="[level, sponsors] in Object.entries(sponsorGroups)"
+        :key="`sponsor-level-${level}`"
+        class="outer-container"
       >
-        <div class="img-container">
-          <a :href="`${sponsor.link}`" target="_blank" rel="noopener">
-            <img
-              :src="`/2020/images/sponsors/${sponsor.image}`"
-              :alt="`Sponsor ${sponsor.name[languageType]}'s logo`"
-            />
-          </a>
-        </div>
-        <div class="content-container">
-          <a :href="`${sponsor.link}`" target="_blank" rel="noopener">
-            <h2>
-              {{ sponsor.name[languageType] }}
-            </h2>
-          </a>
-          <article
-            v-if="introSet[sponsor.id] && introSet[sponsor.id][languageType]"
-            v-html="introSet[sponsor.id][languageType]"
-            class="markdown"
-          ></article>
-          <div class="readmore" @click="onReadmoreClick">
-            <span>Read More</span>
+        <h2 class="title level">
+          {{ t(`sponsor.level['${level}']`) }}
+        </h2>
+        <div
+          v-for="sponsor in sponsors"
+          :key="sponsor.id"
+          class="card sponsor-container"
+        >
+          <div class="img-container">
+            <a :href="`${sponsor.link}`" target="_blank" rel="noopener">
+              <img
+                :src="sponsor.image"
+                :alt="`Sponsor ${sponsor.name[languageType]}'s logo`"
+              />
+            </a>
+          </div>
+          <div class="content-container">
+            <a :href="`${sponsor.link}`" target="_blank" rel="noopener">
+              <h2>
+                {{ sponsor.name[languageType] }}
+              </h2>
+            </a>
+            <article
+              v-html="sponsor.intro[languageType]"
+              class="markdown"
+            ></article>
+            <div class="readmore" @click="onReadmoreClick">
+              <span>Read More</span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </template>
   </main>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, reactive, ref, watch } from 'vue'
+import { computed, defineComponent, onMounted, ref, watch } from 'vue'
 import { groupBy } from 'lodash'
-import { availableLanguageTypes, LanguageType } from '@/services/language'
 import markdown from '@/utils/markdown'
-import sponsorDatas from '@/../public/json/sponsor.json'
+import sponsorDatas from '@/assets/json/sponsor.json'
 
 import '@/assets/scss/pages/sponsor.scss'
-import { useRenderedEventDispatcher } from '../plugins/renderedEventDispatcher'
-import { useStore } from '@/store'
+import { useBreakpoints } from '@/modules/breakpoints'
+import { Locale } from '@/modules/i18n'
+import { useI18n } from 'vue-i18n'
+import { isClient } from '@vueuse/core'
+import { generateAssetsMap } from '@/utils/common'
 
 type ArrayElement<ArrayType extends readonly unknown[]> = ArrayType[number];
 type SopnsorData = ArrayElement<typeof sponsorDatas>
-type Intro = Record<LanguageType, string>
+type SponsorGroups = Record<string, SopnsorData[]>
 
-type IntroSet = Record<string, Intro>
+const imagesMap = generateAssetsMap(
+  import.meta.globEager('../assets/images/sponsors/*.png'),
+  '../assets/images/sponsors/*.png'
+)
 
 export default defineComponent({
   name: 'Sponsor',
   setup () {
-    const { breakpoint, languageType, languagePack } = useStore()
-    const despatchRenderedEvent = useRenderedEventDispatcher()
+    const { locale, t } = useI18n()
+    const { breakpoint } = useBreakpoints()
 
-    const sponsorGroups = reactive(Object.fromEntries(Object.entries(groupBy<SopnsorData>(sponsorDatas, 'level'))
-      .sort((entryA, entryB) => {
-        const sponsorSequence = ['titanium', 'diamond', 'gold', 'silver', 'bronze', 'co-organizer', 'special-thanks']
-        return sponsorSequence.indexOf(entryA[0]) - sponsorSequence.indexOf(entryB[0])
-      })))
+    const languageType = computed(() => locale.value as Locale)
 
-    const introSet = ref<IntroSet>({})
+    const sponsorGroups = ref<SponsorGroups | null>(null)
+    const initSponsorGroups = async () => {
+      sponsorGroups.value = Object.fromEntries(
+        await Promise.all(Object.entries(groupBy<SopnsorData>(sponsorDatas, 'level'))
+          .sort((entryA, entryB) => {
+            const sponsorSequence = ['titanium', 'diamond', 'gold', 'silver', 'bronze', 'co-organizer', 'special-thanks']
+            return sponsorSequence.indexOf(entryA[0]) - sponsorSequence.indexOf(entryB[0])
+          })
+          .map(async ([group, rawSponsors]) => {
+            const sponsors = await Promise.all(rawSponsors.map(async (rawSponsor) => {
+              const sponsor: SopnsorData = {
+                ...rawSponsor,
+                image: imagesMap[rawSponsor.image]
+              }
 
-    const renderSponsorsIntro = async () => {
-      const intros: IntroSet = {}
-      for (const data of sponsorDatas) {
-        intros[data.id] = {
-          en: '',
-          'zh-TW': ''
-        }
-        for (const languageType of availableLanguageTypes) {
-          intros[data.id][languageType] = await markdown(data.intro[languageType])
-        }
-      }
-      introSet.value = intros
+              sponsor.intro = {
+                en: markdown(sponsor.intro.en),
+                'zh-TW': markdown(sponsor.intro['zh-TW'])
+              }
+
+              return sponsor
+            }))
+            return [group, sponsors]
+          }))
+      )
     }
 
     const detectOverflowContentElements = () => {
@@ -115,24 +128,23 @@ export default defineComponent({
     }
 
     const onReadmoreClick = (event: MouseEvent) => {
+      if (!isClient) return
       const contentContainer = (event.target as HTMLElement).parentElement as HTMLElement
       contentContainer.classList.remove('folded')
     }
 
-    watch(() => breakpoint.value, async () => {
-      detectOverflowContentElements()
+    onMounted(async () => {
+      await initSponsorGroups()
+      isClient && detectOverflowContentElements()
     })
 
-    onMounted(async () => {
-      await renderSponsorsIntro()
+    isClient && watch(() => breakpoint.value, async () => {
       detectOverflowContentElements()
-      despatchRenderedEvent()
     })
 
     return {
+      t,
       languageType,
-      languagePack,
-      introSet,
       sponsorGroups,
       onReadmoreClick
     }

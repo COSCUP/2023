@@ -21,11 +21,14 @@ pnpm-debug.log*
 *.sw?
 
 # Auto-generated files
-src/utils/icon/index.ts
-src/utils/icon/icons/fontAwesome.ts
-src/services/language/languages/*
-!src/services/language/languages/.gitkeep
+public/json/announcement.json
 public/json/session.json
 public/json/staff.json
 public/json/sponsor.json
-languages/languages.json
+public/json/sponsor-news.json
+src/assets/json/announcement.json
+src/assets/json/session.json
+src/assets/json/staff.json
+src/assets/json/sponsor.json
+src/assets/json/sponsor-news.json
+./.vite-ssg-temp

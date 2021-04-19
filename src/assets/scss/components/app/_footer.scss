@@ -6,10 +6,12 @@
   @include theme-colors-of("all", "#footer") {
     --color-text-hover: #{$coscup-green};
   }
+
   @include theme-colors-of("light", "#footer") {
     --color-text: #{text-light};
     --color-background: #{darken($background-light, 10)};
   }
+
   @include theme-colors-of("dark", "#footer") {
     --color-text: #{text-dark};
     --color-background: #{lighten($background-dark, 8)};
@@ -17,7 +19,7 @@
 }
 
 @mixin footer {
-  &.in-app #footer {
+  & .in-app #footer {
     display: none;
   }
 

@@ -6,9 +6,11 @@
 @mixin session-popup-container-theme-colors {
   @include theme-colors-of("all", "#session-popup-container") {
   }
+
   @include theme-colors-of("light", "#session-popup-container") {
     --color-background: #fafafa;
   }
+
   @include theme-colors-of("dark", "#session-popup-container") {
     --color-background: #555;
   }
@@ -29,7 +31,7 @@
 
     $content-container-width: 760px;
 
-    .sponsor-ad {
+    .sponsor-news {
       display: inline-block;
 
       img {
@@ -88,7 +90,7 @@
         padding: 3rem 2rem 2rem 2rem;
       }
 
-      .sponsor-ad {
+      .sponsor-news {
         &.vertical {
           display: none;
         }

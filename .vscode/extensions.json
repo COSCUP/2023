@@ -10,6 +10,7 @@
     "wayou.vscode-todo-highlight",
     "CoenraadS.bracket-pair-colorizer",
     "oderwat.indent-rainbow",
-    "naumovs.color-highlight"
+    "naumovs.color-highlight",
+    "bierner.lit-html"
   ]
 }

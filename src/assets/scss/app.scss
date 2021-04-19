@@ -14,13 +14,14 @@
 @include native-variables;
 @include font;
 @include markdown;
+@include transitions;
 
-body[data-theme="light"] {
+@include theme-colors-of("light", "") {
   --color-text: #{$text-light};
   --color-background: #{$background-light};
 }
 
-body[data-theme="dark"] {
+@include theme-colors-of("dark", "") {
   --color-text: #{$text-dark};
   --color-background: #{$background-dark};
 }

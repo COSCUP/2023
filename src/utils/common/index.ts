@@ -3,32 +3,24 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-import { join } from 'path-browserify'
-
-/**
- * A workaround method to let typescript type checking for Vue inject not throw error
- *
- * @export
- * @template Injected A interface or type that contains the injected properties
- * @param {unknown} thisArg Assume a "this" in Vue.extend({...}) to thisArg
- * @returns {Injected} this
- */
-export function injectedThis<Injected> (thisArg: unknown) {
-  return thisArg as Injected
-}
-
-export const isProduction = process.env.NODE_ENV === 'production'
+import dotenv from 'dotenv'
+const { parsed } = globalThis.process ? dotenv.config() : { parsed: undefined }
+const ORIGIN = parsed?.VITE_ORIGIN ?? ''
+const BASE_URL = parsed?.VITE_BASE_URL ?? ''
 
 export function delay (ms: number) {
   return new Promise((resolve) => { setTimeout(resolve, ms) })
 }
 
-export function immediatePromise () { return new Promise<void>((resolve) => setImmediate(resolve)) }
+export function getRootUrl (): string {
+  if (globalThis.window) return window.rootUrl
+  return `${ORIGIN}${BASE_URL}`
+}
 
-export function getFullUrl (relativeUrl = ''): string {
-  if (process.env.VUE_APP_PRODUCTION_ORIGIN === undefined) throw new Error()
-  const productionOrigin: string = process.env.VUE_APP_PRODUCTION_ORIGIN
-  // this condition is for running scripts in node environment without 'window'
-  if (typeof window === 'undefined') return productionOrigin
-  return `${isProduction ? productionOrigin : window.location.origin}${join(process.env.BASE_URL, relativeUrl).toString()}`
+export function generateAssetsMap (result: Record<string, Record<string, any>>, pattern: string) {
+  const base = pattern.replace(/\*.*/, '')
+  return Object.fromEntries(
+    Object.entries(result)
+      .map(([key, value]) => [key.replace(base, ''), value.default])
+  )
 }

@@ -14,7 +14,7 @@
     >
       <section class="group-box">
         <h2 class="group-name">
-          {{ languagePack.staff.groups[group.tid] }}
+          {{ t(`staff.groups['${group.tid}']`) }}
         </h2>
         <div class="staff-wrapper">
           <div
@@ -43,17 +43,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, onMounted } from 'vue'
-import _staffData from '@/../public/json/staff.json'
-import { useRenderedEventDispatcher } from '@/plugins/renderedEventDispatcher'
+import { defineComponent, computed } from 'vue'
+import _staffData from '@/assets/json/staff.json'
 
 import '@/assets/scss/pages/staff.scss'
-import { useStore } from '@/store'
+import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
   name: 'Staff',
   setup () {
-    const { languagePack } = useStore()
+    const { t } = useI18n()
     const staffData = computed(() => {
       const groupSequence = ['coordinator', 'secretary', 'program', 'field', 'finance', 'it', 'marketing', 'photo', 'sponsor', 'streaming']
       return _staffData
@@ -70,14 +69,8 @@ export default defineComponent({
         })
     })
 
-    const dispatchRenderedEvent = useRenderedEventDispatcher()
-
-    onMounted(() => {
-      dispatchRenderedEvent()
-    })
-
     return {
-      languagePack,
+      t,
       staffData
     }
   }

@@ -8,11 +8,8 @@
 <template>
   <section class="map">
     <div class="reset-view-btn-container">
-      <button
-        class="reset-view-btn"
-        @click="mapInstance && mapInstance.resetView()"
-      >
-        <Icon name="redo" />
+      <button class="reset-view-btn" @click="mapInstance && mapInstance.resetView()">
+        <icon-fa-solid-redo />
       </button>
     </div>
   </section>
@@ -38,7 +35,7 @@ export default defineComponent({
       }
     }
   },
-  setup (props) {
+  setup(props) {
     const router = useRouter()
     const mapInstance = ref<Map | null>(null)
 

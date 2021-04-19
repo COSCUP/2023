@@ -1,0 +1,56 @@
+// Copyright (c) 2020 DevilTea
+//
+// This software is released under the MIT License.
+// https://opensource.org/licenses/MIT
+
+@import "./schedule-table-room-cell";
+@import "./schedule-item";
+
+@mixin schedule-table {
+  .schedule-table {
+    --room-list-height: 120px;
+    --column-width: 250px;
+
+    table-layout: fixed;
+    height: 100%;
+
+    .room-list {
+      tr {
+        th {
+          position: sticky;
+          top: var(--navbar-height);
+          height: var(--room-list-height);
+          z-index: 2;
+
+          .cell-content {
+            width: var(--column-width);
+            height: 100%;
+
+            @include schedule-table-room-cell;
+          }
+        }
+      }
+    }
+
+    .table-body {
+      height: 100%;
+
+      tr {
+        height: 100%;
+
+        td {
+          height: 100%;
+          vertical-align: top;
+
+          .cell-content {
+            width: var(--column-width);
+            height: 100%;
+            padding: 0.25rem;
+
+            @include schedule-item;
+          }
+        }
+      }
+    }
+  }
+}

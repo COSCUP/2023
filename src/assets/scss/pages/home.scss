@@ -12,17 +12,21 @@
     --color-markdown-link: var(--color-link);
     --color-markdown-link-hover: var(--color-link-hover);
   }
+
   @include theme-colors-of("light", "#home") {
     --color-section-background: #{$coscup-green};
-    --color-logo-wrapper-background: #{adjust-color(
+    --color-logo-wrapper-background:
+      #{adjust-color(
         $background-light,
         $alpha: -0.1
       )};
     --color-link: #{$coscup-green};
     --color-link-hover: #{lighten($coscup-green, 8)};
   }
+
   @include theme-colors-of("dark", "#home") {
-    --color-logo-wrapper-background: #{adjust-color(
+    --color-logo-wrapper-background:
+      #{adjust-color(
         $background-dark,
         $alpha: -0.1
       )};
@@ -44,7 +48,7 @@
     justify-content: center;
     width: 100%;
     height: 500px;
-    background-image: url("/2020/images/banner.jpg");
+    background-image: url("@/assets/images/banner.jpg");
     background-repeat: repeat;
     background-position: top -5px right -5px;
     background-size: 760px 510px;
@@ -89,6 +93,7 @@
             display: inline-flex;
             justify-content: flex-end;
             vertical-align: bottom;
+
             p {
               line-height: 1.25;
               font-weight: 700;
@@ -163,6 +168,7 @@
         span {
           color: var(--color-link-hover);
           transition: all 0.1s;
+
           &::after {
             width: 100%;
             transition: all 0.1s;
@@ -184,7 +190,7 @@
     background-color: var(--color-section-background);
     clip-path: polygon(20px 20px, 100% 0%, 100% 100%, 0% 100%);
 
-    &:before {
+    &::before {
       content: "";
       display: block;
       position: absolute;
@@ -192,7 +198,7 @@
       bottom: 0;
       width: 100%;
       height: 100%;
-      background-image: url("/2020/images/logo.svg");
+      background-image: url("@/assets/images/logo.svg");
       background-position: bottom 3rem right 3rem;
       background-size: 40%;
       background-repeat: no-repeat;
@@ -264,6 +270,7 @@
       height: $banner-containr-height;
       background-position: top -5px right -30px;
       background-size: 660px 410px;
+
       .logo-wrapper {
         max-width: 80%;
         height: 300px;
@@ -281,6 +288,7 @@
               width: 120px;
               max-width: 100%;
             }
+
             div {
               width: 100%;
               margin-top: 0.5rem;
