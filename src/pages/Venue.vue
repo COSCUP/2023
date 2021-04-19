@@ -8,30 +8,32 @@
 <template>
   <main id="venue" class="page-container">
     <div v-for="map in maps" :key="map" class="map-container">
-      <img :src="`/2020/images/venues/${map}.png`" alt="Map" />
+      <img :src="mapImages[map]" alt="Map" />
     </div>
   </main>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from 'vue'
-import { useRenderedEventDispatcher } from '@/plugins/renderedEventDispatcher'
-
+import { defineComponent } from 'vue'
+import { generateAssetsMap } from '@/utils/common'
 import '@/assets/scss/pages/venue.scss'
+
+const imagesMap = generateAssetsMap(
+  import.meta.globEager('../assets/images/venues/*.png'),
+  '../assets/images/venues/*.png'
+)
 
 export default defineComponent({
   name: 'Venue',
   components: {
   },
   setup () {
-    const dispatchRenderedEvent = useRenderedEventDispatcher()
     const maps = ['map-all', 'map-tr-2f', 'map-tr-3f', 'map-tr-4f', 'map-tr-5f']
-    onMounted(() => {
-      dispatchRenderedEvent()
-    })
+    const mapImages = Object.fromEntries(maps.map(k => [k, imagesMap[`${k}.png`]]))
 
     return {
-      maps
+      maps,
+      mapImages
     }
   }
 })

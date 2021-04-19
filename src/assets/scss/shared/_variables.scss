@@ -3,7 +3,11 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-$xs-max-width: 600px;
-$sm-max-width: 960px;
-$md-max-width: 1264px;
-$lg-max-width: 1904px;
+$xl-min-width: 1904px;
+$lg-max-width: $xl-min-width - 0.1px;
+$lg-min-width: 1264px;
+$md-max-width: $lg-min-width - 0.1px;
+$md-min-width: 960px;
+$sm-max-width: $md-min-width - 0.1px;
+$sm-min-width: 600px;
+$xs-max-width: $sm-min-width - 0.1px;

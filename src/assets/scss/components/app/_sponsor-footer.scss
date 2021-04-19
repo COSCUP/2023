@@ -6,10 +6,12 @@
   @include theme-colors-of("all", "#sponsor-footer") {
     --color-text-hover: #{$coscup-green};
   }
+
   @include theme-colors-of("light", "#sponsor-footer") {
     --color-text: #{text-light};
     --color-background: #{darken($background-light, 10)};
   }
+
   @include theme-colors-of("dark", "#sponsor-footer") {
     --color-text: #{text-dark};
     --color-background: #{lighten($background-dark, 8)};
@@ -17,7 +19,7 @@
 }
 
 @mixin sponsor-footer {
-  &.in-app #sponsor-footer {
+  & .in-app #sponsor-footer {
     display: none;
   }
 

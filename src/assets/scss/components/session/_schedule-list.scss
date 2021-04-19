@@ -1,0 +1,31 @@
+// Copyright (c) 2020 DevilTea
+//
+// This software is released under the MIT License.
+// https://opensource.org/licenses/MIT
+
+@import "./schedule-item";
+
+@mixin schedule-list {
+  .schedule-list {
+    position: relative;
+
+    .section {
+      .time {
+        position: sticky;
+        top: var(--navbar-height);
+        padding: 1rem;
+        background-color: var(--color-list-time-background);
+        z-index: 1;
+        font-size: 1.15rem;
+        font-weight: 500;
+      }
+
+      .schedule-item-container {
+        padding: 0.5rem;
+        z-index: 0;
+
+        @include schedule-item;
+      }
+    }
+  }
+}

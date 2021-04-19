@@ -16,9 +16,6 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'NavbarItemContent',
-  setup () {
-    return {}
-  }
+  name: 'NavbarItemContent'
 })
 </script>

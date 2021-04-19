@@ -4,9 +4,9 @@
 // https://opensource.org/licenses/MIT
 
 import MarkdownIt from 'markdown-it'
+import plugins from './plugins'
 import Prism from 'prismjs'
 import 'prismjs/components'
-import plugins from './plugins'
 
 function createMarkdownIt () {
   const options: MarkdownIt.Options = {

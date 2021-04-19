@@ -9,9 +9,11 @@
   @include theme-colors-of("all", "#staff") {
     --color-avatar-border: #eee;
   }
+
   @include theme-colors-of("light", "#staff") {
     --color-background: #{lighten($coscup-green, 50)};
   }
+
   @include theme-colors-of("dark", "#staff") {
     --color-background: #{lighten($background-dark, 8)};
   }
@@ -70,7 +72,6 @@
                 left: 0;
                 width: 100%;
                 height: 100%;
-
                 border-radius: 50%;
                 border: var(--color-avatar-border) 5px solid;
               }

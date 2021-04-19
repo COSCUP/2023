@@ -4,8 +4,6 @@
       v-for="data in navbarItemDataList"
       :key="data.options.name"
       :navbar-item-data="data"
-      @click="onItemClick(data.options.name)"
-      @action="$emit('action', $event)"
     ></NavbarItem>
   </div>
 </template>
@@ -25,15 +23,6 @@ export default defineComponent({
   },
   components: {
     NavbarItem
-  },
-  setup (props, context) {
-    const onItemClick = (itemName: string) => {
-      if (itemName === 'menuToggle') context.emit('toggle-menu')
-    }
-
-    return {
-      onItemClick
-    }
   }
 })
 </script>

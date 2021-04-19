@@ -14,7 +14,7 @@
     >
       <div class="level-container">
         <p class="level">
-          {{ languagePack.sponsor.level[groupEntry[0]] }}
+          {{ t(`sponsor.level['${groupEntry[0]}']`) }}
         </p>
       </div>
       <div class="inner-container">
@@ -28,7 +28,7 @@
         >
           <img
             :alt="sponsor.name"
-            :src="`/2020/images/sponsors/${sponsor.image}`"
+            :src="sponsor.image"
           />
           <p class="name">{{ sponsor.name }}</p>
         </a>
@@ -39,21 +39,28 @@
 
 <script lang="ts">
 import { groupBy } from 'lodash'
-import sponsorDatas from '@/../public/json/sponsor.json'
+import sponsorDatas from '@/assets/json/sponsor.json'
 import { defineComponent, computed } from 'vue'
-import { useStore } from '@/store'
+import { useI18n } from 'vue-i18n'
+import { Locale } from '@/modules/i18n'
+import { generateAssetsMap } from '@/utils/common'
+
+const imagesMap = generateAssetsMap(
+  import.meta.globEager('../../assets/images/sponsors/*.png'),
+  '../../assets/images/sponsors/*.png'
+)
 
 export default defineComponent({
   name: 'SponsorFooter',
   setup () {
-    const { languageType, languagePack } = useStore()
+    const { t, locale } = useI18n()
     const sponsorGroups = computed(() => Object.entries(groupBy(sponsorDatas.map((data) => {
       return {
         level: data.level,
         id: data.id,
-        name: data.name[languageType.value],
+        name: data.name[locale.value as Locale],
         link: data.link,
-        image: data.image
+        image: imagesMap[data.image]
       }
     }), 'level'))
       .sort((entryA, entryB) => {
@@ -64,7 +71,7 @@ export default defineComponent({
 
     return {
       sponsorGroups,
-      languagePack
+      t
     }
   }
 })

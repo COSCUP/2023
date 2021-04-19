@@ -45,5 +45,10 @@
     "**/*.scss",
     "**/*.vue",
     "**/*.styl"
+  ],
+  "i18n-ally.localesPaths": [
+    "locales",
+    "src/services/language",
+    "src/services/language/languages"
   ]
 }

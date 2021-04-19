@@ -1,22 +1,25 @@
 <template>
-  <Action v-bind="$attrs">
+  <component :is="Action" v-bind="$attrs" @click="isOpen = !isOpen">
     <template v-slot:default>
-      <Icon name="bars"></Icon>
+      <icon-fa-solid-bars />
     </template>
-  </Action>
+  </component>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, inject, Ref } from 'vue'
 import Action from '../Basic/Action.vue'
 
 export default defineComponent({
   name: 'MenuToggle',
-  components: {
-    Action
-  },
   setup () {
-    return {}
+    const isOpen = inject<Ref<boolean>>('isMenuOpen')
+    if (!isOpen) throw new Error('"isMenuOpen" is not provided')
+
+    return {
+      Action,
+      isOpen
+    }
   }
 })
 </script>

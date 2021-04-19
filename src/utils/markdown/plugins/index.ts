@@ -16,9 +16,9 @@ import pluginMark from 'markdown-it-mark'
 import pluginExternalLinks from 'markdown-it-external-links'
 import pluginAnchor from 'markdown-it-anchor'
 import pluginTOC from 'markdown-it-toc-done-right'
-import pluginImsize from 'markdown-it-imsize'
-import pluginLazyLoadImg from './lazyLoadImg'
-import { getFullUrl } from '@/utils/common'
+import { getRootUrl } from '@/utils/common'
+// 'markdown-it-imsize' would cause an issue
+// import pluginImsize from 'markdown-it-imsize'
 
 function allPlugins (md: MarkdownIt) {
   md.use(pluginSub)
@@ -27,8 +27,7 @@ function allPlugins (md: MarkdownIt) {
     .use(pluginDeflist)
     .use(pluginAbbr)
     .use(pluginEmoji)
-    .use(pluginLazyLoadImg)
-    .use(pluginImsize)
+    // .use(pluginImsize)
     .use(pluginContainer, 'info')
     .use(pluginContainer, 'warning')
     .use(pluginContainer, 'error')
@@ -36,7 +35,9 @@ function allPlugins (md: MarkdownIt) {
     .use(pluginIns)
     .use(pluginMark)
     .use(pluginExternalLinks, {
-      internalDomains: [getFullUrl().split('/')[2]],
+      internalDomains: [
+        getRootUrl() ?? ''
+      ],
       externalTarget: '_blank',
       externalRel: 'noopener noreferrer'
     })

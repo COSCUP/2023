@@ -10,6 +10,7 @@
   @include theme-colors-of("light", "#navbar") {
     --color-background: #{$background-light};
   }
+
   @include theme-colors-of("dark", "#navbar") {
     --color-background: #{lighten($background-dark, 8)};
   }
@@ -19,7 +20,7 @@
 }
 
 @mixin navbar {
-  &.in-app #navbar {
+  & .in-app #navbar {
     .navbar-item-list {
       justify-content: flex-end;
 
@@ -59,16 +60,17 @@
           justify-content: center;
           align-items: center;
           cursor: pointer;
-
           animation: breathe 3s linear infinite;
 
           @keyframes breathe {
             0% {
               opacity: 0;
             }
+
             50% {
               opacity: 1;
             }
+
             100% {
               opacity: 0;
             }

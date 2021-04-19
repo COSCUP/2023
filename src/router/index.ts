@@ -1,81 +1,107 @@
-// Copyright (c) 2020 DevilTea
-//
-// This software is released under the MIT License.
-// https://opensource.org/licenses/MIT
+import { setupI18nRoutes } from '@/modules/i18n'
+import { RouterOptions } from 'vite-ssg'
+import { RouteRecordRaw, RouterScrollBehavior } from 'vue-router'
 
-import { camelCase } from 'lodash'
-import { Router, createRouter as _createRouter, createWebHistory, RouteLocationNormalized } from 'vue-router'
-import { LanguageType, defaultLanguageType, availableLanguageTypes, LanguagePack } from '@/services/language'
-import { MetaOptions } from '@/services/meta'
-import { createRoutes, pageRouteNameList } from './routes'
-import { delay } from '@/utils/common'
+const routes: RouteRecordRaw[] = [
+  {
+    path: '/',
+    name: 'Home',
+    component: () => import('@/pages/Home.vue'),
+    meta: {
+      order: 0
+    }
+  },
+  {
+    path: '/session',
+    name: 'Session',
+    component: () => import('@/pages/Session.vue'),
+    children: [
+      {
+        path: ':sessionId',
+        name: 'SessionDetail',
+        component: () => import('@/pages/Session.vue')
+      }
+    ],
+    meta: {
+      order: 1
+    }
+  },
+  {
+    path: '/room',
+    name: 'Room',
+    component: () => import('@/pages/Room.vue'),
+    meta: {
+      order: 2
+    }
+  },
+  {
+    path: '/map',
+    name: 'Map',
+    component: () => import('@/pages/Map.vue'),
+    meta: {
+      order: 3
+    }
+  },
+  {
+    path: '/venue',
+    name: 'Venue',
+    component: () => import('@/pages/Venue.vue'),
+    meta: {
+      order: 4
+    }
+  },
+  {
+    path: '/sponsor',
+    name: 'Sponsor',
+    component: () => import('@/pages/Sponsor.vue'),
+    meta: {
+      order: 5
+    }
+  },
+  {
+    path: '/staff',
+    name: 'Staff',
+    component: () => import('@/pages/Staff.vue'),
+    meta: {
+      order: 6
+    }
+  }, {
+    name: 'NotFound',
+    path: '/:catchAll(.*)',
+    redirect: '/'
+  }
+]
 
-export { pageRouteNameList } from './routes'
+export const pageRouteNameList = routes.filter(r => !isNaN(Number(r.meta?.order)))
+  .sort((a, b) => Number(a.meta?.order) - Number(b.meta?.order))
+  .map(r => r.name?.toString() ?? '')
 
-type PageTitleKey = Exclude<(keyof LanguagePack), 'app'>
-interface MethodInject {
-  setLanguageType: (languageType: LanguageType) => void;
-  setIsLoading: (isLoading: boolean) => void;
-  setMeta: (options: MetaOptions) => void;
-  getPageTitle: (pageTitleKey: PageTitleKey) => string;
-  isPopup: () => boolean;
-  isMobile: () => boolean;
-}
-
-export function createRouter (inject: MethodInject): Router {
-  const routes = createRoutes(inject.setIsLoading)
-
-  const router = _createRouter({
-    history: createWebHistory(process.env.BASE_URL),
-    routes,
-
-    async scrollBehavior (to, from) {
-      const toKeepPositionConditions: ((to: RouteLocationNormalized, from: RouteLocationNormalized) => boolean)[] = [
-        (to, from) => to.name === from.name && to.params.languageType !== from.params.languageType,
-        (to, from) => to.name === from.name && (to.query.popUp === 'announcement' || from.query.popUp === 'announcement'),
-        (to, from) => (to.name === 'Agenda' && from.name === 'AgendaDetail') || (to.name === 'AgendaDetail' && from.name === 'Agenda')
-      ]
-      if (toKeepPositionConditions.some((condition) => condition(to, from))) return
-      await delay(300)
+export const routerOptions: RouterOptions = {
+  base: import.meta.env.BASE_URL,
+  routes: setupI18nRoutes(routes),
+  scrollBehavior: ((): RouterScrollBehavior => {
+    const toTreatAsSame = ['Session', 'SessionDetail']
+    const savedPosition: Record<'top' | 'left', number> = {
+      top: 0,
+      left: 0
+    }
+    const savePosition = (top: number, left: number) => {
+      Object.assign(savedPosition, { top, left })
+    }
+    return (to, from) => {
+      const { scrollX, scrollY } = window
+      savePosition(scrollY, scrollX)
+      if (to.name === from.name ||
+        (toTreatAsSame.includes(to.name?.toString() ?? '') &&
+        toTreatAsSame.includes(from.name?.toString() ?? ''))
+      ) {
+        return savedPosition
+      }
       return {
         top: 0,
-        left: 0
+        left: 0,
+        behavior: 'smooth'
       }
     }
-  })
-
-  router.beforeEach((to, from, next) => {
-    const languageType = to.params.languageType as string
-    if (languageType && !(availableLanguageTypes as string[]).includes(languageType)) {
-      next('/')
-    } else {
-      inject.setLanguageType(languageType as LanguageType || defaultLanguageType)
-
-      const routeName = to.name?.toString() ?? ''
-      if (pageRouteNameList.includes(routeName)) {
-        inject.setMeta({
-          title: inject.getPageTitle(camelCase(routeName) as PageTitleKey)
-        })
-      }
-      next()
-    }
-  })
-
-  router.afterEach((to, from) => {
-    if (inject.isMobile()) {
-      to.meta.transitionName = 'fade'
-      return
-    }
-    const newRouteName = to.name?.toString() ?? ''
-    const oldRouteName = from.name?.toString() ?? ''
-    const newIndex = pageRouteNameList.indexOf(newRouteName)
-    const oldIndex = pageRouteNameList.indexOf(oldRouteName)
-    if (oldIndex < newIndex) {
-      to.meta.transitionName = 'slide-left'
-    } else {
-      to.meta.transitionName = 'slide-right'
-    }
-  })
-
-  return router
+  })()
 }

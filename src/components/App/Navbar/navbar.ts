@@ -1,14 +1,14 @@
 import { camelCase } from 'lodash'
-import { RouteLocationRaw, RouteLocationNormalized } from 'vue-router'
+import { useI18n } from 'vue-i18n'
+import { RouteLocationRaw, useRoute } from 'vue-router'
 import { pageRouteNameList } from '@/router'
-import { defaultLanguageType, availableLanguageTypes, LanguageType } from '@/services/language'
 import InternalLink from '@/components/App/Navbar/Basic/InternalLink.vue'
 import ExternalLink from '@/components/App/Navbar/Basic/ExternalLink.vue'
 import HomeTab from '@/components/App/Navbar/Custom/HomeTab.vue'
 import ThemeToggle from '@/components/App/Navbar/Custom/ThemeToggle.vue'
+import LanguageSwitch from '@/components/App/Navbar/Custom/LanguageSwitch.vue'
 import MenuToggle from '@/components/App/Navbar/Custom/MenuToggle.vue'
-import { ThemeType } from '@/services/theme'
-import { defineAsyncComponent } from 'vue'
+import { computed, defineAsyncComponent } from 'vue'
 
 export type NavbarItemType = 'internal-link' | 'external-link' | 'action'
 export type ActionType = 'toggle-theme' | 'toggle-menu'
@@ -21,7 +21,7 @@ interface BasicOptions {
 }
 
 export interface InternalLinkOptions extends BasicOptions {
-  to: RouteLocationRaw;
+  to?: RouteLocationRaw;
   active: boolean;
 }
 
@@ -29,10 +29,7 @@ export interface ExternalLinkOptions extends BasicOptions {
   url: string;
 }
 
-export interface ActionOptions extends BasicOptions {
-  action: ActionType;
-  payloads?: Record<string, unknown>;
-}
+export interface ActionOptions extends BasicOptions {}
 
 export type NavbarItemOptions = InternalLinkOptions | ExternalLinkOptions | ActionOptions
 
@@ -59,49 +56,34 @@ export interface ActionData extends BasicNavbarItemData {
 
 export type NavbarItemData = InternalLinkData | ExternalLinkData | ActionData
 
-const internalLinksThatFixedInNavbar: string[] = ['home']
-const internalLinksThatHiddenInMenu: string[] = []
+export function useNavbarItems () {
+  const internalLinksThatFixedInNavbar: string[] = ['home']
+  const internalLinksThatHiddenInMenu: string[] = []
 
-export function getInternalLinkDataList ({
-  currentRoute,
-  getNavbarItemText
-}: {
-  currentRoute: RouteLocationNormalized;
-  getNavbarItemText: (itemName: string) => string;
-}) {
-  const internalLinkDataList = pageRouteNameList.map((routeName): InternalLinkData => {
-    const itemName = camelCase(routeName)
-    return {
-      type: 'internal-link',
-      options: {
-        name: itemName,
-        fixedInNavbar: internalLinksThatFixedInNavbar.includes(itemName),
-        hiddenInMenu: internalLinksThatHiddenInMenu.includes(itemName),
-        text: getNavbarItemText(itemName),
-        to: {
-          name: routeName,
-          params: {
-            languageType: currentRoute.params.languageType || defaultLanguageType
-          }
+  const { t } = useI18n()
+  const currentRoute = useRoute()
+  const getNavbarItemText = (itemName: string) => t(`app.navbar['${itemName}']`)
+  const internalLinkDataList = computed<InternalLinkData[]>(() => pageRouteNameList
+    .map((routeName): InternalLinkData => {
+      const itemName = camelCase(routeName)
+      return {
+        type: 'internal-link',
+        options: {
+          name: itemName === 'home' ? 'home-tab' : itemName,
+          fixedInNavbar: internalLinksThatFixedInNavbar.includes(itemName),
+          hiddenInMenu: internalLinksThatHiddenInMenu.includes(itemName),
+          text: getNavbarItemText(itemName),
+          to: {
+            name: routeName
+          },
+          active: currentRoute.name?.toString().startsWith(routeName) ?? false
         },
-        active: currentRoute.name?.toString().startsWith(routeName) ?? false
-      },
-      component: InternalLink
-    }
-  })
+        component: itemName === 'home' ? HomeTab : InternalLink
+      }
+    })
+  )
 
-  const home = internalLinkDataList.find((data) => data.options.name === 'home')
-  if (home) home.component = HomeTab
-
-  return internalLinkDataList
-}
-
-export function getExternalLinkDataList ({
-  getNavbarItemText
-}: {
-  getNavbarItemText: (itemName: string) => string;
-}) {
-  const externalLinkDataList: ExternalLinkData[] = [
+  const externalLinkDataList = computed<ExternalLinkData[]>(() => [
     {
       type: 'external-link',
       options: {
@@ -135,56 +117,20 @@ export function getExternalLinkDataList ({
       },
       component: ExternalLink
     }
-  ]
+  ])
 
-  return externalLinkDataList
-}
-
-export function getLanguageSwitchData ({
-  currentLanguageType,
-  currentRoute,
-  getNextLanguageTypeText
-}: {
-  currentLanguageType: LanguageType;
-  currentRoute: RouteLocationNormalized;
-  getNextLanguageTypeText: (nextLanguageType: LanguageType) => string;
-}) {
-  const nextLanguageType = [...availableLanguageTypes, ...availableLanguageTypes]
-    .find((languageType, index, array) => array.indexOf(currentLanguageType) === index - 1) || defaultLanguageType
-
-  const languageSwitchData: InternalLinkData = {
+  const languageSwitchData = computed<InternalLinkData>(() => ({
     type: 'internal-link',
     options: {
       name: 'languageSwitch',
       fixedInNavbar: true,
       hiddenInMenu: true,
-      text: getNextLanguageTypeText(nextLanguageType),
-      to: (() => {
-        return {
-          name: currentRoute.name || 'Home',
-          params: {
-            ...currentRoute.params,
-            languageType: nextLanguageType
-          },
-          query: {
-            ...currentRoute.query
-          }
-        }
-      })(),
       active: false
     },
-    component: InternalLink
-  }
+    component: LanguageSwitch
+  }))
 
-  return languageSwitchData
-}
-
-export function getThemeToggleData ({
-  currentThemeType
-}: {
-  currentThemeType: ThemeType;
-}) {
-  const themeToggleData: ActionData = {
+  const themeToggleData = computed<ActionData>(() => ({
     type: 'action',
     options: {
       name: 'themeToggle',
@@ -192,17 +138,13 @@ export function getThemeToggleData ({
       hiddenInMenu: true,
       action: 'toggle-theme',
       payloads: {
-        currentThemeType
+        currentThemeType: 'light'
       }
     },
     component: ThemeToggle
-  }
+  }))
 
-  return themeToggleData
-}
-
-export function getMenuToggleData () {
-  const menuToggleData: ActionData = {
+  const menuToggleData = computed<ActionData>(() => ({
     type: 'action',
     options: {
       name: 'menuToggle',
@@ -211,7 +153,15 @@ export function getMenuToggleData () {
       action: 'toggle-menu'
     },
     component: MenuToggle
-  }
+  }))
 
-  return menuToggleData
+  const navbarItems = computed<NavbarItemData[]>(() => [
+    ...internalLinkDataList.value,
+    ...externalLinkDataList.value,
+    languageSwitchData.value,
+    themeToggleData.value,
+    menuToggleData.value
+  ])
+
+  return navbarItems
 }

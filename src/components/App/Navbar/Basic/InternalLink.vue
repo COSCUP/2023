@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar-item-container" @click="$emit('click', $event)">
+  <div class="navbar-item-container">
     <router-link class="navbar-item internal-link" :to="to">
       <NavbarItemContent>
         <template v-slot:prefix>
@@ -44,9 +44,6 @@ export default defineComponent({
       type: Boolean,
       required: true
     }
-  },
-  setup () {
-    return {}
   }
 })
 </script>

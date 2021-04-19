@@ -9,7 +9,7 @@
   <component
     :class="{
       [className]: true,
-      active: navbarItemData.options.active,
+      active: navbarItemData.type === 'internal-link' && navbarItemData.options.active,
     }"
     :is="navbarItemData.component"
     v-bind="navbarItemData.options"

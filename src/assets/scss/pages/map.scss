@@ -13,6 +13,7 @@
     --color-card-content: #{$text-light};
     --opacity-of-map-component: 1;
   }
+
   @include theme-colors-of("dark", "#map") {
     --color-card-background: #{lighten($background-dark, 8)};
     --color-card-title: #{lighten($coscup-green, 10)};

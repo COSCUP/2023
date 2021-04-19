@@ -12,7 +12,7 @@
         <div class="logo-container">
           <h2>COSCUP 2020</h2>
           <div class="logo-content">
-            <img src="/2020/images/banner-logo.svg" alt="COSCUP" />
+            <img src="@/assets/images/banner-logo.svg" alt="COSCUP" />
             <div>
               <p>Conference for Open Source Coders, Users & Promoters</p>
             </div>
@@ -24,7 +24,7 @@
       <div class="info">
         <span class="date">8 / 1 ~ 8 / 2</span>
         <span class="venue">
-          {{ languagePack.home.info.venue }}
+          {{ t('home.info.venue') }}
         </span>
       </div>
       <router-link
@@ -36,7 +36,7 @@
         }"
       >
         <span>
-          {{ languagePack.home.info.tabs.announcement }}
+          {{ t('home.info.tabs.announcement') }}
         </span>
       </router-link>
     </div>
@@ -46,7 +46,7 @@
       :key="`section-${section.name}`"
       class="section-block"
     >
-      <img class="prefix-icon" src="/2020/images/logo.svg" />
+      <img class="prefix-icon" src="@/assets/images/logo.svg" />
       <h2 class="section-title">
         {{ section.title }}
       </h2>
@@ -59,12 +59,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed, watch, onMounted } from 'vue'
+import { defineComponent, ref, watch } from 'vue'
 import markdown from '@/utils/markdown'
-import { useRenderedEventDispatcher } from '@/plugins/renderedEventDispatcher'
 
 import '@/assets/scss/pages/home.scss'
-import { useStore } from '@/store'
+import { useI18n } from 'vue-i18n'
 
 interface Section {
   name: 'notice' | 'about';
@@ -75,37 +74,28 @@ interface Section {
 export default defineComponent({
   name: 'Home',
   setup () {
-    const { languageType, languagePack } = useStore()
-    const despatchRenderedEvent = useRenderedEventDispatcher()
-    const noticeHtml = ref('')
-    const aboutHtml = ref('')
-    const sections = computed<Section[]>(() => [
-      {
-        name: 'notice',
-        title: languagePack.value.home.notice.title,
-        content: noticeHtml.value
-      },
-      {
-        name: 'about',
-        title: languagePack.value.home.about.title,
-        content: aboutHtml.value
-      }
-    ])
+    const { t, locale } = useI18n()
+    const sections = ref<Section[]>([])
 
-    const parseMarkdownContent = async () => {
-      noticeHtml.value = await markdown(languagePack.value.home.notice.content)
-      aboutHtml.value = await markdown(languagePack.value.home.about.content)
-    }
-
-    watch(() => languageType.value, parseMarkdownContent)
-
-    onMounted(async () => {
-      await parseMarkdownContent()
-      despatchRenderedEvent()
+    watch(locale, async () => {
+      sections.value = [
+        {
+          name: 'notice',
+          title: t('home.notice.title'),
+          content: markdown(t('home.notice.content'))
+        },
+        {
+          name: 'about',
+          title: t('home.about.title'),
+          content: markdown(t('home.about.content'))
+        }
+      ]
+    }, {
+      immediate: true
     })
 
     return {
-      languagePack,
+      t,
       sections
     }
   }

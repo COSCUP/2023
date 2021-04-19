@@ -11,25 +11,20 @@
         v-for="data in navbarItemDataList"
         :key="data.options.name"
         :navbar-item-data="data"
-        @click="onItemClick(data.options.name)"
-        @action="$emit('action', $event)"
+        @click="isOpen = false"
       ></NavbarItem>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, computed } from 'vue'
+import { defineComponent, PropType, inject, Ref } from 'vue'
 import NavbarItem from './NavbarItem.vue'
 import { NavbarItemData } from './navbar'
 
 export default defineComponent({
   name: 'NavbarMenu',
   props: {
-    value: {
-      type: Boolean,
-      required: true
-    },
     navbarItemDataList: {
       type: Array as PropType<NavbarItemData[]>,
       required: true
@@ -38,23 +33,12 @@ export default defineComponent({
   components: {
     NavbarItem
   },
-  setup (props, context) {
-    const isOpen = computed({
-      get () {
-        return props.value
-      },
-      set (newValue: boolean) {
-        context.emit('input', newValue)
-      }
-    })
-
-    const onItemClick = (itemName: string) => {
-      if (itemName !== 'menuToggle') isOpen.value = false
-    }
+  setup (props, { emit }) {
+    const isOpen = inject<Ref<boolean>>('isMenuOpen')
+    if (!isOpen) throw new Error('"isMenuOpen" is not provided')
 
     return {
-      isOpen,
-      onItemClick
+      isOpen
     }
   }
 })

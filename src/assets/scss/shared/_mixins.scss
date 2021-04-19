@@ -7,25 +7,25 @@
 
 // Rule: Only
 @mixin xlOnly() {
-  @media screen and (min-width: $lg-max-width + 1px) {
+  @media screen and (min-width: $xl-min-width) {
     @content;
   }
 }
 
 @mixin lgOnly() {
-  @media screen and (min-width: $md-max-width + 1px) and (max-width: $lg-max-width) {
+  @media screen and (min-width: $lg-min-width) and (max-width: $lg-max-width) {
     @content;
   }
 }
 
 @mixin mdOnly() {
-  @media screen and (min-width: $sm-max-width + 1px) and (max-width: $md-max-width) {
+  @media screen and (min-width: $md-min-width) and (max-width: $md-max-width) {
     @content;
   }
 }
 
 @mixin smOnly() {
-  @media screen and (min-width: $xs-max-width + 1px) and (max-width: $sm-max-width) {
+  @media screen and (min-width: $sm-min-width) and (max-width: $sm-max-width) {
     @content;
   }
 }
@@ -38,19 +38,19 @@
 
 // Rule: AndUp
 @mixin lgAndUp() {
-  @media screen and (min-width: $md-max-width + 1px) {
+  @media screen and (min-width: $lg-min-width) {
     @content;
   }
 }
 
 @mixin mdAndUp() {
-  @media screen and (min-width: $sm-max-width + 1px) {
+  @media screen and (min-width: $md-min-width) {
     @content;
   }
 }
 
 @mixin smAndUp() {
-  @media screen and (min-width: $xs-max-width + 1px) {
+  @media screen and (min-width: $sm-min-width) {
     @content;
   }
 }
@@ -80,6 +80,7 @@
   &::-webkit-scrollbar {
     display: none;
   }
+
   & {
     -ms-overflow-style: none; /* IE 11 */
     scrollbar-width: none; /* Firefox 64 */

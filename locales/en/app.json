@@ -1,0 +1,19 @@
+{
+  "navbar": {
+    "home": "COSCUP 2020",
+    "session": "Session",
+    "room": "Room",
+    "map": "Map",
+    "venue": "Venue",
+    "sponsor": "Sponsor",
+    "staff": "Staff",
+    "blog": "Blog",
+    "press-release": "Press Release",
+    "coc": "CoC",
+    "languageSwitch": "EN"
+  },
+  "footer": {
+    "websites": "Websites",
+    "social": "Social Media"
+  }
+}

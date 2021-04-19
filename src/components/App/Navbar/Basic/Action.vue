@@ -1,6 +1,6 @@
 <template>
-  <div class="navbar-item-container" @click="$emit('click', $event)">
-    <button class="navbar-item action" @click="$emit('action', action)">
+  <div class="navbar-item-container">
+    <button class="navbar-item action">
       <NavbarItemContent>
         <template v-slot:prefix>
           <slot name="prefix" v-bind="$props"> </slot>
@@ -21,7 +21,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { defineComponent } from 'vue'
 import NavbarItemContent from './NavbarItemContent.vue'
 
 export default defineComponent({
@@ -34,18 +34,7 @@ export default defineComponent({
       type: String,
       required: false,
       default: ''
-    },
-    action: {
-      type: String,
-      required: true
-    },
-    payloads: {
-      type: Object as PropType<Record<string, unknown>>,
-      required: false
     }
-  },
-  setup () {
-    return {}
   }
 })
 </script>

@@ -1,13 +1,13 @@
 <template>
-  <InternalLink class="home-tab" v-bind="$attrs">
+  <component :is="InternalLink" v-bind="$attrs">
     <template v-slot:prefix>
-      <img class="logo" :src="`/2020/images/logo.svg`" />
+      <img class="logo" src="@/assets/images/logo.svg" />
     </template>
     <template v-slot:default>
       <p class="coscup">COSCUP</p>
       <p class="year">2020</p>
     </template>
-  </InternalLink>
+  </component>
 </template>
 
 <script lang="ts">
@@ -16,11 +16,10 @@ import InternalLink from '../Basic/InternalLink.vue'
 
 export default defineComponent({
   name: 'HomeTab',
-  components: {
-    InternalLink
-  },
   setup () {
-    return {}
+    return {
+      InternalLink
+    }
   }
 })
 </script>
@@ -67,7 +66,7 @@ export default defineComponent({
     .home-tab {
       margin-right: auto;
 
-      &:not(&::hover).active .navbar-item {
+      &:not(&:hover).active .navbar-item {
         background-color: transparent !important;
       }
     }
