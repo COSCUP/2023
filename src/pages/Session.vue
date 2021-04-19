@@ -54,12 +54,16 @@ export default defineComponent({
     const route = useRoute()
     const router = useRouter()
     const { daysSchedule, currentDayIndex, getSessionById, isLoaded } = useSession()
-    const { openPopUp } = usePopUp()
+    const { openPopUp, removeAll } = usePopUp()
     const { xsOnly } = useBreakpoints()
     const { locale } = useI18n()
 
     watch(() => [route.params.sessionId, isLoaded.value], ([sessionId, bool], past) => {
-      if (!bool || !sessionId || typeof sessionId !== 'string') return
+      if (!bool) return
+      if (typeof sessionId !== 'string') {
+        removeAll((popUpData) => !popUpData.popupId?.startsWith('session-'))
+        return
+      }
       const onClose = () => {
         router.push({
           name: route.query.from === 'Room'

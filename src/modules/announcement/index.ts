@@ -37,6 +37,7 @@ export const setup = () => {
     }
     openPopUp({
       popupId: 'announcement',
+      order: 9999,
       metaOptions: {
         title: announcement.meta.title[locale.value as Locale],
         description: announcement.meta.description[locale.value as Locale]

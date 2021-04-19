@@ -46,6 +46,7 @@ export type PopUpContentData = HtmlPopUpContentData
 
 export interface PopUpData {
   popupId?: string;
+  order?: number;
   metaOptions: MetaOptions;
   containerData: PopUpContainerData;
   contentData: PopUpContentData;
@@ -55,6 +56,7 @@ export interface PopUpData {
 interface UsePopUp {
   openPopUp: (data: PopUpData) => void;
   closePopUp: () => void;
+  removeAll: (comparator?: (popUpData: PopUpData) => boolean) => void;
   currentPopUp: Ref<PopUpData | null>;
   currentContainerComponent: Ref<Component | null>;
   currentContentComponent: Ref<Component | null>;
@@ -90,7 +92,13 @@ const _usePopUp = (): UsePopUp => {
   const openPopUp = (data: PopUpData) => {
     setMetas(data.metaOptions)
     lockScroll()
-    stack.value.push(data)
+    const i = stack.value.findIndex((popUpData) =>
+      (popUpData.order ?? 0) >= (data.order ?? 0))
+    if (i === -1) {
+      stack.value.push(data)
+    } else {
+      stack.value.splice(i + 1, 0, data)
+    }
   }
   const closePopUp = () => {
     const popUp = stack.value.pop() ?? null
@@ -98,12 +106,20 @@ const _usePopUp = (): UsePopUp => {
     unlockScroll()
     popUp.onClose?.()
   }
+  const removeAll = (comparator?: (popUpData: PopUpData) => boolean) => {
+    if (comparator) {
+      stack.value = stack.value.filter(comparator)
+    } else {
+      stack.value.length = 0
+    }
+  }
   return {
     currentPopUp,
     currentContainerComponent,
     currentContentComponent,
     openPopUp,
-    closePopUp
+    closePopUp,
+    removeAll
   }
 }
 
