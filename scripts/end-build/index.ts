@@ -13,4 +13,11 @@ import copy from 'recursive-copy'
       overwrite: true
     }
   )
+  await copy(
+    join(__dirname, '../../dist/index.html'),
+    join(__dirname, '../../dist/404.html'),
+    {
+      overwrite: true
+    }
+  )
 })()
