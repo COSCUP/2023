@@ -35,7 +35,7 @@ export default defineComponent({
       }
     }
   },
-  setup(props) {
+  setup (props) {
     const router = useRouter()
     const mapInstance = ref<Map | null>(null)
 

@@ -9,8 +9,8 @@
 @import "../components/session/schedule-list";
 
 @mixin session-theme-colors {
-  @include theme-colors-of("all", "#session") {
-  }
+  // @include theme-colors-of("all", "#session") {
+  // }
 
   @include theme-colors-of("light", "#session") {
     --color-primary: #{$coscup-green};

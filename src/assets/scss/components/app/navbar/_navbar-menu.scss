@@ -2,9 +2,11 @@
   @include theme-colors-of("all", ".navbar-menu") {
     --color-mask-background: #0000004d;
   }
+
   @include theme-colors-of("light", ".navbar-menu") {
     --color-container-background: #fff;
   }
+
   @include theme-colors-of("dark", ".navbar-menu") {
     --color-container-background: #{$coscup-dark-blue};
   }

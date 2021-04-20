@@ -4,8 +4,8 @@
 // https://opensource.org/licenses/MIT
 
 @mixin session-popup-container-theme-colors {
-  @include theme-colors-of("all", "#session-popup-container") {
-  }
+  // @include theme-colors-of("all", "#session-popup-container") {
+  // }
 
   @include theme-colors-of("light", "#session-popup-container") {
     --color-background: #fafafa;

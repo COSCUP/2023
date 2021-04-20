@@ -4,11 +4,13 @@
 // https://opensource.org/licenses/MIT
 
 @mixin default-popup-container-theme-colors {
-  @include theme-colors-of("all", "#default-popup-container") {
-  }
+  // @include theme-colors-of("all", "#default-popup-container") {
+  // }
+
   @include theme-colors-of("light", "#default-popup-container") {
     --color-background: #fafafa;
   }
+
   @include theme-colors-of("dark", "#default-popup-container") {
     --color-background: #555;
   }

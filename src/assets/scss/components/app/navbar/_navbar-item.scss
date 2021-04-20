@@ -5,9 +5,11 @@
     --color-background-hover: #80808033;
     --color-underline: #{$coscup-green};
   }
+
   @include theme-colors-of("light", ".navbar-item") {
     --color-text: #{$text-light};
   }
+
   @include theme-colors-of("dark", ".navbar-item") {
     --color-text: #{$text-dark};
   }

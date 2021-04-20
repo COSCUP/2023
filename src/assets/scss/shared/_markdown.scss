@@ -17,10 +17,12 @@
     --color-markdown-table-border: #666;
     --color-markdown-mark-background: #{lighten($coscup-green, 8)};
   }
+
   @include theme-colors-of("light", ".markdown") {
     --color-markdown-link: #{$coscup-green};
     --color-markdown-link-hover: #{lighten($coscup-green, 8)};
   }
+
   @include theme-colors-of("dark", ".markdown") {
     --color-markdown-link: #{lighten($coscup-green, 8)};
     --color-markdown-link-hover: #{lighten($coscup-green, 15)};
@@ -141,8 +143,10 @@
 
     ul {
       list-style-type: disc;
+
       ul {
         list-style-type: circle;
+
         ul {
           list-style-type: square;
         }
@@ -213,6 +217,7 @@
           from {
             opacity: 0;
           }
+
           to {
             opacity: 1;
           }
@@ -253,6 +258,7 @@
         &.#{$container} {
           padding: 1rem;
           border: solid 2px;
+
           @each $key, $value in $properties {
             #{$key}: $value;
           }

@@ -4,11 +4,13 @@
 // https://opensource.org/licenses/MIT
 
 @mixin session-detail-theme-colors {
-  @include theme-colors-of("all", ".session-detail") {
-  }
+  // @include theme-colors-of("all", ".session-detail") {
+  // }
+
   @include theme-colors-of("light", ".session-detail") {
     --color-primary: #{$coscup-green};
   }
+
   @include theme-colors-of("dark", ".session-detail") {
     --color-primary: #{lighten($coscup-green, 8)};
   }
