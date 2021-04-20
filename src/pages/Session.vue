@@ -53,7 +53,7 @@ export default defineComponent({
   setup () {
     const route = useRoute()
     const router = useRouter()
-    const { daysSchedule, currentDayIndex, getSessionById, isLoaded } = useSession()
+    const { load, daysSchedule, currentDayIndex, getSessionById, isLoaded } = useSession()
     const { openPopUp, removeAll } = usePopUp()
     const { xsOnly } = useBreakpoints()
     const { locale } = useI18n()
@@ -113,8 +113,12 @@ export default defineComponent({
     return {
       xsOnly,
       currentDayIndex,
-      daysSchedule
+      daysSchedule,
+      load
     }
+  },
+  async serverPrefetch () {
+    await this.load()
   }
   // setup () {
   //   const router = useRouter()

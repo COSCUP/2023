@@ -11,6 +11,15 @@ import type { MetaOptions } from '../metas'
 import type { PopUpData } from '../pop-up'
 import type { Session, ScheduleElement, RawData, SessionType, Room, Speaker, Tag, SessionsMap, ScheduleList, YearOfDate, MonthOfDate, DateOfDate, SchedulDay, HourOfDate, MinuteOfDate, ScheduleTable, RoomId, ScheduleTableBodyCell, ScheduleTableBlankCell, ScheduleTableSpanCell, RoomsMap } from './types'
 
+export const TIMEZONE_OFFSET: number = -480
+export const ROOM_ORDER: RoomId[] = [
+  'RB105',
+  'AU',
+  'TR209', 'TR211', 'TR212', 'TR213', 'TR214',
+  'TR309', 'TR311', 'TR313',
+  'TR409-2', 'TR410', 'TR411', 'TR412-1', 'TR412-2', 'TR413-1', 'TR413-2'
+]
+
 function mapSessionsWithIndex (sessions: Session[]):SessionsMap {
   return Object.fromEntries(sessions.map(s => [s.id, s]))
 }

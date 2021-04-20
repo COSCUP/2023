@@ -4,10 +4,10 @@
 // https://opensource.org/licenses/MIT
 import { computed, InjectionKey, Ref, ref } from 'vue'
 import { createModuleHook, createModuleSetup, useSetupCtx } from '../utils'
-import { generateScheduleList, generateScheduleTable, getScheduleDays, transformRawData } from './logic'
+import { TIMEZONE_OFFSET, ROOM_ORDER, generateScheduleList, generateScheduleTable, getScheduleDays, transformRawData } from './logic'
 import { ScheduleElement, SessionsMap, RoomId, ScheduleTable, ScheduleList, Session, SessionId, RoomsMap, Room, RoomsStatusMap, RoomStatus } from './types'
 import { fixedTimeZoneDate } from './utils'
-import rawData from '@/assets/json/session.json'
+import { useProgress } from '../progress'
 
 interface UseSession {
   isLoaded: Ref<boolean>;
@@ -21,27 +21,35 @@ interface UseSession {
   getSessionById: (id: SessionId) => Session;
   getRoomById: (id: RoomId) => Room;
   getRoomStatusById: (id: RoomId) => RoomStatus;
+  load: () => Promise<void>;
 }
 
 const PROVIDE_KEY: InjectionKey<UseSession> = Symbol('session')
-export const TIMEZONE_OFFSET: number = -480
-export const ROOM_ORDER: RoomId[] = [
-  'RB105',
-  'AU',
-  'TR209', 'TR211', 'TR212', 'TR213', 'TR214',
-  'TR309', 'TR311', 'TR313',
-  'TR409-2', 'TR410', 'TR411', 'TR412-1', 'TR412-2', 'TR413-1', 'TR413-2'
-]
-const { scheduleElements: _scheduleElements, sessionsMap: _sessionsMap, roomsMap: _roomsMap } =
-          transformRawData(rawData, TIMEZONE_OFFSET, ROOM_ORDER)
 
 const _useSession = (): UseSession => {
   const { isClient } = useSetupCtx()
+  const { start, done } = useProgress()
 
-  const scheduleElements = ref<ScheduleElement[]>(_scheduleElements)
-  const sessionsMap = ref<SessionsMap>(_sessionsMap)
-  const roomsMap = ref<RoomsMap>(_roomsMap)
-  const isLoaded = ref<boolean>(true)
+  const scheduleElements = ref<ScheduleElement[] | null>(null)
+  const sessionsMap = ref<SessionsMap | null>(null)
+  const roomsMap = ref<RoomsMap | null>(null)
+  const isLoaded = ref<boolean>(false)
+
+  const load = async () => {
+    if (isLoaded.value) return
+    isLoaded.value = true
+    start()
+    const { default: _rawData } = await import('@/assets/json/session.json')
+    const { scheduleElements: _scheduleElements, sessionsMap: _sessionsMap, roomsMap: _roomsMap } =
+      transformRawData(_rawData, TIMEZONE_OFFSET, ROOM_ORDER)
+    scheduleElements.value = _scheduleElements
+    sessionsMap.value = _sessionsMap
+    roomsMap.value = _roomsMap
+    done()
+  }
+
+  isClient && load()
+
   const currentDayIndex = ref(0)
   const daysSchedule = computed(() => {
     if (scheduleElements.value === null) return []
@@ -67,12 +75,13 @@ const _useSession = (): UseSession => {
   }
 
   const currentSessions = ref<Session[]>([])
-  const roomsIsFull = ref<Record<RoomId, boolean>>(Object.fromEntries(Object.keys(_roomsMap).map(id => [id, false])))
-  const roomsStatusMap = computed<RoomsStatusMap>(() => {
+  const roomsIsFull = ref<Record<RoomId, boolean>>({})
+  const roomsStatusMap = computed<RoomsStatusMap | null>(() => {
+    if (roomsMap.value === null) return null
     return Object.fromEntries(
       Object.keys(roomsMap.value)
         .map(roomId => {
-          const isFull = roomsIsFull.value![roomId]
+          const isFull = roomsIsFull.value[roomId] ?? false
           const currentSession = currentSessions.value.find(s => s.room.id === roomId)?.id ?? null
           return [roomId, { isFull, currentSession } as RoomStatus]
         })
@@ -102,7 +111,8 @@ const _useSession = (): UseSession => {
     roomsStatusMap,
     getSessionById,
     getRoomById,
-    getRoomStatusById
+    getRoomStatusById,
+    load
   }
 }
 

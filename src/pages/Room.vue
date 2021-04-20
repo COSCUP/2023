@@ -72,7 +72,7 @@ export default defineComponent({
   name: 'Room',
   setup () {
     const { t, locale } = useI18n()
-    const { roomsStatusMap, getRoomById, getSessionById } = useSession()
+    const { load, roomsStatusMap, getRoomById, getSessionById } = useSession()
     const timePeriodOf = (sessionId: SessionId) => {
       const { start, end } = getSessionById(sessionId)
       return `${formatTimeString(start, '：')} ~ ${formatTimeString(end, '：')}`
@@ -84,8 +84,12 @@ export default defineComponent({
       timePeriodOf,
       roomsStatusMap,
       getRoomById,
-      getSessionById
+      getSessionById,
+      load
     }
+  },
+  async serverPrefetch () {
+    await this.load()
   }
   // setup () {
   //   const { locale, tm } = useI18n()

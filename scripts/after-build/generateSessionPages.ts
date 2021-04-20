@@ -5,8 +5,8 @@
 import { readdirSync, readFileSync } from 'fs'
 import { writeFile, rm, mkdir } from 'fs/promises'
 import { join } from 'path'
-import { generateSessionMetaOptions, generateSessionPopupContentHtml, transformRawData } from '@/modules/session/logic'
-import { TIMEZONE_OFFSET, ROOM_ORDER } from '@/modules/session'
+import { generateSessionMetaOptions, generateSessionPopupContentHtml, transformRawData, TIMEZONE_OFFSET, ROOM_ORDER } from '@/modules/session/logic'
+
 import { Locale } from '@/modules/i18n'
 import sessionJSON from '@/assets/json/session.json'
 
