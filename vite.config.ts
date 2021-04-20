@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
-import { readdirSync, readFileSync } from 'fs'
-import path from 'path'
+import { readdirSync } from 'fs'
+import { join } from 'path'
 import Vue from '@vitejs/plugin-vue'
 import Components from 'vite-plugin-components'
 import ViteIcons, { ViteIconsResolver } from 'vite-plugin-icons'
@@ -22,18 +22,16 @@ const renderRoutes = (() => {
   return Array.from(readdirSync('./locales/'))
     .flatMap((locale) => {
       return routes
-        .map((route) => path.join('/', locale, route))
-        .concat(path.join('/', locale, '/session/template'))
+        .map((route) => join('/', locale, route))
+        .concat(join('/', locale, '/session/template'))
     })
 })()
-
-const GA_TEMPLATE = readFileSync(path.join(__dirname, './template/ga.html')).toString()
 
 export default defineConfig({
   base: parsed?.VITE_BASE_URL,
   resolve: {
     alias: {
-      '@': `${path.resolve(__dirname, 'src')}`
+      '@': `${join(__dirname, 'src')}`
     }
   },
   plugins: [
@@ -53,7 +51,7 @@ export default defineConfig({
       return renderRoutes
     },
     onPageRendered: (r, html) => {
-      return html.replace('{{{ %GA_TEMPLATE% }}}', GA_TEMPLATE)
+      return html
     }
   }
 })
