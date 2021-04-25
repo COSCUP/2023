@@ -18,8 +18,10 @@
           </keep-alive>
         </transition>
       </router-view>
-      <SponsorFooter></SponsorFooter>
-      <Footer></Footer>
+      <template v-if="!isLandingPage">
+        <SponsorFooter></SponsorFooter>
+        <Footer></Footer>
+      </template>
     </MainContainer>
     <FullPageProgress></FullPageProgress>
     <PopUp></PopUp>
@@ -27,7 +29,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, watch, ref } from 'vue'
+import { defineComponent, watch, ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { setupModules } from '@/modules'
 import MainContainer from '@/components/App/MainContainer.vue'
@@ -54,6 +56,7 @@ export default defineComponent({
     const route = useRoute()
 
     const isInApp = ref(false)
+    const isLandingPage = computed(() => route.name === 'Landing')
 
     watch(() => route.query, ({ mode }) => {
       isInApp.value || (isInApp.value = mode === 'app')
@@ -62,6 +65,7 @@ export default defineComponent({
     })
 
     return {
+      isLandingPage,
       isInApp
     }
   }
