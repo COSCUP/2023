@@ -2,75 +2,98 @@ import { setupI18nRoutes } from '@/modules/i18n'
 import { RouterOptions } from 'vite-ssg'
 import { RouteRecordRaw, RouterScrollBehavior } from 'vue-router'
 
-const routes: RouteRecordRaw[] = [
-  {
-    path: '/',
-    name: 'Home',
-    component: () => import('@/pages/Home.vue'),
-    meta: {
-      order: 0
-    }
-  },
-  {
-    path: '/session',
-    name: 'Session',
-    component: () => import('@/pages/Session.vue'),
-    children: [
+const routes: RouteRecordRaw[] = import.meta.env.VITE_LANDING_ONLY === 'yes'
+  ? [
       {
-        path: ':sessionId',
-        name: 'SessionDetail',
-        component: () => import('@/pages/Session.vue')
+        path: '/',
+        name: 'Home',
+        redirect: {
+          name: 'Landing'
+        },
+        meta: {
+          order: 0
+        }
+      },
+      {
+        path: '/landing',
+        name: 'Landing',
+        component: () => import('@/pages/Landing.vue')
       }
-    ],
-    meta: {
-      order: 1
-    }
-  },
-  {
-    path: '/room',
-    name: 'Room',
-    component: () => import('@/pages/Room.vue'),
-    meta: {
-      order: 2
-    }
-  },
-  {
-    path: '/map',
-    name: 'Map',
-    component: () => import('@/pages/Map.vue'),
-    meta: {
-      order: 3
-    }
-  },
-  {
-    path: '/venue',
-    name: 'Venue',
-    component: () => import('@/pages/Venue.vue'),
-    meta: {
-      order: 4
-    }
-  },
-  {
-    path: '/sponsor',
-    name: 'Sponsor',
-    component: () => import('@/pages/Sponsor.vue'),
-    meta: {
-      order: 5
-    }
-  },
-  {
-    path: '/staff',
-    name: 'Staff',
-    component: () => import('@/pages/Staff.vue'),
-    meta: {
-      order: 6
-    }
-  }, {
-    name: 'NotFound',
-    path: '/:catchAll(.*)',
-    redirect: '/'
-  }
-]
+    ]
+  : [
+      {
+        path: '/',
+        name: 'Home',
+        component: () => import('@/pages/Home.vue'),
+        meta: {
+          order: 0
+        }
+      },
+      {
+        path: '/landing',
+        name: 'Landing',
+        component: () => import('@/pages/Landing.vue')
+      },
+      {
+        path: '/session',
+        name: 'Session',
+        component: () => import('@/pages/Session.vue'),
+        children: [
+          {
+            path: ':sessionId',
+            name: 'SessionDetail',
+            component: () => import('@/pages/Session.vue')
+          }
+        ],
+        meta: {
+          order: 1
+        }
+      },
+      {
+        path: '/room',
+        name: 'Room',
+        component: () => import('@/pages/Room.vue'),
+        meta: {
+          order: 2
+        }
+      },
+      {
+        path: '/map',
+        name: 'Map',
+        component: () => import('@/pages/Map.vue'),
+        meta: {
+          order: 3
+        }
+      },
+      {
+        path: '/venue',
+        name: 'Venue',
+        component: () => import('@/pages/Venue.vue'),
+        meta: {
+          order: 4
+        }
+      },
+      {
+        path: '/sponsor',
+        name: 'Sponsor',
+        component: () => import('@/pages/Sponsor.vue'),
+        meta: {
+          order: 5
+        }
+      },
+      {
+        path: '/staff',
+        name: 'Staff',
+        component: () => import('@/pages/Staff.vue'),
+        meta: {
+          order: 6
+        }
+      }, {
+        name: 'NotFound',
+        path: '/:catchAll(.*)',
+        redirect: '/'
+      }
+    ]
 
 export const pageRouteNameList = routes.filter(r => !isNaN(Number(r.meta?.order)))
   .sort((a, b) => Number(a.meta?.order) - Number(b.meta?.order))

@@ -10,7 +10,7 @@
     <div class="banner-container">
       <div class="logo-wrapper">
         <div class="logo-container">
-          <h2>COSCUP 2020</h2>
+          <h2>COSCUP 2021</h2>
           <div class="logo-content">
             <img src="@/assets/images/banner-logo.svg" alt="COSCUP" />
             <div>

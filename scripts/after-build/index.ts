@@ -5,3 +5,4 @@
 import generateSessionPages from './generateSessionPages'
 
 generateSessionPages()
+  .catch(() => {})

@@ -67,7 +67,7 @@ export default defineComponent({
   name: 'Footer',
   setup () {
     const { t } = useI18n()
-    const numOfPast = 2020 - 2006
+    const numOfPast = 2021 - 2006
 
     return {
       t,

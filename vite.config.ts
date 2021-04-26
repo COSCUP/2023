@@ -8,24 +8,38 @@ import dotenv from 'dotenv'
 
 const { parsed } = dotenv.config()
 
-const renderRoutes = (() => {
-  const routes = [
-    '/',
-    '/session',
-    '/room',
-    '/venue',
-    '/map',
-    '/sponsor',
-    '/staff'
-  ].flatMap(r => [r, `${r}/`])
+const renderRoutes = parsed?.VITE_LANDING_ONLY === 'yes'
+  ? (() => {
+      const routes = [
+        '/',
+        '/landing'
+      ].flatMap(r => [r, `${r}/`])
+      return Array.from(readdirSync('./locales/'))
+        .flatMap((locale) => {
+          return routes
+            .map((route) => join('/', locale, route))
+        })
+    })()
 
-  return Array.from(readdirSync('./locales/'))
-    .flatMap((locale) => {
-      return routes
-        .map((route) => join('/', locale, route))
-        .concat(join('/', locale, '/session/template'))
-    })
-})()
+  : (() => {
+      const routes = [
+        '/',
+        '/landing',
+        '/session',
+        '/room',
+        '/venue',
+        '/map',
+        '/sponsor',
+        '/staff'
+      ].flatMap(r => [r, `${r}/`])
+
+      return Array.from(readdirSync('./locales/'))
+        .flatMap((locale) => {
+          return routes
+            .map((route) => join('/', locale, route))
+            .concat(join('/', locale, '/session/template'))
+        })
+    })()
 
 export default defineConfig({
   base: parsed?.VITE_BASE_URL,
