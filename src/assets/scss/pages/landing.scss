@@ -32,7 +32,7 @@
       )};
     --color-section-background: #{lighten($coscup-dark-blue, 8)};
     --color-link: #{lighten($coscup-dark-blue, 20)};
-    --color-link-hover: #{lighten($coscup-dark-blue, 35)};
+    --color-link-hover: #{lighten($coscup-dark-blue, 50)};
   }
 }
 
@@ -134,6 +134,7 @@
   .section-block {
     position: relative;
     width: 90%;
+    border-radius: 10px;
     max-width: 1024px;
     margin: 5rem auto;
     padding: 3rem;
