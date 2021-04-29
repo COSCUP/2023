@@ -76,7 +76,7 @@ export default defineComponent({
         {
           name: 'blogger',
           icon: IconBlogger,
-          link: 'http://blog.coscup.org/'
+          link: 'https://blog.coscup.org/'
         },
         {
           name: 'facebook',
