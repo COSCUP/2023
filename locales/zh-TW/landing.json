@@ -6,8 +6,10 @@
     "location": "國立臺灣科技大學"
   },
   "links": {
+    "cfp": "稿件徵求",
     "volunteer": "工作人員招募",
-    "sponsor": "贊助商募集"
+    "sponsor": "贊助商募集",
+    "community": "申請社群攤位"
   },
   "about": {
     "title": "關於 COSCUP",

@@ -20,11 +20,17 @@
       </div>
     </section>
     <section class="links">
+      <a href="https://blog.coscup.org/2021/04/coscup-2021-cfp.html" target="_blank" rel="noopener noreferrer">
+        {{ t('landing.links.cfp') }}
+      </a>
       <a href="https://volunteer.coscup.org/" target="_blank" rel="noopener noreferrer">
         {{ t('landing.links.volunteer') }}
       </a>
       <a href="mailto:sponsorship@coscup.org" target="_blank" rel="noopener noreferrer">
         {{ t('landing.links.sponsor') }}
+      </a>
+      <a href="https://blog.coscup.org/2021/03/coscup-2021-call-for-participation-now.html" target="_blank" rel="noopener noreferrer">
+        {{ t('landing.links.community') }}
       </a>
     </section>
     <section class="media-links">

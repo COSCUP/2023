@@ -44,7 +44,7 @@
   .info-block {
     max-width: 900px;
     margin: 0 auto;
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
 
     .logo-container {
       position: relative;
@@ -75,6 +75,7 @@
 
       .row {
         display: flex;
+        justify-content: center;
         align-items: center;
         margin: 1rem;
 
@@ -87,10 +88,11 @@
 
   .links {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
 
     a {
-      margin: 0 1rem;
+      margin: 0.5rem 1rem;
       padding: 0.75rem 1.5rem;
       border-radius: 10px;
       font-size: 1.25rem;
@@ -219,6 +221,12 @@
         flex-direction: column;
         margin: auto;
       }
+    }
+
+    .links {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
     }
 
     .media-links {

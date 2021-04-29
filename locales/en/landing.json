@@ -6,8 +6,10 @@
     "location": "NTUST"
   },
   "links": {
+    "cfp": "Call for Proposal",
     "volunteer": "Volunteer Recruitment",
-    "sponsor": "Call for Sponsor"
+    "sponsor": "Call for Sponsor",
+    "community": "Apply for Community Booth"
   },
   "about": {
     "title": "About COSCUP",
