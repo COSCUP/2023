@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite'
-import { readdirSync } from 'fs'
+import { readdirSync, readFileSync } from 'fs'
 import { join } from 'path'
 import Vue from '@vitejs/plugin-vue'
 import Components from 'vite-plugin-components'
@@ -41,6 +41,8 @@ const renderRoutes = parsed?.VITE_LANDING_ONLY === 'yes'
         })
     })()
 
+const gaTemplate = readFileSync(join(__dirname, './templates/ga-template.html')).toString()
+
 export default defineConfig({
   base: parsed?.VITE_BASE_URL,
   resolve: {
@@ -61,11 +63,13 @@ export default defineConfig({
   ],
   ssgOptions: {
     script: 'async',
+    formatting: 'minify',
     includedRoutes () {
       return renderRoutes
     },
     onPageRendered: (r, html) => {
       return html
+        .replace('<template>%GA_TEMPLATE%</template>', gaTemplate)
     }
   }
 })
