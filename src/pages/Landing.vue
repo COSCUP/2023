@@ -2,7 +2,7 @@
   <main id="landing" class="page-container">
     <section class="info-block">
       <div class="logo-container">
-        <img src="@/assets/images/logo-512-white.png" alt="COSCUP Logo" />
+        <img src="@/assets/images/og.png" alt="COSCUP Logo" />
       </div>
       <div class="info">
         <div class="row">

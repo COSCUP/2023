@@ -8,25 +8,23 @@
 @mixin landing-theme-colors {
   @include theme-colors-of("all", "#landing") {
     --color-logo-wrapper-background: #{$background-dark};
-    --color-logo: #{$coscup-green};
+    --color-logo: #{$coscup-blue};
     --color-markdown-link: var(--color-link);
     --color-markdown-link-hover: var(--color-link-hover);
   }
 
   @include theme-colors-of("light", "#landing") {
-    --color-section-background: #{$coscup-green};
-    --color-logo-wrapper-background:
-      #{adjust-color(
+    --color-section-background: #{$coscup-blue};
+    --color-logo-wrapper-background: #{adjust-color(
         $background-light,
         $alpha: -0.1
       )};
-    --color-link: #{$coscup-green};
-    --color-link-hover: #{lighten($coscup-green, 8)};
+    --color-link: #{$coscup-blue};
+    --color-link-hover: #{lighten($coscup-blue, 8)};
   }
 
   @include theme-colors-of("dark", "#landing") {
-    --color-logo-wrapper-background:
-      #{adjust-color(
+    --color-logo-wrapper-background: #{adjust-color(
         $background-dark,
         $alpha: -0.1
       )};
@@ -48,23 +46,14 @@
 
     .logo-container {
       position: relative;
-      width: 50%;
-      padding-top: 25%;
+      width: 100%;
       margin: auto;
       margin-bottom: 2rem;
 
       img {
-        position: absolute;
-        top: 50%;
-        left: 50%;
         display: block;
         width: 100%;
         height: auto;
-        transform: translate(-50%, -50%);
-
-        @at-root .light & {
-          filter: brightness(0.5) sepia(1) saturate(10000%) hue-rotate(115deg) saturate(0.46) brightness(1.59);
-        }
       }
     }
 
