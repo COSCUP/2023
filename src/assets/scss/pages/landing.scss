@@ -15,7 +15,8 @@
 
   @include theme-colors-of("light", "#landing") {
     --color-section-background: #{$coscup-blue};
-    --color-logo-wrapper-background: #{adjust-color(
+    --color-logo-wrapper-background:
+      #{adjust-color(
         $background-light,
         $alpha: -0.1
       )};
@@ -24,7 +25,8 @@
   }
 
   @include theme-colors-of("dark", "#landing") {
-    --color-logo-wrapper-background: #{adjust-color(
+    --color-logo-wrapper-background:
+      #{adjust-color(
         $background-dark,
         $alpha: -0.1
       )};
@@ -200,8 +202,6 @@
       flex-wrap: wrap;
 
       .logo-container {
-        width: 80%;
-        padding-top: 40%;
         margin: auto;
       }
 
