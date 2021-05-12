@@ -20,7 +20,7 @@
       </div>
     </section>
     <section class="links">
-      <a href="https://blog.coscup.org/2021/04/coscup-2021-cfp.html" target="_blank" rel="noopener noreferrer">
+      <a href="https://blog.coscup.org/2021/05/coscup-x-rubyconftw-2021-cfp-deadline.html" target="_blank" rel="noopener noreferrer">
         {{ t('landing.links.cfp') }}
       </a>
       <a href="https://volunteer.coscup.org/" target="_blank" rel="noopener noreferrer">
