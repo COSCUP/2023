@@ -11,6 +11,9 @@ jobs:
   deploy:
     runs-on: ${{ matrix.os }}
 
+    env:
+      SPREADSHEET_API_KEY: ${{ secrets.SPREADSHEET_API_KEY }}
+
     strategy:
       matrix:
         os: [ubuntu-latest]
