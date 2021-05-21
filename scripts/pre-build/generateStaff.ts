@@ -6,6 +6,6 @@ import axios from 'axios'
 import { saveJSON } from './utils'
 
 export default async function run () {
-  const { data } = await axios.get('https://coscup.org/2020/json/staff.json')
+  const { data: { data } } = await axios.get('https://volunteer.coscup.org/api/members?pid=2021')
   saveJSON('staff', data)
 }

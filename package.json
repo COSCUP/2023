@@ -44,6 +44,7 @@
   },
   "devDependencies": {
     "@iconify/json": "^1.1.333",
+    "@types/google-spreadsheet": "^3.1.1",
     "@types/lodash": "^4.14.157",
     "@types/markdown-it": "^12.0.1",
     "@types/node": "^14.0.13",
@@ -64,6 +65,7 @@
     "eslint-plugin-promise": "^4.3.1",
     "eslint-plugin-vue": "^7.9.0",
     "find": "^0.3.0",
+    "google-spreadsheet": "^3.1.15",
     "koa": "^2.13.0",
     "koa-static-server": "^1.5.2",
     "npm-run-all": "^4.1.5",
