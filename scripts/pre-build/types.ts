@@ -1,7 +1,8 @@
 type AnnouncementRowKeys = 'uuid' | 'meta:title:en' | 'meta:title:zh-TW' | 'meta:description:en' | 'meta:description:zh-TW' | 'content:en' | 'content:zh-TW'
 export type AnnouncementRow = Record<AnnouncementRowKeys, string>
 
-export type SponsorLevel = 'titanium' | 'diamond' | 'co-organizer' | 'gold' | 'bronze' | 'silver' | 'special-thanks' | 'friend'
+export type SponsorLevelTuple = ['titanium', 'diamond', 'co-organizer', 'gold', 'bronze', 'silver', 'special-thanks', 'friend']
+export type SponsorLevel = SponsorLevelTuple[number]
 type SponsorLevelRowKeys = 'level' | 'basicWeight'
 export type SponsorLevelRow = {
   [K in SponsorLevelRowKeys]: K extends 'level' ? SponsorLevel : string;
@@ -16,7 +17,7 @@ export type SponsorRow = {
       : string;
 }
 
-type SponsorNewsRowKeys = 'sponsor' | 'description' | 'link' | 'image' | 'specialWeight' | 'canPublish'
+type SponsorNewsRowKeys = 'sponsor' | 'description' | 'link' | 'image:vertical' | 'image:horizontal' | 'specialWeight' | 'canPublish'
 export type SponsorNewsRow = {
   [K in SponsorNewsRowKeys]: K extends 'canPublish'
     ? 'Y' | 'N'

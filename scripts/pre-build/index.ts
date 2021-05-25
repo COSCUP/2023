@@ -16,7 +16,7 @@ import generateStaff from './generateStaff'
     const doc = await getLoadedSpreadsheetDocument()
     await Promise.all([
       generateAnnouncement(doc),
-      generateSponsor(doc),
+      generateSponsor(doc, true),
       generateSession(),
       generateStaff()
     ])
