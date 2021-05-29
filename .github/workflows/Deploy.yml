@@ -13,6 +13,8 @@ jobs:
 
     env:
       SPREADSHEET_API_KEY: ${{ secrets.SPREADSHEET_API_KEY }}
+      PRETALX_TOKEN: ${{secrets.PRETALX_TOKEN}}
+
 
     strategy:
       matrix:

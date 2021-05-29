@@ -21,6 +21,7 @@
     "@types/socket.io-client": "^1.4.33",
     "@vueuse/core": "^4.8.1",
     "axios": "^0.21.1",
+    "js-md5": "^0.7.3",
     "markdown-it": "^12.0.4",
     "markdown-it-abbr": "^1.0.4",
     "markdown-it-anchor": "^7.0.2",
