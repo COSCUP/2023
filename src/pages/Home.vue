@@ -8,16 +8,7 @@
 <template>
   <main id="home" class="page-container">
     <div class="banner-container">
-      <div class="logo-wrapper">
         <div class="logo-container">
-          <h2>COSCUP 2021</h2>
-          <div class="logo-content">
-            <img src="@/assets/images/banner-logo.svg" alt="COSCUP" />
-            <div>
-              <p>Conference for Open Source Coders, Users & Promoters</p>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
     <div class="info-container">
