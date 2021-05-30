@@ -2,7 +2,9 @@
   <main id="landing" class="page-container">
     <section class="info-block">
       <div class="logo-container">
-        <img src="@/assets/images/og.png" alt="COSCUP Logo" />
+        <img v-if="colorSchema === 'dark'" src="@/assets/images/og.png" alt="COSCUP Logo" />
+        <img v-else-if="colorSchema === 'light'" src="@/assets/images/banner.svg" alt="COSCUP Logo" />
+        <img v-else src="@/assets/images/og.png" alt="COSCUP Logo" />
       </div>
       <div class="info">
         <div class="row">
@@ -64,6 +66,7 @@
 </template>
 
 <script lang="ts">
+import { useTheme } from '@/modules/theme'
 import { defineComponent, ref, watch } from 'vue'
 import markdown from '@/utils/markdown'
 import IconBlogger from 'virtual:vite-icons/fa-brands/blogger'
@@ -133,6 +136,7 @@ export default defineComponent({
   setup () {
     const { t, locale } = useI18n()
     const section = ref<Section>({ name: 'about', title: '', content: '' })
+    const { colorSchema } = useTheme()
 
     watch(locale, async () => {
       section.value =
@@ -149,7 +153,8 @@ export default defineComponent({
       t,
       section,
       communityMedia,
-      numOfPast
+      numOfPast,
+      colorSchema
     }
   }
 })
