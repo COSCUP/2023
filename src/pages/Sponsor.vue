@@ -69,16 +69,16 @@ import { useBreakpoints } from '@/modules/breakpoints'
 import { Locale } from '@/modules/i18n'
 import { useI18n } from 'vue-i18n'
 import { isClient } from '@vueuse/core'
-import { generateAssetsMap } from '@/utils/common'
+// import { generateAssetsMap } from '@/utils/common'
 
 type ArrayElement<ArrayType extends readonly unknown[]> = ArrayType[number];
 type SopnsorData = ArrayElement<typeof sponsorDatas>
 type SponsorGroups = Record<string, SopnsorData[]>
 
-const imagesMap = generateAssetsMap(
-  import.meta.globEager('../assets/images/sponsors/*.png'),
-  '../assets/images/sponsors/*.png'
-)
+// const imagesMap = generateAssetsMap(
+//   import.meta.globEager('../assets/images/sponsors/*.png'),
+//   '../assets/images/sponsors/*.png'
+// )
 
 export default defineComponent({
   name: 'Sponsor',
@@ -93,14 +93,15 @@ export default defineComponent({
       sponsorGroups.value = Object.fromEntries(
         await Promise.all(Object.entries(groupBy<SopnsorData>(sponsorDatas, 'level'))
           .sort((entryA, entryB) => {
-            const sponsorSequence = ['titanium', 'diamond', 'gold', 'silver', 'bronze', 'co-organizer', 'special-thanks']
+            const sponsorSequence = ['titanium', 'diamond', 'gold', 'silver', 'bronze', 'co-organizer', 'special-thanks', 'friend']
             return sponsorSequence.indexOf(entryA[0]) - sponsorSequence.indexOf(entryB[0])
           })
           .map(async ([group, rawSponsors]) => {
             const sponsors = await Promise.all(rawSponsors.map(async (rawSponsor) => {
               const sponsor: SopnsorData = {
-                ...rawSponsor,
-                image: imagesMap[rawSponsor.image]
+                // ...rawSponsor,
+                // image: imagesMap[rawSponsor.image]
+                ...rawSponsor
               }
 
               sponsor.intro = {

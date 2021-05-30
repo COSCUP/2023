@@ -11,6 +11,11 @@ jobs:
   deploy:
     runs-on: ${{ matrix.os }}
 
+    env:
+      SPREADSHEET_API_KEY: ${{ secrets.SPREADSHEET_API_KEY }}
+      PRETALX_TOKEN: ${{secrets.PRETALX_TOKEN}}
+
+
     strategy:
       matrix:
         os: [ubuntu-latest]

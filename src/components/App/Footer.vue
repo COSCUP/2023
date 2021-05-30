@@ -62,6 +62,7 @@ import IconTwitter from 'virtual:vite-icons/fa-brands/twitter'
 import IconYoutube from 'virtual:vite-icons/fa-brands/youtube'
 import IconTelegram from 'virtual:vite-icons/fa-brands/telegram-plane'
 import IconBullhorn from 'virtual:vite-icons/fa-solid/bullhorn'
+import IconMedium from 'virtual:vite-icons/fa-brands/medium'
 
 export default defineComponent({
   name: 'Footer',
@@ -112,6 +113,11 @@ export default defineComponent({
           name: 'channel',
           icon: IconBullhorn,
           link: 'https://t.me/coscup'
+        },
+        {
+          name: 'medium',
+          icon: IconMedium,
+          link: 'https://coscup.medium.com'
         }
       ]
     }
