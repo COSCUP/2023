@@ -37,7 +37,6 @@ const _useSession = (): UseSession => {
 
   const load = async () => {
     if (isLoaded.value) return
-    isLoaded.value = true
     start()
     const { default: _rawData } = await import('@/assets/json/session.json')
     const { scheduleElements: _scheduleElements, sessionsMap: _sessionsMap, roomsMap: _roomsMap } =
@@ -45,6 +44,7 @@ const _useSession = (): UseSession => {
     scheduleElements.value = _scheduleElements
     sessionsMap.value = _sessionsMap
     roomsMap.value = _roomsMap
+    isLoaded.value = true
     done()
   }
 

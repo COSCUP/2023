@@ -2,21 +2,27 @@
 //
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
+
+import ora from 'ora'
+import { getLoadedSpreadsheetDocument } from './utils'
 import generateAnnouncement from './generateAnnouncement'
-import generateSession from './generateSession'
 import generateSponsor from './generateSponsor'
-import generateSponsorNews from './generateSponsorNews'
+import generateSession from './generateSession'
 import generateStaff from './generateStaff'
 
 (async () => {
+  const spinner = ora('Strart pre-building...').start()
   try {
+    const doc = await getLoadedSpreadsheetDocument()
     await Promise.all([
-      generateAnnouncement(),
+      generateAnnouncement(doc),
+      generateSponsor(doc, true),
       generateSession(),
-      generateSponsor(),
-      generateSponsorNews(),
-      generateStaff()])
+      generateStaff()
+    ])
+    spinner.succeed('Done!')
   } catch (e) {
-    process.exit(1)
+    console.log(e)
+    spinner.fail('Failed!')
   }
 })()
