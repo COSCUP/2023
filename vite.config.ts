@@ -12,12 +12,14 @@ const renderRoutes = parsed?.VITE_LANDING_ONLY === 'yes'
   ? (() => {
       const routes = [
         '/',
-        '/landing'
+        '/landing',
+        '/session'
       ].flatMap(r => [r, `${r}/`])
       return Array.from(readdirSync('./locales/'))
         .flatMap((locale) => {
           return routes
             .map((route) => join('/', locale, route))
+            .concat(join('/', locale, '/session/template'))
         })
     })()
 
