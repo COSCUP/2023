@@ -19,7 +19,6 @@
         </transition>
       </router-view>
       <template v-if="!isLandingPage">
-        <SponsorFooter></SponsorFooter>
         <Footer></Footer>
       </template>
     </MainContainer>
