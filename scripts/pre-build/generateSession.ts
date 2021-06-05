@@ -3,7 +3,7 @@ import axios from 'axios'
 import md5 from 'js-md5'
 import { saveJSON } from './utils'
 require('dotenv').config()
-const pretalxOptions = { headers: { Authorization: `Token ${process.env.PRETALX_TOKEN}`} }
+const pretalxOptions = { headers: { Authorization: `Token ${process.env.PRETALX_TOKEN}` } }
 function genResult (talks, rooms, speakers) {
   const resRooms = rooms.results.map(r => {
     return {
@@ -22,12 +22,12 @@ function genResult (talks, rooms, speakers) {
       id: s.code,
       avatar: s.avatar || `https://www.gravatar.com/avatar/${md5(s.email)}?s=1024&d=https://coscup.org/2020/img/speaker/avatar/default.png&r=g`,
       zh: {
-        name: s.name,
-        bio: s.biography || ''
+        name: (s.answers.find((a :any) => a.question.id === 863) || {}).answer || s.name,
+        bio: (s.answers.find((a :any) => a.question.id === 866) || {}).answer || s.biography || ''
       },
       en: {
-        name: (s.answers.find((a :any) => a.question.id === 468) || {}).answer || s.name,
-        bio: (s.answers.find((a :any) => a.question.id === 469) || {}).answer || s.biography || ''
+        name: (s.answers.find((a :any) => a.question.id === 861) || {}).answer || s.name,
+        bio: (s.answers.find((a :any) => a.question.id === 862) || {}).answer || s.biography || ''
       }
     }
   })
@@ -85,12 +85,11 @@ function genResult (talks, rooms, speakers) {
       language: s.content_locale === 'zh-tw' ? '漢語' : 'English',
       zh: {
         title: s.title,
-        description: s.abstract + '\n\n---\n\n' + s.description
+        description: s.answers[1].answer
       },
       en: {
         title: (s.answers.find((a :any) => a.question.id === 465) || {}).answer || s.title,
-        description: ((s.answers.find((a :any) => a.question.id === 466) || {}).answer || s.abstract) +
-          '\n\n---\n\n' + ((s.answers.find((a :any) => a.question.id === 467) || {}).answer || s.description)
+        description: s.answers[2].answer
       },
       speakers: s.speakers.map(ss => ss.code),
       tags: s.answers.find(a => a.question.id === 413) !== undefined ? [s.answers.find(a => a.question.id === 413).options[0].answer.en] : [],
@@ -99,32 +98,28 @@ function genResult (talks, rooms, speakers) {
       record: s.answers.find(a => a.question.id === 567) !== undefined ? s.answers.find(a => a.question.id === 567).answer : null
     }
   })
-  let data = JSON.stringify({
+
+  return {
     sessions: resSessions,
     speakers: resSpeakers,
-    // eslint-disable-next-line @typescript-eslint/camelcase
     session_types: resSessionTypes,
     rooms: resRooms,
     tags: resTags
-  })
-  console.log(data)
-  saveJSON('session', {
-    sessions: resSessions,
-    speakers: resSpeakers,
-    // eslint-disable-next-line @typescript-eslint/camelcase
-    session_types: resSessionTypes,
-    rooms: resRooms,
-    tags: resTags
-  })
+  }
 }
 
 export default async function run () {
-  Promise.all([
-    axios.get('https://pretalx.com/api/events/coscup-2021/talks/?limit=1000', pretalxOptions),
-    axios.get('https://pretalx.com/api/events/coscup-2021/rooms/?limit=1000', pretalxOptions),
-    axios.get('https://pretalx.com/api/events/coscup-2021/speakers/?limit=1000', pretalxOptions)
-  ])
-    .then(results => {
-      genResult(results[0].data, results[1].data, results[2].data)
-    })
+  let data = {}
+  try {
+    const results = await Promise.all([
+      axios.get('https://pretalx.com/api/events/coscup-2021/talks/?limit=1000', pretalxOptions),
+      axios.get('https://pretalx.com/api/events/coscup-2021/rooms/?limit=1000', pretalxOptions),
+      axios.get('https://pretalx.com/api/events/coscup-2021/speakers/?limit=1000', pretalxOptions)
+    ])
+    data = genResult(results[0].data, results[1].data, results[2].data)
+  } catch (e) {
+    const { data: d } = await axios.get('https://coscup.org/2021/json/session.json')
+    data = d
+  }
+  saveJSON('session', data)
 }
