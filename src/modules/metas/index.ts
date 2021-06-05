@@ -4,7 +4,7 @@ import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { camelCase } from 'lodash'
 import { createModuleHook, createModuleSetup } from '../utils'
-import ogImageSrc from '@/assets/images/og.png'
+import ogImageSrc from '@/assets/images/banner_dark.svg'
 
 type MetaType = 'lang' | 'title' | 'description' | 'ogUrl' | 'ogImage' | 'ogType' | 'ogSiteName'
 type MetaValues = Record<MetaType, string>

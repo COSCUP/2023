@@ -2,9 +2,7 @@
   <main id="landing" class="page-container">
     <section class="info-block">
       <div class="logo-container">
-        <img v-if="colorSchema === 'dark'" src="@/assets/images/og.png" alt="COSCUP Logo" />
-        <img v-else-if="colorSchema === 'light'" src="@/assets/images/banner.svg" alt="COSCUP Logo" />
-        <img v-else src="@/assets/images/og.png" alt="COSCUP Logo" />
+        <img src='@/assets/images/og.png' alt="COSCUP Logo" />
       </div>
       <div class="info">
         <div class="row">
