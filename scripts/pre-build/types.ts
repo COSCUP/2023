@@ -8,7 +8,7 @@ export type SponsorLevelRow = {
   [K in SponsorLevelRowKeys]: K extends 'level' ? SponsorLevel : string;
 }
 
-type SponsorRowKeys = 'sponsor' | 'level' | 'name:en' | 'name:zh-TW' | 'intro:en' | 'intro:zh-TW' | 'link' | 'image' | 'canPublish'
+type SponsorRowKeys = 'id' | 'level' | 'name:en' | 'name:zh-TW' | 'intro:en' | 'intro:zh-TW' | 'link' | 'image' | 'canPublish'
 export type SponsorRow = {
   [K in SponsorRowKeys]: K extends 'level'
     ? SponsorLevel
@@ -17,7 +17,7 @@ export type SponsorRow = {
       : string;
 }
 
-type SponsorNewsRowKeys = 'sponsor' | 'description' | 'link' | 'image:vertical' | 'image:horizontal' | 'specialWeight' | 'canPublish'
+type SponsorNewsRowKeys = 'sponsorId' | 'newsId' | 'description' | 'link' | 'image:vertical' | 'image:horizontal' | 'specialWeight' | 'canPublish'
 export type SponsorNewsRow = {
   [K in SponsorNewsRowKeys]: K extends 'canPublish'
     ? 'Y' | 'N'

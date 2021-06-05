@@ -37,11 +37,11 @@ function transformSponsorMap (rows: SponsorRow[]) {
   return Object.fromEntries(rows
     .filter((r) => r.canPublish === 'Y')
     .map((r) => [
-      r.sponsor,
+      r.id,
       {
-        id: r.sponsor,
+        id: r.id,
         level: r.level,
-        image: r.image,
+        image: `https://coscup.org/2021-static/images/sponsor/${r.id}.png`,
         link: r.link,
         name: {
           en: r['name:en'],
@@ -58,18 +58,18 @@ function transformSponsorMap (rows: SponsorRow[]) {
 function transformSponsorNews (rows: SponsorNewsRow[], sponsorLevelMap: ReturnType<typeof transformSponsorLevelMap>, sponsorMap: ReturnType<typeof transformSponsorMap>) {
   return rows
     .filter((r) => r.canPublish === 'Y')
-    .filter((r) => !!sponsorMap[r.sponsor])
+    .filter((r) => !!sponsorMap[r.sponsorId])
     .map((r) => ({
-      sponsor: r.sponsor,
+      sponsor: r.sponsorId,
       image: {
-        vertical: r['image:vertical'],
-        horizontal: r['image:horizontal']
+        vertical: `https://coscup.org/2021-static/images/sponsor-news/${r.sponsorId}-${r.newsId}-vertical.png`,
+        horizontal: `https://coscup.org/2021-static/images/sponsor-news/${r.sponsorId}-${r.newsId}-horizontal.png`
       },
       description: r.description,
       link: r.link,
-      level: sponsorMap[r.sponsor].level,
+      level: sponsorMap[r.sponsorId].level,
       weight: (r.specialWeight.length === 0 || isNaN(Number(r.specialWeight)))
-        ? sponsorLevelMap[sponsorMap[r.sponsor].level].basicWeight
+        ? sponsorLevelMap[sponsorMap[r.sponsorId].level].basicWeight
         : Number(r.specialWeight)
     }))
 }
@@ -136,7 +136,7 @@ function createFakeData () {
           const entry: [SponsorLevel, SponsorRow[]] = [
             level as SponsorLevel,
             Array.from(Array(numOfSponsorsMap[level]), (_, i): SponsorRow => ({
-              sponsor: `${level}-${i}`,
+              id: `${level}-${i}`,
               level,
               'name:en': company.companyName(),
               'name:zh-TW': company.companyName(),
@@ -156,7 +156,8 @@ function createFakeData () {
     return sponsorRows
       .map((r): SponsorNewsRow => {
         return {
-          sponsor: r.sponsor,
+          sponsorId: r.id,
+          newsId: lorem.word(),
           'image:vertical': `https://picsum.photos/200/800?random=${Math.random()}`,
           'image:horizontal': `https://picsum.photos/1440/400?random=${Math.random()}`,
           description: lorem.paragraph(4),
