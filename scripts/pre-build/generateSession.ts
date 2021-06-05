@@ -3,7 +3,7 @@ import axios from 'axios'
 import md5 from 'js-md5'
 import { saveJSON } from './utils'
 require('dotenv').config()
-const pretalxOptions = { headers: { Authorization: `Token ${process.env.PRETALX_TOKEN}`} }
+const pretalxOptions = { headers: { Authorization: `Token ${process.env.PRETALX_TOKEN}` } }
 function genResult (talks, rooms, speakers) {
   const resRooms = rooms.results.map(r => {
     return {
@@ -98,32 +98,28 @@ function genResult (talks, rooms, speakers) {
       record: s.answers.find(a => a.question.id === 567) !== undefined ? s.answers.find(a => a.question.id === 567).answer : null
     }
   })
-  let data = JSON.stringify({
+
+  return {
     sessions: resSessions,
     speakers: resSpeakers,
-    // eslint-disable-next-line @typescript-eslint/camelcase
     session_types: resSessionTypes,
     rooms: resRooms,
     tags: resTags
-  })
-  console.log(data)
-  saveJSON('session', {
-    sessions: resSessions,
-    speakers: resSpeakers,
-    // eslint-disable-next-line @typescript-eslint/camelcase
-    session_types: resSessionTypes,
-    rooms: resRooms,
-    tags: resTags
-  })
+  }
 }
 
 export default async function run () {
-  Promise.all([
-    axios.get('https://pretalx.com/api/events/coscup-2021/talks/?limit=1000', pretalxOptions),
-    axios.get('https://pretalx.com/api/events/coscup-2021/rooms/?limit=1000', pretalxOptions),
-    axios.get('https://pretalx.com/api/events/coscup-2021/speakers/?limit=1000', pretalxOptions)
-  ])
-    .then(results => {
-      genResult(results[0].data, results[1].data, results[2].data)
-    })
+  let data = {}
+  try {
+    const results = await Promise.all([
+      axios.get('https://pretalx.com/api/events/coscup-2021/talks/?limit=1000', pretalxOptions),
+      axios.get('https://pretalx.com/api/events/coscup-2021/rooms/?limit=1000', pretalxOptions),
+      axios.get('https://pretalx.com/api/events/coscup-2021/speakers/?limit=1000', pretalxOptions)
+    ])
+    data = genResult(results[0].data, results[1].data, results[2].data)
+  } catch (e) {
+    const { data: d } = await axios.get('https://coscup.org/2021/json/session.json')
+    data = d
+  }
+  saveJSON('session', data)
 }
