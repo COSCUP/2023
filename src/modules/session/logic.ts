@@ -17,7 +17,7 @@ export const ROOM_ORDER: RoomId[] = [
   'AU',
   'TR209', 'TR211', 'TR212', 'TR213', 'TR214',
   'TR309', 'TR311', 'TR313',
-  'TR409-2', 'TR410', 'TR411', 'TR412-1', 'TR412-2', 'TR413-1', 'TR413-2'
+  'TR409-1', 'TR410', 'TR411', 'TR412-1', 'TR412-2', 'TR413-1', 'TR413-2'
 ]
 
 function mapSessionsWithIndex (sessions: Session[]):SessionsMap {
@@ -166,10 +166,10 @@ export function generateScheduleTable (elements: ScheduleElement[]): ScheduleTab
             return timePoints.findIndex(([h, m]) => h === hour && m === minute)
           })
         const span = endIndex - startIndex
-        if (cells.slice(startIndex, endIndex).some(c => c.type !== 'blank')) {
-          console.warn(`Session: ${e.session} is overlapping with others`)
-          return
-        }
+        // if (cells.slice(startIndex, endIndex).some(c => c.type !== 'blank')) {
+        //   console.warn(`Session: ${e.session} is overlapping with others`)
+        //   return
+        // }
         cells.splice(startIndex, span, ...(new Array(span)).fill(spanCell))
         cells.splice(startIndex, 1, {
           type: 'session',
