@@ -25,14 +25,16 @@ export default async function run () {
           const { title, description, ogUrl, ogImage } = generateSessionMetaOptions(session, locale as Locale)
           const content = generateSessionPopupContentHtml(session, locale as Locale)
           const result = template
-            .replace('@{TEMPLATE_META_TITLE}', title ?? '')
-            .replace('@{TEMPLATE_META_DESCRIPTION}', description ?? '')
-            .replace('@{TEMPLATE_META_OG_URL}', ogUrl ?? '')
-            .replace('@{TEMPLATE_META_OG_IMAGE}', ogImage ?? '')
-            .replace('@{TEMPLATE_CONTENT_HTML}', content)
+            .replace(/@{TEMPLATE_META_TITLE}/g, title ?? '')
+            .replace(/@{TEMPLATE_META_DESCRIPTION}/g, description ?? '')
+            .replace(/@{TEMPLATE_META_OG_URL}/g, ogUrl ?? '')
+            .replace(/@{TEMPLATE_META_OG_IMAGE}/g, ogImage ?? '')
+            .replace(/@{TEMPLATE_CONTENT_HTML}/g, content)
           await writeFile(output1Path, result)
           await mkdir(output2DirPath, { recursive: true })
-          await writeFile(output2Path, result)
+          await writeFile(output2Path, result, {
+            encoding: 'utf-8'
+          })
         }))
       await rm(templatePath)
     }))
