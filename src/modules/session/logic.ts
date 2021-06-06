@@ -4,7 +4,7 @@
 // https://opensource.org/licenses/MIT
 import markdown from '@/utils/markdown/render'
 import { getRootUrl } from '@/utils/common'
-import { truncate, uniq, uniqWith } from 'lodash'
+import { truncate, uniq, uniqWith, escape } from 'lodash'
 import { fixedTimeZoneDate, formatDateString, formatTimeString, getPartsOfDate, html, padNumberStart2WithZero } from './utils'
 import type { Locale } from '../i18n'
 import type { MetaOptions } from '../metas'

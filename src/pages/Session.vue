@@ -58,7 +58,14 @@ export default defineComponent({
     const { xsOnly } = useBreakpoints()
     const { locale } = useI18n()
 
-    function openSessionPopUp (sessionId: string) {
+    function tryToOpenSessionPopUp () {
+      const [bool, sessionId] = [isLoaded.value, route.params.sessionId as string]
+      if (!bool) return
+      if (typeof sessionId !== 'string') {
+        removeAll((popUpData) => !popUpData.popupId?.startsWith('session-'))
+        return
+      }
+
       const onClose = () => {
         router.push({
           name: route.query.from === 'Room'
@@ -95,15 +102,9 @@ export default defineComponent({
       }
     }
 
-    watch(() => [route.params.sessionId, isLoaded.value], ([sessionId, bool]) => {
-      if (!bool) return
-      if (typeof sessionId !== 'string') {
-        removeAll((popUpData) => !popUpData.popupId?.startsWith('session-'))
-        return
-      }
-      openSessionPopUp(sessionId)
-    }, {
-      immediate: true
+    tryToOpenSessionPopUp()
+    watch(() => [route.params.sessionId, isLoaded.value], () => {
+      tryToOpenSessionPopUp()
     })
 
     isClient && watch(currentDayIndex, async () => {
@@ -119,14 +120,14 @@ export default defineComponent({
       currentDayIndex,
       daysSchedule,
       load,
-      openSessionPopUp,
+      tryToOpenSessionPopUp,
       route
     }
   },
   async serverPrefetch () {
     await this.load()
     if (this.route.params.sessionId) {
-      this.openSessionPopUp(this.route.params.sessionId as string)
+      this.tryToOpenSessionPopUp()
     }
   }
 })
