@@ -303,7 +303,7 @@ export function generateSessionMetaOptions (session: Session, locale: Locale): M
   return {
     title: session[locale].title,
     description: escape(truncate(session[locale].description, { length: 80 })),
-    ogUrl: `${getRootUrl()}${locale}/agenda/${session.id}`,
+    ogUrl: `${getRootUrl()}${locale}/session/${session.id}`,
     ogImage: session.speakers.length > 0 ? session.speakers[Math.floor(Math.random() * session.speakers.length)].avatar : undefined
   }
 }
