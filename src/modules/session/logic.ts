@@ -166,10 +166,10 @@ export function generateScheduleTable (elements: ScheduleElement[]): ScheduleTab
             return timePoints.findIndex(([h, m]) => h === hour && m === minute)
           })
         const span = endIndex - startIndex
-        // if (cells.slice(startIndex, endIndex).some(c => c.type !== 'blank')) {
-        //   console.warn(`Session: ${e.session} is overlapping with others`)
-        //   return
-        // }
+        if (cells.slice(startIndex, endIndex).some(c => c.type !== 'blank')) {
+          console.warn(`Session: ${e.session} is overlapping with others`)
+          return
+        }
         cells.splice(startIndex, span, ...(new Array(span)).fill(spanCell))
         cells.splice(startIndex, 1, {
           type: 'session',
