@@ -15,7 +15,7 @@
   @include theme-colors-of("light", "#session") {
     --color-primary: #{$coscup-green};
     --color-session-background: #{lighten($coscup-green, 56)};
-    --color-list-time-background: #{background-light};
+    --color-list-time-background: #{$background-light};
     --color-nav-background: #{$background-light};
     --color-room-cell-background:
       #{adjust-color(

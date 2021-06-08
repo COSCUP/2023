@@ -21,6 +21,7 @@
 
       .track {
         display: flex;
+        flex-wrap: wrap;
         align-items: center;
         color: var(--color-primary);
         line-height: 1.15;
@@ -30,6 +31,7 @@
           border-radius: 4px;
           padding: 4px 8px;
           margin-right: 1rem;
+          margin-bottom: 0.5rem;
           color: #fff;
           background-color: #3ca054;
 
