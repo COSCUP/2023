@@ -73,7 +73,24 @@ export function transformRawData (rawData: RawData, timeZoneOffsetMinutes: numbe
       return { ...rest, 'zh-TW': zh }
     })()
     const speakers = ((): Speaker[] => {
-      return rawRest.speakers.map(s => rawData.speakers.find(d => d.id === s)!)
+      if (! rawRest.speakers.length && rawRest.speakerZhName !== '') {
+        return [
+          {
+            id,
+            avatar: '',
+            en: {
+              name: rawRest.speakerEnName,
+              bio: rawRest.speakerEnBio
+            },
+            "zh-TW": {
+              name: rawRest.speakerZhName,
+              bio: rawRest.speakerZhBio
+            }
+          }
+        ]
+      }
+      return rawRest.speakers
+        .map(s => rawData.speakers.find(d => d.id === s)!)
         .map(({ zh, ...rest }) => ({ ...rest, 'zh-TW': zh }))
     })()
     const tags = ((): Tag[] => {

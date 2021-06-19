@@ -85,13 +85,17 @@ function genResult (talks, rooms, speakers) {
       language: s.content_locale === 'zh-tw' ? '漢語' : 'English',
       zh: {
         title: s.title,
-        description: (s.answers.find((a :any) => a.question.id === 865) || {}).answer || ""
+        description: (s.answers.find((a :any) => a.question.id === 865) || {}).answer || s.description || ""
       },
       en: {
         title: (s.answers.find((a :any) => a.question.id === 859) || {}).answer || s.title,
-        description: (s.answers.find((a :any) => a.question.id === 860) || {}).answer || ""
+        description: (s.answers.find((a :any) => a.question.id === 860) || {}).answer || (s.answers.find((a :any) => a.question.id === 865) || {}).answer || ""
       },
       speakers: s.speakers.map(ss => ss.code),
+      speakerZhName: (s.answers.find((a :any) => a.question.id === 863) || {}).answer || '',
+      speakerEnName: (s.answers.find((a :any) => a.question.id === 861) || {}).answer || '',
+      speakerZhBio: (s.answers.find((a :any) => a.question.id === 866) || {}).answer || '',
+      speakerEnBio: (s.answers.find((a :any) => a.question.id === 862) || {}).answer || '',
       tags: s.answers.find(a => a.question.id === 876) !== undefined ? [s.answers.find(a => a.question.id === 876).options[0].answer.en] : [],
       co_write: s.answers.find(a => a.question.id === 550) !== undefined ? s.answers.find(a => a.question.id === 550).answer : null,
       slide: s.answers.find(a => a.question.id === 566) !== undefined ? s.answers.find(a => a.question.id === 566).answer : null,
