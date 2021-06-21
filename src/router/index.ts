@@ -64,30 +64,30 @@ const routes: RouteRecordRaw[] = import.meta.env.VITE_LANDING_ONLY === 'yes'
           order: 1
         }
       },
-      {
-        path: '/room',
-        name: 'Room',
-        component: () => import('@/pages/Room.vue'),
-        meta: {
-          order: 2
-        }
-      },
-      {
-        path: '/map',
-        name: 'Map',
-        component: () => import('@/pages/Map.vue'),
-        meta: {
-          order: 3
-        }
-      },
-      {
-        path: '/venue',
-        name: 'Venue',
-        component: () => import('@/pages/Venue.vue'),
-        meta: {
-          order: 4
-        }
-      },
+      // {
+      //   path: '/room',
+      //   name: 'Room',
+      //   component: () => import('@/pages/Room.vue'),
+      //   meta: {
+      //     order: 2
+      //   }
+      // },
+      // {
+      //   path: '/map',
+      //   name: 'Map',
+      //   component: () => import('@/pages/Map.vue'),
+      //   meta: {
+      //     order: 3
+      //   }
+      // },
+      // {
+      //   path: '/venue',
+      //   name: 'Venue',
+      //   component: () => import('@/pages/Venue.vue'),
+      //   meta: {
+      //     order: 4
+      //   }
+      // },
       {
         path: '/sponsor',
         name: 'Sponsor',
