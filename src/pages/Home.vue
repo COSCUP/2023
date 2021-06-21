@@ -13,7 +13,7 @@
     </div>
     <div class="info-container">
       <div class="info">
-        <span class="date">8 / 1 ~ 8 / 2</span>
+        <span class="date">7 / 31 ~ 8 / 1</span>
         <span class="venue">
           {{ t('home.info.venue') }}
         </span>
