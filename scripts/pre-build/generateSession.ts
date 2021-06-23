@@ -96,6 +96,7 @@ function genResult (talks, rooms, speakers) {
       speakerEnName: (s.answers.find((a :any) => a.question.id === 861) || {}).answer || '',
       speakerZhBio: (s.answers.find((a :any) => a.question.id === 866) || {}).answer || '',
       speakerEnBio: (s.answers.find((a :any) => a.question.id === 862) || {}).answer || '',
+      speakerAvatar: (s.answers.find((a :any) => a.question.id === 977) || {}).answer_file || '',
       tags: s.answers.find(a => a.question.id === 876) !== undefined ? [s.answers.find(a => a.question.id === 876).options[0].answer.en] : [],
       co_write: s.answers.find(a => a.question.id === 550) !== undefined ? s.answers.find(a => a.question.id === 550).answer : null,
       slide: s.answers.find(a => a.question.id === 566) !== undefined ? s.answers.find(a => a.question.id === 566).answer : null,
