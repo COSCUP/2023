@@ -77,7 +77,7 @@ export function transformRawData (rawData: RawData, timeZoneOffsetMinutes: numbe
         return [
           {
             id,
-            avatar: '',
+            avatar: rawRest.speakerAvatar,
             en: {
               name: rawRest.speakerEnName,
               bio: rawRest.speakerEnBio
