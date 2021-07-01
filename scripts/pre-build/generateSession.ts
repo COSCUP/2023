@@ -20,7 +20,7 @@ function genResult (talks, rooms, speakers) {
   const resSpeakers = speakers.results.map(s => {
     return {
       id: s.code,
-      avatar: s.avatar || `https://www.gravatar.com/avatar/${md5(s.email)}?s=1024&d=https://coscup.org/2020/img/speaker/avatar/default.png&r=g`,
+      avatar: s.avatar || `https://www.gravatar.com/avatar/${md5(s.email)}?s=1024&d=identicon&r=g`,
       zh: {
         name: (s.answers.find((a :any) => a.question.id === 863) || {}).answer || s.name,
         bio: (s.answers.find((a :any) => a.question.id === 866) || {}).answer || s.biography || ''
@@ -85,11 +85,11 @@ function genResult (talks, rooms, speakers) {
       language: s.content_locale === 'zh-tw' ? '漢語' : 'English',
       zh: {
         title: s.title,
-        description: (s.answers.find((a :any) => a.question.id === 865) || {}).answer || s.description || ""
+        description: (s.answers.find((a :any) => a.question.id === 865) || {}).answer || s.description || ''
       },
       en: {
         title: (s.answers.find((a :any) => a.question.id === 859) || {}).answer || s.title,
-        description: (s.answers.find((a :any) => a.question.id === 860) || {}).answer || (s.answers.find((a :any) => a.question.id === 865) || {}).answer || ""
+        description: (s.answers.find((a :any) => a.question.id === 860) || {}).answer || (s.answers.find((a :any) => a.question.id === 865) || {}).answer || ''
       },
       speakers: s.speakers.map(ss => ss.code),
       speakerZhName: (s.answers.find((a :any) => a.question.id === 863) || {}).answer || '',
