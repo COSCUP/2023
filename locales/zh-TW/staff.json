@@ -3,6 +3,7 @@
     "title": "工作人員"
   },
   "groups": {
+    "documentary": "紀錄組",
     "secretary": "行政組",
     "coordinator": "總召組",
     "program": "議程組",

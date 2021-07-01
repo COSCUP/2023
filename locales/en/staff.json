@@ -3,6 +3,7 @@
     "title": "Staff"
   },
   "groups": {
+    "documentary": "Documentary Staff",
     "secretary": "Administrative Staff",
     "coordinator": "General Coordinator",
     "program": "Program Staff",
