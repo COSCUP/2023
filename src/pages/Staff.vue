@@ -54,7 +54,7 @@ export default defineComponent({
   setup () {
     const { t } = useI18n()
     const staffData = computed(() => {
-      const groupSequence = ['coordinator', 'secretary', 'program', 'field', 'finance', 'it', 'marketing', 'photo', 'sponsor', 'streaming']
+      const groupSequence = ['coordinator', 'secretary', 'program', 'field', 'finance', 'it', 'marketing', 'photo', 'sponsor', 'streaming', 'documentary']
       return _staffData
         .sort((a, b) => groupSequence.indexOf(a.tid) - groupSequence.indexOf(b.tid))
         .map((group) => {
