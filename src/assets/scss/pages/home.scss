@@ -8,6 +8,7 @@
 @mixin home-theme-colors {
   @include theme-colors-of("all", "#home") {
     --color-logo-wrapper-background: #{$background-dark};
+    --color-link-gather: #{($text-light, 20%)};
     --color-logo: #{$coscup-green};
     --color-markdown-link: var(--color-link);
     --color-markdown-link-hover: var(--color-link-hover);
@@ -16,6 +17,7 @@
 
   @include theme-colors-of("light", "#home") {
     --color-section-background: #{$coscup-green};
+    --color-link-gather: #{$text-light};
     --color-logo-wrapper-background: #{adjust-color(
         $background-light,
         $alpha: -0.1
@@ -127,7 +129,7 @@
         font-size: 4rem;
         font-weight: 600;
         text-decoration: none;
-        color: $text-light;
+        color: var(--color-link-gather);
       }
     }
 
