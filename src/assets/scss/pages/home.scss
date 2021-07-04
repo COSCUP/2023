@@ -16,8 +16,7 @@
 
   @include theme-colors-of("light", "#home") {
     --color-section-background: #{$coscup-green};
-    --color-logo-wrapper-background:
-      #{adjust-color(
+    --color-logo-wrapper-background: #{adjust-color(
         $background-light,
         $alpha: -0.1
       )};
@@ -27,8 +26,7 @@
   }
 
   @include theme-colors-of("dark", "#home") {
-    --color-logo-wrapper-background:
-      #{adjust-color(
+    --color-logo-wrapper-background: #{adjust-color(
         $background-dark,
         $alpha: -0.1
       )};
@@ -65,6 +63,7 @@
       padding: 1rem 2rem;
       transform: translateY(-50%);
       background-color: var(--color-logo-wrapper-background);
+
       .logo-container {
         display: flex;
         flex-direction: column;
@@ -127,6 +126,8 @@
       .venue {
         font-size: 4rem;
         font-weight: 600;
+        text-decoration: none;
+        color: $text-light;
       }
     }
 
@@ -254,8 +255,8 @@
 
   @include smOnly {
     .banner-container {
-        max-width: 100%;
-        height: auto;
+      max-width: 100%;
+      height: auto;
     }
 
     .section-block {
