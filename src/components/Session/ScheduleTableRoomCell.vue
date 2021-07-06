@@ -19,8 +19,17 @@
         allowfullscreen
       ></iframe>
 
-      <div v-else class="play-container" @click="iframeLoaded = true">
-        <icon-mdi-play></icon-mdi-play>
+      <div
+        v-else
+        class="play-container"
+        @click="roomLink && (iframeLoaded = true)"
+      >
+        <icon-mdi-play v-if="roomLink"></icon-mdi-play>
+        <div style="font-size: 1.5rem;">
+          <p>Coming Soon</p>
+          <br>
+          <icon-mdi-clock></icon-mdi-clock>
+        </div>
       </div>
     </div>
 
@@ -49,12 +58,18 @@ export default defineComponent({
   setup (props) {
     const { t, locale } = useI18n()
     const { isLoaded, getRoomById, getRoomStatusById } = useSession()
-    const roomName = computed(() => getRoomById(props.roomId)[locale.value as Locale].name.split(' / ')[0])
+    const roomName = computed(
+      () =>
+        getRoomById(props.roomId)[locale.value as Locale].name.split(' / ')[0]
+    )
     const status = computed(() => getRoomStatusById(props.roomId))
     const isFull = computed(() => status.value.isFull)
-    const statusText = computed(() => t(`session['room-status'].${isFull.value ? 'full' : 'vacancy'}`))
+    const statusText = computed(() =>
+      t(`session['room-status'].${isFull.value ? 'full' : 'vacancy'}`)
+    )
     const roomLink = computed(() => {
       const videoId = ytLinkDatas[props.roomId as keyof typeof ytLinkDatas]
+      if (videoId === null) return null
       const url = new URL(`https://www.youtube-nocookie.com/embed/${videoId}`)
       url.searchParams.set('autoplay', '1')
       url.searchParams.set('modestbranding', '1')
