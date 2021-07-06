@@ -24,7 +24,10 @@ export type SponsorNewsRow = {
     : string;
 }
 
-export type SheetName = 'announcement' | 'sponsorLevel' | 'sponsor' | 'sponsorNews'
+type YoutubeRowKeys = 'room' | 'link'
+export type YoutubeRow = Record<YoutubeRowKeys, string>
+
+export type SheetName = 'announcement' | 'sponsorLevel' | 'sponsor' | 'sponsorNews' | 'youtube'
 export type SheetIdMap = Record<SheetName, string>
 
 export type SheetRow<N extends SheetName> = N extends 'announcement'
@@ -35,4 +38,6 @@ export type SheetRow<N extends SheetName> = N extends 'announcement'
       ? SponsorRow
       : N extends 'sponsorNews'
         ? SponsorNewsRow
-        : never
+        : N extends 'youtube'
+          ? YoutubeRow
+          : never

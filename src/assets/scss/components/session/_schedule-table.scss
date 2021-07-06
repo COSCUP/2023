@@ -21,6 +21,7 @@
           top: var(--navbar-height);
           height: var(--room-list-height);
           z-index: 2;
+          vertical-align: middle;
 
           .cell-content {
             width: var(--column-width);

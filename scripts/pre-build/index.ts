@@ -9,6 +9,7 @@ import generateAnnouncement from './generateAnnouncement'
 import generateSponsor from './generateSponsor'
 import generateSession from './generateSession'
 import generateStaff from './generateStaff'
+import generateYTLink from './generateYTLink'
 
 (async () => {
   const spinner = ora('Strart pre-building...').start()
@@ -18,7 +19,8 @@ import generateStaff from './generateStaff'
       generateAnnouncement(doc),
       generateSponsor(doc, false),
       generateSession(),
-      generateStaff()
+      generateStaff(),
+      generateYTLink(doc)
     ])
     spinner.succeed('Done!')
   } catch (e) {
