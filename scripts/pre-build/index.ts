@@ -20,7 +20,7 @@ import generateYTLink from './generateYTLink'
       generateSponsor(doc, false),
       generateSession(),
       generateStaff(),
-      generateYTLink()
+      generateYTLink(doc)
     ])
     spinner.succeed('Done!')
   } catch (e) {
