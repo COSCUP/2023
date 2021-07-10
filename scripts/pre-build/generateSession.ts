@@ -22,12 +22,12 @@ function genResult (talks, rooms, speakers) {
       id: s.code,
       avatar: s.avatar || `https://www.gravatar.com/avatar/${md5(s.email)}?s=1024&d=https://coscup.org/2020/img/speaker/avatar/default.png&r=g`,
       zh: {
-        name: (s.answers.find((a :any) => a.question.id === 863) || {}).answer || s.name,
-        bio: (s.answers.find((a :any) => a.question.id === 866) || {}).answer || s.biography || ''
+        name: (s.answers.find((a :any) => a.question.id === 863 && a.person === s.code) || {}).answer || s.name,
+        bio: (s.answers.find((a :any) => a.question.id === 866 && a.person === s.code) || {}).answer || s.biography || ''
       },
       en: {
-        name: (s.answers.find((a :any) => a.question.id === 861) || {}).answer || s.name,
-        bio: (s.answers.find((a :any) => a.question.id === 862) || {}).answer || s.biography || ''
+        name: (s.answers.find((a :any) => a.question.id === 861 && a.person === s.code) || {}).answer || s.name,
+        bio: (s.answers.find((a :any) => a.question.id === 862 && a.person === s.code) || {}).answer || s.biography || ''
       }
     }
   })
