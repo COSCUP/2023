@@ -10,6 +10,7 @@
   .schedule-table {
     --room-list-height: 120px;
     --column-width: 250px;
+    --live-player-height: calc(var(--column-width) / 16 * 9);
 
     table-layout: fixed;
     height: 100%;
@@ -19,7 +20,7 @@
         th {
           position: sticky;
           top: var(--navbar-height);
-          height: var(--room-list-height);
+          height: calc(var(--room-list-height) + var(--live-player-height));
           z-index: 2;
           vertical-align: middle;
 

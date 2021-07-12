@@ -15,7 +15,7 @@
 
     .content-section {
       position: sticky;
-      top: calc(var(--navbar-height) + var(--room-list-height));
+      top: calc(var(--navbar-height) + var(--room-list-height) + var(--live-player-height));
       padding: 1rem;
       word-break: break-word;
 
