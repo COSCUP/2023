@@ -134,8 +134,15 @@ const { randomOnce } = (() => {
           break
       }
     } else {
+      let retryCount = 0
       result.verticalLeft = randomNews()
-      result.verticalRight = randomNews()
+      while (true) {
+        result.verticalRight = randomNews()
+        if (retryCount >= 10 || result.verticalLeft.id !== result.verticalRight.id) {
+          break
+        }
+        retryCount++
+      }
     }
 
     return result as NewsList

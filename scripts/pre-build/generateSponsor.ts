@@ -60,6 +60,7 @@ function transformSponsorNews (rows: SponsorNewsRow[], sponsorLevelMap: ReturnTy
     .filter((r) => r.canPublish === 'Y')
     .filter((r) => !!sponsorMap[r.sponsorId])
     .map((r) => ({
+      id: r.newsId,
       sponsor: r.sponsorId,
       image: {
         vertical: `https://coscup.org/2021-static/images/sponsor-news/${r.sponsorId}-${r.newsId}-vertical.png`,
