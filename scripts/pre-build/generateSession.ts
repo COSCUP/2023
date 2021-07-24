@@ -98,7 +98,8 @@ function genResult (talks, rooms, speakers) {
       speakerEnBio: (s.answers.find((a :any) => a.question.id === 862) || {}).answer || '',
       speakerAvatar: (s.answers.find((a :any) => a.question.id === 977) || {}).answer_file || '',
       tags: s.answers.find(a => a.question.id === 876) !== undefined ? [s.answers.find(a => a.question.id === 876).options[0].answer.en] : [],
-      co_write: s.answers.find(a => a.question.id === 550) !== undefined ? s.answers.find(a => a.question.id === 550).answer : null,
+      co_write: s.answers.find(a => a.question.id === 1025) !== undefined ? s.answers.find(a => a.question.id === 1025).answer : null,
+      qa: s.answers.find(a => a.question.id === 1026) !== undefined ? s.answers.find(a => a.question.id === 1026).answer : null,
       slide: s.answers.find(a => a.question.id === 566) !== undefined ? s.answers.find(a => a.question.id === 566).answer : null,
       record: s.answers.find(a => a.question.id === 567) !== undefined ? s.answers.find(a => a.question.id === 567).answer : null
     }
