@@ -63,7 +63,7 @@ export function transformRawData (rawData: RawData, timeZoneOffsetMinutes: numbe
     }
   }
 
-  function transformToSession ({ id, language, co_write: coWrite, slide, record, en, zh, ...rawRest }: RawSession): Session {
+  function transformToSession ({ id, language, co_write: coWrite, qa, slide, record, en, zh, ...rawRest }: RawSession): Session {
     const type = ((): SessionType => {
       const { zh, ...rest } = rawData.session_types.find(t => t.id === rawRest.type)!
       return { ...rest, 'zh-TW': zh }
@@ -73,7 +73,7 @@ export function transformRawData (rawData: RawData, timeZoneOffsetMinutes: numbe
       return { ...rest, 'zh-TW': zh }
     })()
     const speakers = ((): Speaker[] => {
-      if (! rawRest.speakers.length && rawRest.speakerZhName !== '') {
+      if (!rawRest.speakers.length && rawRest.speakerZhName !== '') {
         return [
           {
             id,
@@ -82,7 +82,7 @@ export function transformRawData (rawData: RawData, timeZoneOffsetMinutes: numbe
               name: rawRest.speakerEnName,
               bio: rawRest.speakerEnBio
             },
-            "zh-TW": {
+            'zh-TW': {
               name: rawRest.speakerZhName,
               bio: rawRest.speakerZhBio
             }
@@ -109,6 +109,7 @@ export function transformRawData (rawData: RawData, timeZoneOffsetMinutes: numbe
       speakers,
       tags,
       coWrite,
+      qa,
       slide,
       record
     }
@@ -285,6 +286,15 @@ export function generateSessionPopupContentHtml (session: Session, locale: Local
       <div class="outer-link">
         <span>${locale === 'en' ? 'Collaborative note:' : '共筆:'}</span>
         <a href="${session.coWrite}" target="_blank" rel="noopener noreferrer">${session.coWrite}</a>
+      </div>`
+          : ''
+      }
+      ${
+        session.qa
+          ? html`
+      <div class="outer-link">
+        <span>${locale === 'en' ? 'Q&A:' : '提問區:'}</span>
+        <a href="${session.qa}" target="_blank" rel="noopener noreferrer">${session.qa}</a>
       </div>`
           : ''
       }

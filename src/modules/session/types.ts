@@ -46,6 +46,7 @@ export interface Session extends LocaleRecord<{ title: string; description: stri
   speakers: Speaker[];
   tags: Tag[];
   coWrite: null | string;
+  qa: null | string;
   slide: null | string;
   record: null | string;
 }
