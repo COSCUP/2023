@@ -3,7 +3,13 @@
     "title": ""
   },
   "info": {
-    "venue": "Online events",
+    "entrance": "Entrance",
+    "booth": "Booth",
+    "booth_1": "Booth 1",
+    "booth_2": "Booth 2",
+    "party": "Party",
+    "party_1": "Party 1",
+    "party_2": "Party 2",
     "tabs": {
       "announcement": "Announcement"
     }

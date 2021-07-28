@@ -3,7 +3,13 @@
     "title": ""
   },
   "info": {
-    "venue": "線上舉辦",
+    "entrance": "入口大廳",
+    "booth": "攤位區",
+    "booth_1": "攤位區 1",
+    "booth_2": "攤位區 2",
+    "party": "派對區",
+    "party_1": "派對區 1",
+    "party_2": "派對區 2",
     "tabs": {
       "announcement": "最新公告"
     }

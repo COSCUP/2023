@@ -8,6 +8,9 @@
 <template>
   <main id="venue" class="page-container">
     <div v-for="map in maps" :key="map" class="map-container">
+      <h2 class="title">
+        {{ t(`home.info.${map}`)}}
+      </h2>
       <img :src="mapImages[map]" alt="Map" />
     </div>
   </main>
@@ -15,12 +18,13 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { generateAssetsMap } from '@/utils/common'
 import '@/assets/scss/pages/venue.scss'
 
 const imagesMap = generateAssetsMap(
-  import.meta.globEager('../assets/images/venues/*.png'),
-  '../assets/images/venues/*.png'
+  import.meta.globEager('../assets/images/venues/*.jpg'),
+  '../assets/images/venues/*.jpg'
 )
 
 export default defineComponent({
@@ -28,10 +32,11 @@ export default defineComponent({
   components: {
   },
   setup () {
-    const maps = ['map-all', 'map-tr-2f', 'map-tr-3f', 'map-tr-4f', 'map-tr-5f']
-    const mapImages = Object.fromEntries(maps.map(k => [k, imagesMap[`${k}.png`]]))
-
+    const maps = ['entrance', 'booth_1', 'booth_2']
+    const mapImages = Object.fromEntries(maps.map(k => [k, imagesMap[`${k}.jpg`]]))
+    const { t } = useI18n()
     return {
+      t,
       maps,
       mapImages
     }
