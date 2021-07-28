@@ -18,7 +18,8 @@
   @include theme-colors-of("light", "#home") {
     --color-section-background: #{$coscup-green};
     --color-link-gather: #{$text-light};
-    --color-logo-wrapper-background: #{adjust-color(
+    --color-logo-wrapper-background:
+      #{adjust-color(
         $background-light,
         $alpha: -0.1
       )};
@@ -28,7 +29,8 @@
   }
 
   @include theme-colors-of("dark", "#home") {
-    --color-logo-wrapper-background: #{adjust-color(
+    --color-logo-wrapper-background:
+      #{adjust-color(
         $background-dark,
         $alpha: -0.1
       )};
@@ -107,26 +109,29 @@
   }
 
   .info-container {
-    max-width: 600px;
+    max-width: 800px;
     margin: 0 auto;
     padding: 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
 
+    .date {
+      font-size: 1.5rem;
+      line-height: 2;
+    }
+
     .info {
       display: flex;
-      flex-direction: column;
+      flex-wrap: wrap;
+      flex-direction: row;
       align-items: center;
       margin-bottom: 2.5rem;
-
-      .date {
-        font-size: 1.5rem;
-        line-height: 2;
-      }
+      justify-content: center;
 
       .venue {
-        font-size: 4rem;
+        padding: 2rem;
+        font-size: 2rem;
         font-weight: 600;
         text-decoration: none;
         color: var(--color-link-gather);

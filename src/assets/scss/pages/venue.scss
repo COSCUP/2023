@@ -16,6 +16,13 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      overflow: hidden;
+    }
+
+    .title {
+      font-size: 1.5rem;
+      font-weight: 500;
+      margin: 2rem auto;
     }
   }
 
