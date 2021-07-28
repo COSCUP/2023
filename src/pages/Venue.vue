@@ -9,7 +9,9 @@
   <main id="venue" class="page-container">
     <div v-for="map in maps" :key="map" class="map-container">
       <h2 class="title">
-        {{ t(`home.info.${map}`)}}
+        <a :href="linksImages[map]" target="_blank">
+          {{ t(`home.info.${map}`)}}
+        </a>
       </h2>
       <img :src="mapImages[map]" alt="Map" />
     </div>
@@ -33,11 +35,19 @@ export default defineComponent({
   },
   setup () {
     const maps = ['entrance', 'booth_1', 'booth_2']
+    const links = [
+      'https://gather.town/app/yq99YWKCypHdDs0X/COSCUP%20Entrance',
+      'https://gather.town/app/9JO8kCSwIqbd57jM/COSCUP%20Booth%201',
+      'https://gather.town/app/PDC6hcsUH7aeEY21/COSCUP%20Booth%202'
+    ]
     const mapImages = Object.fromEntries(maps.map(k => [k, imagesMap[`${k}.jpg`]]))
+    const linksImages = Object.fromEntries(links.map((k, index) => [maps[index], k]))
+
     const { t } = useI18n()
     return {
       t,
       maps,
+      linksImages,
       mapImages
     }
   }
