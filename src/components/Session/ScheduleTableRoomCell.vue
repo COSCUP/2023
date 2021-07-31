@@ -25,11 +25,6 @@
         @click="roomLink && (iframeLoaded = true)"
       >
         <icon-mdi-play v-if="roomLink"></icon-mdi-play>
-        <div style="font-size: 1.5rem;">
-          <p>Coming Soon</p>
-          <br>
-          <icon-mdi-clock></icon-mdi-clock>
-        </div>
       </div>
     </div>
 
