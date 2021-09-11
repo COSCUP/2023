@@ -29,7 +29,7 @@
               <div class="staff-avatar-container">
                 <img
                   class="staff-avatar"
-                  :src="`https://www.gravatar.com/avatar/${staff.email_hash}?s=320&d=identicon&r=g`"
+                  :src="`https://www.gravatar.com/avatar/${staff.email_hash}?s=320&d=identicon&r=g&d=https://volunteer.coscup.org/img/nonavatar.png`"
                   :alt="`${staff.name}'s Avatar`"
                 />
               </div>
@@ -39,20 +39,45 @@
         </div>
       </section>
     </div>
+    <div class="group-box-wrapper">
+        <section class="group-box">
+          <h2 class="group-name">
+            {{ joinus.title }}
+          </h2>
+          <article class="markdown" v-html="joinus.desc"></article>
+        </section>
+    </div>
   </main>
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue'
+import { defineComponent, computed, watch, ref} from 'vue'
 import _staffData from '@/assets/json/staff.json'
+import markdown from '@/utils/markdown'
 
 import '@/assets/scss/pages/staff.scss'
 import { useI18n } from 'vue-i18n'
 
+interface JoinUs {
+  title: string;
+  desc: string;
+}
+
 export default defineComponent({
   name: 'Staff',
   setup () {
-    const { t } = useI18n()
+    const { t, locale } = useI18n()
+    const joinus = ref<JoinUs>({})
+
+    watch(locale, async () => {
+        joinus.value = {
+          title: t(`staff.intro['title']`),
+          desc: markdown(t(`staff.intro['desc']`))
+        }
+    }, {
+      immediate: true
+    })
+
     const staffData = computed(() => {
       const groupSequence = ['coordinator', 'secretary', 'program', 'field', 'finance', 'it', 'marketing', 'photo', 'sponsor', 'streaming', 'documentary']
       return _staffData
@@ -71,7 +96,8 @@ export default defineComponent({
 
     return {
       t,
-      staffData
+      staffData,
+      joinus
     }
   }
 })

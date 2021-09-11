@@ -14,5 +14,9 @@
     "it": "資訊組",
     "photo": "攝影組",
     "sponsor": "贊助組"
+  },
+  "intro": {
+    "title": "歡迎加入志工團隊",
+    "desc": "每一次的活動都需要志工夥伴貢獻專長來讓活動順利進行，如果對 COSCUP 有服務的熱誠，歡迎來[報名加入志工](https://volunteer.coscup.org/)！"
   }
 }

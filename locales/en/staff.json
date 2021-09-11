@@ -14,5 +14,9 @@
     "it": "IT Staff",
     "photo": "Photo Staff",
     "sponsor": "Sponsor Staff"
+  },
+  "intro": {
+    "title": "Join as Volunteer",
+    "desc": "The volunteer staff plays a huge role in success of COSCUP! If you are interested in, [join as volunteer!](https://volunteer.coscup.org/)"
   }
 }

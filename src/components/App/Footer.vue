@@ -15,6 +15,26 @@
         </p>
       </section>
       <section class="footer__section">
+        <div class="content contacts">
+            <div class="contact">
+                <p class="subtitle">{{ t('app.footer.contact_attendee') }}</p>
+                <p><a href="mailto:attendee@coscup.org">attendee@coscup.org</a></p>
+            </div>
+            <div class="contact">
+                <p class="subtitle">{{ t('app.footer.contact_sponsorship') }}</p>
+                <p><a href="mailto:sponsorship@coscup.org">sponsorship@coscup.org</a></p>
+            </div>
+            <div class="contact">
+                <p class="subtitle">{{ t('app.footer.contact_program') }}</p>
+                <p><a href="mailto:program@coscup.org">program@coscup.org</a></p>
+            </div>
+            <div class="contact">
+                <p class="subtitle">{{ t('app.footer.contact_marketing') }}</p>
+                <p><a href="mailto:marketing@coscup.org">marketing@coscup.org</a></p>
+            </div>
+        </div>
+      </section>
+      <section class="footer__section">
         <p class="title">
           {{ t('app.footer.websites') }}
         </p>

@@ -14,6 +14,10 @@
   },
   "footer": {
     "websites": "Websites",
-    "social": "Social Media"
+    "social": "Social Media",
+    "contact_attendee": "Attendee Service",
+    "contact_sponsorship": "Sponsorship",
+    "contact_program": "Program",
+    "contact_marketing": "Marketing"
   }
 }
