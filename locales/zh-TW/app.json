@@ -14,6 +14,10 @@
   },
   "footer": {
     "websites": "歷年網站",
-    "social": "社群媒體"
+    "social": "社群媒體",
+    "contact_attendee": "會眾服務",
+    "contact_sponsorship": "贊助合作",
+    "contact_program": "議程投稿",
+    "contact_marketing": "行銷方案"
   }
 }
