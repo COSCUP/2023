@@ -4,4 +4,6 @@
 // https://opensource.org/licenses/MIT
 import generateSessionPages from './generateSessionPages'
 
-generateSessionPages()
+if (process.env.BUILD_SESSION === 'yes') {
+  generateSessionPages()
+}
