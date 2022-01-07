@@ -18,8 +18,8 @@
           </keep-alive>
         </transition>
       </router-view>
-      <SponsorFooter></SponsorFooter>
       <template v-if="!isLandingPage">
+        <SponsorFooter></SponsorFooter>
         <Footer></Footer>
       </template>
     </MainContainer>
