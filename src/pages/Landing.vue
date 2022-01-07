@@ -2,14 +2,13 @@
   <main id="landing" class="page-container">
     <section class="info-block">
       <div class="logo-container">
-        <img src='@/assets/images/og.png' alt="COSCUP Logo" />
       </div>
       <div class="info">
         <div class="row">
           <div class="icon">
             <icon-akar-icons-calendar></icon-akar-icons-calendar>
           </div>
-          <span>07/31 - 08/01</span>
+          <span>2022/??/?? ~ 2022/??/??</span>
         </div>
         <div class="row">
           <div class="icon">
@@ -25,9 +24,6 @@
       </a>
       <a href="mailto:sponsorship@coscup.org" target="_blank" rel="noopener noreferrer">
         {{ t('landing.links.sponsor') }}
-      </a>
-      <a href="https://blog.coscup.org/2021/03/coscup-2021-call-for-participation-now.html" target="_blank" rel="noopener noreferrer">
-        {{ t('landing.links.community') }}
       </a>
     </section>
     <section class="media-links">
@@ -130,7 +126,7 @@ const communityMedia = [
   }
 ]
 
-const numOfPast = 2021 - 2006
+const numOfPast = 2022 - 2006
 
 export default defineComponent({
   name: 'Home',

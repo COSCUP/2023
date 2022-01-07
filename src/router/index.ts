@@ -18,21 +18,6 @@ const routes: RouteRecordRaw[] = import.meta.env.VITE_LANDING_ONLY === 'yes'
         path: '/landing',
         name: 'Landing',
         component: () => import('@/pages/Landing.vue')
-      },
-      {
-        path: '/session',
-        name: 'Session',
-        component: () => import('@/pages/Session.vue'),
-        children: [
-          {
-            path: ':sessionId',
-            name: 'SessionDetail',
-            component: () => import('@/pages/Session.vue')
-          }
-        ],
-        meta: {
-          order: 1
-        }
       }
     ]
   : [

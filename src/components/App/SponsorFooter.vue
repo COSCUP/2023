@@ -43,12 +43,6 @@ import sponsorDatas from '@/assets/json/sponsor.json'
 import { defineComponent, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { Locale } from '@/modules/i18n'
-// import { generateAssetsMap } from '@/utils/common'
-
-// const imagesMap = generateAssetsMap(
-//   import.meta.globEager('../../assets/images/sponsors/*.png'),
-//   '../../assets/images/sponsors/*.png'
-// )
 
 export default defineComponent({
   name: 'SponsorFooter',
@@ -61,7 +55,6 @@ export default defineComponent({
         name: data.name[locale.value as Locale],
         link: data.link,
         image: data.image
-        // image: imagesMap[data.image]
       }
     }), 'level'))
       .sort((entryA, entryB) => {
