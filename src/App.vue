@@ -18,8 +18,10 @@
           </keep-alive>
         </transition>
       </router-view>
-      <template v-if="!isLandingPage">
+      <template v-if="!landingOnly">
         <SponsorFooter></SponsorFooter>
+      </template>
+      <template v-if="!isLandingPage">
         <Footer></Footer>
       </template>
     </MainContainer>
@@ -56,6 +58,7 @@ export default defineComponent({
     const route = useRoute()
 
     const isInApp = ref(false)
+    const landingOnly = import.meta.env.VITE_LANDING_ONLY === 'yes'
     const isLandingPage = computed(() => route.name === 'Landing')
 
     watch(() => route.query, ({ mode }) => {
@@ -66,7 +69,8 @@ export default defineComponent({
 
     return {
       isLandingPage,
-      isInApp
+      isInApp,
+      landingOnly
     }
   }
 })

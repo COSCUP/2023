@@ -12,7 +12,8 @@ const renderRoutes = parsed?.VITE_LANDING_ONLY === 'yes'
   ? (() => {
       const routes = [
         '/',
-        '/landing'
+        '/landing',
+        '/map'
       ].flatMap(r => [r, `${r}/`])
       return Array.from(readdirSync('./locales/'))
         .flatMap((locale) => {

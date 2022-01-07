@@ -18,6 +18,14 @@ const routes: RouteRecordRaw[] = import.meta.env.VITE_LANDING_ONLY === 'yes'
         path: '/landing',
         name: 'Landing',
         component: () => import('@/pages/Landing.vue')
+      },
+      {
+        path: '/map',
+        name: 'Map',
+        component: () => import('@/pages/Map.vue'),
+        meta: {
+          order: 3
+        }
       }
     ]
   : [
@@ -57,14 +65,14 @@ const routes: RouteRecordRaw[] = import.meta.env.VITE_LANDING_ONLY === 'yes'
       //     order: 2
       //   }
       // },
-      // {
-      //   path: '/map',
-      //   name: 'Map',
-      //   component: () => import('@/pages/Map.vue'),
-      //   meta: {
-      //     order: 3
-      //   }
-      // },
+      {
+        path: '/map',
+        name: 'Map',
+        component: () => import('@/pages/Map.vue'),
+        meta: {
+          order: 3
+        }
+      },
       {
         path: '/venue',
         name: 'Venue',
