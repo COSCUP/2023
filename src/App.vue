@@ -21,9 +21,7 @@
       <template v-if="!landingOnly">
         <SponsorFooter></SponsorFooter>
       </template>
-      <template v-if="!isLandingPage">
-        <Footer></Footer>
-      </template>
+      <Footer></Footer>
     </MainContainer>
     <FullPageProgress></FullPageProgress>
     <PopUp></PopUp>

@@ -43,21 +43,10 @@
       <h2 class="section-title">{{ section.title }}</h2>
       <article class="section-content notice markdown" v-html="section.content"></article>
     </section>
-    <section class="past-links">
-      <a
-        v-for="i in numOfPast"
-        :href="`https://coscup.org/${2006 + i - 1}/`"
-        :key="`website-${2006 + i - 1}`"
-        class="past-link"
-        target="_blank"
-        rel="noopener"
-      >{{ 2006 + i - 1 }}</a>
-    </section>
   </main>
 </template>
 
 <script lang="ts">
-import { useTheme } from '@/modules/theme'
 import { defineComponent, ref, watch } from 'vue'
 import markdown from '@/utils/markdown'
 import IconBlogger from 'virtual:vite-icons/fa-brands/blogger'
@@ -126,14 +115,11 @@ const communityMedia = [
   }
 ]
 
-const numOfPast = 2022 - 2006
-
 export default defineComponent({
   name: 'Home',
   setup () {
     const { t, locale } = useI18n()
     const section = ref<Section>({ name: 'about', title: '', content: '' })
-    const { colorSchema } = useTheme()
 
     watch(locale, async () => {
       section.value =
@@ -149,9 +135,7 @@ export default defineComponent({
     return {
       t,
       section,
-      communityMedia,
-      numOfPast,
-      colorSchema
+      communityMedia
     }
   }
 })
