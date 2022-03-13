@@ -236,6 +236,12 @@ import { chunk } from '@/utils/common'
 import markdown from '@/utils/markdown'
 import { useTheme } from '@/modules/theme'
 
+const levelImageModules = import.meta.globEager('../assets/images/sponsorships/levels/*.svg')
+const getLevelImage = (file: string) => levelImageModules[`../assets/images/sponsorships/levels/${file}.svg`].default
+
+const addOnsImageModules = import.meta.globEager('../assets/images/sponsorships/*.png')
+const getAddOnsImage = (file: string) => addOnsImageModules[`../assets/images/sponsorships/${file}.png`].default
+
 export default defineComponent({
   name: 'Sponsorship',
   setup () {
@@ -246,8 +252,6 @@ export default defineComponent({
     const groupLevelKeys = computed(() => chunk(levelKeys.value, 3))
 
     const addOnsImageKeys = ['flag', 'lanyards', 'promotion', 'website-agenda-ads']
-
-    const getAddOnsImage = (key: string) => new URL(`../assets/images/sponsorships/${key}.png`, import.meta.url).href
 
     const addOnsThinTable = computed(() => {
       const getAvailableLevels = (column: string) => Object.keys(tm(`sponsorship.add-ons.list.${column}`)).filter((l) => !['X', ''].includes((tm(`sponsorship.add-ons.list.${column}`) as Record<string, string>)[l]))
@@ -268,7 +272,7 @@ export default defineComponent({
 
     const { isDark } = useTheme()
 
-    const getImageFromLevel = (level: string) => new URL(`../assets/images/sponsorships/levels/${level}_${isDark.value ? 'dark' : 'light'}.svg`, import.meta.url).href
+    const getImageFromLevel = (level: string) => getLevelImage(`${level}_${isDark.value ? 'dark' : 'light'}`)
 
     return {
       t,
