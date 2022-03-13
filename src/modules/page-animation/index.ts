@@ -11,7 +11,7 @@ export const setup: UserModuleSetup = ({ router }) => {
 
     const newIndex = Number(to.meta.order)
     const oldIndex = Number(from.meta.order)
-    if (isNaN(newIndex) || isNaN(newIndex)) {
+    if (isNaN(newIndex) || isNaN(oldIndex)) {
       to.meta.transitionName = 'fade'
       return
     }
