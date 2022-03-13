@@ -24,3 +24,10 @@ export function generateAssetsMap (result: Record<string, Record<string, any>>, 
       .map(([key, value]) => [key.replace(base, ''), value.default])
   )
 }
+
+export function chunk <T> (arr: Array<T>, chunkSize = 1, cache: Array<Array<T>> = []): Array<Array<T>> {
+  const tmp = [...arr]
+  if (chunkSize <= 0) return cache
+  while (tmp.length) cache.push(tmp.splice(0, chunkSize))
+  return cache
+}

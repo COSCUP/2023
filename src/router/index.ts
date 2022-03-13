@@ -26,6 +26,14 @@ const routes: RouteRecordRaw[] = import.meta.env.VITE_LANDING_ONLY === 'yes'
         meta: {
           order: 3
         }
+      },
+      {
+        path: '/sponsorship',
+        name: 'Sponsorship',
+        component: () => import('@/pages/Sponsorship.vue'),
+        meta: {
+          order: 1
+        }
       }
     ]
   : [

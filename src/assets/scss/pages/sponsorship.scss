@@ -1,0 +1,265 @@
+@import "../shared";
+
+@mixin sponsorship-theme-colors {
+  @include theme-colors-of("light", "#sponsorship") {
+    --color-card-background: #{$background-light};
+    --color-card-title: #{$coscup-green};
+    --color-card-content: #{$text-light};
+  }
+
+  @include theme-colors-of("dark", "#sponsorship") {
+    --color-card-background: #{lighten($background-dark, 8)};
+    --color-card-title: #{lighten($coscup-green, 10)};
+    --color-card-content: #{$text-dark};
+  }
+}
+
+@include sponsorship-theme-colors;
+
+@include page("sponsorship") {
+  $max-width: 900px;
+
+  h2 {
+    text-align: center;
+    font-size: 2rem;
+    padding: 5rem 5rem 0 5rem;
+  }
+
+  section {
+    position: relative;
+    width: 90%;
+    border-radius: 10px;
+    max-width: 1024px;
+    margin: 3rem auto;
+    padding: 3rem;
+    color: var(--color-card-content);
+    background-color: var(--color-card-background);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+    h3 {
+      color: var(--color-card-title);
+      display: inline-block;
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      padding: 0 1rem 0.5rem 0;
+      border-bottom: solid 2px;
+
+      .subtitle {
+        text-decoration: none;
+        font-size: 1rem;
+      }
+    }
+
+    .level-table {
+      max-width: calc(100vw - 8rem);
+      overflow-x: auto;
+      overflow-y: hidden;
+
+      table {
+        width: 100%;
+        min-width: 750px;
+
+        th {
+          img {
+            width: 80px;
+            padding-bottom: 0.65rem;
+          }
+        }
+
+        tbody > tr > td:first-child {
+          color: var(--color-card-title);
+          word-break: normal;
+        }
+
+        .cost {
+          text-align: center;
+          vertical-align: middle;
+          font-size: 1.2rem;
+        }
+      }
+    }
+
+    .level-list {
+      display: none;
+    }
+
+    .images {
+      column-count: 2;
+
+      img {
+        display: inline-block;
+        width: 100%;
+      }
+
+      p {
+        text-align: center;
+        font-size: 0.9rem;
+        min-height: 50px;
+      }
+    }
+
+    .add-ons-table {
+      max-width: calc(100vw - 8rem);
+      overflow-x: auto;
+      overflow-y: hidden;
+
+      table {
+        width: 100%;
+        min-width: 750px;
+
+        th {
+          word-break: keep-all;
+
+          img {
+            width: 60px;
+            padding-bottom: 0.3rem;
+          }
+        }
+
+        td {
+          word-break: normal;
+        }
+      }
+    }
+    .add-ons-thin-table {
+      display: none;
+    }
+
+    .faq {
+      li {
+        h4 {
+          font-size: 1.1rem;
+          padding: 1rem 0;
+        }
+
+        p {
+          white-space: pre-line;
+        }
+      }
+    }
+
+    .about-image {
+      img {
+        display: inline-block;
+        width: 100%;
+      }
+
+      p {
+        text-align: center;
+        font-size: 0.9rem;
+      }
+    }
+  }
+
+  @include xsOnly {
+    h2 {
+      text-align: center;
+      font-size: 1.75rem;
+      padding: 5rem 5rem 3rem 5rem;
+    }
+
+    section {
+      width: 100%;
+      padding: 2rem;
+      margin: 2rem auto;
+      font-size: 0.85rem;
+
+      h3 {
+        font-size: 1.5rem;
+
+        .subtitle {
+          font-size: 0.85rem;
+        }
+      }
+
+      .level-table, .add-ons-table {
+        max-width: calc(100vw - 4rem);
+      }
+
+      .level-table {
+        display: none;
+      }
+
+      .level-list {
+        display: block;
+        list-style: none;
+        padding: 0;
+
+        >li {
+          margin: 2rem 0;
+
+          img {
+            width: 40%;
+            margin: 1rem auto;
+          }
+          h4 {
+            text-align: center;
+          }
+          p {
+            text-align: center;
+            font-size: 1.2rem;
+          }
+        }
+      }
+
+      .add-ons-table {
+        display: none;
+      }
+      .add-ons-thin-table {
+        display: block;
+        width: 100%;
+
+        table {
+          width: 100%;
+          th {
+            word-break: keep-all;
+          }
+
+          tbody > tr > td {
+            word-break: normal;
+          }
+
+          .name {
+            vertical-align: middle;
+          }
+
+          .level {
+            padding: 0.5rem;
+
+            img {
+              width: 40px;
+              margin: 0.2rem auto;
+            }
+
+            p {
+              text-align: center;
+              word-break: keep-all;
+            }
+          }
+
+          .cost {
+            vertical-align: bottom;
+            text-align: end;
+          }
+        }
+      }
+
+      .images {
+        column-count: 1;
+
+        p {
+          min-height: unset;
+        }
+      }
+
+      .faq {
+        li {
+          h4 {
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+  }
+}

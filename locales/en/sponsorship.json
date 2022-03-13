@@ -1,0 +1,253 @@
+{
+  "meta": {
+    "title": "Sponsorship Program"
+  },
+  "plan": {
+    "title": "COSCUP x KCD Taiwan 2022 Sponsorship Program"
+  },
+  "contact": "Contact Us: {email}",
+  "overview": {
+    "title": "Overview",
+    "description": "Over 2,000 attendees and dozens of communities attended the COSCUP each year for three to five years.",
+    "feedback": {
+      "title": "COSCUP 2021 survey feedback:",
+      "list": [
+        "59.1% of attendees are from an information technology background",
+        "72% of attendees are 21-40 years old",
+        "Top 5 most used programming languages: Python, Bash, C++, C, Javascript"
+      ]
+    }
+  },
+  "level": {
+    "title": "Sponsorship Package",
+    "subtitle": "(Unit: USD. Please note that actual foreign exchange rates that will be applied to your sponsor fee will differ from these examples: FOREX as 1 USD= 28TWD)",
+    "columns": {
+      "cost": "Cost",
+      "benefit": "Benefits"
+    },
+    "list": {
+      "titanium": {
+        "name": "Titanium",
+        "subtitle": "(1 Available)",
+        "cost": "7,860",
+        "benefits": [
+          "Logo and company profile listed on COSCUP and KCD official website",
+          "Promotion via COSCUP social media",
+          "Logo is exposed on the welcome wall at the check-in area",
+          "Agenda page ads (the frequency depends on the level of sponsorship)",
+          "1 article on the COSCUP blog",
+          "4 Welcome Party free drink tickets",
+          "Recruiting Board Sponsorship",
+          "Logo displayed at reception table (co-branded with COSCUP)",
+          "Logo on stage flag in keynote hall (co-branded with COSCUP)",
+          "Welcome Party Sponsorship (co-branded with COSCUP)"
+        ]
+      },
+      "diamond": {
+        "name": "Diamond",
+        "subtitle": "(1 Available)",
+        "cost": "6,090",
+        "benefits": [
+          "Logo and company profile listed on COSCUP and KCD official website",
+          "Promotion via COSCUP social media",
+          "Logo is exposed on the welcome wall at the check-in area",
+          "Agenda page ads (the frequency depends on the level of sponsorship)",
+          "1 article on the COSCUP blog",
+          "2 Welcome Party free drink tickets",
+          "Promotion at the snack area"
+        ]
+      },
+      "gold": {
+        "name": "Gold",
+        "subtitle": "",
+        "cost": "4,910",
+        "benefits": [
+          "Logo and company profile listed on COSCUP and KCD official website",
+          "Promotion via COSCUP social media",
+          "Logo is exposed on the welcome wall at the check-in area",
+          "Agenda page ads (the frequency depends on the level of sponsorship)",
+          "1 article on the COSCUP blog",
+          "1 Welcome Party free drink tickets"
+        ]
+      },
+      "sliver": {
+        "name": "Silver",
+        "subtitle": "",
+        "cost": "2,945",
+        "benefits": [
+          "Logo and company profile listed on COSCUP and KCD official website",
+          "Promotion via COSCUP social media",
+          "Logo is exposed on the welcome wall at the check-in area",
+          "Agenda page ads (the frequency depends on the level of sponsorship)"
+        ]
+      },
+      "bronze": {
+        "name": "Bronze",
+        "subtitle": "",
+        "cost": "1,375",
+        "benefits": [
+          "Logo and company profile listed on COSCUP and KCD official website",
+          "Promotion via COSCUP social media",
+          "Logo is exposed on the welcome wall at the check-in area",
+          "Agenda page ads (the frequency depends on the level of sponsorship)"
+        ]
+      },
+      "friend": {
+        "name": "Friend",
+        "subtitle": "",
+        "cost": "785",
+        "benefits": [
+          "Logo and company profile listed on COSCUP and KCD official website",
+          "Promotion via COSCUP social media",
+          "Logo is exposed on the welcome wall at the check-in area"
+        ]
+      }
+    }
+  },
+  "add-ons": {
+    "title": "Sponsorship Add-ons",
+    "subtitle": "(Unit: USD. Please note that actual foreign exchange rates that will be applied to your sponsor fee will differ from these examples: FOREX as 1 USD= 28TWD)",
+    "item": "Additional Purchase",
+    "all": "All",
+    "level-limit": "Level limit",
+    "cost": "Cost",
+    "columns": {
+      "booth": "Booth",
+      "keynote": "Keynote (Limited)",
+      "technical": "Technical",
+      "flag": "Logo on Stage Flag in Keynote Hall (co-branded with COSCUP)",
+      "lanyards": "Lanyards (Exclusive Sponsorship)",
+      "party": "Welcome Party Sponsorship (co-branded with COSCUP)",
+      "promotion": "Promotion at the Snack Area (2 days)",
+      "website-agenda-ads": "Agenda Page Ads"
+    },
+    "list": {
+      "booth": {
+        "titanium": "2,680",
+        "diamond": "1,965",
+        "gold": "890",
+        "sliver": "",
+        "bronze": "",
+        "friend": ""
+      },
+      "keynote": {
+        "titanium": "1,785",
+        "diamond": "1,785",
+        "gold": "",
+        "sliver": "",
+        "bronze": "",
+        "friend": ""
+      },
+      "technical": {
+        "titanium": "890",
+        "diamond": "890",
+        "gold": "890",
+        "sliver": "",
+        "bronze": "",
+        "friend": ""
+      },
+      "flag": {
+        "titanium": "Included",
+        "diamond": "3,570",
+        "gold": "",
+        "sliver": "",
+        "bronze": "",
+        "friend": ""
+      },
+      "lanyards": {
+        "titanium": "2,860",
+        "diamond": "2,860",
+        "gold": "2,860",
+        "sliver": "",
+        "bronze": "",
+        "friend": ""
+      },
+      "party": {
+        "titanium": "Included",
+        "diamond": "5,360",
+        "gold": "5,360",
+        "sliver": "",
+        "bronze": "",
+        "friend": ""
+      },
+      "promotion": {
+        "titanium": "1,070",
+        "diamond": "Included",
+        "gold": "1,070",
+        "sliver": "1,070",
+        "bronze": "1,070",
+        "friend": "1,070"
+      },
+      "website-agenda-ads": {
+        "all": "430"
+      }
+    },
+    "end": {
+      "content": "Deadline for sponsorship: {date}",
+      "date": "July 18, 2022"
+    }
+  },
+  "faq": {
+    "title": "FAQ",
+    "list": [
+      {
+        "q": "Besides the current sponsorship plan, can I sponsor other projects or items?",
+        "a": "Yes, contact us at [sponsorship@coscup.org](mailto:sponsorship@coscup.org) to create custom sponsorship packages."
+      },
+      {
+        "q": "Our company would like to have a booth at COSCUP. Which sponsorship level should we choose?",
+        "a": "Please choose \"Gold,\" \"Diamond,\" or \"Titanium,\" and then select the booth level.\nPhysical booths allow for interaction with attendees, and COSCUP will also prepare activities for attendees to visit each booth. Sponsors can get to know the attendees better through surveys and giveaways, which is a great way to recruit talents and deepen the impression of attendees.\nThe booth is a popular option for additional purchases. But due to the limited number of booths, only Gold-level sponsors or above have the right to purchase booths."
+      },
+      {
+        "q": "What is the difference between a Keynote and a technical speech?",
+        "a": "The Keynote will be a 30-minute exclusive presentation in the main hall. Only Diamond-level sponsors and above can purchase the Keynote. The Technical Session is a 50-minute presentation that runs concurrently with the rest of the program. It is only available to Gold-level sponsors or higher.\nBoth are limited in number, so please check with your sponsor specialist to see if any slots are available and book early. In addition, we encourage you to follow the call for papers and let your engineers choose the community they are interested in presenting."
+      },
+      {
+        "q": "How are the logos of the sponsors ordered? How were the booths chosen?",
+        "a": "To protect the position of sponsor logos and to ensure fairness, the ranking of sponsor logos and the selection of booths are determined by \"sponsorship level\" and \"order of sponsorship payment.\"\nFor Gold-level sponsors who have purchased a booth, the logo of the earliest paid sponsor will be ranked first, and the booth location will be selected first."
+      },
+      {
+        "q": "Can sponsors request the personal information of the participants?",
+        "a": "COSCUP does not provide personal information of attendees to sponsors.\nThe organizer agrees to allow sponsors to promote, provide swags, recruit talent, and collect personal information from attendees at their booths with the consent of the attendees."
+      },
+      {
+        "q": "Why don't I see a physical brochure or an opportunity to place pamphlets?",
+        "a": "COSCUP has been going paperless for the past few years (Let's save some trees!) Attendees will read the agenda via the website and OPass app.\nIn addition to the \"Friends\" level of sponsorship, other levels of sponsorship will receive an electronic version of the advertisement, which will be broadcasted as users read the agenda (the frequency of ads depends on the level of sponsorship.) If you would like more exposure, you are welcome to purchase additional ads on the agenda page of the website."
+      },
+      {
+        "q": "If the epidemic rises again, will COSCUP still be held as usual? How will the sponsorship fee be calculated?",
+        "a": "In response to the announcement of the Central Epidemic Command Center of Taiwan to prohibit indoor gathering activities, COSCUP will be conducted as an online video live broadcast, with the sponsor's logo exposed before and after the video. The sponsorship fee is 60% of the total sponsorship (external tax)."
+      },
+      {
+        "q": "What's OCF?",
+        "a": "OCF, short for [Open Culture Foundation](https://ocf.tw/), is a non-profit organization that helps communities access administrative and financial services. COSCUP 2022 is co-organized with the Open Culture Foundation (OCF) to issue sponsorship receipts, electronic invoices, sponsorship contracts, and other legal documents."
+      }
+    ]
+  },
+  "about-coscup": {
+    "title": "About COSCUP",
+    "description": "COSCUP (Conference for Open Source Coders, Users and Promoters)",
+    "messages": [
+      "It's the LARGEST annual open source conference in Taiwan.",
+      "It's organized by Taiwan's open source communities since 2006. (This year is our 17th!)",
+      "Our mission is to create a friendly environment for open source people to make friends, learn new technical skills, and share experiences."
+    ],
+    "ps1": "To see our past conference photos, please visit: ",
+    "ps2": "96.2% of attendees would recommend others to join COSCUP"
+  },
+  "about-kcd": {
+    "title": "About Kubernetes Community Days Taiwan",
+    "description": "Kubernetes Community Days (KCDs) are community-organized events that gather adopters and technologists from open source and cloud native communities for education, collaboration, and networking. KCDs are supported by the Cloud Native Computing Foundation (CNCF).",
+    "message": "Kubernetes Community Days Taiwan (KCD Taiwan) is a local community event organized by the Cloud Native Taiwan User Group (CNTUG). The goal is to grow and sustain the Kubernetes community through the power of the local community so that more people can participate and learn about Kubernetes."
+  },
+  "wish": {
+    "title": "We wish all the sponsors in COSCUP x KCD Taiwan 2022 would",
+    "list": [
+      "Be inspired by new ideas and creativity.",
+      "Start new collaborative projects.",
+      "Recruit top talents to join your companies.",
+      "Expand the vision of the future of open software.",
+      "Network with professionals."
+    ]
+  }
+}
