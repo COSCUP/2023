@@ -13,5 +13,11 @@ export const install: UserModuleInstall = ({ app }) => {
 }
 
 export const setup: UserModuleSetup = ({ router }) => {
-  trackRouter(router)
+  trackRouter(router, {
+    template: (to) => ({
+      page_title: to.name,
+      page_path: import.meta.env.BASE_URL + to.path,
+      page_location: window.location.href
+    })
+  })
 }
