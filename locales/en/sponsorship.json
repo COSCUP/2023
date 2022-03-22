@@ -123,63 +123,63 @@
     },
     "list": {
       "booth": {
-        "titanium": "2,680",
-        "diamond": "1,965",
-        "gold": "890",
+        "titanium": "2,950",
+        "diamond": "2,160",
+        "gold": "980",
         "sliver": "",
         "bronze": "",
         "friend": ""
       },
       "keynote": {
-        "titanium": "1,785",
-        "diamond": "1,785",
+        "titanium": "1,965",
+        "diamond": "1,965",
         "gold": "",
         "sliver": "",
         "bronze": "",
         "friend": ""
       },
       "technical": {
-        "titanium": "890",
-        "diamond": "890",
-        "gold": "890",
+        "titanium": "980",
+        "diamond": "980",
+        "gold": "980",
         "sliver": "",
         "bronze": "",
         "friend": ""
       },
       "flag": {
         "titanium": "Included",
-        "diamond": "3,570",
+        "diamond": "3,930",
         "gold": "",
         "sliver": "",
         "bronze": "",
         "friend": ""
       },
       "lanyards": {
-        "titanium": "2,860",
-        "diamond": "2,860",
-        "gold": "2,860",
+        "titanium": "3,140",
+        "diamond": "3,140",
+        "gold": "3,140",
         "sliver": "",
         "bronze": "",
         "friend": ""
       },
       "party": {
         "titanium": "Included",
-        "diamond": "5,360",
-        "gold": "5,360",
+        "diamond": "5,890",
+        "gold": "5,890",
         "sliver": "",
         "bronze": "",
         "friend": ""
       },
       "promotion": {
-        "titanium": "1,070",
+        "titanium": "1,180",
         "diamond": "Included",
-        "gold": "1,070",
-        "sliver": "1,070",
-        "bronze": "1,070",
-        "friend": "1,070"
+        "gold": "1,180",
+        "sliver": "1,180",
+        "bronze": "1,180",
+        "friend": "1,180"
       },
       "website-agenda-ads": {
-        "all": "430"
+        "all": "470"
       }
     },
     "end": {

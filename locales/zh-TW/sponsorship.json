@@ -106,7 +106,7 @@
   },
   "add-ons": {
     "title": "贊助方案加價購",
-    "subtitle": "（單位：新台幣，外税）",
+    "subtitle": "（單位：新台幣，含税）",
     "item": "加價項目",
     "all": "全部",
     "level-limit": "等級限制",
@@ -123,63 +123,63 @@
     },
     "list": {
       "booth": {
-        "titanium": "75,000",
-        "diamond": "55,000",
-        "gold": "25,000",
+        "titanium": "82,500",
+        "diamond": "60,500",
+        "gold": "27,500",
         "sliver": "X",
         "bronze": "X",
         "friend": "X"
       },
       "keynote": {
-        "titanium": "50,000",
-        "diamond": "50,000",
+        "titanium": "55,000",
+        "diamond": "55,000",
         "gold": "X",
         "sliver": "X",
         "bronze": "X",
         "friend": "X"
       },
       "technical": {
-        "titanium": "25,000",
-        "diamond": "25,000",
-        "gold": "25,000",
+        "titanium": "27,500",
+        "diamond": "27,500",
+        "gold": "27,500",
         "sliver": "X",
         "bronze": "X",
         "friend": "X"
       },
       "flag": {
         "titanium": "已包含",
-        "diamond": "100,000",
+        "diamond": "110,000",
         "gold": "X",
         "sliver": "X",
         "bronze": "X",
         "friend": "X"
       },
       "lanyards": {
-        "titanium": "80,000",
-        "diamond": "80,000",
-        "gold": "80,000",
+        "titanium": "88,000",
+        "diamond": "88,000",
+        "gold": "88,000",
         "sliver": "X",
         "bronze": "X",
         "friend": "X"
       },
       "party": {
         "titanium": "已包含",
-        "diamond": "150,000",
-        "gold": "150,000",
+        "diamond": "165,000",
+        "gold": "165,000",
         "sliver": "X",
         "bronze": "X",
         "friend": "X"
       },
       "promotion": {
-        "titanium": "30,000",
+        "titanium": "33,000",
         "diamond": "已包含",
-        "gold": "30,000",
-        "sliver": "30,000",
-        "bronze": "30,000",
-        "friend": "30,000"
+        "gold": "33,000",
+        "sliver": "33,000",
+        "bronze": "33,000",
+        "friend": "33,000"
       },
       "website-agenda-ads": {
-        "all": "12,000"
+        "all": "13,200"
       }
     },
     "end": {
