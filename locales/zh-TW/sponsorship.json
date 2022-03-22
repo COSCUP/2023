@@ -20,7 +20,7 @@
   },
   "level": {
     "title": "贊助方案",
-    "subtitle": "（單位：新台幣，含稅）",
+    "subtitle": "（單位：新台幣，外稅）",
     "columns": {
       "cost": "贊助金額",
       "benefit": "贊助福利"
@@ -106,7 +106,7 @@
   },
   "add-ons": {
     "title": "贊助方案加價購",
-    "subtitle": "（單位：新台幣，含税）",
+    "subtitle": "（單位：新台幣，外稅）",
     "item": "加價項目",
     "all": "全部",
     "level-limit": "等級限制",
