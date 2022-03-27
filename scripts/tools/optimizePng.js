@@ -23,7 +23,7 @@ const optimizeOne = async (file) => {
 // const delay = () => new Promise(resolve => setTimeout(resolve, 300))
 
 async function run () {
-  const files = find.fileSync(/\.png$/, path.join(__dirname, '..'))
+  const files = find.fileSync(/\.png$/, path.join(__dirname, '../', '../'))
     .filter((file) => !['/node_modules/', '/dist/'].some((ignore) => file.includes(ignore)))
 
   for (const file of files) {
