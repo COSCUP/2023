@@ -5,12 +5,14 @@
     --color-card-background: #{$background-light};
     --color-card-title: #{$coscup-green};
     --color-card-content: #{$text-light};
+    --color-table-border: #285688;
   }
 
   @include theme-colors-of("dark", "#sponsorship") {
     --color-card-background: #{lighten($background-dark, 8)};
     --color-card-title: #{lighten($coscup-green, 10)};
     --color-card-content: #{$text-dark};
+    --color-table-border: #bfe0f6;
   }
 }
 
@@ -19,10 +21,15 @@
 @include page("sponsorship") {
   $max-width: 900px;
 
+  .banner {
+    width: 100%;
+  }
+
   h2 {
     text-align: center;
     font-size: 2rem;
     padding: 5rem 5rem 0 5rem;
+    display: none;
   }
 
   section {
@@ -52,6 +59,7 @@
     }
 
     .level-table {
+      border: 1px solid var(--color-table-border);
       max-width: calc(100vw - 8rem);
       overflow-x: auto;
       overflow-y: hidden;
@@ -100,6 +108,7 @@
     }
 
     .add-ons-table {
+      border: 1px solid var(--color-table-border);
       max-width: calc(100vw - 8rem);
       overflow-x: auto;
       overflow-y: hidden;

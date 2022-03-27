@@ -1,5 +1,10 @@
 <template>
   <main id="sponsorship" class="page-container">
+    <img
+      class="banner"
+      :src="getImageFromAddOns('banner')"
+      :alt="t('sponsorship.plan.title')"
+    >
     <h2>{{ t('sponsorship.plan.title') }}</h2>
     <section class="markdown">
       <h3>{{ t('sponsorship.overview.title') }}</h3>
@@ -159,7 +164,7 @@
           :key="key"
           class="item"
         >
-          <img :src="getAddOnsImage(key)" :alt="t(`sponsorship.add-ons.columns.${key}`)">
+          <img :src="getImageFromAddOns(key)" :alt="t(`sponsorship.add-ons.columns.${key}`)">
           <p>{{ t(`sponsorship.add-ons.columns.${key}`) }}</p>
         </div>
         <img>
@@ -274,6 +279,8 @@ export default defineComponent({
 
     const getImageFromLevel = (level: string) => getLevelImage(`${level}_${isDark.value ? 'dark' : 'light'}`)
 
+    const getImageFromAddOns = (key: string) => getAddOnsImage(`${key}_${isDark.value ? 'dark' : 'light'}`)
+
     return {
       t,
       tm,
@@ -282,7 +289,7 @@ export default defineComponent({
       groupLevelKeys,
       markdown,
       addOnsImageKeys,
-      getAddOnsImage,
+      getImageFromAddOns,
       addOnsThinTable,
       getImageFromLevel
     }
