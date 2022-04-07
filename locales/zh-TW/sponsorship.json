@@ -28,7 +28,7 @@
     "list": {
       "titanium": {
         "name": "鈦金級",
-        "subtitle": "（限量 1 名）",
+        "subtitle": "（因場地限制，鈦金級贊助有數量限制，採購前請先與贊助團隊確認）",
         "cost": "220,000",
         "benefits": [
           "Logo 和公司介紹於 COSCUP 和 KCD 官網露出",
@@ -45,7 +45,7 @@
       },
       "diamond": {
         "name": "鑽石級",
-        "subtitle": "（限量 1 名）",
+        "subtitle": "（因場地限制，鑽石級贊助有數量限制，採購前請先與贊助團隊確認）",
         "cost": "170,500",
         "benefits": [
           "Logo 和公司介紹於 COSCUP 和 KCD 官網露出",
