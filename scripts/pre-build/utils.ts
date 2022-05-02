@@ -23,7 +23,7 @@ export async function getLoadedSpreadsheetDocument () {
 
   if (!API_KEY) return null
 
-  const SPREADSHEET_ID = '1-n8ZnmZ3jssdhYSzkRF6ngOvlsea_qQVLP0E_bexzxY'
+  const SPREADSHEET_ID = '1DNPNGq8N6XimfuLEjv2Qzue4IiCD0kKfPvBJbr2CItY'
   const doc = new GoogleSpreadsheet(SPREADSHEET_ID)
   doc.useApiKey(API_KEY)
   try {

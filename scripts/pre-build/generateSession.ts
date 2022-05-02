@@ -124,7 +124,7 @@ export default async function run () {
     ])
     data = genResult(results[0].data, results[1].data, results[2].data)
   } catch (e) {
-    const { data: d } = await axios.get('https://coscup.org/2021/json/session.json')
+    const { data: d } = await axios.get('https://coscup.org/2022/json/session.json')
     data = d
   }
   saveJSON('session', data)
