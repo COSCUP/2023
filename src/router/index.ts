@@ -40,31 +40,41 @@ const routes: RouteRecordRaw[] = import.meta.env.VITE_LANDING_ONLY === 'yes'
       {
         path: '/',
         name: 'Home',
-        component: () => import('@/pages/Home.vue'),
+        redirect: {
+          name: 'Landing'
+        },
         meta: {
           order: 0
         }
       },
+      // {
+      //   path: '/',
+      //   name: 'Home',
+      //   component: () => import('@/pages/Home.vue'),
+      //   meta: {
+      //     order: 0
+      //   }
+      // },
       {
         path: '/landing',
         name: 'Landing',
         component: () => import('@/pages/Landing.vue')
       },
-      {
-        path: '/session',
-        name: 'Session',
-        component: () => import('@/pages/Session.vue'),
-        children: [
-          {
-            path: ':sessionId',
-            name: 'SessionDetail',
-            component: () => import('@/pages/Session.vue')
-          }
-        ],
-        meta: {
-          order: 1
-        }
-      },
+      // {
+      //   path: '/session',
+      //   name: 'Session',
+      //   component: () => import('@/pages/Session.vue'),
+      //   children: [
+      //     {
+      //       path: ':sessionId',
+      //       name: 'SessionDetail',
+      //       component: () => import('@/pages/Session.vue')
+      //     }
+      //   ],
+      //   meta: {
+      //     order: 1
+      //   }
+      // },
       // {
       //   path: '/room',
       //   name: 'Room',
@@ -74,6 +84,14 @@ const routes: RouteRecordRaw[] = import.meta.env.VITE_LANDING_ONLY === 'yes'
       //   }
       // },
       {
+        path: '/sponsorship',
+        name: 'Sponsorship',
+        component: () => import('@/pages/Sponsorship.vue'),
+        meta: {
+          order: 1
+        }
+      },
+      {
         path: '/map',
         name: 'Map',
         component: () => import('@/pages/Map.vue'),
@@ -81,14 +99,14 @@ const routes: RouteRecordRaw[] = import.meta.env.VITE_LANDING_ONLY === 'yes'
           order: 3
         }
       },
-      {
-        path: '/venue',
-        name: 'Venue',
-        component: () => import('@/pages/Venue.vue'),
-        meta: {
-          order: 4
-        }
-      },
+      // {
+      //   path: '/venue',
+      //   name: 'Venue',
+      //   component: () => import('@/pages/Venue.vue'),
+      //   meta: {
+      //     order: 4
+      //   }
+      // },
       {
         path: '/sponsor',
         name: 'Sponsor',
@@ -104,7 +122,8 @@ const routes: RouteRecordRaw[] = import.meta.env.VITE_LANDING_ONLY === 'yes'
         meta: {
           order: 6
         }
-      }, {
+      },
+      {
         name: 'NotFound',
         path: '/:catchAll(.*)',
         redirect: '/'
