@@ -35,7 +35,7 @@ function transformSponsorLevelMap (rows: SponsorLevelRow[]) {
 
 function transformSponsorMap (rows: SponsorRow[]) {
   return Object.fromEntries(rows
-    .filter((r) => r.canPublish === 'Y')
+    .filter((r) => r.canPublish === 'Y' || r.canPublish === 'P')
     .map((r) => [
       r.id,
       {
@@ -50,7 +50,8 @@ function transformSponsorMap (rows: SponsorRow[]) {
         intro: {
           en: r['intro:en'],
           'zh-TW': r['intro:zh-TW']
-        }
+        },
+        prepare: r.canPublish === 'P'
       }
     ]))
 }

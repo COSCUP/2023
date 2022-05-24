@@ -48,7 +48,7 @@ export default defineComponent({
   name: 'SponsorFooter',
   setup () {
     const { t, locale } = useI18n()
-    const sponsorGroups = computed(() => Object.entries(groupBy(sponsorDatas.map((data) => {
+    const sponsorGroups = computed(() => Object.entries(groupBy(sponsorDatas.filter((s) => !s.prepare).map((data) => {
       return {
         level: data.level,
         id: data.id,

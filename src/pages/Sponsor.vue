@@ -55,6 +55,26 @@
         </div>
       </div>
     </template>
+    <div
+      v-if="prepareSponsorGroups"
+      class="outer-container"
+    >
+      <h2 class="title level">
+        {{ t('sponsor.more') }}
+      </h2>
+      <div
+        class="card sponsor-container"
+      >
+        <div class="content-container">
+          <p
+            v-for="[level, sponsors] in Object.entries(prepareSponsorGroups)"
+            :key="`sponsor-level-${level}`"
+          >
+            {{ t(`sponsor.level['${level}']`) }} － {{ sponsors.map((s) => s.name[languageType]).join(',') }}
+          </p>
+        </div>
+      </div>
+    </div>
   </main>
 </template>
 
@@ -72,8 +92,8 @@ import { isClient } from '@vueuse/core'
 // import { generateAssetsMap } from '@/utils/common'
 
 type ArrayElement<ArrayType extends readonly unknown[]> = ArrayType[number];
-type SopnsorData = ArrayElement<typeof sponsorDatas>
-type SponsorGroups = Record<string, SopnsorData[]>
+type SponsorData = ArrayElement<typeof sponsorDatas>
+type SponsorGroups = Record<string, SponsorData[]>
 
 // const imagesMap = generateAssetsMap(
 //   import.meta.globEager('../assets/images/sponsors/*.png'),
@@ -89,16 +109,18 @@ export default defineComponent({
     const languageType = computed(() => locale.value as Locale)
 
     const sponsorGroups = ref<SponsorGroups | null>(null)
-    const initSponsorGroups = async () => {
-      sponsorGroups.value = Object.fromEntries(
-        await Promise.all(Object.entries(groupBy<SopnsorData>(sponsorDatas, 'level'))
+    const prepareSponsorGroups = ref<SponsorGroups | null>(null)
+
+    const createGroup = async (data: SponsorData[]) => {
+      return Object.fromEntries(
+        await Promise.all(Object.entries(groupBy<SponsorData>(data, 'level'))
           .sort((entryA, entryB) => {
             const sponsorSequence = ['titanium', 'diamond', 'gold', 'silver', 'bronze', 'friend', 'co-organizer', 'special-thanks']
             return sponsorSequence.indexOf(entryA[0]) - sponsorSequence.indexOf(entryB[0])
           })
           .map(async ([group, rawSponsors]) => {
             const sponsors = await Promise.all(rawSponsors.map(async (rawSponsor) => {
-              const sponsor: SopnsorData = {
+              const sponsor: SponsorData = {
                 // ...rawSponsor,
                 // image: imagesMap[rawSponsor.image]
                 ...rawSponsor
@@ -114,6 +136,11 @@ export default defineComponent({
             return [group, sponsors]
           }))
       )
+    }
+
+    const initSponsorGroups = async () => {
+      sponsorGroups.value = await createGroup(sponsorDatas.filter((s) => !s.prepare))
+      prepareSponsorGroups.value = (await createGroup(sponsorDatas.filter((s) => s.prepare)))
     }
 
     const detectOverflowContentElements = () => {
@@ -147,6 +174,7 @@ export default defineComponent({
       t,
       languageType,
       sponsorGroups,
+      prepareSponsorGroups,
       onReadmoreClick
     }
   }

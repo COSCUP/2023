@@ -13,7 +13,7 @@ export type SponsorRow = {
   [K in SponsorRowKeys]: K extends 'level'
     ? SponsorLevel
     : K extends 'canPublish'
-      ? 'Y' | 'N'
+      ? 'Y' | 'N' | 'P'
       : string;
 }
 
