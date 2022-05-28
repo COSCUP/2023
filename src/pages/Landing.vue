@@ -1,7 +1,9 @@
 <template>
   <main id="landing" class="page-container">
     <section class="info-block">
-      <img src='@/assets/images/banner.svg' alt="COSCUP Logo" />
+      <div class="logo-container">
+        <img src='@/assets/images/banner.svg' alt="COSCUP Logo" />
+      </div>
       <div class="info">
         <div class="row">
           <div class="icon">
