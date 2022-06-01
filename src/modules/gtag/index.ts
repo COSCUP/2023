@@ -17,7 +17,7 @@ export const setup: UserModuleSetup = ({ router }) => {
     template: (to) => ({
       page_title: to.name,
       page_path: import.meta.env.BASE_URL.replace(/\/$/, '') + to.path,
-      page_location: window.location.href
+      page_location: (typeof window !== 'undefined') ? window.location.href : undefined
     })
   })
 }
