@@ -2,7 +2,6 @@
 const fs = require('fs')
 const path = require('path')
 const SitemapGenerator = require('sitemap-generator')
-const sitemapPath = path.join(__dirname, '../../public/sitemap.xml')
 const spinner = require('ora')('Generating sitemap.xml...')
 const dotenv = require('dotenv')
 const { parsed } = dotenv.config()
@@ -11,6 +10,7 @@ const PORT = 3001
 const ORIGIN = parsed.VITE_ORIGIN
 const BASE_URL = parsed.VITE_BASE_URL
 const isLocal = process.argv[2] === '--local'
+const sitemapPath = path.join(__dirname, `../../${isLocal ? 'dist' : 'public'}/sitemap.xml`)
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
 const siteUrl = isLocal ? `http://localhost:${PORT}${BASE_URL}` : `${ORIGIN}${BASE_URL}`
 const generator = SitemapGenerator(siteUrl, {

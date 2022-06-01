@@ -49,7 +49,6 @@ jobs:
       - name: Generate sitemap 🗺
         run: |
           npm run tool:generate-sitemap:local
-          cp ./public/sitemap.xml ./dist/sitemap.xml
 
       - name: Deploy 📡
         uses: peaceiris/actions-gh-pages@v3
