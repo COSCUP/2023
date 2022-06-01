@@ -27,6 +27,7 @@ const renderRoutes = parsed?.VITE_LANDING_ONLY === 'yes'
       const routes = [
         '/',
         '/landing',
+        '/sponsorship',
         '/session',
         '/room',
         '/venue',
