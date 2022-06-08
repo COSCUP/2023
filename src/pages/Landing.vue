@@ -2,13 +2,14 @@
   <main id="landing" class="page-container">
     <section class="info-block">
       <div class="logo-container">
+        <img src='@/assets/images/banner.svg' alt="COSCUP Logo" />
       </div>
       <div class="info">
         <div class="row">
           <div class="icon">
             <icon-akar-icons-calendar></icon-akar-icons-calendar>
           </div>
-          <span>2022/07/30 ~ 2022/07/31</span>
+          <span>07/31 - 08/01</span>
         </div>
         <div class="row">
           <div class="icon">

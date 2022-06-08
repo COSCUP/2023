@@ -37,24 +37,24 @@ const routes: RouteRecordRaw[] = import.meta.env.VITE_LANDING_ONLY === 'yes'
       }
     ]
   : [
-      {
-        path: '/',
-        name: 'Home',
-        redirect: {
-          name: 'Landing'
-        },
-        meta: {
-          order: 0
-        }
-      },
       // {
       //   path: '/',
       //   name: 'Home',
-      //   component: () => import('@/pages/Home.vue'),
+      //   redirect: {
+      //     name: 'Landing'
+      //   },
       //   meta: {
       //     order: 0
       //   }
       // },
+      {
+        path: '/',
+        name: 'Home',
+        component: () => import('@/pages/Home.vue'),
+        meta: {
+          order: 0
+        }
+      },
       {
         path: '/landing',
         name: 'Landing',
