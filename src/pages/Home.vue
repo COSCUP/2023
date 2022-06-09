@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="info-container">
-      <span class="date">7 / 31 ~ 8 / 1</span>
+      <span class="date">2022/07/30 ~ 2022/07/31</span>
       <!-- <div class="info">
         <a class="venue" href="https://blog.coscup.org/2021/07/all-virtual-venues-opening-hours.html" target="_blank">
           {{ t('home.info.virtual_venue') }}

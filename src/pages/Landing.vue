@@ -9,7 +9,7 @@
           <div class="icon">
             <icon-akar-icons-calendar></icon-akar-icons-calendar>
           </div>
-          <span>07/31 - 08/01</span>
+          <span>2022/07/30 ~ 2022/07/31</span>
         </div>
         <div class="row">
           <div class="icon">
