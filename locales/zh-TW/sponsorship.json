@@ -28,7 +28,7 @@
     "list": {
       "titanium": {
         "name": "鈦金級",
-        "subtitle": "（因場地限制，鈦金級贊助有數量限制，採購前請先與贊助團隊確認）",
+        "subtitle": "（已額滿）",
         "cost": "220,000",
         "benefits": [
           "Logo 和公司介紹於 COSCUP 和 KCD 官網露出",
@@ -113,8 +113,8 @@
     "cost": "加價金額",
     "columns": {
       "booth": "攤位",
-      "keynote": "Keynote 演講（限量）",
-      "technical": "技術演講",
+      "keynote": "Keynote 演講（已額滿）",
+      "technical": "技術演講 （已額滿）",
       "flag": "Keynote 演講廳 垂吊布條",
       "lanyards": "頸帶獨家贊助",
       "party": "會前派對贊助 (與 COSCUP 聯名）",
