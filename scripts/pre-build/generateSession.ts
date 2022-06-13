@@ -4,10 +4,24 @@ import md5 from 'js-md5'
 import { saveJSON } from './utils'
 require('dotenv').config()
 const pretalxOptions = { headers: { Authorization: `Token ${process.env.PRETALX_TOKEN}` } }
+
+const SPEAKER_ZH_NAME_ID = 0
+const SPEAKER_ZH_BIO_ID = 0
+const SPEAKER_EN_NAME_ID = 0
+const SPEAKER_EN_BIO_ID = 1798
+const SESSION_ZH_DESCRIPTION_ID = 0
+const SESSION_EN_TITLE_ID = 1800
+const SESSION_EN_DESCRIPTION_ID = 1797
+const SESSION_TAGS_ID = 1690
+const SESSION_CO_WRITE_ID = 0
+const SESSION_QA_ID = 1594
+const SESSION_SLIDE_ID = 0
+const SESSION_RECORD_ID = 0
+
 function genResult (talks, rooms, speakers) {
   const resRooms = rooms.results.map(r => {
     return {
-      id: r.name.en.split(' ')[0],
+      id: r.name.en,
       zh: {
         name: r.name['zh-tw']
       },
@@ -22,12 +36,12 @@ function genResult (talks, rooms, speakers) {
       id: s.code,
       avatar: s.avatar || `https://www.gravatar.com/avatar/${md5(s.email)}?s=1024&d=identicon&r=g`,
       zh: {
-        name: (s.answers.find((a :any) => a.question.id === 863 && a.person === s.code) || {}).answer || s.name,
-        bio: (s.answers.find((a :any) => a.question.id === 866 && a.person === s.code) || {}).answer || s.biography || ''
+        name: (s.answers.find((a :any) => a.question.id === SPEAKER_ZH_NAME_ID && a.person === s.code) || {}).answer || s.name,
+        bio: (s.answers.find((a :any) => a.question.id === SPEAKER_ZH_BIO_ID && a.person === s.code) || {}).answer || s.biography || ''
       },
       en: {
-        name: (s.answers.find((a :any) => a.question.id === 861 && a.person === s.code) || {}).answer || s.name,
-        bio: (s.answers.find((a :any) => a.question.id === 862 && a.person === s.code) || {}).answer || s.biography || ''
+        name: (s.answers.find((a :any) => a.question.id === SPEAKER_EN_NAME_ID && a.person === s.code) || {}).answer || s.name,
+        bio: (s.answers.find((a :any) => a.question.id === SPEAKER_EN_BIO_ID && a.person === s.code) || {}).answer || s.biography || ''
       }
     }
   })
@@ -79,29 +93,24 @@ function genResult (talks, rooms, speakers) {
     return {
       id: s.code,
       type: resSessionTypes.find((t :any) => s.track['zh-tw'] === t.zh.name || s.track.en === t.en.name).id,
-      room: s.slot.room.en.split(' ')[0],
+      room: s.slot.room,
       start: s.slot.start,
       end: s.slot.end,
       language: s.content_locale === 'zh-tw' ? '漢語' : 'English',
       zh: {
         title: s.title,
-        description: (s.answers.find((a :any) => a.question.id === 865) || {}).answer || s.description || ''
+        description: (s.answers.find((a :any) => a.question.id === SESSION_ZH_DESCRIPTION_ID) || {}).answer || s.description || ''
       },
       en: {
-        title: (s.answers.find((a :any) => a.question.id === 859) || {}).answer || s.title,
-        description: (s.answers.find((a :any) => a.question.id === 860) || {}).answer || (s.answers.find((a :any) => a.question.id === 865) || {}).answer || ''
+        title: (s.answers.find((a :any) => a.question.id === SESSION_EN_TITLE_ID) || {}).answer || s.title,
+        description: (s.answers.find((a :any) => a.question.id === SESSION_EN_DESCRIPTION_ID) || {}).answer || ''
       },
       speakers: s.speakers.map(ss => ss.code),
-      speakerZhName: (s.answers.find((a :any) => a.question.id === 863) || {}).answer || '',
-      speakerEnName: (s.answers.find((a :any) => a.question.id === 861) || {}).answer || '',
-      speakerZhBio: (s.answers.find((a :any) => a.question.id === 866) || {}).answer || '',
-      speakerEnBio: (s.answers.find((a :any) => a.question.id === 862) || {}).answer || '',
-      speakerAvatar: (s.answers.find((a :any) => a.question.id === 977) || {}).answer_file || '',
-      tags: s.answers.find(a => a.question.id === 876) !== undefined ? [s.answers.find(a => a.question.id === 876).options[0].answer.en] : [],
-      co_write: s.answers.find(a => a.question.id === 1025) !== undefined ? s.answers.find(a => a.question.id === 1025).answer : null,
-      qa: s.answers.find(a => a.question.id === 1026) !== undefined ? s.answers.find(a => a.question.id === 1026).answer : null,
-      slide: s.answers.find(a => a.question.id === 566) !== undefined ? s.answers.find(a => a.question.id === 566).answer : null,
-      record: s.answers.find(a => a.question.id === 567) !== undefined ? s.answers.find(a => a.question.id === 567).answer : null
+      tags: s.answers.find(a => a.question.id === SESSION_TAGS_ID) !== undefined ? [s.answers.find(a => a.question.id === SESSION_TAGS_ID).options[0].answer.en] : [],
+      co_write: s.answers.find(a => a.question.id === SESSION_CO_WRITE_ID) !== undefined ? s.answers.find(a => a.question.id === SESSION_CO_WRITE_ID).answer : null,
+      qa: s.answers.find(a => a.question.id === SESSION_QA_ID) !== undefined ? s.answers.find(a => a.question.id === SESSION_QA_ID).answer : null,
+      slide: s.answers.find(a => a.question.id === SESSION_SLIDE_ID) !== undefined ? s.answers.find(a => a.question.id === SESSION_SLIDE_ID).answer : null,
+      record: s.answers.find(a => a.question.id === SESSION_RECORD_ID) !== undefined ? s.answers.find(a => a.question.id === SESSION_RECORD_ID).answer : null
     }
   })
 
@@ -118,12 +127,13 @@ export default async function run () {
   let data = {}
   try {
     const results = await Promise.all([
-      axios.get('https://pretalx.com/api/events/coscup-2021/talks/?limit=1000', pretalxOptions),
-      axios.get('https://pretalx.com/api/events/coscup-2021/rooms/?limit=1000', pretalxOptions),
-      axios.get('https://pretalx.com/api/events/coscup-2021/speakers/?limit=1000', pretalxOptions)
+      axios.get('https://pretalx.com/api/events/coscup-2022/talks/?limit=1000', pretalxOptions),
+      axios.get('https://pretalx.com/api/events/coscup-2022/rooms/?limit=1000', pretalxOptions),
+      axios.get('https://pretalx.com/api/events/coscup-2022/speakers/?limit=1000', pretalxOptions)
     ])
     data = genResult(results[0].data, results[1].data, results[2].data)
   } catch (e) {
+    console.error(e)
     const { data: d } = await axios.get('https://coscup.org/2022/json/session.json')
     data = d
   }
