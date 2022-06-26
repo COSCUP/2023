@@ -45,7 +45,7 @@
       },
       "diamond": {
         "name": "鑽石級",
-        "subtitle": "（因場地限制，鑽石級贊助有數量限制，採購前請先與贊助團隊確認）",
+        "subtitle": "（已額滿）",
         "cost": "170,500",
         "benefits": [
           "Logo 和公司介紹於 COSCUP 和 KCD 官網露出",
@@ -112,7 +112,7 @@
     "level-limit": "等級限制",
     "cost": "加價金額",
     "columns": {
-      "booth": "攤位",
+      "booth": "攤位（已額滿）",
       "keynote": "Keynote 演講（已額滿）",
       "technical": "技術演講 （已額滿）",
       "flag": "Keynote 演講廳 垂吊布條",
