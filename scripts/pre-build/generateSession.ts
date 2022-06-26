@@ -2,7 +2,14 @@
 import axios from 'axios'
 import md5 from 'js-md5'
 import { saveJSON } from './utils'
-require('dotenv').config()
+import { join } from 'path'
+import dotenv from 'dotenv'
+import { formatISO } from 'date-fns'
+import { utcToZonedTime } from 'date-fns-tz'
+
+dotenv.config()
+dotenv.config({ path: join(__dirname, '../../.env.local') })
+
 const pretalxOptions = { headers: { Authorization: `Token ${process.env.PRETALX_TOKEN}` } }
 
 const SPEAKER_ZH_NAME_ID = 0
@@ -12,21 +19,21 @@ const SPEAKER_EN_BIO_ID = 1798
 const SESSION_ZH_DESCRIPTION_ID = 0
 const SESSION_EN_TITLE_ID = 1800
 const SESSION_EN_DESCRIPTION_ID = 1797
-const SESSION_TAGS_ID = 1690
+const SESSION_TAGS_ID = 1594
 const SESSION_CO_WRITE_ID = 0
-const SESSION_QA_ID = 1594
+const SESSION_QA_ID = 0
 const SESSION_SLIDE_ID = 0
 const SESSION_RECORD_ID = 0
 
 function genResult (talks, rooms, speakers) {
   const resRooms = rooms.results.map(r => {
     return {
-      id: r.name.en,
+      id: r.name.en || r.name['zh-tw'],
       zh: {
         name: r.name['zh-tw']
       },
       en: {
-        name: r.name.en
+        name: r.name.en || r.name['zh-tw']
       }
     }
   })
@@ -94,8 +101,8 @@ function genResult (talks, rooms, speakers) {
       id: s.code,
       type: resSessionTypes.find((t :any) => s.track['zh-tw'] === t.zh.name || s.track.en === t.en.name).id,
       room: s.slot.room,
-      start: s.slot.start,
-      end: s.slot.end,
+      start: formatISO(utcToZonedTime(s.slot.start, '+00:00')),
+      end: formatISO(utcToZonedTime(s.slot.end, '+00:00')),
       language: s.content_locale === 'zh-tw' ? '漢語' : 'English',
       zh: {
         title: s.title,

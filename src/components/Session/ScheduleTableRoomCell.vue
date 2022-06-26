@@ -7,7 +7,7 @@
 
 <template>
   <div v-if="isLoaded" class="schedule-table-room-cell">
-    <div class="live">
+    <!-- <div class="live">
       <iframe
         v-if="iframeLoaded"
         width="240"
@@ -26,7 +26,7 @@
       >
         <icon-mdi-play v-if="roomLink"></icon-mdi-play>
       </div>
-    </div>
+    </div> -->
 
     <div class="text">
       <span>Room</span>
