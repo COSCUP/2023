@@ -30,6 +30,7 @@ const renderRoutes = parsed?.VITE_LANDING_ONLY === 'yes'
         '/sponsorship',
         '/session',
         '/room',
+        '/community',
         '/venue',
         '/map',
         '/sponsor',

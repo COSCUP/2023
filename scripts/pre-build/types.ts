@@ -1,6 +1,13 @@
 type AnnouncementRowKeys = 'uuid' | 'meta:title:en' | 'meta:title:zh-TW' | 'meta:description:en' | 'meta:description:zh-TW' | 'content:en' | 'content:zh-TW'
 export type AnnouncementRow = Record<AnnouncementRowKeys, string>
 
+type CommunityRowKeys = 'id' | 'name:en' | 'name:zh-TW' | 'intro:en' | 'intro:zh-TW' | 'link' | 'image' | 'canPublish'
+export type CommunityRow = {
+  [K in CommunityRowKeys]: K extends 'canPublish'
+      ? 'Y' | 'N'
+      : string;
+}
+
 export type SponsorLevelTuple = ['titanium', 'diamond', 'co-organizer', 'gold', 'bronze', 'silver', 'special-thanks', 'friend']
 export type SponsorLevel = SponsorLevelTuple[number]
 type SponsorLevelRowKeys = 'level' | 'basicWeight'
@@ -27,7 +34,7 @@ export type SponsorNewsRow = {
 type YoutubeRowKeys = 'room' | 'link'
 export type YoutubeRow = Record<YoutubeRowKeys, string>
 
-export type SheetName = 'announcement' | 'sponsorLevel' | 'sponsor' | 'sponsorNews' | 'youtube'
+export type SheetName = 'announcement' | 'community' | 'sponsorLevel' | 'sponsor' | 'sponsorNews' | 'youtube'
 export type SheetIdMap = Record<SheetName, string>
 
 export type SheetRow<N extends SheetName> = N extends 'announcement'

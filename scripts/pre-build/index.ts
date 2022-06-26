@@ -10,6 +10,7 @@ import generateSponsor from './generateSponsor'
 import generateSession from './generateSession'
 import generateStaff from './generateStaff'
 import generateYTLink from './generateYTLink'
+import generateCommunity from './generateCommunity'
 
 (async () => {
   const spinner = ora('Strart pre-building...').start()
@@ -18,6 +19,7 @@ import generateYTLink from './generateYTLink'
     await Promise.all([
       generateAnnouncement(doc),
       generateSponsor(doc, false),
+      generateCommunity(doc, false),
       generateSession(),
       generateStaff(),
       generateYTLink(doc)

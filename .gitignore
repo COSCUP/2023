@@ -27,6 +27,7 @@ public/json/staff.json
 public/json/sponsor.json
 public/json/sponsor-news.json
 public/json/ytLink.json
+public/json/community.json
 public/sitemap.xml
 src/assets/json/announcement.json
 src/assets/json/session.json
@@ -34,4 +35,5 @@ src/assets/json/staff.json
 src/assets/json/sponsor.json
 src/assets/json/sponsor-news.json
 src/assets/json/ytLink.json
+src/assets/json/community.json
 ./.vite-ssg-temp
