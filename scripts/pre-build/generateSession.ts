@@ -107,11 +107,11 @@ function genResult (talks, rooms, speakers) {
       language: s.content_locale === 'zh-tw' ? '漢語' : 'English',
       zh: {
         title: s.title,
-        description: (s.answers.find((a :any) => a.question.id === SESSION_ZH_DESCRIPTION_ID) || {}).answer || s.description || s.abstract || ''
+        description: (s.answers.find((a :any) => a.question.id === SESSION_ZH_DESCRIPTION_ID) || {}).answer || s.abstract || ''
       },
       en: {
         title: (s.answers.find((a :any) => a.question.id === SESSION_EN_TITLE_ID) || {}).answer || s.title,
-        description: (s.answers.find((a :any) => a.question.id === SESSION_EN_DESCRIPTION_ID) || {}).answer || s.description || s.abstract || ''
+        description: (s.answers.find((a :any) => a.question.id === SESSION_EN_DESCRIPTION_ID) || {}).answer || s.abstract || ''
       },
       speakers: s.speakers.map(ss => ss.code),
       tags: s.answers.find(a => a.question.id === SESSION_TAGS_ID) !== undefined ? [s.answers.find(a => a.question.id === SESSION_TAGS_ID).options[0].answer.en] : [],
