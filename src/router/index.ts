@@ -60,29 +60,29 @@ const routes: RouteRecordRaw[] = import.meta.env.VITE_LANDING_ONLY === 'yes'
         name: 'Landing',
         component: () => import('@/pages/Landing.vue')
       },
-      // {
-      //   path: '/session',
-      //   name: 'Session',
-      //   component: () => import('@/pages/Session.vue'),
-      //   children: [
-      //     {
-      //       path: ':sessionId',
-      //       name: 'SessionDetail',
-      //       component: () => import('@/pages/Session.vue')
-      //     }
-      //   ],
-      //   meta: {
-      //     order: 1
-      //   }
-      // },
-      // {
-      //   path: '/room',
-      //   name: 'Room',
-      //   component: () => import('@/pages/Room.vue'),
-      //   meta: {
-      //     order: 2
-      //   }
-      // },
+      {
+        path: '/session',
+        name: 'Session',
+        component: () => import('@/pages/Session.vue'),
+        children: [
+          {
+            path: ':sessionId',
+            name: 'SessionDetail',
+            component: () => import('@/pages/Session.vue')
+          }
+        ],
+        meta: {
+          order: 1
+        }
+      },
+      {
+        path: '/room',
+        name: 'Room',
+        component: () => import('@/pages/Room.vue'),
+        meta: {
+          order: 2
+        }
+      },
       // {
       //   path: '/community',
       //   name: 'Community',

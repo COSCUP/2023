@@ -27,6 +27,11 @@ function mapSessionsWithIndex (sessions: Session[]):SessionsMap {
 
 function filterAndSortScheduleElements (elements: ScheduleElement[], roomOrder: RoomId[]): ScheduleElement[] {
   return elements
+    .sort((a, b) => {
+      if (a.room === 'Main Track') return -1
+      if (b.room === 'Main Track') return 1
+      return a.room.charCodeAt(0) - b.room.charCodeAt(0)
+    })
   // .filter(e => {
   //   const result = roomOrder.includes(e.room)
   //   !result && console.warn(`Session: ${e.session}'s room: ${e.room} is not in provided roomOrder`)
@@ -70,7 +75,7 @@ export function transformRawData (rawData: RawData, timeZoneOffsetMinutes: numbe
       return { ...rest, 'zh-TW': zh }
     })()
     const room = ((): Room => {
-      const { zh, en, ...rest } = rawData.rooms.find(r => r.id === rawRest.room.en)!
+      const { zh, en, ...rest } = rawData.rooms.find(r => r.id === rawRest.room.en || r.id === rawRest.room['zh-tw'])!
       return {
         id: rest.id,
         en: { name: en.name || rest.id },
