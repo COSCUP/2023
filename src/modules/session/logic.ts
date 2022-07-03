@@ -63,7 +63,7 @@ export function transformRawData (rawData: RawData, timeZoneOffsetMinutes: numbe
   function transformToScheduleElement (rawSession: RawSession): ScheduleElement {
     return {
       session: rawSession.id,
-      room: rawSession.room.en,
+      room: rawSession.room,
       start: createDate(rawSession.start),
       end: createDate(rawSession.end)
     }
@@ -75,7 +75,7 @@ export function transformRawData (rawData: RawData, timeZoneOffsetMinutes: numbe
       return { ...rest, 'zh-TW': zh }
     })()
     const room = ((): Room => {
-      const { zh, en, ...rest } = rawData.rooms.find(r => r.id === rawRest.room.en || r.id === rawRest.room['zh-tw'])!
+      const { zh, en, ...rest } = rawData.rooms.find(r => r.id === rawRest.room)!
       return {
         id: rest.id,
         en: { name: en.name || rest.id },

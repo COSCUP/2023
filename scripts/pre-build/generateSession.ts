@@ -98,10 +98,7 @@ function genResult (talks, rooms, speakers) {
     return {
       id: s.code,
       type: resSessionTypes.find((t :any) => s.track?.['zh-tw'] === t.zh.name || s.track?.en === t.en.name).id,
-      room: {
-        'zh-tw': s.slot.room?.['zh-tw'] || s.slot.room?.en,
-        en: s.slot.room?.en || s.slot.room?.['zh-tw'],
-      },
+      room: s.slot.room?.en || s.slot.room?.['zh-tw'],
       start: s.slot.start,
       end: s.slot.end,
       language: s.content_locale === 'zh-tw' ? '漢語' : 'English',
