@@ -12,14 +12,14 @@ import type { PopUpData } from '../pop-up'
 import type { Session, ScheduleElement, RawData, SessionType, Room, Speaker, Tag, SessionsMap, ScheduleList, YearOfDate, MonthOfDate, DateOfDate, SchedulDay, HourOfDate, MinuteOfDate, ScheduleTable, RoomId, ScheduleTableBodyCell, ScheduleTableBlankCell, ScheduleTableSpanCell, RoomsMap } from './types'
 
 export const TIMEZONE_OFFSET: number = -480
-export const ROOM_ORDER = []
-// export const ROOM_ORDER: RoomId[] = [
-//   'RB105',
-//   'AU',
-//   'TR209', 'TR211', 'TR212', 'TR213', 'TR214',
-//   'TR309', 'TR311', 'TR313',
-//   'TR409-1', 'TR410', 'TR411', 'TR412-1', 'TR412-2', 'TR413-1', 'TR413-2'
-// ]
+// export const ROOM_ORDER = []
+export const ROOM_ORDER: RoomId[] = [
+  'RB 105',
+  'AU 視聽館',
+  'TR 209', 'TR 211', 'TR 212', 'TR 213', 'TR 214',
+  'TR 310-1', 'TR 310-2', 'TR 311', 'TR 313',
+  'TR 409-1', 'TR 409-2', 'TR 410', 'TR 411', 'TR 412-1', 'TR 412-2', 'TR 413-1', 'TR 413-2'
+]
 
 function mapSessionsWithIndex (sessions: Session[]):SessionsMap {
   return Object.fromEntries(sessions.map(s => [s.id, s]))
@@ -27,17 +27,17 @@ function mapSessionsWithIndex (sessions: Session[]):SessionsMap {
 
 function filterAndSortScheduleElements (elements: ScheduleElement[], roomOrder: RoomId[]): ScheduleElement[] {
   return elements
-    .sort((a, b) => {
-      if (a.room === 'Main Track') return -1
-      if (b.room === 'Main Track') return 1
-      return a.room.charCodeAt(0) - b.room.charCodeAt(0)
-    })
-  // .filter(e => {
-  //   const result = roomOrder.includes(e.room)
-  //   !result && console.warn(`Session: ${e.session}'s room: ${e.room} is not in provided roomOrder`)
-  //   return result
-  // })
-  // .sort((a, b) => roomOrder.indexOf(a.room) - roomOrder.indexOf(b.room))
+    // .sort((a, b) => {
+    //   if (a.room === 'Main Track') return -1
+    //   if (b.room === 'Main Track') return 1
+    //   return a.room.charCodeAt(0) - b.room.charCodeAt(0)
+    // })
+  .filter(e => {
+    const result = roomOrder.includes(e.room)
+    !result && console.warn(`Session: ${e.session}'s room: ${e.room} is not in provided roomOrder`)
+    return result
+  })
+  .sort((a, b) => roomOrder.indexOf(a.room) - roomOrder.indexOf(b.room))
 }
 
 function getTimePoints (elements: ScheduleElement[], includeEndTime = true): [HourOfDate, MinuteOfDate][] {
@@ -115,8 +115,8 @@ export function transformRawData (rawData: RawData, timeZoneOffsetMinutes: numbe
   const scheduleElements = filterAndSortScheduleElements(tuples.map(([d]) => d), roomOrder)
   const sessionsMap = mapSessionsWithIndex(tuples.map(([_, d]) => d))
   const roomsMap: RoomsMap = Object.fromEntries(rawData.rooms
-    // .filter(r => roomOrder.includes(r.id))
-    // .sort((a, b) => roomOrder.indexOf(a.id) - roomOrder.indexOf(b.id))
+    .filter(r => roomOrder.includes(r.id))
+    .sort((a, b) => roomOrder.indexOf(a.id) - roomOrder.indexOf(b.id))
     .map(
       r => [r.id, {
         id: r.id,
