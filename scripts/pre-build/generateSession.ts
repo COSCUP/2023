@@ -41,12 +41,12 @@ function genResult (talks, rooms, speakers) {
       id: s.code,
       avatar: s.avatar || `https://www.gravatar.com/avatar/${md5(s.email)}?s=1024&d=identicon&r=g`,
       zh: {
-        name: (s.answers.find((a :any) => a.question.id === SPEAKER_ZH_NAME_ID && a.person === s.code) || {}).answer || s.name,
-        bio: (s.answers.find((a :any) => a.question.id === SPEAKER_ZH_BIO_ID && a.person === s.code) || {}).answer || s.biography || ''
+        name: (s.answers.find((a :any) => a.question.id === SPEAKER_ZH_NAME_ID) || {}).answer || s.name,
+        bio: (s.answers.find((a :any) => a.question.id === SPEAKER_ZH_BIO_ID) || {}).answer || s.biography || ''
       },
       en: {
-        name: (s.answers.find((a :any) => a.question.id === SPEAKER_EN_NAME_ID && a.person === s.code) || {}).answer || s.name,
-        bio: (s.answers.find((a :any) => a.question.id === SPEAKER_EN_BIO_ID && a.person === s.code) || {}).answer || s.biography || ''
+        name: (s.answers.find((a :any) => a.question.id === SPEAKER_EN_NAME_ID) || {}).answer || s.name,
+        bio: (s.answers.find((a :any) => a.question.id === SPEAKER_EN_BIO_ID) || {}).answer || s.biography || ''
       }
     }
   })
