@@ -61,7 +61,7 @@ import '@/assets/scss/pages/home.scss'
 import { useI18n } from 'vue-i18n'
 
 interface Section {
-  name: 'notice' | 'about';
+  name: 'notice' | 'about' | 'about-kcd';
   title: string;
   content: string;
 }
@@ -73,15 +73,20 @@ export default defineComponent({
     const sections = ref<Section[]>([])
     watch(locale, async () => {
       sections.value = [
-        // {
-        //   name: 'notice',
-        //   title: t('home.notice.title'),
-        //   content: markdown(t('home.notice.content'))
-        // },
+        {
+          name: 'notice',
+          title: t('home.notice.title'),
+          content: markdown(t('home.notice.content'))
+        },
         {
           name: 'about',
           title: t('home.about.title'),
           content: markdown(t('home.about.content'))
+        },
+        {
+          name: 'about-kcd',
+          title: t('home.about-kcd.title'),
+          content: markdown(t('home.about-kcd.content'))
         }
       ]
     }, {
