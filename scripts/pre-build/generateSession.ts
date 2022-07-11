@@ -24,6 +24,15 @@ const SESSION_SLIDE_ID = 0
 const SESSION_RECORD_ID = 0
 
 function genResult (talks, rooms, speakers) {
+  function getAnswer<T extends { answers: Array<{ question: { id: number }, answer: string }>, [name: string]: string | any }> (
+    data: T,
+    id: number,
+    fallback: string | null
+  ): string | null {
+    const answer = data.answers.find((a :any) => a.question.id === id)?.answer
+    return (!answer || answer === '-') ? fallback : answer
+  }
+
   const resRooms = rooms.results.map(r => {
     return {
       id: r.name.en || r.name['zh-tw'],
@@ -41,12 +50,12 @@ function genResult (talks, rooms, speakers) {
       id: s.code,
       avatar: s.avatar || `https://www.gravatar.com/avatar/${md5(s.email)}?s=1024&d=identicon&r=g`,
       zh: {
-        name: (s.answers.find((a :any) => a.question.id === SPEAKER_ZH_NAME_ID) || {}).answer || s.name,
-        bio: (s.answers.find((a :any) => a.question.id === SPEAKER_ZH_BIO_ID) || {}).answer || s.biography || ''
+        name: getAnswer(s, SPEAKER_ZH_NAME_ID, s.name),
+        bio: getAnswer(s, SPEAKER_ZH_BIO_ID, s.biography || '')
       },
       en: {
-        name: (s.answers.find((a :any) => a.question.id === SPEAKER_EN_NAME_ID) || {}).answer || s.name,
-        bio: (s.answers.find((a :any) => a.question.id === SPEAKER_EN_BIO_ID) || {}).answer || s.biography || ''
+        name: getAnswer(s, SPEAKER_EN_NAME_ID, s.name),
+        bio: getAnswer(s, SPEAKER_EN_BIO_ID, s.biography || '')
       }
     }
   })
@@ -104,18 +113,18 @@ function genResult (talks, rooms, speakers) {
       language: s.content_locale === 'zh-tw' ? '漢語' : 'English',
       zh: {
         title: s.title,
-        description: (s.answers.find((a :any) => a.question.id === SESSION_ZH_DESCRIPTION_ID) || {}).answer || s.abstract || ''
+        description: getAnswer(s, SESSION_ZH_DESCRIPTION_ID, s.abstract || '')
       },
       en: {
-        title: (s.answers.find((a :any) => a.question.id === SESSION_EN_TITLE_ID) || {}).answer || s.title,
-        description: (s.answers.find((a :any) => a.question.id === SESSION_EN_DESCRIPTION_ID) || {}).answer || s.abstract || ''
+        title: getAnswer(s, SESSION_EN_TITLE_ID, s.title),
+        description: getAnswer(s, SESSION_EN_DESCRIPTION_ID, s.abstract || '')
       },
       speakers: s.speakers.map(ss => ss.code),
-      tags: s.answers.find(a => a.question.id === SESSION_TAGS_ID) !== undefined ? [s.answers.find(a => a.question.id === SESSION_TAGS_ID).options[0].answer.en] : [],
-      co_write: s.answers.find(a => a.question.id === SESSION_CO_WRITE_ID) !== undefined ? s.answers.find(a => a.question.id === SESSION_CO_WRITE_ID).answer : null,
-      qa: s.answers.find(a => a.question.id === SESSION_QA_ID) !== undefined ? s.answers.find(a => a.question.id === SESSION_QA_ID).answer : null,
-      slide: s.answers.find(a => a.question.id === SESSION_SLIDE_ID) !== undefined ? s.answers.find(a => a.question.id === SESSION_SLIDE_ID).answer : null,
-      record: s.answers.find(a => a.question.id === SESSION_RECORD_ID) !== undefined ? s.answers.find(a => a.question.id === SESSION_RECORD_ID).answer : null,
+      tags: [getAnswer(s, SESSION_TAGS_ID, null)].filter((el) => el),
+      co_write: getAnswer(s, SESSION_CO_WRITE_ID, null),
+      qa: getAnswer(s, SESSION_QA_ID, null),
+      slide: getAnswer(s, SESSION_SLIDE_ID, null),
+      record: getAnswer(s, SESSION_RECORD_ID, null),
       uri: `https://coscup.org/2022/zh-TW/session/${s.code}`
     }
   })
