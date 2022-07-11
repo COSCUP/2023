@@ -112,6 +112,7 @@ const _usePopUp = (): UsePopUp => {
     } else {
       stack.value.length = 0
     }
+    if (!stack.value.length) unlockScroll()
   }
   return {
     currentPopUp,
