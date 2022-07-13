@@ -77,25 +77,25 @@ export default defineConfig(({ mode, command }) => {
           theme_color: '#ffffff',
           icons: command === 'build' ? [
             {
-              src: `${parsed?.VITE_BASE_URL}/images/manifest-icon-192.maskable.png`,
+              src: `${parsed?.VITE_BASE_URL}images/manifest-icon-192.maskable.png`,
               sizes: "192x192",
               type: "image/png",
               purpose: "any"
             },
             {
-              src: `${parsed?.VITE_BASE_URL}/images/manifest-icon-192.maskable.png`,
+              src: `${parsed?.VITE_BASE_URL}images/manifest-icon-192.maskable.png`,
               sizes: "192x192",
               type: "image/png",
               purpose: "maskable"
             },
             {
-              src: `${parsed?.VITE_BASE_URL}/images/manifest-icon-512.maskable.png`,
+              src: `${parsed?.VITE_BASE_URL}images/manifest-icon-512.maskable.png`,
               sizes: "512x512",
               type: "image/png",
               purpose: "any"
             },
             {
-              src: `${parsed?.VITE_BASE_URL}/images/manifest-icon-512.maskable.png`,
+              src: `${parsed?.VITE_BASE_URL}images/manifest-icon-512.maskable.png`,
               sizes: "512x512",
               type: "image/png",
               purpose: "maskable"
