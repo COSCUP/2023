@@ -125,7 +125,7 @@ function genResult (talks, rooms, speakers) {
       qa: getAnswer(s, SESSION_QA_ID, null),
       slide: getAnswer(s, SESSION_SLIDE_ID, null),
       record: getAnswer(s, SESSION_RECORD_ID, null),
-      uri: `https://coscup.org/2022/zh-TW/session/${s.code}`
+      uri: `https://coscup.org/2022/session/${s.code}`
     }
   })
 
