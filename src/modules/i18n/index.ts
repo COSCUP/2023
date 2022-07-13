@@ -18,10 +18,17 @@ const messages = (() => {
 })()
 export const locales = Object.keys(messages)
 
+function getFallbackLocale () {
+  if (typeof window !== 'object') return 'zh-TW'
+  const lang = window.navigator.language
+  if (lang.includes('zh')) return 'zh-TW'
+  return 'en'
+}
+
 const i18nOptions: I18nOptions = {
   legacy: false,
   locale: 'zh-TW',
-  fallbackLocale: 'zh-TW',
+  fallbackLocale: getFallbackLocale(),
   messages
 }
 
