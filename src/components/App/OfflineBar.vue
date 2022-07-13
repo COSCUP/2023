@@ -61,6 +61,7 @@ export default defineComponent({
   bottom: 0;
   right: 0;
   left: 0;
+  z-index: 5;
   padding: 5px;
   color: #fff;
   background-color: var(--color-background);
