@@ -84,20 +84,26 @@ export default defineConfig(({ mode, command }) => {
                   statuses: [0, 200, 301],
                 }
               }
+            },
+            {
+              urlPattern: /^https:\/\/coscup\.org\/2022\/json\/.*/i,
+              handler: 'NetworkFirst',
+              options: {
+                cacheName: 'json-data-cache',
+                expiration: {
+                  maxEntries: 10,
+                  maxAgeSeconds: 60 * 60 * 24 * 5 // <== 5 days
+                },
+                cacheableResponse: {
+                  statuses: [0, 200, 301],
+                }
+              }
             }
           ]
         },
         includeAssets: [
           // favicon
           'favicon.svg',
-          // json
-          'json/announcement.json',
-          'json/community.json',
-          'json/session.json',
-          'json/sponsor-news.json',
-          'json/sponsor.json',
-          'json/staff.json',
-          'json/ytLink.json',
           // error
           // pwa
           // 'images/apple-icon-180.png',
