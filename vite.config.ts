@@ -68,7 +68,7 @@ export default defineConfig(({ mode, command }) => {
       VitePWA({
         registerType: 'autoUpdate',
         workbox: {
-          navigateFallback: '/index.html',
+          navigateFallback: 'index.html',
           offlineGoogleAnalytics: true,
           runtimeCaching: [
             {
