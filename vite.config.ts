@@ -69,7 +69,23 @@ export default defineConfig(({ mode, command }) => {
         registerType: 'autoUpdate',
         workbox: {
           navigateFallback: '/index.html',
-          offlineGoogleAnalytics: true
+          offlineGoogleAnalytics: true,
+          runtimeCaching: [
+            {
+              urlPattern: /^https:\/\/script\.google\.com\/.*/i,
+              handler: 'NetworkFirst',
+              options: {
+                cacheName: 'room-status-cache',
+                expiration: {
+                  maxEntries: 2,
+                  maxAgeSeconds: 60 * 60 * 24 * 30 // <== 30 days
+                },
+                cacheableResponse: {
+                  statuses: [0, 200, 301],
+                }
+              }
+            }
+          ]
         },
         includeAssets: [
           // favicon
