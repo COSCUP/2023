@@ -3,7 +3,7 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 import { computed, InjectionKey, Ref, ref } from 'vue'
-import { createModuleHook, createModuleSetup, useSetupCtx } from '../utils'
+import { createModuleHook, useSetupCtx } from '../utils'
 import { TIMEZONE_OFFSET, ROOM_ORDER, generateScheduleList, generateScheduleTable, getScheduleDays, transformRawData } from './logic'
 import { ScheduleElement, SessionsMap, RoomId, ScheduleTable, ScheduleList, Session, SessionId, RoomsMap, Room, RoomsStatusMap, RoomStatus } from './types'
 import { fixedTimeZoneDate } from './utils'

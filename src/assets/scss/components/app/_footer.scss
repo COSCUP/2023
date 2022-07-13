@@ -47,16 +47,20 @@
 
       .contacts {
         display: inline-block;
+
         .contact {
           text-align: center;
           padding: 0.5rem 1rem;
+
           .subtitle {
-              font-weight: bold;
-              padding-bottom: 0.25rem;
+            font-weight: bold;
+            padding-bottom: 0.25rem;
           }
+
           a {
             color: var(--color-text);
           }
+
           &:hover {
             color: var(--color-text-hover);
             transition: color 0.1s;
@@ -70,7 +74,8 @@
         justify-content: center;
         padding: 1rem 2rem;
 
-        &.past, &.contact {
+        &.past,
+        &.contact {
           max-width: 700px;
         }
 

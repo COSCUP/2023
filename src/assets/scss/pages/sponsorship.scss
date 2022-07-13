@@ -131,6 +131,7 @@
         }
       }
     }
+
     .add-ons-thin-table {
       display: none;
     }
@@ -182,7 +183,8 @@
         }
       }
 
-      .level-table, .add-ons-table {
+      .level-table,
+      .add-ons-table {
         max-width: calc(100vw - 4rem);
       }
 
@@ -202,9 +204,11 @@
             width: 40%;
             margin: 1rem auto;
           }
+
           h4 {
             text-align: center;
           }
+
           p {
             text-align: center;
             font-size: 1.2rem;
@@ -215,12 +219,14 @@
       .add-ons-table {
         display: none;
       }
+
       .add-ons-thin-table {
         display: block;
         width: 100%;
 
         table {
           width: 100%;
+
           th {
             word-break: keep-all;
           }

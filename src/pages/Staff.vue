@@ -51,7 +51,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, watch, ref} from 'vue'
+import { defineComponent, computed, watch, ref } from 'vue'
 import _staffData from '@/assets/json/staff.json'
 import markdown from '@/utils/markdown'
 
@@ -70,10 +70,10 @@ export default defineComponent({
     const joinus = ref<JoinUs>({})
 
     watch(locale, async () => {
-        joinus.value = {
-          title: t(`staff.intro['title']`),
-          desc: markdown(t(`staff.intro['desc']`))
-        }
+      joinus.value = {
+        title: t('staff.intro[\'title\']'),
+        desc: markdown(t('staff.intro[\'desc\']'))
+      }
     }, {
       immediate: true
     })

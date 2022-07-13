@@ -6,17 +6,16 @@ const PROVIDE_KEY: InjectionKey<ReturnType<typeof useRegisterSW> | false> = Symb
 
 const _useRegisterSW = () => {
   const { isClient, router } = useSetupCtx()
-  if (!isClient)
-    return false
+  if (!isClient) { return false }
 
   router.isReady().then(async () => {
     const { registerSW } = await import('virtual:pwa-register')
     registerSW({
-      onRegistered(r) {
+      onRegistered (r) {
         if (!r) return
         console.log('onRegistered')
-        void r.update()
-        setInterval(() => { void r.update() }, 60 * 60 * 1000)
+        r.update()
+        setInterval(() => { r.update() }, 60 * 60 * 1000)
       }
     })
   })

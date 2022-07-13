@@ -32,12 +32,12 @@ function filterAndSortScheduleElements (elements: ScheduleElement[], roomOrder: 
     //   if (b.room === 'Main Track') return 1
     //   return a.room.charCodeAt(0) - b.room.charCodeAt(0)
     // })
-  .filter(e => {
-    const result = roomOrder.includes(e.room)
-    !result && console.warn(`Session: ${e.session}'s room: ${e.room} is not in provided roomOrder`)
-    return result
-  })
-  .sort((a, b) => roomOrder.indexOf(a.room) - roomOrder.indexOf(b.room))
+    .filter(e => {
+      const result = roomOrder.includes(e.room)
+      !result && console.warn(`Session: ${e.session}'s room: ${e.room} is not in provided roomOrder`)
+      return result
+    })
+    .sort((a, b) => roomOrder.indexOf(a.room) - roomOrder.indexOf(b.room))
 }
 
 function getTimePoints (elements: ScheduleElement[], includeEndTime = true): [HourOfDate, MinuteOfDate][] {

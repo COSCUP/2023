@@ -53,7 +53,7 @@ export default defineComponent({
     FullPageProgress,
     PopUp,
     OfflineBar
-},
+  },
   setup () {
     setupModules()
     const route = useRoute()

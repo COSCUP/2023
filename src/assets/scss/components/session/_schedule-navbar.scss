@@ -39,21 +39,21 @@
           color: var(--color-text);
           font-size: 2rem;
           font-weight: 500;
-          
+
           /* Beta mark */
-//           &::after {
-//             content: "Beta";
-//             display: inline-block;
-//             font-size: 1.5rem;
-//             color: rgba($color: #f00, $alpha: 0.7);
-//             position: relative;
-//             top: -1rem;
-//             left: -1rem;
-//             transform: rotate(30deg);
-//             padding: 0 0.5rem;
-//             border: 3px solid rgba($color: #f00, $alpha: 0.7);
-//             border-radius: 10px;
-//           }
+          //           &::after {
+          //             content: "Beta";
+          //             display: inline-block;
+          //             font-size: 1.5rem;
+          //             color: rgba($color: #f00, $alpha: 0.7);
+          //             position: relative;
+          //             top: -1rem;
+          //             left: -1rem;
+          //             transform: rotate(30deg);
+          //             padding: 0 0.5rem;
+          //             border: 3px solid rgba($color: #f00, $alpha: 0.7);
+          //             border-radius: 10px;
+          //           }
         }
 
         &.active {
