@@ -1,5 +1,5 @@
 import { computed, watch } from 'vue'
-import { RouteRecordRaw, useRouter } from 'vue-router'
+import { RouteRecordRaw, useRouter, RouteLocationNormalized } from 'vue-router'
 import { createI18n, I18nOptions, useI18n } from 'vue-i18n'
 import { useMetas } from '../metas'
 import { UserModuleSetup, UserModuleInstall } from '../types'
@@ -27,10 +27,20 @@ const i18nOptions: I18nOptions = {
 
 export const setupI18nRoutes = (routes: RouteRecordRaw[]) => {
   // Redirect the original routes to path within default locale
-  const redirectRoutes: RouteRecordRaw[] = routes.map((route) => ({
-    path: route.path,
-    redirect: `/${i18nOptions.fallbackLocale}${route.path}`
-  }))
+  const redirectRoutes: RouteRecordRaw[] = [
+    ...routes.map((route) => ({
+      path: route.path,
+      redirect: (to: RouteLocationNormalized) => `/${i18nOptions.fallbackLocale}${to.path}`
+    })),
+    ...routes
+      .filter((route) => route.children)
+      .map((route) =>
+        route.children?.map((child) => ({
+          path: `${route.path}/${child.path}`,
+          redirect: (to: RouteLocationNormalized) => `/${i18nOptions.fallbackLocale}${to.path}`
+        })) ?? []
+      ).flat()
+  ]
 
   // Map original routes to routes with locale parameter and navigation guard
   const extendedRoutes: RouteRecordRaw[] = routes.map((route) => ({
