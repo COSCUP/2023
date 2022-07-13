@@ -28,11 +28,30 @@ const _useTheme = (): UseTheme => {
     colorSchema.value = order[(order.indexOf(colorSchema.value) + 1) % order.length]
   }
 
+  const changeBarStyle = () => {
+    const head = document.querySelector('head')
+
+    const meta = document.querySelector('meta[name=theme-color]') ?? document.createElement('meta')
+    meta.setAttribute('name', 'theme-color')
+    meta.setAttribute('content', isDark.value ? '#1a4b6d' : '#fff')
+    if (!meta.parentElement && head) {
+      head?.appendChild(meta)
+    }
+
+    const meta2 = document.querySelector('meta[name=apple-mobile-web-app-status-bar-style]') ?? document.createElement('meta')
+    meta2.setAttribute('name', 'apple-mobile-web-app-status-bar-style')
+    meta2.setAttribute('content', `${isDark.value ? 'dark' : 'light'}-content`)
+    if (!meta2.parentElement && head) {
+      head?.appendChild(meta2)
+    }
+  }
+
   isClient && watch(
     isDark,
     v => {
       document.documentElement.classList.toggle('dark', v)
       document.documentElement.classList.toggle('light', !v)
+      changeBarStyle()
     },
     { immediate: true }
   )
