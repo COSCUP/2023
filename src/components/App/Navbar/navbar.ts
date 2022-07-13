@@ -76,7 +76,7 @@ export function useNavbarItems () {
           to: {
             name: routeName
           },
-          active: currentRoute.name?.toString().startsWith(routeName) ?? false
+          active: currentRoute.name === routeName ?? false
         },
         component: itemName === 'home' ? HomeTab : InternalLink
       }
