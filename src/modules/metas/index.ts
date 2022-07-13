@@ -3,7 +3,7 @@ import { computed, InjectionKey, Ref, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { camelCase } from 'lodash'
-import { createModuleHook, createModuleSetup } from '../utils'
+import { createModuleHook } from '../utils'
 import ogImageSrc from '@/assets/images/og.png'
 
 type MetaType = 'lang' | 'title' | 'description' | 'ogUrl' | 'ogImage' | 'ogType' | 'ogSiteName'
@@ -94,5 +94,5 @@ const _useMetas = (): UseMetas => {
   return { ...metaRefs, setMetas, resetMetas }
 }
 
-export const setup = createModuleSetup(PROVIDE_KEY, _useMetas)
+// export const setup = createModuleSetup(PROVIDE_KEY, _useMetas)
 export const useMetas = createModuleHook(PROVIDE_KEY, _useMetas)

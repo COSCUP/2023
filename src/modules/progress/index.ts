@@ -2,7 +2,7 @@ import { delay } from '@/utils/common'
 import { computed, InjectionKey, ref, Ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useScrollLock } from '../scroll-lock'
-import { createModuleHook, createModuleSetup } from '../utils'
+import { createModuleHook } from '../utils'
 
 export { default as FullPageProgress } from './components/FullPageProgress.vue'
 
@@ -50,5 +50,5 @@ const _useProgress = (): UseProgress => {
   }
 }
 
-export const setup = createModuleSetup(PROVIDE_KEY, _useProgress, fallback)
+// export const setup = createModuleSetup(PROVIDE_KEY, _useProgress, fallback)
 export const useProgress = createModuleHook(PROVIDE_KEY, _useProgress, fallback)

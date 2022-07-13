@@ -1,5 +1,5 @@
 import { computed, ref, nextTick, Ref, InjectionKey } from 'vue'
-import { createModuleHook, createModuleSetup } from '../utils'
+import { createModuleHook } from '../utils'
 
 type Position = Record<'x' | 'y', number>
 
@@ -41,5 +41,5 @@ const _useScrollLock = (): UseScrollLock => {
   }
 }
 
-export const setup = createModuleSetup(PROVIDE_KEY, _useScrollLock, fallback)
+// export const setup = createModuleSetup(PROVIDE_KEY, _useScrollLock, fallback)
 export const useScrollLock = createModuleHook(PROVIDE_KEY, _useScrollLock, fallback)

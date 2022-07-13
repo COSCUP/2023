@@ -6,7 +6,7 @@
 import { computed, InjectionKey, ref, Ref } from 'vue'
 import { MetaOptions, useMetas } from '../metas'
 import { useScrollLock } from '../scroll-lock'
-import { createModuleHook, createModuleSetup } from '../utils'
+import { createModuleHook } from '../utils'
 import DefaultPopUpContainer from './components/Container/DefaultPopUpContainer.vue'
 import SessionPopUpContainer from './components/Container/SessionPopUpContainer.vue'
 import HtmlPopUpContent from './components/Content/HtmlPopUpContent.vue'
@@ -124,5 +124,5 @@ const _usePopUp = (): UsePopUp => {
   }
 }
 
-export const setup = createModuleSetup(PROVIDE_KEY, _usePopUp)
+// export const setup = createModuleSetup(PROVIDE_KEY, _usePopUp)
 export const usePopUp = createModuleHook(PROVIDE_KEY, _usePopUp)

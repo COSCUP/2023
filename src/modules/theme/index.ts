@@ -1,6 +1,6 @@
 import { watch, computed, Ref, ref, InjectionKey } from 'vue'
 import { usePreferredDark, useStorage } from '@vueuse/core'
-import { createModuleHook, createModuleSetup, useSetupCtx } from '../utils'
+import { createModuleHook, useSetupCtx } from '../utils'
 
 type ColorSchema = 'auto' | 'dark' | 'light'
 
@@ -44,5 +44,5 @@ const _useTheme = (): UseTheme => {
   }
 }
 
-export const setup = createModuleSetup(PROVIDE_KEY, _useTheme, fallback)
+// export const setup = createModuleSetup(PROVIDE_KEY, _useTheme, fallback)
 export const useTheme = createModuleHook(PROVIDE_KEY, _useTheme, fallback)

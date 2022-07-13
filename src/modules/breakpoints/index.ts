@@ -1,6 +1,6 @@
 import { computed, InjectionKey, Ref, ref } from 'vue'
 import { useBreakpoints as vueuseBreakpoints } from '@vueuse/core'
-import { createModuleHook, createModuleSetup } from '../utils'
+import { createModuleHook } from '../utils'
 
 export type BreakpointSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 export type Breakpoint = 'xsOnly' | 'smOnly' | 'smAndUp' | 'smAndDown' | 'mdOnly' | 'mdAndUp' | 'mdAndDown' | 'lgOnly' | 'lgAndUp' | 'lgAndDown' | 'xlOnly'
@@ -70,5 +70,5 @@ const _useBreakpoints = (): UseBreakpoints => {
   }
 }
 
-export const setup = createModuleSetup(PROVIDE_KEY, _useBreakpoints, fallback)
+// export const setup = createModuleSetup(PROVIDE_KEY, _useBreakpoints, fallback)
 export const useBreakpoints = createModuleHook(PROVIDE_KEY, _useBreakpoints, fallback)
