@@ -8,6 +8,7 @@ import { TIMEZONE_OFFSET, ROOM_ORDER, generateScheduleList, generateScheduleTabl
 import { ScheduleElement, SessionsMap, RoomId, ScheduleTable, ScheduleList, Session, SessionId, RoomsMap, Room, RoomsStatusMap, RoomStatus } from './types'
 import { fixedTimeZoneDate } from './utils'
 import { useProgress } from '../progress'
+import axios from 'axios'
 
 interface UseSession {
   isLoaded: Ref<boolean>;
@@ -44,6 +45,7 @@ const _useSession = (): UseSession => {
     scheduleElements.value = _scheduleElements
     sessionsMap.value = _sessionsMap
     roomsMap.value = _roomsMap
+    await updateRoomStatus()
     isLoaded.value = true
     done()
   }
@@ -103,6 +105,14 @@ const _useSession = (): UseSession => {
     currentSessions.value = Object.values(sessionsMap.value)
       .filter(s => s.start.getTime() <= currentTime && currentTime <= s.end.getTime())
   }, 3000)
+
+  async function updateRoomStatus () {
+    const apiEndPoint = import.meta.env.VITE_ROOM_STATUS_API
+    if (!apiEndPoint || typeof apiEndPoint !== 'string') return
+    const data = await axios.get(apiEndPoint).then((res) => res.data) as Record<RoomId, boolean>
+    roomsIsFull.value = data
+  }
+  isClient && setInterval(updateRoomStatus, 15000)
 
   return {
     isLoaded,
