@@ -1,14 +1,15 @@
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import { readdirSync, readFileSync } from 'fs'
 import { join } from 'path'
 import Vue from '@vitejs/plugin-vue'
 import Components from 'vite-plugin-components'
 import ViteIcons, { ViteIconsResolver } from 'vite-plugin-icons'
-import dotenv from 'dotenv'
+import { VitePWA } from 'vite-plugin-pwa'
 
-const { parsed } = dotenv.config()
+export default defineConfig(({ mode, command }) => {
+  const parsed = loadEnv(mode, process.cwd())
 
-const renderRoutes = parsed?.VITE_LANDING_ONLY === 'yes'
+  const renderRoutes = parsed?.VITE_LANDING_ONLY === 'yes'
   ? (() => {
       const routes = [
         '/',
@@ -45,35 +46,74 @@ const renderRoutes = parsed?.VITE_LANDING_ONLY === 'yes'
         })
     })()
 
-const gaTemplate = readFileSync(join(__dirname, './templates/ga-template.html')).toString()
+  const gaTemplate = readFileSync(join(__dirname, './templates/ga-template.html')).toString()
 
-export default defineConfig({
-  base: parsed?.VITE_BASE_URL,
-  resolve: {
-    alias: {
-      '@': `${join(__dirname, 'src')}`
-    }
-  },
-  plugins: [
-    Vue({
-      include: [/\.vue$/, /\.md$/]
-    }),
-    Components({
-      customComponentResolvers: ViteIconsResolver({
-        componentPrefix: 'icon'
-      })
-    }),
-    ViteIcons()
-  ],
-  ssgOptions: {
-    script: 'async',
-    formatting: 'minify',
-    includedRoutes () {
-      return renderRoutes
+  return {
+    base: parsed?.VITE_BASE_URL,
+    resolve: {
+      alias: {
+        '@': `${join(__dirname, 'src')}`
+      }
     },
-    onPageRendered: (r, html) => {
-      return html
-        .replace('<template>%GA_TEMPLATE%</template>', gaTemplate)
+    plugins: [
+      Vue({
+        include: [/\.vue$/, /\.md$/]
+      }),
+      Components({
+        customComponentResolvers: ViteIconsResolver({
+          componentPrefix: 'icon'
+        })
+      }),
+      ViteIcons(),
+      VitePWA({
+        registerType: 'autoUpdate',
+        workbox: {
+          navigateFallback: '/index.html',
+          offlineGoogleAnalytics: true
+        },
+        manifest: {
+          name: 'COSCUP 2022',
+          short_name: 'COSCUP 2022',
+          theme_color: '#ffffff',
+          icons: command === 'build' ? [
+            {
+              src: `${parsed?.VITE_BASE_URL}/images/manifest-icon-192.maskable.png`,
+              sizes: "192x192",
+              type: "image/png",
+              purpose: "any"
+            },
+            {
+              src: `${parsed?.VITE_BASE_URL}/images/manifest-icon-192.maskable.png`,
+              sizes: "192x192",
+              type: "image/png",
+              purpose: "maskable"
+            },
+            {
+              src: `${parsed?.VITE_BASE_URL}/images/manifest-icon-512.maskable.png`,
+              sizes: "512x512",
+              type: "image/png",
+              purpose: "any"
+            },
+            {
+              src: `${parsed?.VITE_BASE_URL}/images/manifest-icon-512.maskable.png`,
+              sizes: "512x512",
+              type: "image/png",
+              purpose: "maskable"
+            }
+          ] : []
+        }
+      })
+    ],
+    ssgOptions: {
+      script: 'async',
+      formatting: 'minify',
+      includedRoutes () {
+        return renderRoutes
+      },
+      onPageRendered: (r, html) => {
+        return html
+          .replace('<template>%GA_TEMPLATE%</template>', gaTemplate)
+      }
     }
   }
 })

@@ -7,27 +7,6 @@
 
 <template>
   <div v-if="isLoaded" class="schedule-table-room-cell">
-    <!-- <div class="live">
-      <iframe
-        v-if="iframeLoaded"
-        width="240"
-        height="135"
-        :src="`${roomLink}&autoplay=1`"
-        title="YouTube video player"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-      ></iframe>
-
-      <div
-        v-else
-        class="play-container"
-        @click="roomLink && (iframeLoaded = true)"
-      >
-        <icon-mdi-play v-if="roomLink"></icon-mdi-play>
-      </div>
-    </div> -->
-
     <div class="text">
       <span>Room</span>
       <span>{{ roomName }}</span>

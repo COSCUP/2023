@@ -30,7 +30,7 @@ export const installModules = (ctx: InstallContext) => {
 export const setupModules = () => {
   const ctx = useSetupCtx()
   execModulesMethod(
-    ['theme', 'breakpoints', 'scroll-lock', 'progress', 'metas', 'pop-up'],
+    ['theme', 'breakpoints', 'scroll-lock', 'progress', 'metas', 'pop-up', 'pwa'],
     'setup',
     ctx
   )

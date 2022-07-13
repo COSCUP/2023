@@ -10,6 +10,7 @@
     'in-app': isInApp,
   }">
     <Navbar></Navbar>
+    <OfflineBar></OfflineBar>
     <MainContainer>
       <router-view v-slot="{ Component, route }">
         <transition :name="route.meta.transitionName" mode="out-in">
@@ -36,6 +37,7 @@ import MainContainer from '@/components/App/MainContainer.vue'
 import Navbar from '@/components/App/Navbar/index.vue'
 import SponsorFooter from '@/components/App/SponsorFooter.vue'
 import Footer from '@/components/App/Footer.vue'
+import OfflineBar from '@/components/App/OfflineBar.vue'
 import { FullPageProgress } from '@/modules/progress'
 import { PopUp } from '@/modules/pop-up'
 
@@ -49,8 +51,9 @@ export default defineComponent({
     SponsorFooter,
     Footer,
     FullPageProgress,
-    PopUp
-  },
+    PopUp,
+    OfflineBar
+},
   setup () {
     setupModules()
     const route = useRoute()
