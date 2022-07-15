@@ -8,6 +8,13 @@
   "contact": "Contact Us: {email}",
   "overview": {
     "title": "Overview",
+    "announcement": {
+      "title": "SOLD OUT: Thanks to the support of all sponsors, COSCUP 2022 is officially closed for sponsorship requests.",
+      "list": [
+        "Sponsors are welcome to visit COSCUP on both days of the event and email us to reserve a sponsorship for COSCUP 2023.",
+        "email: sponsorship@coscup.org"
+      ]
+    },
     "description": "Over 2,000 attendees and dozens of communities attended the COSCUP each year for three to five years.",
     "feedback": {
       "title": "COSCUP 2021 survey feedback:",
