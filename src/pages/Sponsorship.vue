@@ -8,6 +8,15 @@
     <h2>{{ t('sponsorship.plan.title') }}</h2>
     <section class="markdown">
       <h3>{{ t('sponsorship.overview.title') }}</h3>
+      <p>{{ t('sponsorship.overview.announcement.title') }}</p>
+      <ul>
+        <li
+          v-for="text in tm('sponsorship.overview.announcement.list')"
+          :key="`${text}`"
+        >
+          {{ text }}
+        </li>
+      </ul>
       <p>{{ t('sponsorship.overview.description') }}</p>
       <p>{{ t('sponsorship.overview.feedback.title') }}</p>
       <ul>

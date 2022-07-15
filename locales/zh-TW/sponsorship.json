@@ -8,6 +8,13 @@
   "contact": "聯絡我們：{email}",
   "overview": {
     "title": "總覽",
+    "announcement": {
+      "title": "售罄：感激所有贊助商支持， COSCUP 2022 贊助徵求正式截止。",
+      "list": [
+        "歡迎所有贊助商在活動兩天參觀 COSCUP，並來信預約 COSCUP 2023 贊助。",
+        "email: sponsorship@coscup.org"
+      ]
+    },
     "description": "COSCUP 過去三至五年平均約有 2,000 多位會眾和數十個社群一同參與。",
     "feedback": {
       "title": "COSCUP 2021 會眾問卷回饋：",
