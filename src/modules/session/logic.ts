@@ -221,7 +221,7 @@ export function generateScheduleList (elements: ScheduleElement[]): ScheduleList
   }
 }
 
-export function generateSessionPopupContentHtml (session: Session, locale: Locale) {
+export function generateSessionPopupContentHtml (session: Session, community: { id: string, name: { 'zh-TW': string, en: string } } | undefined, locale: Locale) {
   return html`
   <article id="session-detail" class="session-detail">
     <header class="detail-header">
@@ -233,7 +233,7 @@ export function generateSessionPopupContentHtml (session: Session, locale: Local
       </div>
       <div class="track">
         <span class="room">${session.room[locale].name.split(' / ')[0]}</span>
-        <span>${session.type[locale].name}</span>
+        <span>${session.type[locale].name}${community ? `<span class="community">&nbsp;by <a href="${import.meta.env.BASE_URL}community#${community.id}">${community.name[locale]}</a></span>` : ''}</span>
       </div>
       <div class="title">${session[locale].title}</div>
       <div class="speaker-list">
@@ -329,7 +329,7 @@ export function generateSessionMetaOptions (session: Session, locale: Locale): M
   }
 }
 
-export function generateSessionPopupData (session: Session, locale: Locale): PopUpData {
+export function generateSessionPopupData (session: Session, community: { id: string, name: { 'zh-TW': string, en: string } } | undefined, locale: Locale): PopUpData {
   return {
     popupId: `session-${session.id}`,
     metaOptions: generateSessionMetaOptions(session, locale),
@@ -338,7 +338,7 @@ export function generateSessionPopupData (session: Session, locale: Locale): Pop
     },
     contentData: {
       type: 'html',
-      html: generateSessionPopupContentHtml(session, locale)
+      html: generateSessionPopupContentHtml(session, community, locale)
     }
   }
 }

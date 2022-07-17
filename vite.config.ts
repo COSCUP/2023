@@ -101,7 +101,7 @@ export default defineConfig(({ mode, command }) => {
             }
           ]
         },
-        includeAssets: [
+        includeAssets: command === 'build' ? [
           // favicon
           'favicon.svg',
           // error
@@ -135,7 +135,7 @@ export default defineConfig(({ mode, command }) => {
           // 'images/apple-splash-828-1792.jpg',
           // 'images/manifest-icon-192.maskable.png',
           // 'images/manifest-icon-512.maskable.png'
-        ],
+        ] : [],
         manifest: {
           name: 'COSCUP 2022',
           short_name: 'COSCUP 2022',

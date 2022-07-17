@@ -11,6 +11,24 @@
       v-if="communityList"
       class="outer-container"
     >
+      <div class="card community-container">
+        <div class="content-container partner-container">
+          <h2>
+            {{ t('community.partner.title') }}
+          </h2>
+          <article>
+            <div
+              v-for="partner in partnerList"
+              :key="partner.name"
+            >
+              <div class="avatar">
+                <img :src="partner.image" :alt="partner.name">
+              </div>
+              <p>{{ partner.name }}</p>
+            </div>
+          </article>
+        </div>
+      </div>
       <div
         v-for="community in communityList"
         :key="community.id"
@@ -18,7 +36,7 @@
       >
         <a class="author" :name="community.id" />
         <div class="img-container">
-          <a :href="`${community.link}`" target="_blank" rel="noopener">
+          <a :href="community.link || undefined" target="_blank" rel="noopener">
             <img
               :src="community.image"
               :alt="`Community ${community.name[languageType]}'s logo`"
@@ -26,7 +44,7 @@
           </a>
         </div>
         <div class="content-container">
-          <a :href="`${community.link}`" target="_blank" rel="noopener">
+          <a :href="community.link || undefined" target="_blank" rel="noopener">
             <h2>
               {{ community.name[languageType] }}
             </h2>
@@ -63,12 +81,17 @@ export default defineComponent({
 
     const languageType = computed(() => locale.value as Locale)
 
-    const communityList = computed(() => communityData.map((el) => ({
+    const communityList = computed(() => communityData.communities.map((el) => ({
       ...el,
       intro: {
         en: markdown(el.intro.en),
         'zh-TW': markdown(el.intro['zh-TW'])
       }
+    })))
+
+    const partnerList = computed(() => communityData.partners.map((el) => ({
+      ...el,
+      image: `https://www.gravatar.com/avatar/${el.email_hash}?s=320&d=identicon&r=g&d=https://volunteer.coscup.org/img/nonavatar.png`
     })))
 
     const detectOverflowContentElements = () => {
@@ -100,6 +123,7 @@ export default defineComponent({
     return {
       t,
       languageType,
+      partnerList,
       communityList,
       onReadmoreClick
     }

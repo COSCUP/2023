@@ -42,6 +42,8 @@ import { generateSessionPopupData } from '@/modules/session/logic'
 import { useI18n } from 'vue-i18n'
 import { Locale } from '@/modules/i18n'
 import { isClient } from '@vueuse/shared'
+import communityData from '@/assets/json/community.json'
+import { Session } from '@/modules/session/types'
 
 export default defineComponent({
   name: 'Session',
@@ -57,6 +59,10 @@ export default defineComponent({
     const { openPopUp, removeAll } = usePopUp()
     const { xsOnly } = useBreakpoints()
     const { locale } = useI18n()
+
+    function getCommunityFromSession (session: Session) {
+      return communityData.communities.find((c) => c.track === session.type['zh-TW'].name)
+    }
 
     function tryToOpenSessionPopUp () {
       const [bool, sessionId] = [isLoaded.value, route.params.sessionId as string]
@@ -95,6 +101,7 @@ export default defineComponent({
         openPopUp({
           ...generateSessionPopupData(
             getSessionById(sessionId),
+            getCommunityFromSession(getSessionById(sessionId)),
             locale.value as Locale
           ),
           onClose

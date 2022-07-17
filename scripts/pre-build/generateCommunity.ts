@@ -2,7 +2,7 @@ import axios from 'axios'
 import { company, internet, lorem } from 'faker'
 import { getSheetRows, saveJSON } from './utils'
 
-import type { CommunityRow } from './types'
+import type { CommunityRow, PartnerRow } from './types'
 import type { GoogleSpreadsheet } from 'google-spreadsheet'
 
 async function fetchRemoteCommunityData () {
@@ -21,6 +21,7 @@ function transformCommunityMap (rows: CommunityRow[]) {
       r.id,
       {
         id: r.id,
+        track: r.track,
         image: r.image || `https://coscup.org/2022-static/images/community/${r.id}.png`,
         link: r.link,
         name: {
@@ -35,6 +36,17 @@ function transformCommunityMap (rows: CommunityRow[]) {
     ]))
 }
 
+function transformPartnerMap (rows: PartnerRow[]) {
+  return Object.fromEntries(rows
+    .map((r) => [
+      r.name,
+      {
+        name: r.name,
+        email_hash: r.email_hash
+      }
+    ]))
+}
+
 function transformData (communityRows: CommunityRow[]) {
   const communityMap = transformCommunityMap(communityRows)
 
@@ -45,6 +57,7 @@ function transformData (communityRows: CommunityRow[]) {
 function createFakeData () {
   const communityRows: CommunityRow[] = [...Array(4).keys()].map((_, i) => ({
     id: `${String.fromCharCode(65 + i)}-${i}`,
+    track: '',
     'name:en': company.companyName(),
     'name:zh-TW': company.companyName(),
     'intro:en': lorem.paragraphs(2),
@@ -65,7 +78,11 @@ export default async function generateCommunity (doc: GoogleSpreadsheet | null, 
     communityData = await fetchRemoteCommunityData()
   } else {
     const communityRow = await getSheetRows(doc, 'community')
-    communityData = transformData(communityRow)
+    const partnerRow = await getSheetRows(doc, 'partner')
+    communityData = {
+      communities: transformData(communityRow),
+      partners: Object.values(transformPartnerMap(partnerRow))
+    }
   }
   saveJSON('community', communityData)
 }

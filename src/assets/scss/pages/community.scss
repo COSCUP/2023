@@ -102,6 +102,46 @@
         position: relative;
         width: calc(100% - 240px - 1rem);
 
+        &.partner-container {
+          h2 {
+            margin-bottom: 1rem;
+            font-size: 1.75rem;
+            font-weight: 300;
+          }
+
+          article {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+
+            >div {
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              margin: 0 10px;
+
+              .avatar {
+                width: 120px;
+                height: 120px;
+                border-radius: 50%;
+                border: 5px solid var(--color-avatar-border);
+                overflow: hidden;
+
+                > img {
+                  width: 100%;
+                }
+              }
+
+              p {
+                margin-top: 10px;
+                text-align: center;
+                height: 48px;
+              }
+            }
+          }
+        }
+
         &.folded {
           max-height: 300px;
           overflow: hidden;
