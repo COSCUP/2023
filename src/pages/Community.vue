@@ -11,24 +11,6 @@
       v-if="communityList"
       class="outer-container"
     >
-      <div class="card community-container">
-        <div class="content-container partner-container">
-          <h2>
-            {{ t('community.partner.title') }}
-          </h2>
-          <article>
-            <div
-              v-for="partner in partnerList"
-              :key="partner.name"
-            >
-              <div class="avatar">
-                <img :src="partner.image" :alt="partner.name">
-              </div>
-              <p>{{ partner.name }}</p>
-            </div>
-          </article>
-        </div>
-      </div>
       <div
         v-for="community in communityList"
         :key="community.id"
@@ -56,6 +38,24 @@
           <div class="readmore" @click="onReadmoreClick">
             <span>Read More</span>
           </div>
+        </div>
+      </div>
+      <div class="card community-container">
+        <div class="content-container partner-container">
+          <h2>
+            {{ t('community.partner.title') }}
+          </h2>
+          <article>
+            <div
+              v-for="partner in partnerList"
+              :key="partner.name"
+            >
+              <div class="avatar">
+                <img :src="partner.image" :alt="partner.name">
+              </div>
+              <p>{{ partner.name }}</p>
+            </div>
+          </article>
         </div>
       </div>
     </div>
