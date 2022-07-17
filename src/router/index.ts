@@ -155,6 +155,13 @@ export const routerOptions: RouterOptions = {
       Object.assign(savedPosition, { top, left })
     }
     return (to, from) => {
+      if (to.hash) {
+        return {
+          el: `[name=${to.hash}]`,
+          behavior: 'smooth'
+        }
+      }
+
       const { scrollX, scrollY } = window
       savePosition(scrollY, scrollX)
       if (to.name === from.name ||
