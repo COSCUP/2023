@@ -8,7 +8,7 @@ import { TIMEZONE_OFFSET, ROOM_ORDER, generateScheduleList, generateScheduleTabl
 import { ScheduleElement, SessionsMap, RoomId, ScheduleTable, ScheduleList, Session, SessionId, RoomsMap, Room, RoomsStatusMap, RoomStatus } from './types'
 import { fixedTimeZoneDate } from './utils'
 import { useProgress } from '../progress'
-import axios from 'axios'
+import io, { Socket } from 'socket.io-client'
 
 interface UseSession {
   isLoaded: Ref<boolean>;
@@ -31,6 +31,7 @@ const _useSession = (): UseSession => {
   const { isClient } = useSetupCtx()
   const { start, done } = useProgress()
 
+  let socket: typeof Socket | null = null
   const scheduleElements = ref<ScheduleElement[] | null>(null)
   const sessionsMap = ref<SessionsMap | null>(null)
   const roomsMap = ref<RoomsMap | null>(null)
@@ -45,7 +46,7 @@ const _useSession = (): UseSession => {
     scheduleElements.value = _scheduleElements
     sessionsMap.value = _sessionsMap
     roomsMap.value = _roomsMap
-    isClient && await updateRoomStatus()
+    isClient && await prepareRoomStatus()
     isLoaded.value = true
     done()
   }
@@ -106,13 +107,20 @@ const _useSession = (): UseSession => {
       .filter(s => s.start.getTime() <= currentTime && currentTime <= s.end.getTime())
   }, 3000)
 
-  async function updateRoomStatus () {
+  async function prepareRoomStatus () {
     const apiEndPoint = import.meta.env.VITE_ROOM_STATUS_API
     if (!apiEndPoint || typeof apiEndPoint !== 'string') return
-    const data = await axios.get(apiEndPoint).then((res) => res.data) as Record<RoomId, boolean>
-    roomsIsFull.value = data
+    if (!socket) {
+      socket = io(apiEndPoint)
+      socket.emit('data')
+    }
+    socket.on('data', (data: Record<RoomId, boolean>) => { roomsIsFull.value = data })
+    socket.on('update', (diff: Record<RoomId, boolean>) => {
+      Object.keys(diff).forEach((key) => {
+        roomsIsFull.value[key] = diff[key]
+      })
+    })
   }
-  isClient && setInterval(updateRoomStatus, 15000)
 
   return {
     isLoaded,
