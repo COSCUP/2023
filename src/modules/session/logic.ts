@@ -14,11 +14,12 @@ import type { Session, ScheduleElement, RawData, SessionType, Room, Speaker, Tag
 export const TIMEZONE_OFFSET: number = -480
 // export const ROOM_ORDER = []
 export const ROOM_ORDER: RoomId[] = [
-  'RB 105',
-  'AU 視聽館',
-  'TR 209', 'TR 211', 'TR 212', 'TR 213', 'TR 214',
-  'TR 310-1', 'TR 310-2', 'TR 311', 'TR 313',
-  'TR 409-1', 'TR 409-2', 'TR 410', 'TR 411', 'TR 412-1', 'TR 412-2', 'TR 413-1', 'TR 413-2'
+  'RB105',
+  'AU101',
+  'TR209', 'TR211', 'TR212', 'TR213', 'TR214',
+  'TR310-1', 'TR310-2', 'TR311', 'TR313',
+  'TR409-1', 'TR409-2', 'TR410', 'TR411', 'TR412-1', 'TR412-2', 'TR413-1', 'TR413-2',
+  'TR510'
 ]
 
 function mapSessionsWithIndex (sessions: Session[]):SessionsMap {
