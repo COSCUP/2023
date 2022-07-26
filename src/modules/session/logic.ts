@@ -246,7 +246,6 @@ export function generateSessionPopupContentHtml (session: Session, community: { 
         }
       </div>
       <div class="tag-list">
-        <span>${session.language}</span>
         ${
           session.tags
             .map((tag) => `<span>${tag[locale].name}</span>`)

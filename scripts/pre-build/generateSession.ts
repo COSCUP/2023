@@ -100,8 +100,48 @@ function genResult (talks, rooms, speakers) {
       en: {
         name: 'Advance'
       }
+    },
+    {
+      id: 'zh-tw',
+      zh: {
+        name: '中文'
+      },
+      en: {
+        name: 'Chinese'
+      }
+    },
+    {
+      id: 'en',
+      zh: {
+        name: 'English'
+      },
+      en: {
+        name: 'English'
+      }
+    },
+    {
+      id: 'en-mozilla',
+      zh: {
+        name: 'English'
+      },
+      en: {
+        name: 'English'
+      }
+    },
+    {
+      id: 'ja-JP',
+      zh: {
+        name: '日本語'
+      },
+      en: {
+        name: 'Japanese'
+      }
     }
   ]
+
+  const getLanguage = (locale: string) => {
+    return resTags.find((t) => t.id === locale)?.zh?.name ?? 'English'
+  }
 
   const resSessions = talks.results.map((s :any) => {
     return {
@@ -110,7 +150,7 @@ function genResult (talks, rooms, speakers) {
       room: s.slot.room?.en || s.slot.room?.['zh-tw'],
       start: s.slot.start,
       end: s.slot.end,
-      language: s.content_locale === 'zh-tw' ? '漢語' : 'English',
+      language: getLanguage(s.content_locale),
       zh: {
         title: s.title,
         description: getAnswer(s, SESSION_ZH_DESCRIPTION_ID, s.abstract || '')
@@ -120,7 +160,7 @@ function genResult (talks, rooms, speakers) {
         description: getAnswer(s, SESSION_EN_DESCRIPTION_ID, s.abstract || '')
       },
       speakers: s.speakers.map(ss => ss.code),
-      tags: s.answers.find(a => a.question.id === SESSION_TAGS_ID) !== undefined ? [s.answers.find(a => a.question.id === SESSION_TAGS_ID).options[0].answer.en] : [],
+      tags: [s.content_locale].concat(s.answers.find(a => a.question.id === SESSION_TAGS_ID) !== undefined ? [s.answers.find(a => a.question.id === SESSION_TAGS_ID).options[0].answer.en] : []),
       co_write: getAnswer(s, SESSION_CO_WRITE_ID, null),
       qa: getAnswer(s, SESSION_QA_ID, null),
       slide: getAnswer(s, SESSION_SLIDE_ID, null),

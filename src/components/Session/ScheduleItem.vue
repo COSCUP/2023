@@ -38,9 +38,6 @@
       </h3>
       <!--  -->
       <div class="tag-list">
-        <span>
-          {{ language }}
-        </span>
         <span
           v-for="(name, i) in tags"
           :key="`tag-${sessionId}-tag-${i}`"
