@@ -12,6 +12,10 @@
     "party_2": "Party 2",
     "virtual_venue": "Virtual Venue",
     "online_conference": "Online Conference",
+    "day_1_rb_online": "Day1 RB Live Room",
+    "day_1_au_online": "Day1 AU Live Room",
+    "day_2_rb_online": "Day2 RB Live Room",
+    "day_2_au_online": "Day2 AU Live Room",
     "tabs": {
       "announcement": "Announcement"
     }

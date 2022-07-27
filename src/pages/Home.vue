@@ -13,16 +13,24 @@
     </div>
     <div class="info-container">
       <span class="date">2022/07/30 ~ 2022/07/31</span>
-      <!-- <div class="info">
-        <a class="venue" href="https://blog.coscup.org/2021/07/all-virtual-venues-opening-hours.html" target="_blank">
-          {{ t('home.info.virtual_venue') }}
+      <div class="info">
+        <a class="venue" href="https://youtu.be/MaQuXvkR7to" target="_blank">
+          {{ t('home.info.day_1_rb_online') }}
           <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1.0em" height="1.0em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 512 512" class="suffix-icon"><path d="M432 320h-32a16 16 0 0 0-16 16v112H64V128h144a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16H48a48 48 0 0 0-48 48v352a48 48 0 0 0 48 48h352a48 48 0 0 0 48-48V336a16 16 0 0 0-16-16zM488 0H360c-21.37 0-32.05 25.91-17 41l35.73 35.73L135 320.37a24 24 0 0 0 0 34L157.67 377a24 24 0 0 0 34 0l243.61-243.68L471 169c15 15 41 4.5 41-17V24a24 24 0 0 0-24-24z" fill="currentColor"></path></svg>
         </a>
-        <a class="venue" href="https://www.youtube.com/playlist?list=PLqfib4St70XOsknW4ywpfoF3ZTE29tZHU" target="_blank">
-          {{ t('home.info.online_conference') }}
+        <a class="venue" href="https://youtu.be/YexUnVOZC8M" target="_blank">
+          {{ t('home.info.day_1_au_online') }}
           <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1.0em" height="1.0em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 512 512" class="suffix-icon"><path d="M432 320h-32a16 16 0 0 0-16 16v112H64V128h144a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16H48a48 48 0 0 0-48 48v352a48 48 0 0 0 48 48h352a48 48 0 0 0 48-48V336a16 16 0 0 0-16-16zM488 0H360c-21.37 0-32.05 25.91-17 41l35.73 35.73L135 320.37a24 24 0 0 0 0 34L157.67 377a24 24 0 0 0 34 0l243.61-243.68L471 169c15 15 41 4.5 41-17V24a24 24 0 0 0-24-24z" fill="currentColor"></path></svg>
         </a>
-      </div> -->
+        <a class="venue" href="https://youtu.be/87qYQQ3pHFc" target="_blank">
+          {{ t('home.info.day_2_rb_online') }}
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1.0em" height="1.0em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 512 512" class="suffix-icon"><path d="M432 320h-32a16 16 0 0 0-16 16v112H64V128h144a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16H48a48 48 0 0 0-48 48v352a48 48 0 0 0 48 48h352a48 48 0 0 0 48-48V336a16 16 0 0 0-16-16zM488 0H360c-21.37 0-32.05 25.91-17 41l35.73 35.73L135 320.37a24 24 0 0 0 0 34L157.67 377a24 24 0 0 0 34 0l243.61-243.68L471 169c15 15 41 4.5 41-17V24a24 24 0 0 0-24-24z" fill="currentColor"></path></svg>
+        </a>
+        <a class="venue" href="https://youtu.be/3a-bbpf2CcI" target="_blank">
+          {{ t('home.info.day_2_au_online') }}
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1.0em" height="1.0em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 512 512" class="suffix-icon"><path d="M432 320h-32a16 16 0 0 0-16 16v112H64V128h144a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16H48a48 48 0 0 0-48 48v352a48 48 0 0 0 48 48h352a48 48 0 0 0 48-48V336a16 16 0 0 0-16-16zM488 0H360c-21.37 0-32.05 25.91-17 41l35.73 35.73L135 320.37a24 24 0 0 0 0 34L157.67 377a24 24 0 0 0 34 0l243.61-243.68L471 169c15 15 41 4.5 41-17V24a24 24 0 0 0-24-24z" fill="currentColor"></path></svg>
+        </a>
+      </div>
       <!-- <router-link
         class="announcement-toggle"
         :to="{
