@@ -23,6 +23,15 @@ const SESSION_QA_ID = 0
 const SESSION_SLIDE_ID = 0
 const SESSION_RECORD_ID = 0
 
+const ROOM_ORDER = [
+  'RB105',
+  'AU101',
+  'TR209', 'TR211', 'TR212', 'TR213', 'TR214',
+  'TR310-1', 'TR310-2', 'TR311', 'TR313',
+  'TR409-1', 'TR409-2', 'TR410', 'TR411', 'TR412-1', 'TR412-2', 'TR413-1', 'TR413-2',
+  'TR510'
+]
+
 function genResult (talks, rooms, speakers) {
   function getAnswer<T extends { answers: Array<{ question: { id: number }, answer: string }>, [name: string]: string | any }> (
     data: T,
@@ -33,17 +42,19 @@ function genResult (talks, rooms, speakers) {
     return (!answer || answer === '-') ? fallback : answer
   }
 
-  const resRooms = rooms.results.map(r => {
-    return {
-      id: r.name.en || r.name['zh-tw'],
-      zh: {
-        name: r.name['zh-tw']
-      },
-      en: {
-        name: r.name.en || r.name['zh-tw']
+  const resRooms = rooms.results
+    .map(r => {
+      return {
+        id: r.name.en || r.name['zh-tw'],
+        zh: {
+          name: r.name['zh-tw']
+        },
+        en: {
+          name: r.name.en || r.name['zh-tw']
+        }
       }
-    }
-  })
+    })
+    .filter(r => ROOM_ORDER.includes(r.id))
 
   const resSpeakers = speakers.results.map(s => {
     return {
