@@ -56,7 +56,7 @@
       </div>
     </template>
     <div
-      v-if="prepareSponsorGroups"
+      v-if="Object.keys(prepareSponsorGroups).length"
       class="outer-container"
     >
       <h2 class="title level">
