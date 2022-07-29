@@ -69,6 +69,7 @@ export default defineConfig(({ mode, command }) => {
         registerType: 'autoUpdate',
         workbox: {
           navigateFallback: 'index.html',
+          navigateFallbackDenylist: [/.*\.jpg$/, /.*\.png$/, /.*\.svg$/, /.*\.json$/, /.*\.js$/],
           offlineGoogleAnalytics: true,
           runtimeCaching: [
             {
