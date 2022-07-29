@@ -9,6 +9,12 @@ import { generateSessionMetaOptions, generateSessionPopupContentHtml, transformR
 
 import { Locale } from '@/modules/i18n'
 import sessionJSON from '@/assets/json/session.json'
+import communityData from '@/assets/json/community.json'
+import { Session } from '@/modules/session/types'
+
+function getCommunityFromSession (session: Session) {
+  return communityData.communities.find((c) => c.track === session.type['zh-TW'].name)
+}
 
 export default async function run () {
   const { sessionsMap } = transformRawData(sessionJSON, TIMEZONE_OFFSET, ROOM_ORDER)
@@ -23,7 +29,7 @@ export default async function run () {
           const output2Path = join(output2DirPath, 'index.html')
 
           const { title, description, ogUrl, ogImage } = generateSessionMetaOptions(session, locale as Locale)
-          const content = generateSessionPopupContentHtml(session, locale as Locale)
+          const content = generateSessionPopupContentHtml(session, getCommunityFromSession(session), locale as Locale)
           const result = template
             .replace(/@{TEMPLATE_META_TITLE}/g, title ?? '')
             .replace(/@{TEMPLATE_META_DESCRIPTION}/g, description ?? '')
