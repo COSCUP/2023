@@ -234,7 +234,7 @@ export function generateSessionPopupContentHtml (session: Session, community: { 
       </div>
       <div class="track">
         <span class="room">${session.room[locale].name.split(' / ')[0]}</span>
-        <span>${session.type[locale].name}${community ? `<span class="community">&nbsp;by <a href="${import.meta.env.BASE_URL}community#${community.id}" target="_blank">${community.name[locale]}</a></span>` : ''}</span>
+        <span>${session.type[locale].name}${community ? `<span class="community">&nbsp;by <a href="${getRootUrl()}community#${community.id}" target="_blank">${community.name[locale]}</a></span>` : ''}</span>
       </div>
       <div class="title">${session[locale].title}</div>
       <div class="speaker-list">
