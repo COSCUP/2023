@@ -9,42 +9,42 @@ import { VitePWA } from 'vite-plugin-pwa'
 export default defineConfig(({ mode, command }) => {
   const parsed = loadEnv(mode, process.cwd())
 
-  const renderRoutes = parsed?.VITE_LANDING_ONLY === 'yes'
-  ? (() => {
-      const routes = [
-        '/',
-        '/landing',
-        '/sponsorship',
-        '/map'
-      ].flatMap(r => [r, `${r}/`])
-      return Array.from(readdirSync('./locales/'))
-        .flatMap((locale) => {
-          return routes
-            .map((route) => join('/', locale, route))
-        })
-    })()
+  const renderRoutes = parsed?.VITE_LANDING_ONLY === 'true'
+    ? (() => {
+        const routes = [
+          '/',
+          '/landing',
+          // '/sponsorship',
+          '/map'
+        ].flatMap(r => [r, `${r}/`])
+        return Array.from(readdirSync('./locales/'))
+          .flatMap((locale) => {
+            return routes
+              .map((route) => join('/', locale, route))
+          })
+      })()
 
-  : (() => {
-      const routes = [
-        '/',
-        '/landing',
-        '/sponsorship',
-        '/session',
-        '/room',
-        '/community',
-        '/venue',
-        '/map',
-        '/sponsor',
-        '/staff'
-      ].flatMap(r => [r, `${r}/`])
+    : (() => {
+        const routes = [
+          '/',
+          '/landing',
+          '/sponsorship',
+          '/session',
+          '/room',
+          '/community',
+          '/venue',
+          '/map',
+          '/sponsor',
+          '/staff'
+        ].flatMap(r => [r, `${r}/`])
 
-      return Array.from(readdirSync('./locales/'))
-        .flatMap((locale) => {
-          return routes
-            .map((route) => join('/', locale, route))
-            .concat(join('/', locale, '/session/template'))
-        })
-    })()
+        return Array.from(readdirSync('./locales/'))
+          .flatMap((locale) => {
+            return routes
+              .map((route) => join('/', locale, route))
+              .concat(join('/', locale, '/session/template'))
+          })
+      })()
 
   const gaTemplate = readFileSync(join(__dirname, './templates/ga-template.html')).toString()
 
@@ -82,7 +82,7 @@ export default defineConfig(({ mode, command }) => {
                   maxAgeSeconds: 60 * 60 * 24 * 30 // <== 30 days
                 },
                 cacheableResponse: {
-                  statuses: [0, 200, 301],
+                  statuses: [0, 200, 301]
                 }
               }
             },
@@ -96,7 +96,7 @@ export default defineConfig(({ mode, command }) => {
                   maxAgeSeconds: 60 * 60 * 24 * 5 // <== 5 days
                 },
                 cacheableResponse: {
-                  statuses: [0, 200, 301],
+                  statuses: [0, 200, 301]
                 }
               }
             }
@@ -104,7 +104,7 @@ export default defineConfig(({ mode, command }) => {
         },
         includeAssets: command === 'build' ? [
           // favicon
-          'favicon.svg',
+          'favicon.svg'
           // error
           // pwa
           // 'images/apple-icon-180.png',
@@ -141,32 +141,34 @@ export default defineConfig(({ mode, command }) => {
           name: 'COSCUP 2023',
           short_name: 'COSCUP 2023',
           theme_color: '#ffffff',
-          icons: command === 'build' ? [
-            {
-              src: `${parsed?.VITE_BASE_URL}images/manifest-icon-192.maskable.png`,
-              sizes: "192x192",
-              type: "image/png",
-              purpose: "any"
-            },
-            {
-              src: `${parsed?.VITE_BASE_URL}images/manifest-icon-192.maskable.png`,
-              sizes: "192x192",
-              type: "image/png",
-              purpose: "maskable"
-            },
-            {
-              src: `${parsed?.VITE_BASE_URL}images/manifest-icon-512.maskable.png`,
-              sizes: "512x512",
-              type: "image/png",
-              purpose: "any"
-            },
-            {
-              src: `${parsed?.VITE_BASE_URL}images/manifest-icon-512.maskable.png`,
-              sizes: "512x512",
-              type: "image/png",
-              purpose: "maskable"
-            }
-          ] : []
+          icons: command === 'build'
+            ? [
+                {
+                  src: `${parsed?.VITE_BASE_URL}images/manifest-icon-192.maskable.png`,
+                  sizes: '192x192',
+                  type: 'image/png',
+                  purpose: 'any'
+                },
+                {
+                  src: `${parsed?.VITE_BASE_URL}images/manifest-icon-192.maskable.png`,
+                  sizes: '192x192',
+                  type: 'image/png',
+                  purpose: 'maskable'
+                },
+                {
+                  src: `${parsed?.VITE_BASE_URL}images/manifest-icon-512.maskable.png`,
+                  sizes: '512x512',
+                  type: 'image/png',
+                  purpose: 'any'
+                },
+                {
+                  src: `${parsed?.VITE_BASE_URL}images/manifest-icon-512.maskable.png`,
+                  sizes: '512x512',
+                  type: 'image/png',
+                  purpose: 'maskable'
+                }
+              ]
+            : []
         }
       })
     ],
