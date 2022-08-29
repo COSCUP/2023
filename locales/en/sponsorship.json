@@ -3,13 +3,13 @@
     "title": "Sponsorship Program"
   },
   "plan": {
-    "title": "COSCUP x KCD Taiwan 2022 Sponsorship Program"
+    "title": "COSCUP x KCD Taiwan 2023 Sponsorship Program"
   },
   "contact": "Contact Us: {email}",
   "overview": {
     "title": "Overview",
     "announcement": {
-      "title": "SOLD OUT: Thanks to the support of all sponsors, COSCUP 2022 is officially closed for sponsorship requests.",
+      "title": "SOLD OUT: Thanks to the support of all sponsors, COSCUP 2023 is officially closed for sponsorship requests.",
       "list": [
         "Sponsors are welcome to visit COSCUP on both days of the event and email us to reserve a sponsorship for COSCUP 2023.",
         "email: sponsorship@coscup.org"
@@ -191,7 +191,7 @@
     },
     "end": {
       "content": "Deadline for sponsorship: {date}",
-      "date": "July 18, 2022"
+      "date": "July 18, 2023"
     }
   },
   "faq": {
@@ -227,7 +227,7 @@
       },
       {
         "q": "What's OCF?",
-        "a": "OCF, short for [Open Culture Foundation](https://ocf.tw/), is a non-profit organization that helps communities access administrative and financial services. COSCUP 2022 is co-organized with the Open Culture Foundation (OCF) to issue sponsorship receipts, electronic invoices, sponsorship contracts, and other legal documents."
+        "a": "OCF, short for [Open Culture Foundation](https://ocf.tw/), is a non-profit organization that helps communities access administrative and financial services. COSCUP 2023 is co-organized with the Open Culture Foundation (OCF) to issue sponsorship receipts, electronic invoices, sponsorship contracts, and other legal documents."
       }
     ]
   },
@@ -248,7 +248,7 @@
     "message": "Kubernetes Community Days Taiwan (KCD Taiwan) is a local community event organized by the Cloud Native Taiwan User Group (CNTUG). The goal is to grow and sustain the Kubernetes community through the power of the local community so that more people can participate and learn about Kubernetes."
   },
   "wish": {
-    "title": "We wish all the sponsors in COSCUP x KCD Taiwan 2022 would",
+    "title": "We wish all the sponsors in COSCUP x KCD Taiwan 2023 would",
     "list": [
       "Be inspired by new ideas and creativity.",
       "Start new collaborative projects.",

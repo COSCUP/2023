@@ -2,7 +2,7 @@ import { setupI18nRoutes } from '@/modules/i18n'
 import { RouterOptions } from 'vite-ssg'
 import { RouteRecordRaw, RouterScrollBehavior } from 'vue-router'
 
-const routes: RouteRecordRaw[] = import.meta.env.VITE_LANDING_ONLY === 'yes'
+const routes: RouteRecordRaw[] = import.meta.env.VITE_LANDING_ONLY === 'true'
   ? [
       {
         path: '/',
@@ -26,15 +26,15 @@ const routes: RouteRecordRaw[] = import.meta.env.VITE_LANDING_ONLY === 'yes'
         meta: {
           order: 3
         }
-      },
-      {
-        path: '/sponsorship',
-        name: 'Sponsorship',
-        component: () => import('@/pages/Sponsorship.vue'),
-        meta: {
-          order: 1
-        }
       }
+      // {
+      //   path: '/sponsorship',
+      //   name: 'Sponsorship',
+      //   component: () => import('@/pages/Sponsorship.vue'),
+      //   meta: {
+      //     order: 1
+      //   }
+      // }
     ]
   : [
       // {

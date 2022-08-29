@@ -5,7 +5,7 @@
     </template>
     <template v-slot:default>
       <p class="coscup">COSCUP</p>
-      <p class="year">2022</p>
+      <p class="year">2023</p>
     </template>
   </component>
 </template>

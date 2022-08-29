@@ -5,7 +5,7 @@ import { getSheetRows, saveJSON } from './utils'
 import type { GoogleSpreadsheet } from 'google-spreadsheet'
 
 async function fetchRemoteData () {
-  const { data } = await axios.get<unknown[]>('https://coscup.org/2022/json/ytLink.json')
+  const { data } = await axios.get<unknown[]>('https://coscup.org/2023/json/ytLink.json')
     .catch((e) => {
       console.log(e)
       return { data: [] as unknown[] }

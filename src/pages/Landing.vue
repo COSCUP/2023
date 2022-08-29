@@ -1,15 +1,15 @@
 <template>
   <main id="landing" class="page-container">
     <section class="info-block">
-      <div class="logo-container">
+      <!-- <div class="logo-container">
         <img src='@/assets/images/banner.svg' alt="COSCUP Logo" />
-      </div>
+      </div> -->
       <div class="info">
         <div class="row">
           <div class="icon">
             <icon-akar-icons-calendar></icon-akar-icons-calendar>
           </div>
-          <span>2022/07/30 ~ 2022/07/31</span>
+          <span>2023/07/29 ~ 2023/07/30</span>
         </div>
         <div class="row">
           <div class="icon">
@@ -20,18 +20,18 @@
       </div>
     </section>
     <section class="links">
-      <a href="https://blog.coscup.org/2022/04/coscup-x-kcd-taiwan-2022-cfp-is-now.html" target="_blank" rel="noopener noreferrer">
+      <!-- <a href="https://blog.coscup.org/2023/04/coscup-x-kcd-taiwan-2023-cfp-is-now.html" target="_blank" rel="noopener noreferrer">
         {{ t('landing.links.cfp') }}
       </a>
-      <a href="https://blog.coscup.org/2022/04/coscup.html" target="_blank" rel="noopener noreferrer">
+      <a href="https://blog.coscup.org/2023/04/coscup.html" target="_blank" rel="noopener noreferrer">
         {{ t('landing.links.ftp') }}
-      </a>
+      </a> -->
       <a href="https://volunteer.coscup.org/" target="_blank" rel="noopener noreferrer">
         {{ t('landing.links.volunteer') }}
       </a>
-      <router-link to="sponsorship">
+      <!-- <router-link to="sponsorship">
         {{ t('landing.links.sponsor') }}
-      </router-link>
+      </router-link> -->
     </section>
     <section class="media-links">
       <a

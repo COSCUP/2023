@@ -22,12 +22,12 @@ const _useMetas = (): UseMetas => {
 
   const defaultMetaValues: MetaValues = {
     lang: 'zh-TW',
-    title: 'COSCUP 2022 | Conference for Open Source Coders, Users, and Promoters',
+    title: 'COSCUP 2023 | Conference for Open Source Coders, Users, and Promoters',
     description: 'Conference for Open Source Coders, Users, and Promoters is a free annual conference providing a platform to connect FLOSS folks across Asia since 2006. It\'s a major force of free software movement advocacy in Taiwan.',
-    ogUrl: 'https://coscup.org/2022',
+    ogUrl: 'https://coscup.org/2023',
     ogImage: ogImageSrc,
     ogType: 'website',
-    ogSiteName: 'COSCUP 2022'
+    ogSiteName: 'COSCUP 2023'
   }
 
   const _title = ref(defaultMetaValues.title)

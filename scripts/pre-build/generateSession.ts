@@ -176,7 +176,7 @@ function genResult (talks, rooms, speakers) {
       qa: getAnswer(s, SESSION_QA_ID, null),
       slide: getAnswer(s, SESSION_SLIDE_ID, null),
       record: getAnswer(s, SESSION_RECORD_ID, null),
-      uri: `https://coscup.org/2022/session/${s.code}`
+      uri: `https://coscup.org/2023/session/${s.code}`
     }
   })
 
@@ -193,14 +193,14 @@ export default async function run () {
   let data = {}
   try {
     const results = await Promise.all([
-      axios.get('https://pretalx.com/api/events/coscup-2022/talks/?limit=1000', pretalxOptions),
-      axios.get('https://pretalx.com/api/events/coscup-2022/rooms/?limit=1000', pretalxOptions),
-      axios.get('https://pretalx.com/api/events/coscup-2022/speakers/?limit=1000', pretalxOptions)
+      axios.get('https://pretalx.com/api/events/coscup-2023/talks/?limit=1000', pretalxOptions),
+      axios.get('https://pretalx.com/api/events/coscup-2023/rooms/?limit=1000', pretalxOptions),
+      axios.get('https://pretalx.com/api/events/coscup-2023/speakers/?limit=1000', pretalxOptions)
     ])
     data = genResult(results[0].data, results[1].data, results[2].data)
   } catch (e) {
     console.error(e)
-    const { data: d } = await axios.get('https://coscup.org/2022/json/session.json')
+    const { data: d } = await axios.get('https://coscup.org/2023/json/session.json')
     data = d
   }
   saveJSON('session', data)

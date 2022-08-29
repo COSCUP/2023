@@ -3,13 +3,13 @@
     "title": "贊助方案"
   },
   "plan": {
-    "title": "COSCUP x KCD Taiwan 2022 贊助方案"
+    "title": "COSCUP x KCD Taiwan 2023 贊助方案"
   },
   "contact": "聯絡我們：{email}",
   "overview": {
     "title": "總覽",
     "announcement": {
-      "title": "售罄：感激所有贊助商支持， COSCUP 2022 贊助徵求正式截止。",
+      "title": "售罄：感激所有贊助商支持， COSCUP 2023 贊助徵求正式截止。",
       "list": [
         "歡迎所有贊助商在活動兩天參觀 COSCUP，並來信預約 COSCUP 2023 贊助。",
         "email: sponsorship@coscup.org"
@@ -191,7 +191,7 @@
     },
     "end": {
       "content": "因應相關製作物所需的工作時間，贊助截止日期：{date}",
-      "date": "2022 年 7 月 18 日"
+      "date": "2023 年 7 月 18 日"
     }
   },
   "faq": {
@@ -227,7 +227,7 @@
       },
       {
         "q": "什麼是 OCF？",
-        "a": "OCF 為 Open Culture Foundation（[財團法人開放文化基金會](https://ocf.tw/)）的簡稱，是個協助社群獲得行政和財務服務的非營利組織。COSCUP 由「財團法人開放文化基金會（OCF）」協力開立 COSCUP 2022 贊助收據、電子發票、簽訂贊助合約或其他法律文件。"
+        "a": "OCF 為 Open Culture Foundation（[財團法人開放文化基金會](https://ocf.tw/)）的簡稱，是個協助社群獲得行政和財務服務的非營利組織。COSCUP 由「財團法人開放文化基金會（OCF）」協力開立 COSCUP 2023 贊助收據、電子發票、簽訂贊助合約或其他法律文件。"
       }
     ]
   },
@@ -248,7 +248,7 @@
     "message": "本次 Kubernetes Community Days Taiwan (KCD Taiwan) 是由台灣雲原生使用者社群 (Cloud Native Taiwan User Group, CNTUG) 所主辦的在地 KCD 的社群活動。其目的是透過本土社群的力量，讓更多人參與 Kubernetes 社群互相交流和學習，並以此持續發展和維持社群。"
   },
   "wish": {
-    "title": "我們期待所有的贊助單位在 COSCUP x KCD Taiwan 2022 都可以...",
+    "title": "我們期待所有的贊助單位在 COSCUP x KCD Taiwan 2023 都可以...",
     "list": [
       "激發新的想法、創意。",
       "獲得意想不到的合作計畫。",

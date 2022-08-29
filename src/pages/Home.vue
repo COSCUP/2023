@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="info-container">
-      <span class="date">2022/07/30 ~ 2022/07/31</span>
+      <span class="date">2023/07/30 ~ 2023/07/31</span>
       <div class="info">
         <a class="venue" href="https://youtu.be/MaQuXvkR7to" target="_blank">
           {{ t('home.info.day_1_rb_online') }}

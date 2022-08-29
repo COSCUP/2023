@@ -6,7 +6,7 @@ import type { SponsorLevelTuple, SponsorLevel, SponsorLevelRow, SponsorRow, Spon
 import type { GoogleSpreadsheet } from 'google-spreadsheet'
 
 async function fetchRemoteSponsorData () {
-  const { data } = await axios.get<unknown[]>('https://coscup.org/2022/json/sponsor.json')
+  const { data } = await axios.get<unknown[]>('https://coscup.org/2023/json/sponsor.json')
     .catch((e) => {
       console.log(e)
       return { data: [] as unknown[] }
@@ -15,7 +15,7 @@ async function fetchRemoteSponsorData () {
 }
 
 async function fetchRemoteSponsorNewsData () {
-  const { data } = await axios.get<unknown[]>('https://coscup.org/2022/json/sponsor-news.json')
+  const { data } = await axios.get<unknown[]>('https://coscup.org/2023/json/sponsor-news.json')
     .catch((e) => {
       console.log(e)
       return { data: [] as unknown[] }
@@ -41,7 +41,7 @@ function transformSponsorMap (rows: SponsorRow[]) {
       {
         id: r.id,
         level: r.level,
-        image: `https://coscup.org/2022-static/images/sponsor/${r.id}.png`,
+        image: `https://coscup.org/2023-static/images/sponsor/${r.id}.png`,
         link: r.link,
         name: {
           en: r['name:en'],
@@ -64,8 +64,8 @@ function transformSponsorNews (rows: SponsorNewsRow[], sponsorLevelMap: ReturnTy
       id: r.newsId,
       sponsor: r.sponsorId,
       image: {
-        vertical: `https://coscup.org/2022-static/images/sponsor-news/${r.sponsorId}-${r.newsId}-vertical.png`,
-        horizontal: `https://coscup.org/2022-static/images/sponsor-news/${r.sponsorId}-${r.newsId}-horizontal.png`
+        vertical: `https://coscup.org/2023-static/images/sponsor-news/${r.sponsorId}-${r.newsId}-vertical.png`,
+        horizontal: `https://coscup.org/2023-static/images/sponsor-news/${r.sponsorId}-${r.newsId}-horizontal.png`
       },
       description: r.description,
       link: r.link,

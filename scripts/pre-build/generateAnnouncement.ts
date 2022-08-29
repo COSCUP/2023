@@ -9,7 +9,7 @@ import axios from 'axios'
 import type { GoogleSpreadsheet } from 'google-spreadsheet'
 
 async function fetchRemoteData () {
-  const { data } = await axios.get<unknown[]>('https://coscup.org/2022/json/announcement.json')
+  const { data } = await axios.get<unknown[]>('https://coscup.org/2023/json/announcement.json')
     .catch((e) => {
       console.log(e)
       return { data: [] as unknown[] }

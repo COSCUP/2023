@@ -87,7 +87,7 @@ export default defineConfig(({ mode, command }) => {
               }
             },
             {
-              urlPattern: /^https:\/\/coscup\.org\/2022\/json\/.*/i,
+              urlPattern: /^https:\/\/coscup\.org\/2023\/json\/.*/i,
               handler: 'NetworkFirst',
               options: {
                 cacheName: 'json-data-cache',
@@ -138,8 +138,8 @@ export default defineConfig(({ mode, command }) => {
           // 'images/manifest-icon-512.maskable.png'
         ] : [],
         manifest: {
-          name: 'COSCUP 2022',
-          short_name: 'COSCUP 2022',
+          name: 'COSCUP 2023',
+          short_name: 'COSCUP 2023',
           theme_color: '#ffffff',
           icons: command === 'build' ? [
             {
