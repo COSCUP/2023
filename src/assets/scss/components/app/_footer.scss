@@ -80,7 +80,8 @@
         }
 
         .past-link,
-        .media-link {
+        .media-link,
+        .subscribe-link {
           text-decoration: none;
           color: var(--color-text);
           transition: color 0.1s;
@@ -94,6 +95,15 @@
         .past-link {
           display: inline-block;
           width: 4rem;
+          margin: 0.5rem;
+          padding: 4px;
+          text-align: center;
+          font-size: 0.95rem;
+          font-weight: 700;
+        }
+
+        .subscribe-link {
+          display: inline-block;
           margin: 0.5rem;
           padding: 4px;
           text-align: center;
