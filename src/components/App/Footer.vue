@@ -36,6 +36,18 @@
       </section>
       <section class="footer__section">
         <p class="title">
+          {{ t('app.footer.subscribe') }}
+        </p>
+        <div class="content subscribe">
+          <a 
+            href="https://secretary.coscup.org/subscribe/coscup"
+            class="subscribe-link"
+            >{{ t('app.footer.subscribe_newslatter') }}</a
+          >
+        </div>
+      </section>
+      <section class="footer__section">
+        <p class="title">
           {{ t('app.footer.websites') }}
         </p>
         <div class="content past">
