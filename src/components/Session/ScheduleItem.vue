@@ -47,6 +47,10 @@
         </span>
       </div>
     </section>
+    <span class="mark-icon" @click="handleMarkIconOnClick">
+      <icon-mdi-bookmark v-if="isMark"></icon-mdi-bookmark>
+      <icon-mdi-bookmark-outline v-else></icon-mdi-bookmark-outline>
+    </span>
   </router-link>
 </template>
 
@@ -57,6 +61,7 @@ import { useI18n } from 'vue-i18n'
 import { Locale } from '@/modules/i18n'
 import { formatTimeString } from '@/modules/session/utils'
 import { useSession } from '@/modules/session'
+import { switchSessionMarkData } from '@/modules/session/logic'
 
 export default defineComponent({
   name: 'ScheduleItem',
@@ -91,6 +96,12 @@ export default defineComponent({
     // const isFull = computed(() => !!(roomsStatus.value[session.value.room.id]))
     const isFull = ref(false)
     const statusText = computed(() => t(`session['room-status'].${isFull.value ? 'full' : 'vacancy'}`))
+    const isMark = computed(() => session.value.isMark)
+
+    const handleMarkIconOnClick = (e: Event) => {
+      switchSessionMarkData(session.value)
+      return e.preventDefault()
+    }
 
     return {
       isLoaded,
@@ -104,7 +115,9 @@ export default defineComponent({
       language,
       room,
       isFull,
-      statusText
+      statusText,
+      isMark,
+      handleMarkIconOnClick
     }
   }
 })

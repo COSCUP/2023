@@ -49,6 +49,12 @@ const _useSession = (): UseSession => {
     isClient && await prepareRoomStatus()
     isLoaded.value = true
     done()
+
+    const markSessions: SessionId[] = JSON.parse(window.localStorage.getItem('MARK_SESSIONS') ?? '[]')
+    for (const id in sessionsMap.value) {
+      const session: Session = sessionsMap.value?.[id]
+      session.isMark = markSessions.includes(id)
+    }
   }
 
   isClient && load()

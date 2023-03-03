@@ -9,7 +9,7 @@ import { fixedTimeZoneDate, formatDateString, formatTimeString, getPartsOfDate, 
 import type { Locale } from '../i18n'
 import type { MetaOptions } from '../metas'
 import type { PopUpData } from '../pop-up'
-import type { Session, ScheduleElement, RawData, SessionType, Room, Speaker, Tag, SessionsMap, ScheduleList, YearOfDate, MonthOfDate, DateOfDate, SchedulDay, HourOfDate, MinuteOfDate, ScheduleTable, RoomId, ScheduleTableBodyCell, ScheduleTableBlankCell, ScheduleTableSpanCell, RoomsMap } from './types'
+import type { Session, SessionId, ScheduleElement, RawData, SessionType, Room, Speaker, Tag, SessionsMap, ScheduleList, YearOfDate, MonthOfDate, DateOfDate, SchedulDay, HourOfDate, MinuteOfDate, ScheduleTable, RoomId, ScheduleTableBodyCell, ScheduleTableBlankCell, ScheduleTableSpanCell, RoomsMap } from './types'
 
 export const TIMEZONE_OFFSET: number = -480
 // export const ROOM_ORDER = []
@@ -341,4 +341,15 @@ export function generateSessionPopupData (session: Session, community: { id: str
       html: generateSessionPopupContentHtml(session, community, locale)
     }
   }
+}
+
+export function switchSessionMarkData (session: Session) {
+  const markSessions: SessionId[] = JSON.parse(window.localStorage.getItem('MARK_SESSIONS') ?? '[]')
+  const currentStatus = !session.isMark
+
+  if (currentStatus) markSessions.push(session.id)
+  else markSessions.splice(markSessions.indexOf(session.id), 1)
+
+  session.isMark = currentStatus
+  window.localStorage.setItem('MARK_SESSIONS', JSON.stringify(markSessions))
 }
