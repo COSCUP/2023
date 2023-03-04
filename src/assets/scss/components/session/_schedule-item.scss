@@ -101,10 +101,26 @@
       }
     }
 
+
     .mark-icon {
-      float: right;
       font-size: 1.2rem;
       padding: 0 8px 10px;
     }
+
+    @include smAndUp {
+      .mark-icon {
+        float: right;
+      }
+    }
+
+    @include xsOnly {
+      position: relative;
+      .mark-icon {
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+      }
+    }
+
   }
 }
