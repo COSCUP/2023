@@ -12,6 +12,8 @@
     color: var(--color-text);
     background-color: var(--color-session-background);
     text-decoration: none;
+    position: relative;
+    padding: 5px;
 
     .content-section {
       position: sticky;
@@ -101,26 +103,10 @@
       }
     }
 
-
     .mark-icon {
-      font-size: 1.2rem;
-      padding: 0 8px 10px;
+      position: absolute;
+      right: 5px;
+      top :5px;
     }
-
-    @include smAndUp {
-      .mark-icon {
-        float: right;
-      }
-    }
-
-    @include xsOnly {
-      position: relative;
-      .mark-icon {
-        position: absolute;
-        right: 10px;
-        bottom: 10px;
-      }
-    }
-
   }
 }
