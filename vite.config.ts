@@ -5,6 +5,9 @@ import Vue from '@vitejs/plugin-vue'
 import Components from 'vite-plugin-components'
 import ViteIcons, { ViteIconsResolver } from 'vite-plugin-icons'
 import { VitePWA } from 'vite-plugin-pwa'
+import { resolve, dirname } from 'node:path'
+import { fileURLToPath } from 'url'
+import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite'
 
 export default defineConfig(({ mode, command }) => {
   const parsed = loadEnv(mode, process.cwd())
@@ -56,6 +59,11 @@ export default defineConfig(({ mode, command }) => {
       }
     },
     plugins: [
+      VueI18nPlugin({
+        /* options */
+        // locale messages resource pre-compile option
+        include: resolve(dirname(fileURLToPath(import.meta.url)), './path/to/src/locales/**')
+      }),
       Vue({
         include: [/\.vue$/, /\.md$/]
       }),
