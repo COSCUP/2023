@@ -20,18 +20,18 @@
       </div>
     </section>
     <section class="links">
-      <!-- <a href="https://blog.coscup.org/2023/04/coscup-x-kcd-taiwan-2023-cfp-is-now.html" target="_blank" rel="noopener noreferrer">
-        {{ t('landing.links.cfp') }}
+      <a href="https://blog.coscup.org/2023/02/coscup-2023-early-bird-call-for-paper.html" target="_blank" rel="noopener noreferrer">
+        {{ t('landing.links.early_cfp') }}
       </a>
-      <a href="https://blog.coscup.org/2023/04/coscup.html" target="_blank" rel="noopener noreferrer">
-        {{ t('landing.links.ftp') }}
-      </a> -->
+      <a href="https://blog.coscup.org/2023/02/coscup-2023-call-for-participation-now.html" target="_blank" rel="noopener noreferrer">
+        {{ t('landing.links.track') }}
+      </a>
+      <a href="https://blog.coscup.org/2023/02/coscup-2023-call-for-participation-now.html" target="_blank" rel="noopener noreferrer">
+        {{ t('landing.links.community') }}
+      </a>
       <a href="https://volunteer.coscup.org/" target="_blank" rel="noopener noreferrer">
         {{ t('landing.links.volunteer') }}
       </a>
-      <!-- <router-link to="sponsorship">
-        {{ t('landing.links.sponsor') }}
-      </router-link> -->
     </section>
     <section class="media-links">
       <a
