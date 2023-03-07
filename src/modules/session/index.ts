@@ -4,8 +4,8 @@
 // https://opensource.org/licenses/MIT
 import { computed, InjectionKey, Ref, ref } from 'vue'
 import { createModuleHook, useSetupCtx } from '../utils'
-import { TIMEZONE_OFFSET, ROOM_ORDER, generateScheduleList, generateScheduleTable, getScheduleDays, transformRawData } from './logic'
-import { ScheduleElement, SessionsMap, RoomId, ScheduleTable, ScheduleList, Session, SessionId, RoomsMap, Room, RoomsStatusMap, RoomStatus } from './types'
+import { TIMEZONE_OFFSET, ROOM_ORDER, generateScheduleList, generateScheduleTable, getScheduleDays, transformRawData, generateFilterOption } from './logic'
+import { ScheduleElement, SessionsMap, RoomId, ScheduleTable, ScheduleList, Session, SessionId, RoomsMap, Room, RoomsStatusMap, RoomStatus, FilterOptions, FilterValue } from './types'
 import { fixedTimeZoneDate } from './utils'
 import { useProgress } from '../progress'
 import io, { Socket } from 'socket.io-client'
@@ -18,6 +18,8 @@ interface UseSession {
     table: ScheduleTable;
     list: ScheduleList;
   }[]>;
+  filterOptions: Ref<FilterOptions>;
+  filterValue: Ref<FilterValue>;
   roomsStatusMap: Ref<RoomsStatusMap | null>;
   getSessionById: (id: SessionId) => Session;
   getRoomById: (id: RoomId) => Room;
@@ -36,6 +38,7 @@ const _useSession = (): UseSession => {
   const sessionsMap = ref<SessionsMap | null>(null)
   const roomsMap = ref<RoomsMap | null>(null)
   const isLoaded = ref<boolean>(false)
+  const filterOptions = ref<FilterOptions>([])
 
   const load = async () => {
     if (isLoaded.value) return
@@ -48,19 +51,41 @@ const _useSession = (): UseSession => {
     roomsMap.value = _roomsMap
     isClient && await prepareRoomStatus()
     isLoaded.value = true
+    filterOptions.value = generateFilterOption(_rawData)
     done()
   }
 
   isClient && load()
 
   const currentDayIndex = ref(0)
+  const filterValue = ref<FilterValue>({ speakers: '*', room: '*', tags: '*', type: '*' })
   const daysSchedule = computed(() => {
     if (scheduleElements.value === null) return []
     return getScheduleDays(scheduleElements.value)
       .map((scheduleDay) => {
         const day = scheduleDay.day
-        const table = generateScheduleTable(scheduleDay.elements)
-        const list = generateScheduleList(scheduleDay.elements)
+        const elements = scheduleDay.elements.filter(s => {
+          const session = getSessionById(s.session)
+
+          for (const filter of Object.entries(filterValue.value)) {
+            if (filter[1] === '*') continue
+
+            switch (filter[0]) {
+              case 'speakers':
+              case 'tags':
+                if (!session[filter[0]].find(x => x.id === filter[1])) return false
+                else continue
+              case 'room':
+              case 'type':
+                if (session[filter[0]].id !== filter[1]) return false
+                else continue
+            }
+          }
+
+          return true
+        })
+        const table = generateScheduleTable(elements)
+        const list = generateScheduleList(elements)
         return { day, table, list }
       })
   })
@@ -127,6 +152,8 @@ const _useSession = (): UseSession => {
     currentDayIndex,
     daysSchedule,
     roomsStatusMap,
+    filterOptions,
+    filterValue,
     getSessionById,
     getRoomById,
     getRoomStatusById,

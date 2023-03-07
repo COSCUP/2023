@@ -7,6 +7,7 @@
 @import "../components/session/schedule-navbar";
 @import "../components/session/schedule-table";
 @import "../components/session/schedule-list";
+@import "../components//session//session-filter";
 
 @mixin session-theme-colors {
   // @include theme-colors-of("all", "#session") {
@@ -39,4 +40,5 @@
   @include schedule-navbar;
   @include schedule-table;
   @include schedule-list;
+  @include session-filter;
 }

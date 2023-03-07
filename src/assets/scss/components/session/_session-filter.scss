@@ -1,0 +1,34 @@
+
+
+
+@mixin session-filter {
+  .session-filter {
+    width: 100vw;
+    position: sticky;
+    left: 0;
+    display: grid;
+    -moz-box-pack: center;
+    justify-content: center;
+    gap: 25px 15px;
+
+    @include smAndUp {
+      grid-template-columns: repeat(4, 200px);
+    }
+
+    @include smOnly {
+      grid-template-columns: repeat(2, 200px);
+    }
+
+    @include xsOnly {
+      grid-template-columns: repeat(2, 160px);
+      margin-top: 30px;
+    }
+
+    select {
+      width: 120px;
+      margin: 5px 0;
+    }
+
+    
+  }
+}

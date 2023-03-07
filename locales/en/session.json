@@ -5,5 +5,12 @@
   "room-status": {
     "vacancy": "Available",
     "full": "Full"
+  },
+  "filter": {
+    "speakers": "Speaker",
+    "room": "Room",
+    "type": "Type",
+    "tags": "Tag",
+    "all": "All"
   }
 }
