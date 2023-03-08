@@ -9,7 +9,7 @@
           <div class="icon">
             <icon-akar-icons-calendar></icon-akar-icons-calendar>
           </div>
-          <span>2023/07/29 ~ 2023/07/30</span>
+          <span>{{startDate}} ~ {{endDate}}</span>
         </div>
         <div class="row">
           <div class="icon">
@@ -127,6 +127,8 @@ export default defineComponent({
   setup () {
     const { t, locale } = useI18n()
     const section = ref<Section>({ name: 'about', title: '', content: '' })
+    const startDate = import.meta.env.VITE_START_DATE
+    const endDate = import.meta.env.VITE_END_DATE
 
     watch(locale, async () => {
       section.value =
@@ -142,7 +144,9 @@ export default defineComponent({
     return {
       t,
       section,
-      communityMedia
+      communityMedia,
+      startDate,
+      endDate
     }
   }
 })
