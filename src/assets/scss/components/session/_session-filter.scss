@@ -9,24 +9,49 @@
     display: grid;
     -moz-box-pack: center;
     justify-content: center;
-    gap: 25px 15px;
+    padding: 10px 0 30px;
 
     @include smAndUp {
-      grid-template-columns: repeat(4, 200px);
+      grid-template-columns: repeat(4, 160px);
+      gap: 25px 15px;
+
     }
 
     @include smOnly {
-      grid-template-columns: repeat(2, 200px);
+      grid-template-columns: repeat(2, 160px);
+      gap: 25px 100px;
+
     }
 
     @include xsOnly {
       grid-template-columns: repeat(2, 160px);
-      margin-top: 30px;
+      gap: 25px 15px;
+      padding: 30px 0;
+      border-bottom: 1px solid var(--color-filter-border);
     }
 
     select {
       width: 120px;
       margin: 5px 0;
+      display: block;
+      border-radius: 8px;
+      border: 1px solid var(--color-filter-border);
+      box-shadow: none;
+
+      background-image: var(--color-filter-icon);
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: right;
+      background-color: var(--color-filter-background);
+
+      color: var(--color-filter-font);
+      appearance: none;
+      padding: 5px;
+      font-size: .85rem;
+
+      &:focus {
+        outline: none;
+      }
     }
 
     
