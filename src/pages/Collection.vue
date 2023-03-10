@@ -10,7 +10,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, computed } from 'vue'
+import { useSession } from '@/modules/session'
 import { useRoute } from 'vue-router'
 import ScheduleItem from '@/components/Session/ScheduleItem.vue'
 import '@/assets/scss/pages/collection.scss'
@@ -22,7 +23,20 @@ export default defineComponent({
   },
   setup () {
     const route = useRoute()
-    const sessions = route.query.sessions?.toString().split('-') ?? JSON.parse(window.localStorage.getItem('MARK_SESSIONS') ?? '[]')
+    const { sessionsMap } = useSession()
+
+    const query = route.query.sessions?.toString().split('-')
+    const sessions = computed(() => {
+      if (query) {
+        return query
+      } else {
+        const result = []
+        for (const sessionId in sessionsMap.value) {
+          if (sessionsMap.value?.[sessionId].isMark) result.push(sessionId)
+        }
+        return result
+      }
+    })
 
     return { sessions }
   }

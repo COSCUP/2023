@@ -19,6 +19,7 @@ interface UseSession {
     list: ScheduleList;
   }[]>;
   roomsStatusMap: Ref<RoomsStatusMap | null>;
+  sessionsMap: Ref<SessionsMap | null>;
   getSessionById: (id: SessionId) => Session;
   getRoomById: (id: RoomId) => Room;
   getRoomStatusById: (id: RoomId) => RoomStatus;
@@ -133,6 +134,7 @@ const _useSession = (): UseSession => {
     currentDayIndex,
     daysSchedule,
     roomsStatusMap,
+    sessionsMap,
     getSessionById,
     getRoomById,
     getRoomStatusById,
