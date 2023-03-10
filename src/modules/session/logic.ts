@@ -378,6 +378,14 @@ export function generateFilterOption (rawData: RawData) {
     }))
   })
 
+  result.push({
+    label: 'collection',
+    options: [{
+      id: 'mark',
+      name: { en: 'My Collection', 'zh-TW': '我的收藏' }
+    }]
+  })
+
   return result
 }
 

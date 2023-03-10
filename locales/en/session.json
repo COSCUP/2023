@@ -11,6 +11,7 @@
     "room": "Room",
     "type": "Type",
     "tags": "Tag",
-    "all": "All"
+    "all": "All",
+    "collection": "Collection"
   }
 }

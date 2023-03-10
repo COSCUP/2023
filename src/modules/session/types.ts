@@ -128,5 +128,6 @@ export type FilterValue = {
   speakers: string,
   type: string,
   tags: string,
-  room: string
+  room: string,
+  collection: string
 }

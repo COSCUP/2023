@@ -12,14 +12,14 @@
     padding: 10px 0 30px;
 
     @include smAndUp {
-      grid-template-columns: repeat(4, 160px);
+      grid-template-columns: repeat(5, 160px);
       gap: 25px 15px;
 
     }
 
     @include smOnly {
-      grid-template-columns: repeat(2, 160px);
-      gap: 25px 100px;
+      grid-template-columns: repeat(3, 160px);
+      gap: 25px 50px;
 
     }
 
