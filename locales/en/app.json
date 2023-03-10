@@ -12,7 +12,8 @@
     "blog": "Blog",
     "press-release": "Press Release",
     "coc": "CoC",
-    "languageSwitch": "EN"
+    "languageSwitch": "EN",
+    "collection": "My Collection"
   },
   "offline": "Offline mode",
   "footer": {

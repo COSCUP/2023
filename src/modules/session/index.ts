@@ -21,6 +21,7 @@ interface UseSession {
   filterOptions: Ref<FilterOptions>;
   filterValue: Ref<FilterValue>;
   roomsStatusMap: Ref<RoomsStatusMap | null>;
+  sessionsMap: Ref<SessionsMap | null>;
   getSessionById: (id: SessionId) => Session;
   getRoomById: (id: RoomId) => Room;
   getRoomStatusById: (id: RoomId) => RoomStatus;
@@ -53,6 +54,12 @@ const _useSession = (): UseSession => {
     isLoaded.value = true
     filterOptions.value = generateFilterOption(_rawData)
     done()
+
+    const markSessions: SessionId[] = JSON.parse(window.localStorage.getItem('MARK_SESSIONS') ?? '[]')
+    for (const id in sessionsMap.value) {
+      const session: Session = sessionsMap.value?.[id]
+      session.isMark = markSessions.includes(id)
+    }
   }
 
   isClient && load()
@@ -154,6 +161,7 @@ const _useSession = (): UseSession => {
     roomsStatusMap,
     filterOptions,
     filterValue,
+    sessionsMap,
     getSessionById,
     getRoomById,
     getRoomStatusById,

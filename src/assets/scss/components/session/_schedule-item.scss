@@ -12,6 +12,8 @@
     color: var(--color-text);
     background-color: var(--color-session-background);
     text-decoration: none;
+    position: relative;
+    padding: 5px;
 
     .content-section {
       position: sticky;
@@ -99,6 +101,12 @@
           border-radius: 16px;
         }
       }
+    }
+
+    .mark-icon {
+      position: absolute;
+      right: 5px;
+      top :5px;
     }
   }
 }
