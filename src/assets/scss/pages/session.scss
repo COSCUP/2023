@@ -7,6 +7,7 @@
 @import "../components/session/schedule-navbar";
 @import "../components/session/schedule-table";
 @import "../components/session/schedule-list";
+@import "../components//session//session-filter";
 
 @mixin session-theme-colors {
   // @include theme-colors-of("all", "#session") {
@@ -22,6 +23,10 @@
         $background-light,
         $alpha: -0.1
       )};
+    --color-filter-background: #{lighten($coscup-green, 56)};
+    --color-filter-font: #{$text-light};
+    --color-filter-border: #{$coscup-secondary};
+    --color-filter-icon: url('@/assets/images/arrow-down-light.svg');
   }
 
   @include theme-colors-of("dark", "#session") {
@@ -30,6 +35,10 @@
     --color-list-time-background: #{$background-dark};
     --color-nav-background: #{$background-dark};
     --color-room-cell-background: #{adjust-color($background-dark, $alpha: -0.1)};
+    --color-filter-background: #{$background-dark};
+    --color-filter-font: #{$text-dark};
+    --color-filter-border: #{$background-light};
+    --color-filter-icon: url('@/assets/images/arrow-down-dark.svg');
   }
 }
 
@@ -39,4 +48,5 @@
   @include schedule-navbar;
   @include schedule-table;
   @include schedule-list;
+  @include session-filter;
 }

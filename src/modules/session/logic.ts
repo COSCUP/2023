@@ -9,7 +9,7 @@ import { fixedTimeZoneDate, formatDateString, formatTimeString, getPartsOfDate, 
 import type { Locale } from '../i18n'
 import type { MetaOptions } from '../metas'
 import type { PopUpData } from '../pop-up'
-import type { Session, ScheduleElement, RawData, SessionType, Room, Speaker, Tag, SessionsMap, ScheduleList, YearOfDate, MonthOfDate, DateOfDate, SchedulDay, HourOfDate, MinuteOfDate, ScheduleTable, RoomId, ScheduleTableBodyCell, ScheduleTableBlankCell, ScheduleTableSpanCell, RoomsMap } from './types'
+import type { Session, ScheduleElement, RawData, SessionType, Room, Speaker, Tag, SessionsMap, ScheduleList, YearOfDate, MonthOfDate, DateOfDate, SchedulDay, HourOfDate, MinuteOfDate, ScheduleTable, RoomId, ScheduleTableBodyCell, ScheduleTableBlankCell, ScheduleTableSpanCell, RoomsMap, FilterValue } from './types'
 
 export const TIMEZONE_OFFSET: number = -480
 // export const ROOM_ORDER = []
@@ -341,4 +341,42 @@ export function generateSessionPopupData (session: Session, community: { id: str
       html: generateSessionPopupContentHtml(session, community, locale)
     }
   }
+}
+
+export function generateFilterOption (rawData: RawData) {
+  const result = []
+
+  result.push({
+    label: 'speakers',
+    options: rawData.speakers.map(speaker => ({
+      id: speaker.id,
+      name: { en: speaker.en.name, 'zh-TW': speaker.zh.name }
+    }))
+  })
+
+  result.push({
+    label: 'room',
+    options: rawData.rooms.map(room => ({
+      id: room.id,
+      name: { en: room.en.name, 'zh-TW': room.zh.name }
+    }))
+  })
+
+  result.push({
+    label: 'tags',
+    options: rawData.tags.map(tag => ({
+      id: tag.id,
+      name: { en: tag.en.name, 'zh-TW': tag.zh.name }
+    }))
+  })
+
+  result.push({
+    label: 'type',
+    options: rawData.session_types.map(type => ({
+      id: type.id,
+      name: { en: type.en.name, 'zh-TW': type.zh.name }
+    }))
+  })
+
+  return result
 }

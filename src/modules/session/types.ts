@@ -115,3 +115,17 @@ export interface ScheduleListItem {
 export interface ScheduleList {
   items: ScheduleListItem[];
 }
+
+// Filter
+
+export type FilterOptions = {
+  label: string,
+  options: {id: string, name: LocaleRecord<string>}[]
+}[]
+
+export type FilterValue = {
+  speakers: string,
+  type: string,
+  tags: string,
+  room: string
+}

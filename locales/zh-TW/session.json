@@ -5,5 +5,12 @@
   "room-status": {
     "vacancy": "尚有空位",
     "full": "沒有空位"
+  },
+    "filter": {
+    "speakers": "講者",
+    "room": "會議室",
+    "type": "類別",
+    "tags": "標籤",
+    "all": "全部"
   }
 }
