@@ -346,29 +346,16 @@ export function generateSessionPopupData (session: Session, community: { id: str
 export function generateFilterOption (rawData: RawData) {
   const result = []
 
-  result.push({
-    label: 'room',
-    options: rawData.rooms.map(room => ({
-      id: room.id,
-      name: { en: room.en.name, 'zh-TW': room.zh.name }
-    }))
-  })
-
-  result.push({
-    label: 'tags',
-    options: rawData.tags.map(tag => ({
-      id: tag.id,
-      name: { en: tag.en.name, 'zh-TW': tag.zh.name }
-    }))
-  })
-
-  result.push({
-    label: 'type',
-    options: rawData.session_types.map(type => ({
-      id: type.id,
-      name: { en: type.en.name, 'zh-TW': type.zh.name }
-    }))
-  })
+  const payload = { room: 'rooms', tags: 'tags', type: 'session_types' }
+  for (const label in payload) {
+    result.push({
+      label,
+      options: rawData[payload[label]].map(({ id, en, zh }: any) => ({
+        id,
+        name: { en: en.name, 'zh-TW': zh.name }
+      }))
+    })
+  }
 
   result.push({
     label: 'collection',
