@@ -347,14 +347,6 @@ export function generateFilterOption (rawData: RawData) {
   const result = []
 
   result.push({
-    label: 'speakers',
-    options: rawData.speakers.map(speaker => ({
-      id: speaker.id,
-      name: { en: speaker.en.name, 'zh-TW': speaker.zh.name }
-    }))
-  })
-
-  result.push({
     label: 'room',
     options: rawData.rooms.map(room => ({
       id: room.id,

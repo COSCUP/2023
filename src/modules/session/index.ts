@@ -65,7 +65,7 @@ const _useSession = (): UseSession => {
   isClient && load()
 
   const currentDayIndex = ref(0)
-  const filterValue = ref<FilterValue>({ speakers: '*', room: '*', tags: '*', type: '*', collection: '*' })
+  const filterValue = ref<FilterValue>({ room: '*', tags: '*', type: '*', collection: '*' })
   const daysSchedule = computed(() => {
     if (scheduleElements.value === null) return []
     return getScheduleDays(scheduleElements.value)
@@ -78,7 +78,6 @@ const _useSession = (): UseSession => {
             if (filter[1] === '*') continue
 
             switch (filter[0]) {
-              case 'speakers':
               case 'tags':
                 if (!session[filter[0]].find(x => x.id === filter[1])) return false
                 else continue
