@@ -39,7 +39,7 @@
           {{ t('app.footer.subscribe') }}
         </p>
         <div class="content subscribe">
-          <a 
+          <a
             href="https://secretary.coscup.org/subscribe/coscup"
             class="subscribe-link"
             >{{ t('app.footer.subscribe_newslatter') }}</a
