@@ -295,15 +295,15 @@
     }
   }
 
+  @page{
+    size: A4 portrait;
+    margin: 0.5cm;
+    orphans: 4;
+    widows: 2;
+  }
+
   @include printOnly {
     font-size: 12pt;
-
-    @page{
-      size: A4 portrait;
-      margin: 0.5cm;
-      orphans: 4;
-      widows: 2;
-    }
 
     h2 {
       display: block;
