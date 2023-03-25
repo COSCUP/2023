@@ -118,5 +118,9 @@
         }
       }
     }
+
+    @include printOnly {
+      display: none;
+    }
   }
 }

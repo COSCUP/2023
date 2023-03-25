@@ -19,10 +19,11 @@
 @include sponsorship-theme-colors;
 
 @include page("sponsorship") {
-  $max-width: 900px;
-
   .banner {
-    width: 100%;
+    display: block;
+    margin: 0 auto;
+    width: 90%;
+    max-width: 1024px;
   }
 
   h2 {
@@ -128,6 +129,14 @@
 
         td {
           word-break: normal;
+
+          ul {
+            padding-inline-start: 15px;
+            font-size: 0.9rem;
+            li {
+              line-height: 1.5;
+            }
+          }
         }
       }
     }
@@ -233,6 +242,14 @@
 
           tbody > tr > td {
             word-break: normal;
+
+            ul {
+              padding-inline-start: 10px;
+              font-size: 0.8rem;
+              li {
+                line-height: 1.5;
+              }
+            }
           }
 
           .name {
@@ -274,6 +291,64 @@
             font-size: 1rem;
           }
         }
+      }
+    }
+  }
+
+  @include printOnly {
+    font-size: 12pt;
+
+    @page{
+      size: A4 portrait;
+      margin: 0.5cm;
+      orphans: 4;
+      widows: 2;
+    }
+
+    h2 {
+      display: block;
+    }
+
+    section {
+      box-shadow: none;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      max-width: unset;
+      page-break-before: always;
+
+      &.avoid-page-break {
+        page-break-before: avoid;
+      }
+
+      h3 {
+        padding: 15pt 0;
+      }
+
+      .add-ons-table,
+      .level-table {
+        max-width: unset;
+        border: none;
+
+        table {
+          width: 100%;
+          min-width: 100%;
+          page-break-inside: avoid;
+
+          td {
+            padding: 2pt;
+          }
+        }
+      }
+    }
+
+    .overview {
+      page-break-after: always;
+    }
+
+    .faq {
+      li {
+        page-break-inside: avoid;
       }
     }
   }
