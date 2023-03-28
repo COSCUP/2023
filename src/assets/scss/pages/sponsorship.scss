@@ -24,6 +24,7 @@
     margin: 0 auto;
     width: 90%;
     max-width: 1024px;
+    background-color: #12344c;
   }
 
   h2 {
@@ -73,6 +74,10 @@
           img {
             width: 80px;
             padding-bottom: 0.65rem;
+          }
+
+          &:not(:first-child) {
+            width: 33%;
           }
         }
 
@@ -298,6 +303,11 @@
   @include printOnly {
     font-size: 12pt;
 
+    .banner {
+      -webkit-print-color-adjust:exact !important;
+      print-color-adjust:exact !important;
+    }
+
     h2 {
       display: block;
     }
@@ -322,6 +332,8 @@
       .level-table {
         max-width: unset;
         border: none;
+        line-height: 1.5;
+        font-size: 9pt;
 
         table {
           width: 100%;
@@ -330,6 +342,11 @@
 
           td {
             padding: 2pt;
+
+            ul {
+              padding-inline-start: 15px;
+              font-size: 9pt;
+            }
           }
         }
       }

@@ -1,10 +1,10 @@
 <template>
   <main id="sponsorship" class="page-container">
-    <!-- <img
+    <img
       class="banner"
       :src="getImageFromAddOns('banner')"
       :alt="t('sponsorship.plan.title')"
-    > -->
+    >
     <h2>{{ t('sponsorship.plan.title') }}</h2>
     <section class="markdown overview avoid-page-break">
       <h3>{{ t('sponsorship.overview.title') }}</h3>
