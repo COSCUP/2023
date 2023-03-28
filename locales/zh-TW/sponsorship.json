@@ -38,7 +38,7 @@
         "subtitle": "",
         "cost": "238,000",
         "benefits": [
-          "Logo 和公司介紹於 COSCUP 和 KCD 官網露出",
+          "Logo 和公司介紹於 COSCUP 官網露出",
           "COSCUP 社群網站宣傳",
           "Logo 於會場報到區迎賓背板曝光",
           "網站議程頁面廣告 (按贊助等級比重播出) ",
@@ -56,7 +56,7 @@
         "subtitle": "",
         "cost": "170,500",
         "benefits": [
-          "Logo 和公司介紹於 COSCUP 和 KCD 官網露出",
+          "Logo 和公司介紹於 COSCUP 官網露出",
           "COSCUP 社群網站宣傳",
           "Logo 於會場報到區迎賓背板曝光",
           "網站議程頁面廣告 (按贊助等級比重播出) ",
@@ -70,7 +70,7 @@
         "subtitle": "",
         "cost": "137,500",
         "benefits": [
-          "Logo 和公司介紹於 COSCUP 和 KCD 官網露出",
+          "Logo 和公司介紹於 COSCUP 官網露出",
           "COSCUP 社群網站宣傳",
           "Logo 於會場報到區迎賓背板曝光",
           "網站議程頁面廣告 (按贊助等級比重播出) ",
@@ -83,7 +83,7 @@
         "subtitle": "",
         "cost": "82,500",
         "benefits": [
-          "Logo 和公司介紹於 COSCUP 和 KCD 官網露出",
+          "Logo 和公司介紹於 COSCUP 官網露出",
           "COSCUP 社群網站宣傳",
           "Logo 於會場報到區迎賓背板曝光",
           "網站議程頁面廣告 (按贊助等級比重播出) "
@@ -94,7 +94,7 @@
         "subtitle": "",
         "cost": "38,500",
         "benefits": [
-          "Logo 和公司介紹於 COSCUP 和 KCD 官網露出",
+          "Logo 和公司介紹於 COSCUP 官網露出",
           "COSCUP 社群網站宣傳",
           "Logo 於會場報到區迎賓背板曝光",
           "網站議程頁面廣告 (按贊助等級比重播出) "
@@ -105,7 +105,7 @@
         "subtitle": "",
         "cost": "22,000",
         "benefits": [
-          "Logo 和公司介紹於 COSCUP 和 KCD 官網露出",
+          "Logo 和公司介紹於 COSCUP 官網露出",
           "COSCUP 社群網站宣傳",
           "Logo 於會場報到區迎賓背板曝光"
         ]
@@ -129,29 +129,29 @@
       "lanyards": "頸帶獨家贊助",
       "party": "會前派對贊助 (與 COSCUP 聯名）",
       "promotion": "大會點心區桌旗（兩天）",
-      "website-agenda-ads": "網站議程頁面廣告*"
+      "website-agenda-ads": "網站議程頁面廣告"
     },
     "details": {
       "prime-session": [
         "議程長度：45分鐘",
-        "議程時間：Day1 早上 1000 - 1045",
+        "議程時間：Day1 1000 AM - 1045 AN",
         "容納人數：500",
         "限量：1個"
       ],
       "technical": [
         "議程長度：30分鐘",
-        "議程時間：Day1 1100 - 1400",
+        "議程時間：Day1 1100 AM - 1400 PM",
         "容納人數：500"
       ],
       "workshop": [
         "議程長度：2小時",
-        "議程時間：Day2 1000 AM - 1500PM",
+        "議程時間：Day2 1000 AM - 1500 PM",
         "容納人數：60",
         "贈送：實體廣告*"
       ],
       "session": [
         "議程長度：30分鐘",
-        "議程時間：Day2 1000 AM - 1500PM",
+        "議程時間：Day2 1000 AM - 1500 PM",
         "容納人數：60",
         "贈送：實體廣告*"
       ],
@@ -277,7 +277,7 @@
       },
       {
         "q": "什麼是 OCF？",
-        "a": "OCF 為 Open Culture Foundation（[財團法人開放文化基金會](https://ocf.tw/)）的簡稱，是個協助社群獲得行政和財務服務的非營利組織。COSCUP 由「財團法人開放文化基金會（OCF）」協力開立 COSCUP 2023 贊助收據、電子發票、簽訂贊助合約或其他法律文件。"
+        "a": "OCF 為 Open Culture Foundation（[財團法人開放文化基金會](https://ocf.tw/)）的簡稱，是個協助社群獲得行政和財務服務的非營利組織。COSCUP 由「財團法人開放文化基金會（OCF）」協力開立 COSCUP 贊助收據、電子發票、簽訂贊助合約或其他法律文件。"
       }
     ]
   },
@@ -286,7 +286,7 @@
     "description": "COSCUP (Conference for Open Source Coders, Users and Promoters ; 開源人年會)",
     "messages": [
       "臺灣最大的年度開源研討會。",
-      "自 2006 年以來，由臺灣開源社群所聯合主辦（今年是我們的第 17 屆！）。",
+      "自 2006 年以來，由臺灣開源社群所聯合主辦。",
       "我們的使命是為開源人創造一個結交朋友、 學習新科技、分享經驗的友善環境。"
     ],
     "ps1": "歡迎從照片中回顧我們精彩的時刻: ",

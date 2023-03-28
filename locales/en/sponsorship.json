@@ -19,7 +19,7 @@
     "feedback": {
       "title": "COSCUP 2022 survey feedback:",
       "list": [
-        "More than 70% of the participants have an information background",
+        "More than 70% of the participants have a background in information technology",
         "About half (51%) were aged between 19 and 34",
         "Top 5 favorite programming languages: Python, Go, C++, JavaScript, and C"
       ]
@@ -38,7 +38,7 @@
         "subtitle": "",
         "cost": "8,500",
         "benefits": [
-          "Logo and company profile listed on COSCUP and KCD official website",
+          "Logo and company profile listed on COSCUP official website",
           "Promotion via COSCUP social media",
           "Logo is exposed on the welcome wall at the check-in area",
           "Agenda page ads (the frequency depends on the level of sponsorship)",
@@ -56,7 +56,7 @@
         "subtitle": "",
         "cost": "6,090",
         "benefits": [
-          "Logo and company profile listed on COSCUP and KCD official website",
+          "Logo and company profile listed on COSCUP official website",
           "Promotion via COSCUP social media",
           "Logo is exposed on the welcome wall at the check-in area",
           "Agenda page ads (the frequency depends on the level of sponsorship)",
@@ -70,7 +70,7 @@
         "subtitle": "",
         "cost": "4,910",
         "benefits": [
-          "Logo and company profile listed on COSCUP and KCD official website",
+          "Logo and company profile listed on COSCUP official website",
           "Promotion via COSCUP social media",
           "Logo is exposed on the welcome wall at the check-in area",
           "Agenda page ads (the frequency depends on the level of sponsorship)",
@@ -83,7 +83,7 @@
         "subtitle": "",
         "cost": "2,945",
         "benefits": [
-          "Logo and company profile listed on COSCUP and KCD official website",
+          "Logo and company profile listed on COSCUP official website",
           "Promotion via COSCUP social media",
           "Logo is exposed on the welcome wall at the check-in area",
           "Agenda page ads (the frequency depends on the level of sponsorship)"
@@ -94,7 +94,7 @@
         "subtitle": "",
         "cost": "1,375",
         "benefits": [
-          "Logo and company profile listed on COSCUP and KCD official website",
+          "Logo and company profile listed on COSCUP official website",
           "Promotion via COSCUP social media",
           "Logo is exposed on the welcome wall at the check-in area",
           "Agenda page ads (the frequency depends on the level of sponsorship)"
@@ -105,7 +105,7 @@
         "subtitle": "",
         "cost": "785",
         "benefits": [
-          "Logo and company profile listed on COSCUP and KCD official website",
+          "Logo and company profile listed on COSCUP official website",
           "Promotion via COSCUP social media",
           "Logo is exposed on the welcome wall at the check-in area"
         ]
@@ -114,7 +114,7 @@
   },
   "add-ons": {
     "title": "Sponsorship Add-ons",
-    "subtitle": "(Unit: USD. Please note that actual foreign exchange rates that will be applied to your sponsor fee will differ from these examples: FOREX as 1 USD= 28TWD)",
+    "subtitle": "(Unit: USD. Please note that actual foreign exchange rates will be applied to your sponsor fee, which will differ from the following prices that take 1 USD=28 TWD)",
     "item": "Additional Purchase",
     "all": "All",
     "level-limit": "Level limit",
@@ -129,7 +129,7 @@
       "lanyards": "Lanyards (Exclusive Sponsorship)",
       "party": "Welcome Party Sponsorship (co-branded with COSCUP)",
       "promotion": "Promotion at the Snack Area (2 days)",
-      "website-agenda-ads": "Agenda Page Ads *You can choose to increase ad weights or add new materials to increase exposure. Please confirm details with a sponsoring specialist."
+      "website-agenda-ads": "Agenda Page Ads"
     },
     "details": {
       "prime-session": [
@@ -277,7 +277,7 @@
       },
       {
         "q": "What's OCF?",
-        "a": "OCF, short for [Open Culture Foundation](https://ocf.tw/), is a non-profit organization that helps communities access administrative and financial services. COSCUP 2023 is co-organized with the Open Culture Foundation (OCF) to issue sponsorship receipts, electronic invoices, sponsorship contracts, and other legal documents."
+        "a": "OCF, short for [Open Culture Foundation](https://ocf.tw/), is a non-profit organization that helps communities access administrative and financial services. COSCUP is co-organized with the Open Culture Foundation (OCF) to issue sponsorship receipts, electronic invoices, sponsorship contracts, and other legal documents."
       }
     ]
   },
@@ -286,7 +286,7 @@
     "description": "COSCUP (Conference for Open Source Coders, Users and Promoters)",
     "messages": [
       "It's the LARGEST annual open source conference in Taiwan.",
-      "It's organized by Taiwan's open source communities since 2006. (This year is our 17th!)",
+      "It's organized by Taiwan's open source communities since 2006.",
       "Our mission is to create a friendly environment for open source people to make friends, learn new technical skills, and share experiences."
     ],
     "ps1": "To see our past conference photos, please visit: ",
