@@ -17,11 +17,11 @@
     },
     "description": "COSCUP 過去三至五年平均約有 2,000 多位會眾和數十個社群一同參與。",
     "feedback": {
-      "title": "COSCUP 2021 會眾問卷回饋：",
+      "title": "COSCUP 2022 會眾問卷回饋：",
       "list": [
-        "59.1% 與會者為資訊背景",
-        "72% 與會者為 21 ~ 40 歲",
-        "前五名最常使用的程式語言：Python, Bash, C++, C, JavaScript"
+        "7 成以上之與會者為資訊背景",
+        "5 成以上之與會者為為 19 ~ 34 歲",
+        "前五名最常使用的程式語言：Python、Go、C++、JavaScript、C"
       ]
     }
   },
@@ -35,10 +35,10 @@
     "list": {
       "titanium": {
         "name": "鈦金級",
-        "subtitle": "（已額滿）",
-        "cost": "220,000",
+        "subtitle": "",
+        "cost": "238,000",
         "benefits": [
-          "Logo 和公司介紹於 COSCUP 和 KCD 官網露出",
+          "Logo 和公司介紹於 COSCUP 官網露出",
           "COSCUP 社群網站宣傳",
           "Logo 於會場報到區迎賓背板曝光",
           "網站議程頁面廣告 (按贊助等級比重播出) ",
@@ -47,15 +47,16 @@
           "徵才版面牆面贊助",
           "Logo 與 COSCUP Logo 聯名於會場桌前露出",
           "Keynote 演講廳垂吊布條",
-          "會前派對贊助 (與 COSCUP 聯名）"
+          "會前派對贊助 (與 COSCUP 聯名）",
+          "大會點心區桌旗曝光"
         ]
       },
       "diamond": {
         "name": "鑽石級",
-        "subtitle": "（已額滿）",
+        "subtitle": "",
         "cost": "170,500",
         "benefits": [
-          "Logo 和公司介紹於 COSCUP 和 KCD 官網露出",
+          "Logo 和公司介紹於 COSCUP 官網露出",
           "COSCUP 社群網站宣傳",
           "Logo 於會場報到區迎賓背板曝光",
           "網站議程頁面廣告 (按贊助等級比重播出) ",
@@ -69,7 +70,7 @@
         "subtitle": "",
         "cost": "137,500",
         "benefits": [
-          "Logo 和公司介紹於 COSCUP 和 KCD 官網露出",
+          "Logo 和公司介紹於 COSCUP 官網露出",
           "COSCUP 社群網站宣傳",
           "Logo 於會場報到區迎賓背板曝光",
           "網站議程頁面廣告 (按贊助等級比重播出) ",
@@ -82,7 +83,7 @@
         "subtitle": "",
         "cost": "82,500",
         "benefits": [
-          "Logo 和公司介紹於 COSCUP 和 KCD 官網露出",
+          "Logo 和公司介紹於 COSCUP 官網露出",
           "COSCUP 社群網站宣傳",
           "Logo 於會場報到區迎賓背板曝光",
           "網站議程頁面廣告 (按贊助等級比重播出) "
@@ -93,7 +94,7 @@
         "subtitle": "",
         "cost": "38,500",
         "benefits": [
-          "Logo 和公司介紹於 COSCUP 和 KCD 官網露出",
+          "Logo 和公司介紹於 COSCUP 官網露出",
           "COSCUP 社群網站宣傳",
           "Logo 於會場報到區迎賓背板曝光",
           "網站議程頁面廣告 (按贊助等級比重播出) "
@@ -104,7 +105,7 @@
         "subtitle": "",
         "cost": "22,000",
         "benefits": [
-          "Logo 和公司介紹於 COSCUP 和 KCD 官網露出",
+          "Logo 和公司介紹於 COSCUP 官網露出",
           "COSCUP 社群網站宣傳",
           "Logo 於會場報到區迎賓背板曝光"
         ]
@@ -119,14 +120,44 @@
     "level-limit": "等級限制",
     "cost": "加價金額",
     "columns": {
-      "booth": "攤位（已額滿）",
-      "keynote": "Keynote 演講（已額滿）",
-      "technical": "技術演講 （已額滿）",
-      "flag": "Keynote 演講廳 垂吊布條",
+      "booth": "攤位",
+      "prime-session": "Prime Session",
+      "technical": "技術演講",
+      "workshop": "Workshop",
+      "session": "Session 30min",
+      "flag": "主演講廳垂吊布條",
       "lanyards": "頸帶獨家贊助",
       "party": "會前派對贊助 (與 COSCUP 聯名）",
       "promotion": "大會點心區桌旗（兩天）",
-      "website-agenda-ads": "網站議程頁面廣告 「可選擇提升廣告比重或新增廣告素材以增加曝光」（請與贊助夥伴確認細節）"
+      "website-agenda-ads": "網站議程頁面廣告"
+    },
+    "details": {
+      "prime-session": [
+        "議程長度：45分鐘",
+        "議程時間：Day1 1000 AM - 1045 AN",
+        "容納人數：500",
+        "限量：1個"
+      ],
+      "technical": [
+        "議程長度：30分鐘",
+        "議程時間：Day1 1100 AM - 1400 PM",
+        "容納人數：500"
+      ],
+      "workshop": [
+        "議程長度：2小時",
+        "議程時間：Day2 1000 AM - 1500 PM",
+        "容納人數：60",
+        "贈送：實體廣告*"
+      ],
+      "session": [
+        "議程長度：30分鐘",
+        "議程時間：Day2 1000 AM - 1500 PM",
+        "容納人數：60",
+        "贈送：實體廣告*"
+      ],
+      "website-agenda-ads": [
+        "選擇：提升廣告比重 或 新增廣告素材以增加曝光"
+      ]
     },
     "list": {
       "booth": {
@@ -137,9 +168,9 @@
         "bronze": "X",
         "friend": "X"
       },
-      "keynote": {
-        "titanium": "55,000",
-        "diamond": "55,000",
+      "prime-session": {
+        "titanium": "45,000",
+        "diamond": "45,000",
         "gold": "X",
         "sliver": "X",
         "bronze": "X",
@@ -149,6 +180,22 @@
         "titanium": "27,500",
         "diamond": "27,500",
         "gold": "27,500",
+        "sliver": "X",
+        "bronze": "X",
+        "friend": "X"
+      },
+      "workshop": {
+        "titanium": "27,500",
+        "diamond": "27,500",
+        "gold": "27,500",
+        "sliver": "X",
+        "bronze": "X",
+        "friend": "X"
+      },
+      "session": {
+        "titanium": "13,750",
+        "diamond": "13,750",
+        "gold": "13,750",
         "sliver": "X",
         "bronze": "X",
         "friend": "X"
@@ -178,7 +225,7 @@
         "friend": "X"
       },
       "promotion": {
-        "titanium": "33,000",
+        "titanium": "已包含",
         "diamond": "已包含",
         "gold": "33,000",
         "sliver": "33,000",
@@ -189,9 +236,12 @@
         "all": "13,200"
       }
     },
+    "explains": [
+      "*贈送之實體廣告需照依照大會規定，置入希望的廣告資訊或職缺內容，相關規定會另外於贊助信件提供"
+    ],
     "end": {
       "content": "因應相關製作物所需的工作時間，贊助截止日期：{date}",
-      "date": "2023 年 7 月 18 日"
+      "date": "2023 年 7 月 17 日"
     }
   },
   "faq": {
@@ -206,8 +256,8 @@
         "a": "請選擇「黃金級」、「鑽石級」或「鈦金級」，接著再選擇攤位等級。\n實體攤位能夠和與會者互動，COSCUP 也會準備活動讓會眾前往各攤位參觀。贊助商可以透過問卷和送贈品等形式更加了解與會者，是招募人才、加深與會者印象的好管道。\n攤位是加購的熱門選項，但因數量限制，黃金級以上（含）的贊助商才擁有加購攤位的權利。"
       },
       {
-        "q": "Keynote 演講跟技術演講的差別在於？",
-        "a": "Keynote 演講將會在主會場，為一場 30 分鐘的獨佔時段演講，鑽石級以上（含）的贊助商才擁有的加購權利。技術演講則是一場 50 分鐘與其他議程同時進行的演講，黃金級以上（含）的贊助商才擁有的加購權利。\n兩者數量皆有限，請先與您的贊助窗口確認是否還有時段，並即早預訂以免向隅。除此之外，我們也鼓勵關注議程徵稿資訊，讓貴公司內工程師選擇有興趣的社群投稿。"
+        "q": "Prime session 演講跟技術演講、Workshop、Session (30min) 演講的差別在於？",
+        "a": "Prime session 演講將會在 RB 105, 500 人場地，在 Day1 為一場 45 分鐘的非獨佔時段演講，鑽石級以上（含）的贊助商才擁有的加購權利。\n技術演講則是在 Day1 每場 30 分鐘與其他議程同時進行的演講，黃金級以上（含）的贊助商才擁有的加購權利。\nPrime session 演講和 技術演講均在 RB 105, 500 人場地。\nWorkshop 為 Day2 兩小時的工作坊。\nSession（30min）演講為 Day2 每場 30min 的 Session.\nWorkshop、Session（30min）演講場地均在 研揚大樓（TR Building）, 且均為黃金級以上（含）的贊助商才擁有的加購權利\n所有演講時段數量皆有限及採購期限，請先與您的贊助窗口確認是否還有時段，並即早預訂以免向隅。除此之外，我們也鼓勵關注議程徵稿資訊，讓貴公司內工程師選擇有興趣的社群投稿。"
       },
       {
         "q": "贊助單位的 Logo 排序是怎麼訂的？攤位是怎麼選擇的？",
@@ -227,7 +277,7 @@
       },
       {
         "q": "什麼是 OCF？",
-        "a": "OCF 為 Open Culture Foundation（[財團法人開放文化基金會](https://ocf.tw/)）的簡稱，是個協助社群獲得行政和財務服務的非營利組織。COSCUP 由「財團法人開放文化基金會（OCF）」協力開立 COSCUP 2023 贊助收據、電子發票、簽訂贊助合約或其他法律文件。"
+        "a": "OCF 為 Open Culture Foundation（[財團法人開放文化基金會](https://ocf.tw/)）的簡稱，是個協助社群獲得行政和財務服務的非營利組織。COSCUP 由「財團法人開放文化基金會（OCF）」協力開立 COSCUP 贊助收據、電子發票、簽訂贊助合約或其他法律文件。"
       }
     ]
   },
@@ -236,19 +286,14 @@
     "description": "COSCUP (Conference for Open Source Coders, Users and Promoters ; 開源人年會)",
     "messages": [
       "臺灣最大的年度開源研討會。",
-      "自 2006 年以來，由臺灣開源社群所聯合主辦（今年是我們的第 17 屆！）。",
+      "自 2006 年以來，由臺灣開源社群所聯合主辦。",
       "我們的使命是為開源人創造一個結交朋友、 學習新科技、分享經驗的友善環境。"
     ],
     "ps1": "歡迎從照片中回顧我們精彩的時刻: ",
     "ps2": "96.2% 與會者願意推薦其他人參加往後的 COSCUP"
   },
-  "about-kcd": {
-    "title": "關於 Kubernetes Community Days Taiwan",
-    "description": "Kubernetes Community Days (KCD) 是由雲原生計算基金會 (CNCF) 支持與認證的官方社群組織活動，此會議集結來自開源和雲原生社區的使用者及技術人員，以進行教育、協作和分享。",
-    "message": "本次 Kubernetes Community Days Taiwan (KCD Taiwan) 是由台灣雲原生使用者社群 (Cloud Native Taiwan User Group, CNTUG) 所主辦的在地 KCD 的社群活動。其目的是透過本土社群的力量，讓更多人參與 Kubernetes 社群互相交流和學習，並以此持續發展和維持社群。"
-  },
   "wish": {
-    "title": "我們期待所有的贊助單位在 COSCUP x KCD Taiwan 2023 都可以...",
+    "title": "我們期待所有的贊助單位在 COSCUP Taiwan 2023 都可以...",
     "list": [
       "激發新的想法、創意。",
       "獲得意想不到的合作計畫。",

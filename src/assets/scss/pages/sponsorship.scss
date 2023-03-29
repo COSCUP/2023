@@ -19,10 +19,12 @@
 @include sponsorship-theme-colors;
 
 @include page("sponsorship") {
-  $max-width: 900px;
-
   .banner {
-    width: 100%;
+    display: block;
+    margin: 0 auto;
+    width: 90%;
+    max-width: 1024px;
+    background-color: #12344c;
   }
 
   h2 {
@@ -72,6 +74,10 @@
           img {
             width: 80px;
             padding-bottom: 0.65rem;
+          }
+
+          &:not(:first-child) {
+            width: 33%;
           }
         }
 
@@ -128,6 +134,14 @@
 
         td {
           word-break: normal;
+
+          ul {
+            padding-inline-start: 15px;
+            font-size: 0.9rem;
+            li {
+              line-height: 1.5;
+            }
+          }
         }
       }
     }
@@ -233,6 +247,14 @@
 
           tbody > tr > td {
             word-break: normal;
+
+            ul {
+              padding-inline-start: 10px;
+              font-size: 0.8rem;
+              li {
+                line-height: 1.5;
+              }
+            }
           }
 
           .name {
@@ -274,6 +296,69 @@
             font-size: 1rem;
           }
         }
+      }
+    }
+  }
+
+  @include printOnly {
+    font-size: 12pt;
+
+    .banner {
+      -webkit-print-color-adjust:exact !important;
+      print-color-adjust:exact !important;
+    }
+
+    h2 {
+      display: block;
+    }
+
+    section {
+      box-shadow: none;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      max-width: unset;
+      page-break-before: always;
+
+      &.avoid-page-break {
+        page-break-before: avoid;
+      }
+
+      h3 {
+        margin: 15pt 0;
+      }
+
+      .add-ons-table,
+      .level-table {
+        max-width: unset;
+        border: none;
+        line-height: 1.5;
+        font-size: 9pt;
+
+        table {
+          width: 100%;
+          min-width: 100%;
+          page-break-inside: avoid;
+
+          td {
+            padding: 2pt;
+
+            ul {
+              padding-inline-start: 15px;
+              font-size: 9pt;
+            }
+          }
+        }
+      }
+    }
+
+    .overview {
+      page-break-after: always;
+    }
+
+    .faq {
+      li {
+        page-break-inside: avoid;
       }
     }
   }
