@@ -305,6 +305,7 @@
 
     .banner {
       -webkit-print-color-adjust:exact !important;
+      /* stylelint-disable-next-line property-no-unknown */
       print-color-adjust:exact !important;
     }
 
