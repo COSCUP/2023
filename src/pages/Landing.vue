@@ -24,9 +24,6 @@
         {{ t('landing.links.early_cfp') }}
       </a>
       <a href="https://blog.coscup.org/2023/02/coscup-2023-call-for-participation-now.html" target="_blank" rel="noopener noreferrer">
-        {{ t('landing.links.track') }}
-      </a>
-      <a href="https://blog.coscup.org/2023/02/coscup-2023-call-for-participation-now.html" target="_blank" rel="noopener noreferrer">
         {{ t('landing.links.community') }}
       </a>
       <a href="https://volunteer.coscup.org/" target="_blank" rel="noopener noreferrer">
