@@ -14,7 +14,7 @@ export default defineConfig(({ mode, command }) => {
         const routes = [
           '/',
           '/landing',
-          // '/sponsorship',
+          '/sponsorship',
           '/map'
         ].flatMap(r => [r, `${r}/`])
         return Array.from(readdirSync('./locales/'))
@@ -69,7 +69,7 @@ export default defineConfig(({ mode, command }) => {
         registerType: 'autoUpdate',
         workbox: {
           navigateFallback: 'index.html',
-          navigateFallbackDenylist: [/.*\.(jpg|png|svg|json|js)$/],
+          navigateFallbackDenylist: [/.*\.(jpg|png|svg|json|js|xml)$/],
           offlineGoogleAnalytics: true,
           runtimeCaching: [
             {

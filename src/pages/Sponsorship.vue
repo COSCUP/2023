@@ -6,9 +6,9 @@
       :alt="t('sponsorship.plan.title')"
     >
     <h2>{{ t('sponsorship.plan.title') }}</h2>
-    <section class="markdown">
+    <section class="markdown overview avoid-page-break">
       <h3>{{ t('sponsorship.overview.title') }}</h3>
-      <p>{{ t('sponsorship.overview.announcement.title') }}</p>
+      <!-- <p>{{ t('sponsorship.overview.announcement.title') }}</p>
       <ul>
         <li
           v-for="text in tm('sponsorship.overview.announcement.list')"
@@ -16,7 +16,7 @@
         >
           {{ text }}
         </li>
-      </ul>
+      </ul> -->
       <p>{{ t('sponsorship.overview.description') }}</p>
       <p>{{ t('sponsorship.overview.feedback.title') }}</p>
       <ul>
@@ -117,7 +117,17 @@
               v-for="(column, key) in tm('sponsorship.add-ons.columns')"
               :key="`${column}`"
             >
-              <td>{{ column }}</td>
+              <td>
+                {{ column }}
+                <ul v-if="te(`sponsorship.add-ons.details.${key}`)">
+                  <li
+                    v-for="(d,i) in tm(`sponsorship.add-ons.details.${key}`)"
+                    :key="i"
+                  >
+                    {{ d }}
+                  </li>
+                </ul>
+              </td>
               <td
                 v-if="te(`sponsorship.add-ons.list.${key}.all`)"
                 :colspan="levelKeys.length"
@@ -149,7 +159,7 @@
           <tbody>
             <tr
               v-for="row in addOnsThinTable"
-              :key="`${row.column}`"
+              :key="`${row.key}`"
             >
               <td
                 v-if="row.rowspan"
@@ -157,6 +167,14 @@
                 class="name"
               >
                 {{ row.column }}
+                <ul v-if="te(`sponsorship.add-ons.details.${row.key}`)">
+                  <li
+                    v-for="(d,i) in tm(`sponsorship.add-ons.details.${row.key}`)"
+                    :key="i"
+                  >
+                    {{ d }}
+                  </li>
+                </ul>
               </td>
               <td class="level">
                 <img v-if="row.image" :src="row.image" :alt="row.name">
@@ -167,6 +185,12 @@
           </tbody>
         </table>
       </div>
+      <p
+        v-for="(explain, index) in tm('sponsorship.add-ons.explains')"
+        :key="index"
+      >
+        {{ explain }}
+      </p>
       <div class="images">
         <div
           v-for="key in addOnsImageKeys"
@@ -218,12 +242,14 @@
         <p>{{ t('sponsorship.about-coscup.ps2') }}</p>
       </div>
     </section>
-    <section class="markdown">
+    <!--
+    <section class="markdown avoid-page-break">
       <h3>{{ t('sponsorship.about-kcd.title') }}</h3>
       <p>{{ t('sponsorship.about-kcd.description') }}</p>
       <p>{{ t('sponsorship.about-kcd.message') }}</p>
     </section>
-    <section class="markdown">
+    --->
+    <section class="markdown avoid-page-break">
       <h3>{{ t('sponsorship.wish.title') }}</h3>
       <ul>
         <li
@@ -274,6 +300,7 @@ export default defineComponent({
         .map((column) => {
           const levels = getAvailableLevels(column)
           return levels.map((level, index) => ({
+            key: column,
             column: t(`sponsorship.add-ons.columns.${column}`),
             rowspan: index === 0 ? levels.length : undefined,
             image: level !== 'all' ? getImageFromLevel(level) : undefined,
