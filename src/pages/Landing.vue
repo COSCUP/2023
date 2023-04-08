@@ -20,8 +20,8 @@
       </div>
     </section>
     <section class="links">
-      <a href="https://blog.coscup.org/2023/02/coscup-2023-early-bird-call-for-paper.html" target="_blank" rel="noopener noreferrer">
-        {{ t('landing.links.early_cfp') }}
+      <a href="https://i.coscup.org/bmDlZ/portal" target="_blank" rel="noopener noreferrer">
+        {{ t('landing.links.cfp') }}
       </a>
       <a href="https://blog.coscup.org/2023/02/coscup-2023-call-for-participation-now.html" target="_blank" rel="noopener noreferrer">
         {{ t('landing.links.community') }}
