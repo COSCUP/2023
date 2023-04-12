@@ -29,8 +29,8 @@
       <a href="https://volunteer.coscup.org/" target="_blank" rel="noopener noreferrer">
         {{ t('landing.links.volunteer') }}
       </a>
-      <a href="https://forms.gle/jKDMdSGoRfLqoe9h9" target="_blank" rel="noopener noreferrer">
-        {{ t('landing.links.sponsorship') }}
+      <a href="../sponsorship" rel="noopener noreferrer">
+        {{ t('landing.links.sponsor') }}
       </a>
     </section>
     <section class="media-links">
