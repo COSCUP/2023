@@ -25,8 +25,8 @@ export default defineComponent({
     const route = useRoute()
     const { sessionsMap } = useSession()
 
-    const query = route.query.sessions?.toString().split('-')
     const sessions = computed(() => {
+      const query = route.query.sessions?.toString().split('-')
       if (query) {
         return query
       } else {
