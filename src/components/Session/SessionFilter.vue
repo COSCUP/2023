@@ -12,11 +12,10 @@
   </article>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, watch } from 'vue'
 import { useSession } from '@/modules/session'
 import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-import { assign, pick, omitBy } from 'lodash'
 
 export default defineComponent({
   name: 'SessionFilter',
@@ -24,8 +23,14 @@ export default defineComponent({
     const { filterOptions, filterValue } = useSession()
     const { t, locale } = useI18n()
     const { query } = useRoute()
+    const router = useRouter()
 
-    assign(filterValue.value, pick(query, ['room', 'tags', 'type']))
+    filterValue.value = { ...filterValue.value, ...query }
+
+    watch(filterValue.value, (value) => {
+      const newFilterValue = Object.entries(value).filter(([_, value]) => value !== '*')
+      router.push({ query: Object.fromEntries(newFilterValue), replace: true })
+    })
 
     return {
       filterOptions,
@@ -33,13 +38,6 @@ export default defineComponent({
       locale,
       t
     }
-  },
-  updated () {
-    const router = useRouter()
-    const { filterValue } = useSession()
-
-    const options = pick(filterValue.value, ['room', 'tags', 'type'])
-    router.push({ query: omitBy(options, (value) => value === '*'), replace: true })
   }
 })
 
