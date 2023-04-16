@@ -24,7 +24,7 @@ const _useMetas = (): UseMetas => {
     lang: 'zh-TW',
     title: `COSCUP ${import.meta.env.VITE_YEAR} | Conference for Open Source Coders, Users, and Promoters`,
     description: 'Conference for Open Source Coders, Users, and Promoters is a free annual conference providing a platform to connect FLOSS folks across Asia since 2006. It\'s a major force of free software movement advocacy in Taiwan.',
-    ogUrl: `https://coscup.org/${import.meta.env.VITE_YEAR}`,
+    ogUrl: `https://coscup.org/${import.meta.env.VITE_BASE_URL}`,
     ogImage: ogImageSrc,
     ogType: 'website',
     ogSiteName: `COSCUP ${import.meta.env.VITE_YEAR}`

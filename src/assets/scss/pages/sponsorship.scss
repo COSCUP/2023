@@ -138,6 +138,7 @@
           ul {
             padding-inline-start: 15px;
             font-size: 0.9rem;
+
             li {
               line-height: 1.5;
             }
@@ -251,6 +252,7 @@
             ul {
               padding-inline-start: 10px;
               font-size: 0.8rem;
+
               li {
                 line-height: 1.5;
               }
@@ -304,9 +306,9 @@
     font-size: 12pt;
 
     .banner {
-      -webkit-print-color-adjust:exact !important;
+      -webkit-print-color-adjust: exact !important;
       /* stylelint-disable-next-line property-no-unknown */
-      print-color-adjust:exact !important;
+      print-color-adjust: exact !important;
     }
 
     h2 {
