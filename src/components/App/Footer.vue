@@ -100,7 +100,7 @@ export default defineComponent({
   name: 'Footer',
   setup () {
     const { t } = useI18n()
-    const numOfPast = Number(import.meta.env.VITE_YEAR) - 2006
+    const numOfPast = import.meta.env.VITE_YEAR - 2006
 
     return {
       t,
