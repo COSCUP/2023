@@ -5,20 +5,21 @@
 
 import { writeFileSync, mkdirSync } from 'fs'
 import { GoogleSpreadsheet } from 'google-spreadsheet'
-import { join } from 'path'
+import { join, dirname } from 'path'
 import dotenv from 'dotenv'
+import { fileURLToPath } from 'url'
 
 import type { SheetName, SheetIdMap, SheetRow } from './types'
 
 export function saveJSON (name: string, data: any) {
-  mkdirSync(join(__dirname, '../../public/json/'), { recursive: true })
-  writeFileSync(join(__dirname, `../../public/json/${name}.json`), JSON.stringify(data))
-  mkdirSync(join(__dirname, '../../src/assets/json/'), { recursive: true })
-  writeFileSync(join(__dirname, `../../src/assets/json/${name}.json`), JSON.stringify(data))
+  mkdirSync(join(dirname(fileURLToPath(import.meta.url)), '../../public/json/'), { recursive: true })
+  writeFileSync(join(dirname(fileURLToPath(import.meta.url)), `../../public/json/${name}.json`), JSON.stringify(data))
+  mkdirSync(join(dirname(fileURLToPath(import.meta.url)), '../../src/assets/json/'), { recursive: true })
+  writeFileSync(join(dirname(fileURLToPath(import.meta.url)), `../../src/assets/json/${name}.json`), JSON.stringify(data))
 }
 
 export async function getLoadedSpreadsheetDocument () {
-  dotenv.config({ path: join(__dirname, '../../.env.local') })
+  dotenv.config({ path: join(dirname(fileURLToPath(import.meta.url)), '../../.env.local') })
   const API_KEY = process.env.SPREADSHEET_API_KEY
 
   if (!API_KEY) return null

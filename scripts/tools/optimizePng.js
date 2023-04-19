@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const { promisify } = require('util')
-const { execFile } = require('child_process')
-const optipng = require('optipng-bin')
-const find = require('find')
-const path = require('path')
-const ora = require('ora')
+import { promisify } from 'util'
+import { execFile } from 'child_process'
+import optipng from 'optipng-bin'
+import find from 'find'
+import path from 'path'
+import ora from 'ora'
+import { fileURLToPath } from 'url'
 
 const execFileP = promisify(execFile)
 
@@ -23,7 +24,7 @@ const optimizeOne = async (file) => {
 // const delay = () => new Promise(resolve => setTimeout(resolve, 300))
 
 async function run () {
-  const files = find.fileSync(/\.png$/, path.join(__dirname, '../', '../'))
+  const files = find.fileSync(/\.png$/, path.join(path.dirname(fileURLToPath(import.meta.url)), '../', '../'))
     .filter((file) => !['/node_modules/', '/dist/'].some((ignore) => file.includes(ignore)))
 
   for (const file of files) {

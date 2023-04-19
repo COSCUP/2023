@@ -2,8 +2,9 @@ import { defineConfig, loadEnv } from 'vite'
 import { readdirSync, readFileSync } from 'fs'
 import { join } from 'path'
 import Vue from '@vitejs/plugin-vue'
-import Components from 'vite-plugin-components'
-import ViteIcons, { ViteIconsResolver } from 'vite-plugin-icons'
+import Components from 'unplugin-vue-components/vite'
+import ViteIcons from 'unplugin-icons/vite'
+import IconsResolver from 'unplugin-icons/resolver'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig(({ mode, command }) => {
@@ -60,9 +61,12 @@ export default defineConfig(({ mode, command }) => {
         include: [/\.vue$/, /\.md$/]
       }),
       Components({
-        customComponentResolvers: ViteIconsResolver({
-          componentPrefix: 'icon'
-        })
+        dts: true,
+        resolvers: [
+          IconsResolver({
+            prefix: 'icon'
+          })
+        ]
       }),
       ViteIcons(),
       VitePWA({

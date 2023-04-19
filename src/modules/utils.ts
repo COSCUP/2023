@@ -13,7 +13,7 @@ export function useSetupCtx (): SetupContext {
   return {
     app: getCurrentInstance()!.appContext.app,
     router: useRouter(),
-    isClient: isClient
+    isClient
   }
 }
 

@@ -4,9 +4,7 @@
     #{$css-selector} {
       @content;
     }
-  }
-
-  @else {
+  } @else {
     html.#{$theme} #{$css-selector} {
       @content;
     }

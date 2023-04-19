@@ -30,7 +30,7 @@
   h2 {
     text-align: center;
     font-size: 2rem;
-    padding: 5rem 5rem 0 5rem;
+    padding: 5rem 5rem 0;
     display: none;
   }
 
@@ -43,7 +43,7 @@
     padding: 3rem;
     color: var(--color-card-content);
     background-color: var(--color-card-background);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgb(0 0 0 / 10%);
 
     h3 {
       color: var(--color-card-title);
@@ -181,7 +181,7 @@
     h2 {
       text-align: center;
       font-size: 1.75rem;
-      padding: 5rem 5rem 3rem 5rem;
+      padding: 5rem 5rem 3rem;
     }
 
     section {

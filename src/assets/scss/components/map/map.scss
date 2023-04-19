@@ -22,13 +22,13 @@
         height: 1.375em;
         width: 1.375em;
         line-height: 0.4em;
-        background-color: rgba(0, 60, 136, 0.5);
+        background-color: rgb(0 60 136 / 50%);
         border: none;
         border-radius: 2px;
 
         &:hover {
           text-decoration: none;
-          background-color: rgba(0, 60, 136, 0.7);
+          background-color: rgb(0 60 136 / 70%);
         }
       }
     }

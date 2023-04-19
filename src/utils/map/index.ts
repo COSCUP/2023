@@ -13,7 +13,6 @@ import OSM from 'ol/source/OSM'
 import SourceVector from 'ol/source/Vector'
 import Style from 'ol/style/Style'
 import Icon from 'ol/style/Icon'
-import IconAnchorUnits from 'ol/style/IconAnchorUnits'
 
 import 'ol/ol.css'
 
@@ -58,8 +57,8 @@ class MapConcrete implements Map {
       image: new Icon({
         scale,
         anchor: [anchor.x, anchor.y],
-        anchorXUnits: IconAnchorUnits.FRACTION,
-        anchorYUnits: IconAnchorUnits.FRACTION,
+        anchorXUnits: 'fraction',
+        anchorYUnits: 'fraction',
         src: imageSrc
       })
     })
