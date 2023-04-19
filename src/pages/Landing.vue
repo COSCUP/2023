@@ -29,7 +29,7 @@
       <a href="https://volunteer.coscup.org/" target="_blank" rel="noopener noreferrer">
         {{ t('landing.links.volunteer') }}
       </a>
-      <router-link href="sponsorship">
+      <router-link to="sponsorship">
         {{ t('landing.links.sponsor') }}
       </router-link>
     </section>
