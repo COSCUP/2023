@@ -56,6 +56,7 @@
 <script lang="ts">
 import { defineComponent, ref, watch } from 'vue'
 import markdown from '@/utils/markdown'
+import IconIg from 'virtual:vite-icons/fa-brands/instagram'
 import IconBlogger from 'virtual:vite-icons/fa-brands/blogger'
 import IconFacebook from 'virtual:vite-icons/fa-brands/facebook'
 import IconFlickr from 'virtual:vite-icons/fa-brands/flickr'
@@ -75,6 +76,11 @@ interface Section {
 }
 
 const communityMedia = [
+  {
+    name: 'instagram',
+    icon: IconIg,
+    link: 'https://www.instagram.com/coscup.tw/'
+  },
   {
     name: 'blogger',
     icon: IconBlogger,
