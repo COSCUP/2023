@@ -1,9 +1,20 @@
 <template>
   <main id="landing" class="page-container">
+    <div class="banner-container">
+      <div class="logo-wrapper">
+        <div class="logo-container">
+          <h2>COSCUP 2023</h2>
+          <div class="logo-content">
+            <img src="../assets/images/banner-logo.svg" alt="COSCUP" />
+            <div>
+              <p>Conference for Open Source Coders, Users & Promoters</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
     <section class="info-block">
-      <!-- <div class="logo-container">
-        <img src='@/assets/images/banner.svg' alt="COSCUP Logo" />
-      </div> -->
+
       <div class="info">
         <div class="row">
           <div class="icon">
