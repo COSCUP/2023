@@ -5,7 +5,7 @@
     </template>
     <template v-slot:default>
       <p class="coscup">COSCUP</p>
-      <p class="year">2023</p>
+      <p class="year">{{year}}</p>
     </template>
   </component>
 </template>
@@ -17,8 +17,10 @@ import InternalLink from '../Basic/InternalLink.vue'
 export default defineComponent({
   name: 'HomeTab',
   setup () {
+    const year = import.meta.env.VITE_YEAR
     return {
-      InternalLink
+      InternalLink,
+      year
     }
   }
 })

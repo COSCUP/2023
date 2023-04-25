@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="info-container">
-      <span class="date">2023/07/30 ~ 2023/07/31</span>
+      <span class="date">{{startDate}} ~ {{endDate}}</span>
       <div class="info">
         <a class="venue" href="https://youtu.be/MaQuXvkR7to" target="_blank">
           {{ t('home.info.day_1_rb_online') }}
@@ -79,6 +79,9 @@ export default defineComponent({
   setup () {
     const { t, locale } = useI18n()
     const sections = ref<Section[]>([])
+    const startDate = import.meta.env.VITE_START_DATE
+    const endDate = import.meta.env.VITE_END_DATE
+
     watch(locale, async () => {
       sections.value = [
         {
@@ -103,7 +106,9 @@ export default defineComponent({
 
     return {
       t,
-      sections
+      sections,
+      startDate,
+      endDate
     }
   }
 })

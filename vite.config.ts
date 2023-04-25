@@ -138,8 +138,8 @@ export default defineConfig(({ mode, command }) => {
           // 'images/manifest-icon-512.maskable.png'
         ] : [],
         manifest: {
-          name: 'COSCUP 2023',
-          short_name: 'COSCUP 2023',
+          name: `COSCUP ${parsed?.VITE_YEAR}`,
+          short_name: `COSCUP ${parsed?.VITE_YEAR}`,
           theme_color: '#ffffff',
           icons: command === 'build'
             ? [
