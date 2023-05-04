@@ -43,6 +43,9 @@
       <router-link to="sponsorship">
         {{ t('landing.links.sponsor') }}
       </router-link>
+      <a href="https://i.coscup.org/indCfS/" target="_blank" rel="noopener noreferrer">
+        {{ t('landing.links.donate') }}
+      </a>
     </section>
     <section class="media-links">
       <a
