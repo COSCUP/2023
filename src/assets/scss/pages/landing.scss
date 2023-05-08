@@ -42,6 +42,30 @@
 @include page('landing') {
     padding: 2rem 0;
 
+    .line-one {
+        border-left: 1px solid white;
+        height: 15px;
+        position: fixed;
+        top: -1px;
+        right: 15px;
+        transform: rotate(320deg);
+    }
+
+    .codepecker-tip {
+        font-size: 0.9rem;
+        position: fixed;
+        top: -20px;
+        right: 20px;
+        text-align: right;
+        color: var(--color-text);
+        white-space: nowrap;
+    }
+
+    .codepecker {
+        width: 36px;
+        position: fixed;
+    }
+
     .banner-container {
         position: relative;
         display: flex;

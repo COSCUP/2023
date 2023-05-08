@@ -14,7 +14,10 @@
     "community": "社群攤位招募",
     "early_cfp": "成為講者",
     "track": "合作社群招募",
-    "donate": "個人贊助"
+    "donate": "個人贊助",
+    "donate_tip": {
+      "codepecker": "內含一隻啄"
+    }
   },
   "about": {
     "title": "關於 COSCUP",

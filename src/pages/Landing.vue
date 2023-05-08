@@ -12,7 +12,7 @@
           </div>
         </div>
       </div>
-    </div> 
+    </div>
     <section class="info-block">
 
       <div class="info">
@@ -45,6 +45,9 @@
       </router-link>
       <a href="https://i.coscup.org/indCfS/" target="_blank" rel="noopener noreferrer">
         {{ t('landing.links.donate') }}
+        <p class="codepecker-tip">{{ t('landing.links.donate_tip.codepecker') }}</p>
+        <div class="line-one"></div>
+        <img class="codepecker" src="@/assets/images/codepecker.png" />
       </a>
     </section>
     <section class="media-links">

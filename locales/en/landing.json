@@ -14,7 +14,10 @@
     "community": "Host a booth in COSCUP",
     "early_cfp": "Call for Speakers",
     "track": "Have your own track in COSCUP",
-    "donate": "Donate"
+    "donate": "Donate",
+    "donate_tip": {
+      "codepecker": "Including a codepecker"
+    }
   },
   "about": {
     "title": "About COSCUP",
