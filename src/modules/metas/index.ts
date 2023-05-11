@@ -2,7 +2,7 @@ import { useHead } from '@vueuse/head'
 import { computed, InjectionKey, Ref, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-import { camelCase } from 'lodash'
+import { camelCase } from 'lodash-es'
 import { createModuleHook } from '../utils'
 import ogImageSrc from '@/assets/images/og.png'
 

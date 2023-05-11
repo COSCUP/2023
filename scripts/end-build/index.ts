@@ -2,20 +2,21 @@
 //
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
-import { join } from 'path'
+import { dirname, join } from 'path'
 import copy from 'recursive-copy'
+import { fileURLToPath } from 'url'
 
 (async () => {
   await copy(
-    join(__dirname, '../../dist/zh-TW/'),
-    join(__dirname, '../../dist/'),
+    join(dirname(fileURLToPath(import.meta.url)), '../../dist/zh-TW/'),
+    join(dirname(fileURLToPath(import.meta.url)), '../../dist/'),
     {
       overwrite: true
     }
   )
   await copy(
-    join(__dirname, '../../dist/index.html'),
-    join(__dirname, '../../dist/404.html'),
+    join(dirname(fileURLToPath(import.meta.url)), '../../dist/index.html'),
+    join(dirname(fileURLToPath(import.meta.url)), '../../dist/404.html'),
     {
       overwrite: true
     }

@@ -1,4 +1,4 @@
-import { camelCase } from 'lodash'
+import { camelCase } from 'lodash-es'
 import { useI18n } from 'vue-i18n'
 import { RouteLocationRaw, useRoute } from 'vue-router'
 import { pageRouteNameList } from '@/router'

@@ -86,15 +86,15 @@
 <script lang="ts">
 import { useI18n } from 'vue-i18n'
 import { defineComponent } from 'vue'
-import IconBlogger from 'virtual:vite-icons/fa-brands/blogger'
-import IconFacebook from 'virtual:vite-icons/fa-brands/facebook'
-import IconFlickr from 'virtual:vite-icons/fa-brands/flickr'
-import IconPlurk from 'virtual:vite-icons/el/plurk-alt'
-import IconTwitter from 'virtual:vite-icons/fa-brands/twitter'
-import IconYoutube from 'virtual:vite-icons/fa-brands/youtube'
-import IconTelegram from 'virtual:vite-icons/fa-brands/telegram-plane'
-import IconBullhorn from 'virtual:vite-icons/fa-solid/bullhorn'
-import IconMedium from 'virtual:vite-icons/fa-brands/medium'
+import IconBlogger from '~icons/fa-brands/blogger'
+import IconFacebook from '~icons/fa-brands/facebook'
+import IconFlickr from '~icons/fa-brands/flickr'
+import IconPlurk from '~icons/el/plurk-alt'
+import IconTwitter from '~icons/fa-brands/twitter'
+import IconYoutube from '~icons/fa-brands/youtube'
+import IconTelegram from '~icons/fa-brands/telegram-plane'
+import IconBullhorn from '~icons/fa-solid/bullhorn'
+import IconMedium from '~icons/fa-brands/medium'
 
 export default defineComponent({
   name: 'Footer',

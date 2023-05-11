@@ -2,11 +2,12 @@
 import axios from 'axios'
 import md5 from 'js-md5'
 import { saveJSON } from './utils'
-import { join } from 'path'
+import { join, dirname } from 'path'
+import { fileURLToPath } from 'url'
 import dotenv from 'dotenv'
 
 dotenv.config()
-dotenv.config({ path: join(__dirname, '../../.env.local') })
+dotenv.config({ path: join(dirname(fileURLToPath(import.meta.url)), '../../.env.local') })
 
 const pretalxOptions = { headers: { Authorization: `Token ${process.env.PRETALX_TOKEN}` } }
 

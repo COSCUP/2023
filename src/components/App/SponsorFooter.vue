@@ -38,7 +38,7 @@
 </template>
 
 <script lang="ts">
-import { groupBy } from 'lodash'
+import { groupBy } from 'lodash-es'
 import sponsorDatas from '@/assets/json/sponsor.json'
 import { defineComponent, computed } from 'vue'
 import { useI18n } from 'vue-i18n'

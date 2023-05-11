@@ -4,13 +4,14 @@
 // https://opensource.org/licenses/MIT
 import { readdirSync, readFileSync } from 'fs'
 import { writeFile, rm, mkdir } from 'fs/promises'
-import { join } from 'path'
+import { dirname, join } from 'path'
 import { generateSessionMetaOptions, generateSessionPopupContentHtml, transformRawData, TIMEZONE_OFFSET, ROOM_ORDER } from '@/modules/session/logic'
 
 import { Locale } from '@/modules/i18n'
 import sessionJSON from '@/assets/json/session.json'
 import communityData from '@/assets/json/community.json'
 import { Session } from '@/modules/session/types'
+import { fileURLToPath } from 'url'
 
 function getCommunityFromSession (session: Session) {
   return communityData.communities.find((c) => c.track === session.type['zh-TW'].name)
@@ -18,14 +19,14 @@ function getCommunityFromSession (session: Session) {
 
 export default async function run () {
   const { sessionsMap } = transformRawData(sessionJSON, TIMEZONE_OFFSET, ROOM_ORDER)
-  await Promise.all(Array.from(readdirSync(join(__dirname, '../../locales/')))
+  await Promise.all(Array.from(readdirSync(join(dirname(fileURLToPath(import.meta.url)), '../../locales/')))
     .map(async (locale) => {
-      const templatePath = join(__dirname, `../../dist/${locale}/session/template.html`)
+      const templatePath = join(dirname(fileURLToPath(import.meta.url)), `../../dist/${locale}/session/template.html`)
       const template = readFileSync(templatePath).toString()
       await Promise.all(Object.entries(sessionsMap)
         .map(async ([sessionId, session]) => {
-          const output1Path = join(__dirname, `../../dist/${locale}/session/${sessionId}.html`)
-          const output2DirPath = join(__dirname, `../../dist/${locale}/session/${sessionId}`)
+          const output1Path = join(dirname(fileURLToPath(import.meta.url)), `../../dist/${locale}/session/${sessionId}.html`)
+          const output2DirPath = join(dirname(fileURLToPath(import.meta.url)), `../../dist/${locale}/session/${sessionId}`)
           const output2Path = join(output2DirPath, 'index.html')
 
           const { title, description, ogUrl, ogImage } = generateSessionMetaOptions(session, locale as Locale)

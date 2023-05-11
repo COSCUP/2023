@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { company, internet, lorem } from 'faker'
+import { faker } from '@faker-js/faker'
 import { getSheetRows, saveJSON } from './utils'
 
 import type { CommunityRow, PartnerRow } from './types'
@@ -58,11 +58,11 @@ function createFakeData () {
   const communityRows: CommunityRow[] = [...Array(4).keys()].map((_, i) => ({
     id: `${String.fromCharCode(65 + i)}-${i}`,
     track: '',
-    'name:en': company.companyName(),
-    'name:zh-TW': company.companyName(),
-    'intro:en': lorem.paragraphs(2),
-    'intro:zh-TW': lorem.paragraphs(2),
-    link: internet.url(),
+    'name:en': faker.company.name(),
+    'name:zh-TW': faker.company.name(),
+    'intro:en': faker.lorem.paragraphs(2),
+    'intro:zh-TW': faker.lorem.paragraphs(2),
+    link: faker.internet.url(),
     image: `https://picsum.photos/600/400?random=${Math.random()}`,
     canPublish: 'Y'
   }))

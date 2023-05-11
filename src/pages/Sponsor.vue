@@ -80,7 +80,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, onMounted, ref, watch } from 'vue'
-import { groupBy } from 'lodash'
+import { groupBy } from 'lodash-es'
 import markdown from '@/utils/markdown'
 import sponsorDatas from '@/assets/json/sponsor.json'
 

@@ -24,7 +24,7 @@
     .navbar-item-list {
       justify-content: flex-end;
 
-      .navbar-item-container:not(.language-switch):not(.theme-toggle) {
+      .navbar-item-container:not(.language-switch, .theme-toggle) {
         display: none;
       }
     }
@@ -40,7 +40,7 @@
     top: 0;
     left: 0;
     background-color: var(--color-background);
-    box-shadow: 0 2px 4px rgba(65, 65, 65, 0.25);
+    box-shadow: 0 2px 4px rgb(65 65 65 / 25%);
 
     @include navbar-menu;
     @include navbar-item-list;

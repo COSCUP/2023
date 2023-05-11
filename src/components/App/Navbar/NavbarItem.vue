@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import { kebabCase } from 'lodash'
+import { kebabCase } from 'lodash-es'
 import { NavbarItemData } from './navbar'
 import { computed, defineComponent, PropType } from 'vue'
 export default defineComponent({
