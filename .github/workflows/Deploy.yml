@@ -24,6 +24,9 @@ jobs:
     steps:
       - name: Checkout 🛎
         uses: actions/checkout@master
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 7.12.2
 
       - name: Setup node env 🏗
         uses: actions/setup-node@v3
