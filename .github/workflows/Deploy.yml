@@ -19,7 +19,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node: [14]
+        node: [18]
 
     steps:
       - name: Checkout 🛎
@@ -29,20 +29,20 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
-          cache: 'npm'
+          cache: 'pnpm'
 
       - name: Install dependencies 👨🏻‍💻
-        run: npm ci
+        run: pnpm install--frozen-lockfile
 
       - name: Linting 🔍
-        run: npm run lint
+        run: pnpm run lint
 
       - name: Build production 🚧
-        run: npm run build
+        run: pnpm run build
 
       - name: Generate sitemap 🗺
         run: |
-          npm run tool:generate-sitemap:local
+          pnpm run tool:generate-sitemap:local
 
       - name: Deploy 📡
         uses: peaceiris/actions-gh-pages@v3
