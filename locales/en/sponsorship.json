@@ -46,7 +46,7 @@
           "4 Welcome Party free drink tickets",
           "Recruiting Board Sponsorship",
           "Logo displayed at reception table (co-branded with COSCUP)",
-          "Logo on stage flag in keynote hall (co-branded with COSCUP)",
+          "Logo on stage flag in prime hall (co-branded with COSCUP)",
           "Welcome Party Sponsorship (co-branded with COSCUP)",
           "Promotion at the snack area"
         ]
@@ -125,7 +125,7 @@
       "technical": "Technical Talk",
       "workshop": "Workshop",
       "session": "Session 30min",
-      "flag": "Logo on Stage Flag in Keynote Hall (co-branded with COSCUP)",
+      "flag": "Logo on Stage Flag in prime Hall (co-branded with COSCUP)",
       "lanyards": "Lanyards (Exclusive Sponsorship)",
       "party": "Welcome Party Sponsorship (co-branded with COSCUP)",
       "promotion": "Promotion at the Snack Area (2 days)",
