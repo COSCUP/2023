@@ -2,7 +2,7 @@
   <article class="session-filter">
     <section v-for="filter in filterOptions" :key="filter.label">
       <label>{{ t(`session.filter.${filter.label}`) }}: </label>
-      <select v-model="filterValue[filter.label]">
+      <select :name="filter.label" :value="filterValue[filter.label]" @change="changeFilterValue">
         <option value="*">{{ t("session.filter.all") }}</option>
         <option v-for="option in filter.options" :key="option.id" :value="option.id">
           {{ option.name[locale] }}
@@ -12,30 +12,35 @@
   </article>
 </template>
 <script lang="ts">
-import { defineComponent, watch } from 'vue'
+import { defineComponent } from 'vue'
 import { useSession } from '@/modules/session'
-import { useRoute, useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
   name: 'SessionFilter',
   setup () {
-    const { filterOptions, filterValue } = useSession()
+    const { filterOptions, filterValue, handleFilterValueChange } = useSession()
     const { t, locale } = useI18n()
-    const { query } = useRoute()
     const router = useRouter()
 
-    filterValue.value = { ...filterValue.value, ...query }
+    const changeFilterValue = (e:Event) => {
+      const target = e.target as HTMLInputElement
+      const value = target.value
+      const label = target.name
 
-    watch(filterValue.value, (value) => {
-      const newFilterValue = Object.entries(value).filter(([_, value]) => value !== '*')
-      router.push({ query: Object.fromEntries(newFilterValue), replace: true })
-    })
+      handleFilterValueChange(label, value)
+      const newFilterValue = Object.entries(filterValue.value).filter(([_, value]) => value !== '*')
+      const query = Object.fromEntries(newFilterValue) as Record<string, string>
+
+      router.push({ query, replace: true })
+    }
 
     return {
       filterOptions,
       filterValue,
       locale,
+      changeFilterValue,
       t
     }
   }

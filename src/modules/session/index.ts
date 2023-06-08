@@ -9,6 +9,7 @@ import { ScheduleElement, SessionsMap, RoomId, ScheduleTable, ScheduleList, Sess
 import { fixedTimeZoneDate } from './utils'
 import { useProgress } from '../progress'
 import io, { Socket } from 'socket.io-client'
+import { useRoute } from 'vue-router'
 
 interface UseSession {
   isLoaded: Ref<boolean>;
@@ -26,6 +27,7 @@ interface UseSession {
   getRoomById: (id: RoomId) => Room;
   getRoomStatusById: (id: RoomId) => RoomStatus;
   load: () => Promise<void>;
+  handleFilterValueChange: (label: string, value: string) => void
 }
 
 const PROVIDE_KEY: InjectionKey<UseSession> = Symbol('session')
@@ -64,8 +66,10 @@ const _useSession = (): UseSession => {
 
   isClient && load()
 
+  const { query } = useRoute()
+  const filterValue = ref<FilterValue>({ room: '*', tags: '*', type: '*', collection: '*', ...query })
+
   const currentDayIndex = ref(0)
-  const filterValue = ref<FilterValue>({ room: '*', tags: '*', type: '*', collection: '*' })
   const daysSchedule = computed(() => {
     if (scheduleElements.value === null) return []
     return getScheduleDays(scheduleElements.value)
@@ -156,6 +160,10 @@ const _useSession = (): UseSession => {
     })
   }
 
+  function handleFilterValueChange (label:string, value:string) {
+    filterValue.value[label] = value
+  }
+
   return {
     isLoaded,
     currentDayIndex,
@@ -167,7 +175,8 @@ const _useSession = (): UseSession => {
     getSessionById,
     getRoomById,
     getRoomStatusById,
-    load
+    load,
+    handleFilterValueChange
   }
 }
 

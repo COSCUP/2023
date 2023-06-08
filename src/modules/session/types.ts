@@ -124,9 +124,9 @@ export type FilterOptions = {
   options: {id: string, name: LocaleRecord<string>}[]
 }[]
 
-export type FilterValue = {
+export interface filterValue extends Record<string, string> {
   type: string,
+  room:string,
   tags: string,
-  room: string,
   collection: string
 }
