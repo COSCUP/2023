@@ -370,11 +370,11 @@ export function generateFilterOption (rawData: RawData) {
 
 export function switchSessionMarkData (session: Session) {
   const markSessions: SessionId[] = JSON.parse(window.localStorage.getItem('MARK_SESSIONS') ?? '[]')
-  const currentStatus = !session.isMark
+  const currentStatus = !session.favorite
 
   if (currentStatus) markSessions.push(session.id)
   else markSessions.splice(markSessions.indexOf(session.id), 1)
 
-  session.isMark = currentStatus
+  session.favorite = currentStatus
   window.localStorage.setItem('MARK_SESSIONS', JSON.stringify(markSessions))
 }

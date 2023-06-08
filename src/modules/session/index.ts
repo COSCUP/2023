@@ -58,7 +58,7 @@ const _useSession = (): UseSession => {
     const markSessions: SessionId[] = JSON.parse(window.localStorage.getItem('MARK_SESSIONS') ?? '[]')
     for (const id in sessionsMap.value) {
       const session: Session = sessionsMap.value?.[id]
-      session.isMark = markSessions.includes(id)
+      session.favorite = markSessions.includes(id)
     }
   }
 
@@ -86,7 +86,7 @@ const _useSession = (): UseSession => {
                 if (session[filter[0]].id !== filter[1]) return false
                 else continue
               case 'collection':
-                if (!session.isMark) return false
+                if (!session.favorite) return false
                 else continue
             }
           }

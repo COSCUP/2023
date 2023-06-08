@@ -32,7 +32,7 @@ export default defineComponent({
       } else {
         const result = []
         for (const sessionId in sessionsMap.value) {
-          if (sessionsMap.value?.[sessionId].isMark) result.push(sessionId)
+          if (sessionsMap.value?.[sessionId].favorite) result.push(sessionId)
         }
         return result
       }

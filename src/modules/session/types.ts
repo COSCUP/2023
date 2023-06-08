@@ -49,7 +49,7 @@ export interface Session extends LocaleRecord<{ title: string; description: stri
   qa: null | string;
   slide: null | string;
   record: null | string;
-  isMark: boolean
+  favorite: boolean
 }
 
 export interface RoomStatus {

@@ -48,7 +48,7 @@
       </div>
     </section>
     <span class="mark-icon" @click="handleMarkIconOnClick">
-      <icon-mdi-bookmark v-if="isMark"></icon-mdi-bookmark>
+      <icon-mdi-bookmark v-if="favorite"></icon-mdi-bookmark>
       <icon-mdi-bookmark-outline v-else></icon-mdi-bookmark-outline>
     </span>
   </router-link>
@@ -96,7 +96,7 @@ export default defineComponent({
     // const isFull = computed(() => !!(roomsStatus.value[session.value.room.id]))
     const isFull = ref(false)
     const statusText = computed(() => t(`session['room-status'].${isFull.value ? 'full' : 'vacancy'}`))
-    const isMark = computed(() => session.value.isMark)
+    const favorite = computed(() => session.value.favorite)
 
     const handleMarkIconOnClick = (e: Event) => {
       switchSessionMarkData(session.value)
@@ -116,7 +116,7 @@ export default defineComponent({
       room,
       isFull,
       statusText,
-      isMark,
+      favorite,
       handleMarkIconOnClick
     }
   }
