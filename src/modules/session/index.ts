@@ -67,7 +67,13 @@ const _useSession = (): UseSession => {
   isClient && load()
 
   const { query } = useRoute()
-  const filterValue = ref<FilterValue>({ room: '*', tags: '*', type: '*', collection: '*', ...query })
+  const _filterValue = ref<FilterValue>({ room: '*', tags: '*', type: '*', collection: '*', ...query })
+  const filterValue = computed({
+    get () { return _filterValue.value },
+    set ({ label, value }) {
+      _filterValue.value[label] = value
+    }
+  })
 
   const currentDayIndex = ref(0)
   const daysSchedule = computed(() => {
@@ -161,7 +167,7 @@ const _useSession = (): UseSession => {
   }
 
   function handleFilterValueChange (label:string, value:string) {
-    filterValue.value[label] = value
+    filterValue.value = { label, value }
   }
 
   return {
