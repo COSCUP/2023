@@ -27,6 +27,7 @@
           {{ text }}
         </li>
       </ul>
+      <p class="highlight">{{ t('sponsorship.overview.end') }}</p>
     </section>
     <section class="markdown">
       <h3>{{ t('sponsorship.level.title') }}<span class="subtitle">{{ t('sponsorship.level.subtitle') }}</span></h3>
