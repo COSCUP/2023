@@ -31,10 +31,10 @@
       </div>
     </section>
     <section class="links">
-      <a href="https://i.coscup.org/bmDlZ/portal" target="_blank" rel="noopener noreferrer">
+      <a href="https://blog.coscup.org/2023/05/ways-to-join-coscup-2023.html" target="_blank" rel="noopener noreferrer">
         {{ t('landing.links.cfp') }}
       </a>
-      <a href="https://blog.coscup.org/2023/02/coscup-2023-call-for-participation-now.html" target="_blank" rel="noopener noreferrer">
+      <a href="https://blog.coscup.org/2023/05/ways-to-join-coscup-2023.html" target="_blank" rel="noopener noreferrer">
         {{ t('landing.links.community') }}
       </a>
       <a href="https://volunteer.coscup.org/" target="_blank" rel="noopener noreferrer">
