@@ -14,12 +14,12 @@ const pretalxOptions = { headers: { Authorization: `Token ${process.env.PRETALX_
 const SPEAKER_ZH_NAME_ID = 0
 const SPEAKER_ZH_BIO_ID = 0
 const SPEAKER_EN_NAME_ID = 0
-const SPEAKER_EN_BIO_ID = 1798
+const SPEAKER_EN_BIO_ID = 70
 const SESSION_ZH_DESCRIPTION_ID = 0
-const SESSION_EN_TITLE_ID = 1800
-const SESSION_EN_DESCRIPTION_ID = 1797
-const SESSION_TAGS_ID = 1594
-const SESSION_CO_WRITE_ID = 1898
+const SESSION_EN_TITLE_ID = 71
+const SESSION_EN_DESCRIPTION_ID = 69
+const SESSION_TAGS_ID = 27
+const SESSION_CO_WRITE_ID = 0
 const SESSION_QA_ID = 0
 const SESSION_SLIDE_ID = 0
 const SESSION_RECORD_ID = 0
@@ -55,7 +55,7 @@ function genResult (talks, rooms, speakers) {
         }
       }
     })
-    .filter(r => ROOM_ORDER.includes(r.id))
+    // .filter(r => ROOM_ORDER.includes(r.id))
 
   const resSpeakers = speakers.results.map(s => {
     return {
@@ -194,9 +194,9 @@ export default async function run () {
   let data = {}
   try {
     const results = await Promise.all([
-      axios.get('https://pretalx.com/api/events/coscup-2023/talks/?limit=1000', pretalxOptions),
-      axios.get('https://pretalx.com/api/events/coscup-2023/rooms/?limit=1000', pretalxOptions),
-      axios.get('https://pretalx.com/api/events/coscup-2023/speakers/?limit=1000', pretalxOptions)
+      axios.get('https://pretalx.coscup.org/api/events/coscup-2023/talks/?limit=1000', pretalxOptions),
+      axios.get('https://pretalx.coscup.org/api/events/coscup-2023/rooms/?limit=1000', pretalxOptions),
+      axios.get('https://pretalx.coscup.org/api/events/coscup-2023/speakers/?limit=1000', pretalxOptions)
     ])
     data = genResult(results[0].data, results[1].data, results[2].data)
   } catch (e) {
