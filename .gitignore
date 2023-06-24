@@ -36,4 +36,4 @@ src/assets/json/sponsor.json
 src/assets/json/sponsor-news.json
 src/assets/json/ytLink.json
 src/assets/json/community.json
-./.vite-ssg-temp
+.vite-ssg-temp/

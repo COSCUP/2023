@@ -6,12 +6,11 @@
   "scripts": {
     "pre-build": "npm run ts -- ./scripts/pre-build/index.ts",
     "dev": "vite",
-    "build": "npm run pre-build && vite-ssg build && npm run after-build && npm run end-build",
+    "build": "npm run pre-build && vite-ssg build && npm run end-build",
     "lint": "npm run lint:eslint && npm run lint:stylelint",
     "lint:eslint": "eslint --ext .js,.ts,.vue src/ --fix",
     "lint:stylelint": "stylelint 'src/**/*.{css,scss,sass,vue}' --fix",
     "ts": "esno",
-    "after-build": "npm run ts -- ./scripts/after-build/index.ts",
     "end-build": "npm run ts -- ./scripts/end-build/index.ts",
     "tool:generate-sitemap": "node ./scripts/tools/generateSitemap.js",
     "tool:generate-sitemap:local": "node ./scripts/tools/generateSitemap.js --local",

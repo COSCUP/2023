@@ -10,6 +10,8 @@ import { VitePWA } from 'vite-plugin-pwa'
 export default defineConfig(({ mode, command }) => {
   const parsed = loadEnv(mode, process.cwd())
 
+  const rawData = JSON.parse(readFileSync(join(__dirname, './src/assets/json/session.json'), { encoding: 'utf8' }))
+
   const renderRoutes = parsed?.VITE_LANDING_ONLY === 'true'
     ? (() => {
         const routes = [
@@ -43,7 +45,7 @@ export default defineConfig(({ mode, command }) => {
           .flatMap((locale) => {
             return routes
               .map((route) => join('/', locale, route))
-              .concat(join('/', locale, '/session/template'))
+              .concat(rawData.sessions.map(el => join('/', locale, `/session/${el.id}`)))
           })
       })()
 
