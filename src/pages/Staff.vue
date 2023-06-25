@@ -79,7 +79,7 @@ export default defineComponent({
     })
 
     const staffData = computed(() => {
-      const groupSequence = ['coordinator', 'secretary', 'program', 'field', 'finance', 'it', 'marketing', 'photo', 'sponsor', 'streaming', 'documentary']
+      const groupSequence = ['coordinator', 'secretary', 'program', 'field', 'finance', 'it', 'marketing', 'photo', 'sponsor', 'streaming', 'documentary', 'booth']
       return _staffData
         .sort((a, b) => groupSequence.indexOf(a.tid) - groupSequence.indexOf(b.tid))
         .map((group) => {
@@ -88,7 +88,7 @@ export default defineComponent({
             name: group.name,
             staffs: [
               ...group.chiefs.map((chief) => ({ ...chief, isChief: true })),
-              ...group.members.map((chief) => ({ ...chief, isChief: false }))
+              ...group.members.map((chief) => ({ ...chief, isChief: false })).filter((member) => !group.chiefs.find((chief) => chief.name === member.name))
             ]
           }
         })
