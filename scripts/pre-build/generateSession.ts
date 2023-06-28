@@ -24,7 +24,7 @@ const SESSION_QA_ID = 0
 const SESSION_SLIDE_ID = 0
 const SESSION_RECORD_ID = 0
 
-const filterUnknownChar = (s: string) => s.replaceAll(' ', '\n')
+const filterUnknownChar = (s: string) => s.replaceAll('\u2028', '\n')
 
 function genResult (talks, rooms, speakers) {
   function getAnswer<T extends { answers: Array<{ question: { id: number }, answer: string }>, [name: string]: string | any }> (
@@ -66,15 +66,14 @@ function genResult (talks, rooms, speakers) {
 
   const tracks = talks.results.map(s => s.track).filter((t, i, s) => i === s.findIndex(tt => tt?.['zh-tw'] === t?.['zh-tw'] && tt?.en === t?.en))
   const resSessionTypes = tracks
-    .filter(t => t)
     .map(t => {
       return {
         id: Math.random().toString(36).substring(2, 8),
         zh: {
-          name: t?.['zh-tw'] || t?.en
+          name: t?.['zh-tw'] || t?.en || 'main'
         },
         en: {
-          name: t?.en || t?.['zh-tw']
+          name: t?.en || t?.['zh-tw'] || 'main'
         }
       }
     })
@@ -152,7 +151,7 @@ function genResult (talks, rooms, speakers) {
   const resSessions = talks.results.map((s :any) => {
     return {
       id: s.code,
-      type: resSessionTypes.find((t :any) => s.track?.['zh-tw'] === t.zh.name || s.track?.en === t.en.name)?.id ?? null,
+      type: resSessionTypes.find((t :any) => s.track?.['zh-tw'] === t.zh.name || s.track?.en === t.en.name)?.id ?? resSessionTypes.find((t :any) => t.zh.name === 'main')?.id,
       room: s.slot.room?.en || s.slot.room?.['zh-tw'],
       start: s.slot.start,
       end: s.slot.end,
