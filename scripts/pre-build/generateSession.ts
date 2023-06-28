@@ -63,17 +63,19 @@ function genResult (talks, rooms, speakers) {
   })
 
   const tracks = talks.results.map(s => s.track).filter((t, i, s) => i === s.findIndex(tt => tt?.['zh-tw'] === t?.['zh-tw'] && tt?.en === t?.en))
-  const resSessionTypes = tracks.map(t => {
-    return {
-      id: Math.random().toString(36).substring(2, 8),
-      zh: {
-        name: t?.['zh-tw'] || t?.en
-      },
-      en: {
-        name: t?.en || t?.['zh-tw']
+  const resSessionTypes = tracks
+    .filter(t => t)
+    .map(t => {
+      return {
+        id: Math.random().toString(36).substring(2, 8),
+        zh: {
+          name: t?.['zh-tw'] || t?.en
+        },
+        en: {
+          name: t?.en || t?.['zh-tw']
+        }
       }
-    }
-  })
+    })
 
   const resTags = [
     {
@@ -148,7 +150,7 @@ function genResult (talks, rooms, speakers) {
   const resSessions = talks.results.map((s :any) => {
     return {
       id: s.code,
-      type: resSessionTypes.find((t :any) => s.track?.['zh-tw'] === t.zh.name || s.track?.en === t.en.name).id,
+      type: resSessionTypes.find((t :any) => s.track?.['zh-tw'] === t.zh.name || s.track?.en === t.en.name)?.id ?? null,
       room: s.slot.room?.en || s.slot.room?.['zh-tw'],
       start: s.slot.start,
       end: s.slot.end,
