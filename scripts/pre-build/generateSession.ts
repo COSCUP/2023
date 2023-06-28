@@ -24,6 +24,8 @@ const SESSION_QA_ID = 0
 const SESSION_SLIDE_ID = 0
 const SESSION_RECORD_ID = 0
 
+const filterUnknownChar = (s: string) => s.replaceAll(' ', '\n')
+
 function genResult (talks, rooms, speakers) {
   function getAnswer<T extends { answers: Array<{ question: { id: number }, answer: string }>, [name: string]: string | any }> (
     data: T,
@@ -53,11 +55,11 @@ function genResult (talks, rooms, speakers) {
       avatar: s.avatar || `https://www.gravatar.com/avatar/${md5(s.email)}?s=1024&d=identicon&r=g`,
       zh: {
         name: getAnswer(s, SPEAKER_ZH_NAME_ID, s.name),
-        bio: getAnswer(s, SPEAKER_ZH_BIO_ID, s.biography || '')
+        bio: filterUnknownChar(getAnswer(s, SPEAKER_ZH_BIO_ID, s.biography || '-'))
       },
       en: {
         name: getAnswer(s, SPEAKER_EN_NAME_ID, s.name),
-        bio: getAnswer(s, SPEAKER_EN_BIO_ID, s.biography || '')
+        bio: filterUnknownChar(getAnswer(s, SPEAKER_EN_BIO_ID, s.biography || '-'))
       }
     }
   })
