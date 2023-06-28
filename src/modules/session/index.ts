@@ -4,7 +4,7 @@
 // https://opensource.org/licenses/MIT
 import { computed, InjectionKey, Ref, ref } from 'vue'
 import { createModuleHook, useSetupCtx } from '../utils'
-import { TIMEZONE_OFFSET, ROOM_ORDER, generateScheduleList, generateScheduleTable, getScheduleDays, transformRawData } from './logic'
+import { TIMEZONE_OFFSET, generateScheduleList, generateScheduleTable, getScheduleDays, transformRawData } from './logic'
 import { ScheduleElement, SessionsMap, RoomId, ScheduleTable, ScheduleList, Session, SessionId, RoomsMap, Room, RoomsStatusMap, RoomStatus } from './types'
 import { fixedTimeZoneDate } from './utils'
 import { useProgress } from '../progress'
@@ -42,7 +42,7 @@ const _useSession = (): UseSession => {
     start()
     const { default: _rawData } = await import('@/assets/json/session.json')
     const { scheduleElements: _scheduleElements, sessionsMap: _sessionsMap, roomsMap: _roomsMap } =
-      transformRawData(_rawData, TIMEZONE_OFFSET, ROOM_ORDER)
+      transformRawData(_rawData, TIMEZONE_OFFSET)
     scheduleElements.value = _scheduleElements
     sessionsMap.value = _sessionsMap
     roomsMap.value = _roomsMap
