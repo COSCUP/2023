@@ -93,16 +93,16 @@ const _useSession = (): UseSession => {
         const elements = scheduleDay.elements.filter(s => {
           const session = getSessionById(s.session)
 
-          for (const filter of Object.entries(filterValue.value)) {
-            if (filter[1] === '*') continue
+          for (const [key, value] of Object.entries(filterValue.value)) {
+            if (value === '*') continue
 
-            switch (filter[0]) {
+            switch (key) {
               case 'tags':
-                if (!session[filter[0]].find(x => x.id === filter[1])) return false
+                if (!session[key].find(x => x.id === value)) return false
                 else continue
               case 'room':
               case 'type':
-                if (session[filter[0]].id !== filter[1]) return false
+                if (session[key].id !== value) return false
                 else continue
               case 'collection':
                 if (!session.favorite) return false
