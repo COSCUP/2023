@@ -9,7 +9,7 @@ import { ScheduleElement, SessionsMap, RoomId, ScheduleTable, ScheduleList, Sess
 import { fixedTimeZoneDate } from './utils'
 import { useProgress } from '../progress'
 import io, { Socket } from 'socket.io-client'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
 interface UseSession {
   isLoaded: Ref<boolean>;
@@ -27,7 +27,6 @@ interface UseSession {
   getRoomById: (id: RoomId) => Room;
   getRoomStatusById: (id: RoomId) => RoomStatus;
   load: () => Promise<void>;
-  handleFilterValueChange: (label: string, value: string) => void
 }
 
 const PROVIDE_KEY: InjectionKey<UseSession> = Symbol('session')
@@ -66,12 +65,22 @@ const _useSession = (): UseSession => {
 
   isClient && load()
 
-  const { query } = useRoute()
-  const _filterValue = ref<FilterValue>({ room: '*', tags: '*', type: '*', collection: '*', ...query })
+  const route = useRoute()
+  const router = useRouter()
   const filterValue = computed({
-    get () { return _filterValue.value },
-    set ({ label, value }) {
-      _filterValue.value[label] = value
+    get () {
+      return {
+        room: route.query.room ?? '*',
+        tags: route.query.tags ?? '*',
+        type: route.query.type ?? '*',
+        collection: route.query.collection ?? '*'
+      }
+    },
+    set (value) {
+      const getQueryValue = (data: FilterValue) => data !== '*' ? data : undefined
+      const query = { ...route.query, room: getQueryValue(value.room), tags: getQueryValue(value.tags), type: getQueryValue(value.type), collection: getQueryValue(value.collection) }
+      const queryArray = Object.entries(query).filter(([, value]) => value !== undefined)
+      router.push({ query: Object.fromEntries(queryArray) })
     }
   })
 
@@ -166,10 +175,6 @@ const _useSession = (): UseSession => {
     })
   }
 
-  function handleFilterValueChange (label:string, value:string) {
-    filterValue.value = { label, value }
-  }
-
   return {
     isLoaded,
     currentDayIndex,
@@ -181,8 +186,7 @@ const _useSession = (): UseSession => {
     getSessionById,
     getRoomById,
     getRoomStatusById,
-    load,
-    handleFilterValueChange
+    load
   }
 }
 

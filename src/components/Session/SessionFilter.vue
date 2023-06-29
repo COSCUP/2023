@@ -14,26 +14,18 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useSession } from '@/modules/session'
-import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
   name: 'SessionFilter',
   setup () {
-    const { filterOptions, filterValue, handleFilterValueChange } = useSession()
+    const { filterOptions, filterValue } = useSession()
     const { t, locale } = useI18n()
-    const router = useRouter()
 
     const changeFilterValue = (e:Event) => {
-      const target = e.target as HTMLInputElement
-      const value = target.value
-      const label = target.name
+      const { name, value } = e.target as HTMLInputElement
 
-      handleFilterValueChange(label, value)
-      const newFilterValue = Object.entries(filterValue.value).filter(([_, value]) => value !== '*')
-      const query = Object.fromEntries(newFilterValue) as Record<string, string>
-
-      router.push({ query, replace: true })
+      filterValue.value = { ...filterValue.value, [name]: value }
     }
 
     return {
