@@ -49,6 +49,7 @@ export interface Session extends LocaleRecord<{ title: string; description: stri
   qa: null | string;
   slide: null | string;
   record: null | string;
+  favorite?: boolean
 }
 
 export interface RoomStatus {
@@ -114,4 +115,19 @@ export interface ScheduleListItem {
 
 export interface ScheduleList {
   items: ScheduleListItem[];
+}
+
+// Filter
+
+export type FilterOptions = {
+  label: keyof FilterValue,
+  options: {id: string, name: LocaleRecord<string>}[]
+}[]
+
+export interface FilterValue {
+  type: string,
+  room: string[],
+  tags: string,
+  collection: string,
+  filter: string[]
 }

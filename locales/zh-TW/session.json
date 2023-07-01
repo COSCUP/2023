@@ -5,5 +5,16 @@
   "room-status": {
     "vacancy": "尚有空位",
     "full": "沒有空位"
-  }
+  },
+  "filter": {
+    "speakers": "講者",
+    "room": "會議室",
+    "type": "類別",
+    "tags": "標籤",
+    "all": "全部",
+    "clear": "清除所有篩選條件"
+  },
+  "share_title": "COSCUP {year} 我想聽的議程們",
+  "share_copied": "複製網址成功",
+  "share_no_favorites": "沒有收藏的議程可以分享"
 }

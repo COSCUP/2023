@@ -22,7 +22,7 @@ const SESSION_TAGS_ID = 27
 const SESSION_CO_WRITE_ID = 0
 const SESSION_QA_ID = 0
 const SESSION_SLIDE_ID = 0
-const SESSION_RECORD_ID = 0
+const SESSION_RECORD_ID = 2098
 
 const filterUnknownChar = (s: string) => s.replaceAll('\u2028', '\n')
 

@@ -1,0 +1,43 @@
+
+
+@import "../shared";
+@import "../components/session/schedule-item";
+
+
+@mixin theme-colors {
+  @include theme-colors-of("light", "#collection") {
+    --color-primary: #{$coscup-green};
+    --color-session-background: #{lighten($coscup-green, 56)};
+  }
+  @include theme-colors-of("dark", "#collection") {
+    --color-primary: #{lighten($coscup-green, 8)};
+    --color-session-background: #{lighten($background-dark, 8)};
+  }
+}
+
+@include theme-colors;
+
+@include page("collection") {
+  @include schedule-item;
+
+
+  .caption {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.4rem;
+    margin: 20px auto;
+    padding: 10px 0;
+
+    svg {
+      cursor: pointer;
+    }
+
+  }
+
+
+  .session-list {
+    width: 90%;
+    margin: 10px auto;
+  }
+}

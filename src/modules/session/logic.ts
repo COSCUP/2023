@@ -98,7 +98,7 @@ export function transformRawData (rawData: RawData, timeZoneOffsetMinutes: numbe
       coWrite,
       qa,
       slide,
-      record
+      record: record ?? null
     }
   }
 
@@ -332,4 +332,22 @@ export function generateSessionPopupData (session: Session, community: { id: str
       html: generateSessionPopupContentHtml(session, community, locale)
     }
   }
+}
+
+export function generateFilterOption (rawData: RawData) {
+  const result = []
+
+  const payload = { room: 'rooms', tags: 'tags', type: 'session_types' } as const
+  for (const key in payload) {
+    const label = key as keyof typeof payload
+    result.push({
+      label,
+      options: rawData[payload[label]].map(({ id, en, zh }: any) => ({
+        id,
+        name: { en: en.name, 'zh-TW': zh.name }
+      }))
+    })
+  }
+
+  return result
 }
