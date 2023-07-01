@@ -55,13 +55,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, ref } from 'vue'
+import { defineComponent, computed } from 'vue'
 import { useBreakpoints } from '@/modules/breakpoints'
 import { useI18n } from 'vue-i18n'
 import { Locale } from '@/modules/i18n'
 import { formatTimeString } from '@/modules/session/utils'
 import { useSession } from '@/modules/session'
-import { switchSessionMarkData } from '@/modules/session/logic'
 
 export default defineComponent({
   name: 'ScheduleItem',
@@ -74,8 +73,7 @@ export default defineComponent({
   setup (props) {
     const { t, locale } = useI18n()
     const { xsOnly } = useBreakpoints()
-    const { isLoaded, getSessionById } = useSession()
-    // const roomsStatus = inject<ComputedRef<Record<string, boolean>>>('roomsStatus') || { value: {} }
+    const { isLoaded, getSessionById, favoriteSessions, roomsStatusMap } = useSession()
     const session = computed(() => getSessionById(props.sessionId))
     const location = computed(() => {
       return {
@@ -93,14 +91,16 @@ export default defineComponent({
     const language = computed(() => session.value.language)
     const room = computed(() => session.value.room[locale.value as Locale].name.split(' / ')[0])
 
-    // const isFull = computed(() => !!(roomsStatus.value[session.value.room.id]))
-    const isFull = ref(false)
+    const isFull = computed(() => !!(roomsStatusMap.value?.[session.value.room.id]?.isFull))
     const statusText = computed(() => t(`session['room-status'].${isFull.value ? 'full' : 'vacancy'}`))
     const favorite = computed(() => session.value.favorite)
 
-    const handleMarkIconOnClick = (e: Event) => {
-      switchSessionMarkData(session.value)
-      return e.preventDefault()
+    const handleMarkIconOnClick = () => {
+      if (favoriteSessions.value.includes(session.value.id)) {
+        favoriteSessions.value = favoriteSessions.value.filter((id) => id !== session.value.id)
+      } else {
+        favoriteSessions.value = [...favoriteSessions.value, session.value.id]
+      }
     }
 
     return {

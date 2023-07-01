@@ -76,14 +76,6 @@ const routes: RouteRecordRaw[] = import.meta.env.VITE_LANDING_ONLY === 'yes'
         }
       },
       {
-        path: '/collection',
-        name: 'Collection',
-        component: () => import('@/pages/Collection.vue'),
-        meta: {
-          order: 7
-        }
-      },
-      {
         path: '/room',
         name: 'Room',
         component: () => import('@/pages/Room.vue'),

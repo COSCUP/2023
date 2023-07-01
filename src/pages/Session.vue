@@ -76,11 +76,7 @@ export default defineComponent({
       }
 
       const onClose = () => {
-        router.push({
-          name: route.query.from === 'Room'
-            ? 'Room'
-            : 'Session'
-        })
+        router.back()
       }
       if (sessionId === 'template') {
         openPopUp({

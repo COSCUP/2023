@@ -9,7 +9,7 @@ import { fixedTimeZoneDate, formatDateString, formatTimeString, getPartsOfDate, 
 import type { Locale } from '../i18n'
 import type { MetaOptions } from '../metas'
 import type { PopUpData } from '../pop-up'
-import type { Session, SessionId, ScheduleElement, RawData, SessionType, Room, Speaker, Tag, SessionsMap, ScheduleList, YearOfDate, MonthOfDate, DateOfDate, SchedulDay, HourOfDate, MinuteOfDate, ScheduleTable, RoomId, ScheduleTableBodyCell, ScheduleTableBlankCell, ScheduleTableSpanCell, RoomsMap, FilterValue } from './types'
+import type { Session, ScheduleElement, RawData, SessionType, Room, Speaker, Tag, SessionsMap, ScheduleList, YearOfDate, MonthOfDate, DateOfDate, SchedulDay, HourOfDate, MinuteOfDate, ScheduleTable, RoomId, ScheduleTableBodyCell, ScheduleTableBlankCell, ScheduleTableSpanCell, RoomsMap } from './types'
 
 export const TIMEZONE_OFFSET: number = -480
 // export const ROOM_ORDER = []
@@ -106,7 +106,7 @@ export function transformRawData (rawData: RawData, timeZoneOffsetMinutes: numbe
       coWrite,
       qa,
       slide,
-      record
+      record: record ?? null
     }
   }
 
@@ -346,8 +346,9 @@ export function generateSessionPopupData (session: Session, community: { id: str
 export function generateFilterOption (rawData: RawData) {
   const result = []
 
-  const payload = { room: 'rooms', tags: 'tags', type: 'session_types' }
-  for (const label in payload) {
+  const payload = { room: 'rooms', tags: 'tags', type: 'session_types' } as const
+  for (const key in payload) {
+    const label = key as keyof typeof payload
     result.push({
       label,
       options: rawData[payload[label]].map(({ id, en, zh }: any) => ({
@@ -357,24 +358,5 @@ export function generateFilterOption (rawData: RawData) {
     })
   }
 
-  result.push({
-    label: 'collection',
-    options: [{
-      id: 'mark',
-      name: { en: 'My Collection', 'zh-TW': '我的收藏' }
-    }]
-  })
-
   return result
-}
-
-export function switchSessionMarkData (session: Session) {
-  const markSessions: SessionId[] = JSON.parse(window.localStorage.getItem('MARK_SESSIONS') ?? '[]')
-  const currentStatus = !session.favorite
-
-  if (currentStatus) markSessions.push(session.id)
-  else markSessions.splice(markSessions.indexOf(session.id), 1)
-
-  session.favorite = currentStatus
-  window.localStorage.setItem('MARK_SESSIONS', JSON.stringify(markSessions))
 }

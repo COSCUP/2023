@@ -11,7 +11,9 @@
     "room": "Room",
     "type": "Type",
     "tags": "Tag",
-    "all": "All",
-    "collection": "Collection"
-  }
+    "all": "All"
+  },
+  "share_title": "The sessions I would like to attend at COSCUP {year}.",
+  "share_copied": "Copy URL successfully.",
+  "share_no_favorites": "There are no favorite sessions to share at the moment."
 }

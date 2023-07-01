@@ -1,59 +1,131 @@
-
-
-
 @mixin session-filter {
   .session-filter {
-    width: 100vw;
-    position: sticky;
-    left: 0;
-    display: grid;
+    width: 80vw;
+    max-width: 250px;
+    position: fixed;
+    top: var(--navbar-height);
+    bottom: 0;
+    right: 0;
+    z-index: 3;
+    background-color: var(--color-filter-panel-background);
     -moz-box-pack: center;
     justify-content: center;
-    padding: 10px 0 30px;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
 
-    @include smAndUp {
-      grid-template-columns: repeat(4, 160px);
-      gap: 25px 15px;
-
+    &.active {
+      transform: translateX(0);
     }
 
-    @include smOnly {
-      grid-template-columns: repeat(3, 160px);
-      gap: 25px 50px;
-
+    button {
+      border: none;
+      color: var(--color-filter-font);
     }
 
-    @include xsOnly {
-      grid-template-columns: repeat(2, 160px);
-      gap: 25px 15px;
-      padding: 30px 0;
-      border-bottom: 1px solid var(--color-filter-border);
+    .clear {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid var(--color-filter-border);
+      border-radius: 5px;
+      width: 100%;
+      padding: 5px;
+      background-color: transparent;
+      cursor: pointer;
+
+      &:hover, &:active {
+        color: var(--color-filter-panel-background);
+        background-color: var(--color-filter-border);
+      }
+    }
+
+    .fab {
+      position: absolute;
+      right: calc(100% + 25px);
+      width: 50px;
+      height: 50px;
+      font-size: 24px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+
+      @include xsOnly {
+        right: calc(100% + 15px);
+      }
+    }
+
+    .bookmark {
+      bottom: 85px;
+      background-color: var(--color-secondary);
+
+      @include xsOnly {
+        bottom: 125px;
+      }
+    }
+
+    .switch {
+      bottom: 25px;
+      background-color: var(--color-primary);
+      transition: transform 0.3s linear;
+
+      @include xsOnly {
+        bottom: 75px;
+      }
+
+      &.active {
+        transform: rotate(180deg);
+      }
+    }
+
+    .close {
+      bottom: 25px;
+      background-color: var(--color-primary);
+
+      @include xsOnly {
+        bottom: 75px;
+      }
+    }
+
+    section {
+      margin: 20px 0;
     }
 
     select {
-      width: 120px;
+      width: 100%;
       margin: 5px 0;
       display: block;
       border-radius: 8px;
       border: 1px solid var(--color-filter-border);
       box-shadow: none;
 
+      font-size: .85rem;
+      padding: 5px;
+      height: auto;
+    }
+
+    select[multiple] {
+      color: var(--color-filter-font);
+      background-color: $background-dark;
+    }
+
+    select:not([multiple]) {
       background-image: var(--color-filter-icon);
       background-size: contain;
       background-repeat: no-repeat;
       background-position: right;
       background-color: var(--color-filter-background);
-
       color: var(--color-filter-font);
+
       appearance: none;
-      padding: 5px;
-      font-size: .85rem;
 
       &:focus {
         outline: none;
       }
     }
-
-    
   }
 }

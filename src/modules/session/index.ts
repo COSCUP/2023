@@ -2,13 +2,13 @@
 //
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
-import { computed, InjectionKey, Ref, ref } from 'vue'
+import { computed, InjectionKey, Ref, ref, watch } from 'vue'
 import { createModuleHook, useSetupCtx } from '../utils'
 import { TIMEZONE_OFFSET, ROOM_ORDER, generateScheduleList, generateScheduleTable, getScheduleDays, transformRawData, generateFilterOption } from './logic'
 import { ScheduleElement, SessionsMap, RoomId, ScheduleTable, ScheduleList, Session, SessionId, RoomsMap, Room, RoomsStatusMap, RoomStatus, FilterOptions, FilterValue } from './types'
 import { fixedTimeZoneDate } from './utils'
 import { useProgress } from '../progress'
-import io, { Socket } from 'socket.io-client'
+import io from 'socket.io-client'
 import { useRoute, useRouter } from 'vue-router'
 
 interface UseSession {
@@ -23,6 +23,7 @@ interface UseSession {
   filterValue: Ref<FilterValue>;
   roomsStatusMap: Ref<RoomsStatusMap | null>;
   sessionsMap: Ref<SessionsMap | null>;
+  favoriteSessions: Ref<SessionId[]>;
   getSessionById: (id: SessionId) => Session;
   getRoomById: (id: RoomId) => Room;
   getRoomStatusById: (id: RoomId) => RoomStatus;
@@ -35,32 +36,48 @@ const _useSession = (): UseSession => {
   const { isClient } = useSetupCtx()
   const { start, done } = useProgress()
 
-  let socket: typeof Socket | null = null
+  let socket: ReturnType<typeof io> | null = null
   const scheduleElements = ref<ScheduleElement[] | null>(null)
-  const sessionsMap = ref<SessionsMap | null>(null)
+  const _sessionsMap = ref<SessionsMap | null>(null)
+  const sessionsMap = computed(() => {
+    if (!_sessionsMap.value) return null
+    return Object.keys(_sessionsMap.value).reduce((result, key) => {
+      return {
+        ...result,
+        [key]: {
+          ..._sessionsMap.value?.[key],
+          favorite: favoriteSessions.value.includes(key)
+        }
+      }
+    }, {}) as SessionsMap
+  })
   const roomsMap = ref<RoomsMap | null>(null)
   const isLoaded = ref<boolean>(false)
   const filterOptions = ref<FilterOptions>([])
+  const favoriteSessions = (() => {
+    const _favoriteSessions = ref<SessionId[]>(JSON.parse(window.localStorage.getItem('FAVORITE_SESSIONS') ?? '[]'))
+    return computed({
+      get: () => _favoriteSessions.value,
+      set: (value) => {
+        window.localStorage.setItem('FAVORITE_SESSIONS', JSON.stringify(value))
+        _favoriteSessions.value = value
+      }
+    })
+  })()
 
   const load = async () => {
     if (isLoaded.value) return
     start()
     const { default: _rawData } = await import('@/assets/json/session.json')
-    const { scheduleElements: _scheduleElements, sessionsMap: _sessionsMap, roomsMap: _roomsMap } =
+    const { scheduleElements: _scheduleElements, sessionsMap: __sessionsMap, roomsMap: _roomsMap } =
       transformRawData(_rawData, TIMEZONE_OFFSET, ROOM_ORDER)
     scheduleElements.value = _scheduleElements
-    sessionsMap.value = _sessionsMap
+    _sessionsMap.value = __sessionsMap
     roomsMap.value = _roomsMap
     isClient && await prepareRoomStatus()
     isLoaded.value = true
     filterOptions.value = generateFilterOption(_rawData)
     done()
-
-    const markSessions: SessionId[] = JSON.parse(window.localStorage.getItem('MARK_SESSIONS') ?? '[]')
-    for (const id in sessionsMap.value) {
-      const session: Session = sessionsMap.value?.[id]
-      session.favorite = markSessions.includes(id)
-    }
   }
 
   isClient && load()
@@ -70,15 +87,23 @@ const _useSession = (): UseSession => {
   const filterValue = computed({
     get () {
       return {
-        room: route.query.room ?? '*',
-        tags: route.query.tags ?? '*',
-        type: route.query.type ?? '*',
-        collection: route.query.collection ?? '*'
+        room: route.query.room as string[] ?? ['*'],
+        tags: route.query.tags as string ?? '*',
+        type: route.query.type as string ?? '*',
+        collection: route.query.collection as string ?? '*',
+        filter: ((route.query.filter as string)?.match(/.{1,6}/g) as string[]) ?? ['*']
       }
     },
     set (value) {
-      const getQueryValue = (data: FilterValue) => data !== '*' ? data : undefined
-      const query = { ...route.query, room: getQueryValue(value.room), tags: getQueryValue(value.tags), type: getQueryValue(value.type), collection: getQueryValue(value.collection) }
+      const getQueryValue = (data: string) => data !== '*' ? data : undefined
+      const query = {
+        ...route.query,
+        room: value.room.includes('*') ? undefined : value.room,
+        tags: getQueryValue(value.tags),
+        type: getQueryValue(value.type),
+        collection: getQueryValue(value.collection),
+        filter: !value.filter.includes('*') ? value.filter.join('') : undefined
+      }
       const queryArray = Object.entries(query).filter(([, value]) => value !== undefined)
       router.push({ query: Object.fromEntries(queryArray) })
     }
@@ -95,17 +120,23 @@ const _useSession = (): UseSession => {
 
           for (const [key, value] of Object.entries(filterValue.value)) {
             if (value === '*') continue
+            if (Array.isArray(value) && value.includes('*')) continue
 
             switch (key) {
               case 'tags':
                 if (!session[key].find(x => x.id === value)) return false
                 else continue
               case 'room':
+                if (!value.includes(session[key].id)) return false
+                else continue
               case 'type':
                 if (session[key].id !== value) return false
                 else continue
               case 'collection':
                 if (!session.favorite) return false
+                else continue
+              case 'filter':
+                if (!value.includes(session.id)) return false
                 else continue
             }
           }
@@ -116,6 +147,14 @@ const _useSession = (): UseSession => {
         const list = generateScheduleList(elements)
         return { day, table, list }
       })
+  })
+
+  watch(daysSchedule, () => {
+    if (daysSchedule.value[currentDayIndex.value].list.items.length > 0) return
+    const newIndex = daysSchedule.value.findIndex((day) => day.list.items.length > 0)
+    if (newIndex >= 0) {
+      currentDayIndex.value = newIndex
+    }
   })
 
   const getSessionById = (id: SessionId): Session => {
@@ -186,7 +225,8 @@ const _useSession = (): UseSession => {
     getSessionById,
     getRoomById,
     getRoomStatusById,
-    load
+    load,
+    favoriteSessions
   }
 }
 

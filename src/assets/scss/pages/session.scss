@@ -15,6 +15,7 @@
 
   @include theme-colors-of("light", "#session") {
     --color-primary: #{$coscup-green};
+    --color-secondary: #{$coscup-blue};
     --color-session-background: #{lighten($coscup-green, 56)};
     --color-list-time-background: #{$background-light};
     --color-nav-background: #{$background-light};
@@ -23,6 +24,7 @@
         $background-light,
         $alpha: -0.1
       )};
+    --color-filter-panel-background: #{lighten($coscup-green, 76)};
     --color-filter-background: #{lighten($coscup-green, 56)};
     --color-filter-font: #{$text-light};
     --color-filter-border: #{$coscup-secondary};
@@ -31,10 +33,12 @@
 
   @include theme-colors-of("dark", "#session") {
     --color-primary: #{lighten($coscup-green, 8)};
+    --color-secondary: #{lighten($coscup-blue, 8)};
     --color-session-background: #{lighten($background-dark, 8)};
     --color-list-time-background: #{$background-dark};
     --color-nav-background: #{$background-dark};
     --color-room-cell-background: #{adjust-color($background-dark, $alpha: -0.1)};
+    --color-filter-panel-background: #{lighten($background-dark, 6)};
     --color-filter-background: #{$background-dark};
     --color-filter-font: #{$text-dark};
     --color-filter-border: #{$background-light};
