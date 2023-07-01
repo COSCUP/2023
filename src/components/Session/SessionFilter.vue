@@ -16,12 +16,9 @@
         <icon-mdi-close />
       </button>
     </template>
-    <template v-if="hasFilters">
-      <button class="clear" @click="clearFilters">
-        <icon-mdi-close />
-        {{ t('session.filter.clear') }}
-      </button>
-    </template>
+    <section>
+      <input type="search" :placeholder="t('session.filter.search')" name="search" :value="filterValue.search" @input="changeFilterValue" />
+    </section>
     <section v-for="filter in filterOptions" :key="filter.label">
       <template v-if="filter.label === 'room'">
         <label>{{ t(`session.filter.${filter.label}`) }}: </label>
@@ -42,6 +39,12 @@
         </select>
       </template>
     </section>
+    <template v-if="hasFilters">
+      <button class="clear" @click="clearFilters">
+        <icon-mdi-close />
+        {{ t('session.filter.clear') }}
+      </button>
+    </template>
   </article>
 </template>
 <script lang="ts">
@@ -81,6 +84,7 @@ export default defineComponent({
     const changeFilterValue = (e:Event) => {
       const { name, value } = e.target as HTMLSelectElement
 
+      window.scrollTo(0, 0)
       filterValue.value = { ...filterValue.value, [name]: value }
     }
 
@@ -88,6 +92,7 @@ export default defineComponent({
     const showFavorites = () => {
       active.value = false
       filterValue.value = {
+        search: '',
         tags: '*',
         room: ['*'],
         type: '*',

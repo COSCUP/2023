@@ -11,7 +11,9 @@
     "room": "Room",
     "type": "Type",
     "tags": "Tag",
-    "all": "All"
+    "all": "All",
+    "clear": "Clear all filters",
+    "search": "Search"
   },
   "share_title": "The sessions I would like to attend at COSCUP {year}.",
   "share_copied": "Copy URL successfully.",

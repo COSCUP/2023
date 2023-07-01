@@ -119,15 +119,16 @@ export interface ScheduleList {
 
 // Filter
 
-export type FilterOptions = {
-  label: keyof FilterValue,
-  options: {id: string, name: LocaleRecord<string>}[]
-}[]
-
 export interface FilterValue {
   type: string,
   room: string[],
   tags: string,
   collection: string,
-  filter: string[]
+  filter: string[],
+  search: string
 }
+
+export type FilterOptions = {
+  label: keyof FilterValue,
+  options: {id: string, name: LocaleRecord<string>}[]
+}[]

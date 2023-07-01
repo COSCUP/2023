@@ -10,6 +10,8 @@ import { fixedTimeZoneDate } from './utils'
 import { useProgress } from '../progress'
 import io from 'socket.io-client'
 import { useRoute, useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
+import { Locale } from '@/modules/i18n'
 
 interface UseSession {
   isLoaded: Ref<boolean>;
@@ -35,6 +37,8 @@ const PROVIDE_KEY: InjectionKey<UseSession> = Symbol('session')
 const _useSession = (): UseSession => {
   const { isClient } = useSetupCtx()
   const { start, done } = useProgress()
+  const { locale: _locale } = useI18n()
+  const locale = computed<Locale>(() => _locale.value as Locale)
 
   let socket: ReturnType<typeof io> | null = null
   const scheduleElements = ref<ScheduleElement[] | null>(null)
@@ -92,7 +96,8 @@ const _useSession = (): UseSession => {
         tags: route.query.tags as string ?? '*',
         type: route.query.type as string ?? '*',
         collection: route.query.collection as string ?? '*',
-        filter: ((route.query.filter as string)?.match(/.{1,6}/g) as string[]) ?? ['*']
+        filter: ((route.query.filter as string)?.match(/.{1,6}/g) as string[]) ?? ['*'],
+        search: route.query.search as string ?? ''
       }
     },
     set (value) {
@@ -103,7 +108,8 @@ const _useSession = (): UseSession => {
         tags: getQueryValue(value.tags),
         type: getQueryValue(value.type),
         collection: getQueryValue(value.collection),
-        filter: !value.filter.includes('*') ? value.filter.join('') : undefined
+        filter: !value.filter.includes('*') ? value.filter.join('') : undefined,
+        search: value.search ? value.search : undefined
       }
       const queryArray = Object.entries(query).filter(([, value]) => value !== undefined)
       router.push({ query: Object.fromEntries(queryArray) })
@@ -119,26 +125,43 @@ const _useSession = (): UseSession => {
         const elements = scheduleDay.elements.filter(s => {
           const session = getSessionById(s.session)
 
-          for (const [key, value] of Object.entries(filterValue.value)) {
+          for (const _key of Object.keys(filterValue.value)) {
+            const key = _key as keyof FilterValue
+            const value = filterValue.value[key]
             if (value === '*') continue
             if (Array.isArray(value) && value.includes('*')) continue
 
-            switch (key) {
-              case 'tags':
-                if (!session[key].find(x => x.id === value)) return false
-                else continue
-              case 'room':
-                if (!value.includes(session[key].id)) return false
-                else continue
-              case 'type':
-                if (session[key].id !== value) return false
-                else continue
-              case 'collection':
-                if (!session.favorite) return false
-                else continue
-              case 'filter':
-                if (!value.includes(session.id)) return false
-                else continue
+            if (key === 'tags') {
+              if (!session[key].find(x => x.id === value)) return false
+              else continue
+            }
+            if (key === 'room') {
+              if (!value.includes(session[key].id)) return false
+              else continue
+            }
+            if (key === 'type') {
+              if (session[key].id !== value) return false
+              else continue
+            }
+            if (key === 'collection') {
+              if (!session.favorite) return false
+              else continue
+            }
+            if (key === 'filter') {
+              if (!value.includes(session.id)) return false
+              else continue
+            }
+            if (key === 'search') {
+              const val = (value as string).toLowerCase()
+              if (
+                !session[locale.value].title.toLowerCase().includes(val) &&
+                !session[locale.value].description.toLowerCase().includes(val) &&
+                (
+                  !session.speakers.every(s => s[locale.value].name.toLowerCase().includes(val) || s[locale.value].bio.toLowerCase().includes(val)) ||
+                  session.speakers.length === 0
+                )
+              ) return false
+              else continue
             }
           }
 

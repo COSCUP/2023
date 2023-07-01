@@ -12,7 +12,8 @@
     "type": "類別",
     "tags": "標籤",
     "all": "全部",
-    "clear": "清除所有篩選條件"
+    "clear": "清除所有篩選條件",
+    "search": "搜尋"
   },
   "share_title": "COSCUP {year} 我想聽的議程們",
   "share_copied": "複製網址成功",
