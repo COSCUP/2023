@@ -8,7 +8,7 @@
 
 @mixin schedule-table {
   .schedule-table {
-    --room-list-height: 120px;
+    --room-list-height: 80px;
     --column-width: 250px;
 
     // --live-player-height: calc(var(--column-width) / 16 * 9);

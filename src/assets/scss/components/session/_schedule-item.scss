@@ -15,6 +15,10 @@
     position: relative;
     padding: 5px;
 
+    &.main {
+      background-color: var(--color-main-session-background);
+    }
+
     .content-section {
       position: sticky;
       top: calc(var(--navbar-height) + var(--room-list-height) + var(--live-player-height));
