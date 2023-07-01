@@ -55,7 +55,8 @@ const _useSession = (): UseSession => {
   const isLoaded = ref<boolean>(false)
   const filterOptions = ref<FilterOptions>([])
   const favoriteSessions = (() => {
-    const _favoriteSessions = ref<SessionId[]>(JSON.parse(window.localStorage.getItem('FAVORITE_SESSIONS') ?? '[]'))
+    const defaultValue = isClient ? JSON.parse(window.localStorage.getItem('FAVORITE_SESSIONS') ?? '[]') : []
+    const _favoriteSessions = ref<SessionId[]>(defaultValue)
     return computed({
       get: () => _favoriteSessions.value,
       set: (value) => {
