@@ -17,7 +17,7 @@
     --color-primary: #{$coscup-green};
     --color-secondary: #{$coscup-blue};
     --color-session-background: #{lighten($coscup-green, 56)};
-    --color-main-session-background: #{lighten($coscup-green, 46)};
+    --color-main-session-background: #{lighten($coscup-blue, 46)};
     --color-list-time-background: #{$background-light};
     --color-nav-background: #{$background-light};
     --color-room-cell-background:
@@ -36,7 +36,7 @@
     --color-primary: #{lighten($coscup-green, 8)};
     --color-secondary: #{lighten($coscup-blue, 8)};
     --color-session-background: #{lighten($background-dark, 8)};
-    --color-main-session-background: #{lighten($background-dark, 16)};
+    --color-main-session-background: #{darken($coscup-green, 8)};
     --color-list-time-background: #{$background-dark};
     --color-nav-background: #{$background-dark};
     --color-room-cell-background: #{adjust-color($background-dark, $alpha: -0.1)};

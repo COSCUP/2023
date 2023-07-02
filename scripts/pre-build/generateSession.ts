@@ -80,6 +80,15 @@ function genResult (talks, rooms, speakers) {
 
   const resTags = [
     {
+      id: 'Prime',
+      zh: {
+        name: 'Prime session'
+      },
+      en: {
+        name: 'Prime session'
+      }
+    },
+    {
       id: 'Beginner',
       zh: {
         name: '入門'
@@ -125,15 +134,6 @@ function genResult (talks, rooms, speakers) {
       }
     },
     {
-      id: 'en-mozilla',
-      zh: {
-        name: 'English'
-      },
-      en: {
-        name: 'English'
-      }
-    },
-    {
       id: 'ja-JP',
       zh: {
         name: '日本語'
@@ -165,7 +165,9 @@ function genResult (talks, rooms, speakers) {
         description: getAnswer(s, SESSION_EN_DESCRIPTION_ID, s.abstract || '')
       },
       speakers: s.speakers.map(ss => ss.code),
-      tags: [s.content_locale].concat(s.answers.find(a => a.question.id === SESSION_TAGS_ID) !== undefined ? [s.answers.find(a => a.question.id === SESSION_TAGS_ID).options[0].answer.en] : []),
+      tags: [s.content_locale]
+        .concat(s.answers.find(a => a.question.id === SESSION_TAGS_ID) !== undefined ? [s.answers.find(a => a.question.id === SESSION_TAGS_ID).options[0].answer.en] : [])
+        .concat(s.tags?.includes('prime session') ? ['Prime'] : []),
       co_write: getAnswer(s, SESSION_CO_WRITE_ID, null),
       qa: getAnswer(s, SESSION_QA_ID, null),
       slide: getAnswer(s, SESSION_SLIDE_ID, null),

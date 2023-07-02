@@ -6,7 +6,7 @@
 -->
 
 <template>
-  <router-link v-if="isLoaded" class="schedule-item" :class="{ main: isMainTrack }" :to="location">
+  <router-link v-if="isLoaded" class="schedule-item" :class="{ prime: isPrimeSession }" :to="location">
     <section class="content-section">
       <h4 class="track">
         <div
@@ -75,7 +75,7 @@ export default defineComponent({
     const { xsOnly } = useBreakpoints()
     const { isLoaded, getSessionById, favoriteSessions, roomsStatusMap } = useSession()
     const session = computed(() => getSessionById(props.sessionId))
-    const isMainTrack = computed(() => session.value.type.en.name === 'Misc. - Other Free Libre Open Source Topics')
+    const isPrimeSession = computed(() => session.value.tags.find((tag) => tag.id === 'Prime'))
     const location = computed(() => {
       return {
         name: 'SessionDetail',
@@ -108,7 +108,7 @@ export default defineComponent({
       isLoaded,
       xsOnly,
       location,
-      isMainTrack,
+      isPrimeSession,
       track,
       period,
       title,
