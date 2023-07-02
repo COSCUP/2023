@@ -111,7 +111,7 @@ export default defineComponent({
         return
       }
 
-      const title = t('session.share_title', { year: '2022' })
+      const title = t('session.share_title', { year: import.meta.env.VITE_YEAR })
       const url = `${window.location.origin}${router.resolve({ query: { filter: favoriteSessions.value.join('') } }).href}`
       try {
         await window.navigator.share({ title, url })
