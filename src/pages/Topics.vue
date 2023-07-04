@@ -6,56 +6,38 @@
 -->
 
 <template>
-  <main id="community" class="page-container">
+  <main id="topics" class="page-container">
     <div
-      v-if="communityList"
+      v-if="topicsList"
       class="outer-container"
     >
       <div
-        v-for="community in communityList"
-        :key="community.id"
-        class="card community-container"
+        v-for="topic in topicsList"
+        :key="topic.id"
+        class="card topics-container"
       >
-        <a class="author" :name="community.id" />
+        <a class="author" :name="topic.id" />
         <div class="img-container">
-          <a :href="community.link || undefined" target="_blank" rel="noopener">
+          <a :href="topic.link || undefined" target="_blank" rel="noopener">
             <img
-              :src="community.image"
-              :alt="`Community ${community.name[languageType]}'s logo`"
+              :src="topic.image"
+              :alt="`topics ${topic.name[languageType]}'s logo`"
             />
           </a>
         </div>
         <div class="content-container">
-          <a :href="community.link || undefined" target="_blank" rel="noopener">
+          <a :href="topic.link || undefined" target="_blank" rel="noopener">
             <h2>
-              {{ community.name[languageType] }}
+              {{ topic.name[languageType] }}
             </h2>
           </a>
           <article
-            v-html="community.intro[languageType]"
+            v-html="topic.intro[languageType]"
             class="markdown"
           ></article>
           <div class="readmore" @click="onReadmoreClick">
             <span>Read More</span>
           </div>
-        </div>
-      </div>
-      <div class="card community-container">
-        <div class="content-container partner-container">
-          <h2>
-            {{ t('community.partner.title') }}
-          </h2>
-          <article>
-            <div
-              v-for="partner in partnerList"
-              :key="partner.name"
-            >
-              <div class="avatar">
-                <img :src="partner.image" :alt="partner.name">
-              </div>
-              <p>{{ partner.name }}</p>
-            </div>
-          </article>
         </div>
       </div>
     </div>
@@ -65,33 +47,28 @@
 <script lang="ts">
 import { computed, defineComponent, onMounted, watch } from 'vue'
 import markdown from '@/utils/markdown'
-import communityData from '@/assets/json/community.json'
+import topicsData from '@/assets/json/topics.json'
 
-import '@/assets/scss/pages/community.scss'
+import '@/assets/scss/pages/topics.scss'
 import { useBreakpoints } from '@/modules/breakpoints'
 import { Locale } from '@/modules/i18n'
 import { useI18n } from 'vue-i18n'
 import { isClient } from '@vueuse/core'
 
 export default defineComponent({
-  name: 'Community',
+  name: 'Topics',
   setup () {
     const { locale, t } = useI18n()
     const { breakpoint } = useBreakpoints()
 
     const languageType = computed(() => locale.value as Locale)
 
-    const communityList = computed(() => communityData.communities.map((el) => ({
+    const topicsList = computed(() => topicsData.tipics.map((el) => ({
       ...el,
       intro: {
         en: markdown(el.intro.en),
         'zh-TW': markdown(el.intro['zh-TW'])
       }
-    })))
-
-    const partnerList = computed(() => communityData.partners.map((el) => ({
-      ...el,
-      image: `https://www.gravatar.com/avatar/${el.email_hash}?s=320&d=identicon&r=g&d=https://volunteer.coscup.org/img/nonavatar.png`
     })))
 
     const detectOverflowContentElements = () => {
@@ -123,8 +100,7 @@ export default defineComponent({
     return {
       t,
       languageType,
-      partnerList,
-      communityList,
+      topicsList,
       onReadmoreClick
     }
   }

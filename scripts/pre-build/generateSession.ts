@@ -194,9 +194,9 @@ export default async function run () {
   let data = {}
   try {
     const results = await Promise.all([
-      axios.get('https://pretalx.com/api/events/coscup-2023/talks/?limit=1000', pretalxOptions),
-      axios.get('https://pretalx.com/api/events/coscup-2023/rooms/?limit=1000', pretalxOptions),
-      axios.get('https://pretalx.com/api/events/coscup-2023/speakers/?limit=1000', pretalxOptions)
+      axios.get('https://pretalx.coscup.org/api/events/coscup-2023/talks/?limit=1000', pretalxOptions),
+      axios.get('https://pretalx.coscup.org/api/events/coscup-2023/rooms/?limit=1000', pretalxOptions),
+      axios.get('https://pretalx.coscup.org/api/events/coscup-2023/speakers/?limit=1000', pretalxOptions)
     ])
     data = genResult(results[0].data, results[1].data, results[2].data)
   } catch (e) {

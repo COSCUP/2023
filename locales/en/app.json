@@ -12,7 +12,10 @@
     "blog": "Blog",
     "press-release": "Press Release",
     "coc": "CoC",
-    "languageSwitch": "EN"
+    "languageSwitch": "EN",
+    "topics": "Topics and Co-located Events",
+    "booths": "Booths",
+    "speaker": "Speaker"
   },
   "offline": "Offline mode",
   "footer": {

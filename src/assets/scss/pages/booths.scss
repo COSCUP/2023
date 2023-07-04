@@ -1,0 +1,183 @@
+// Copyright (c) 2023 yoyo930021
+//
+// This software is released under the MIT License.
+// https://opensource.org/licenses/MIT
+
+@import "../shared";
+
+@mixin booths-theme-colors {
+  @include theme-colors-of("all", "#booths") {
+    --color-avatar-border: #eee;
+    --color-markdown-link: var(--color-markdown-link);
+    --color-markdown-link-hover: var(--color-markdown-link-hover);
+  }
+
+  @include theme-colors-of("light", "#booths") {
+    --color-card-background: #{$background-light};
+    --color-link: #{$coscup-green};
+    --color-link-hover: #{lighten($coscup-green, 8)};
+    --opacity-of-image: 1;
+  }
+
+  @include theme-colors-of("dark", "#booths") {
+    --color-card-background: #{lighten($background-dark, 8)};
+    --color-link: #{lighten($coscup-green, 8)};
+    --color-link-hover: #{lighten($coscup-green, 15)};
+    --opacity-of-image: 0.8;
+  }
+}
+
+@include booths-theme-colors;
+
+@include page("booths") {
+  .card {
+    padding: 2rem;
+    background-color: var(--color-card-background);
+    border-radius: 10px;
+    box-shadow: 0 0 2rem rgb(0 0 0 / 10%);
+  }
+
+  a {
+    word-break: break-word;
+    text-decoration: none;
+    color: var(--color-link);
+    transition: all 0.2s;
+
+    &:hover {
+      color: var(--color-link-hover);
+      transition: all 0.2s;
+    }
+  }
+
+  .outer-container {
+    max-width: 900px;
+    margin: 2rem auto;
+
+    .title {
+      font-size: 1.5rem;
+      font-weight: 500;
+      margin-bottom: 2rem;
+
+      &.level {
+        font-size: 2rem;
+        font-weight: 300;
+      }
+    }
+
+    .booths-container {
+      position: relative;
+
+      &:not(:first-child) {
+        margin-top: 1rem;
+      }
+
+      .author {
+        display: block;
+        position: absolute;
+        top: -75px;
+      }
+
+      .img-container {
+        display: inline-block;
+        position: sticky;
+        top: calc(var(--navbar-height) + 2rem);
+        width: 240px;
+        height: 160px;
+        margin-right: 1rem;
+        background-color: #fff;
+        border-radius: 5px;
+        vertical-align: top;
+        opacity: var(--opacity-of-image);
+
+        img {
+          display: block;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      .content-container {
+        display: inline-block;
+        position: relative;
+        width: calc(100% - 240px - 1rem);
+
+        &.folded {
+          max-height: 300px;
+          overflow: hidden;
+
+          .readmore {
+            display: block;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            color: var(--color-coscup-green);
+            text-align: center;
+            padding: 2rem 0 0.5rem;
+            background:
+              linear-gradient(
+                rgb(0 0 0 / 0%) 0%,
+                var(--color-card-background) 60%,
+                var(--color-card-background) 100%
+              );
+            cursor: pointer;
+
+            span {
+              display: inline-block;
+              pointer-events: none;
+              color: var(--color-link);
+              transition: all 0.3s;
+            }
+
+            &:hover span {
+              color: var(--color-link-hover);
+              transform: scale(1.05);
+              transition: all 0.3s;
+            }
+          }
+        }
+
+        .readmore {
+          display: none;
+        }
+
+        a {
+          h2 {
+            margin-bottom: 1rem;
+            font-size: 1.75rem;
+            font-weight: 300;
+          }
+        }
+      }
+    }
+  }
+
+  @include smOnly {
+    .outer-container {
+      max-width: 90%;
+      margin: inherit auto;
+    }
+  }
+
+  @include xsOnly {
+    .outer-container {
+      max-width: calc(100% - 2rem);
+      margin: inherit auto;
+
+      .community-container {
+        .img-container {
+          position: static;
+          width: 100%;
+          height: auto;
+          margin-bottom: 1rem;
+          margin-right: 0;
+        }
+
+        .content-container {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
