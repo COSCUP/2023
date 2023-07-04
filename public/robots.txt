@@ -1,4 +1,0 @@
-Sitemap: https://coscup.org/2023/sitemap.xml
-
-User-agent: *
-Disallow:
