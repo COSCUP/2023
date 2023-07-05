@@ -67,7 +67,9 @@ export default defineComponent({
         en: el.en.name,
         'zh-TW': el.zh.name
       }
-    })))
+    })).sort((a, b) => {
+      return a.zh.name.charCodeAt(0) - b.zh.name.charCodeAt(0)
+    }))
 
     const detectOverflowContentElements = () => {
       const elements = Array.from(document.querySelectorAll('#sponsor .content-container'))
