@@ -41,7 +41,13 @@ export type SponsorNewsRow = {
 type YoutubeRowKeys = 'room' | 'link'
 export type YoutubeRow = Record<YoutubeRowKeys, string>
 
-export type SheetName = 'announcement' | 'community' | 'sponsorLevel' | 'sponsor' | 'sponsorNews' | 'youtube' | 'partner'
+type TopicsRowKeys = 'id' | 'name:zh-TW' | 'name:en' | 'intro:en' | 'intro:zh-TW' | 'link' | 'image'
+export type TopicsRow = Record<TopicsRowKeys, string>
+
+type BoothsRowKeys = 'id' | 'name:zh-TW' | 'name:en' | 'intro:en' | 'intro:zh-TW' | 'link' | 'image' | 'community'
+export type BoothsRow = Record<BoothsRowKeys, string>
+
+export type SheetName = 'announcement' | 'community' | 'sponsorLevel' | 'sponsor' | 'sponsorNews' | 'youtube' | 'partner' | 'topics' | 'booths'
 export type SheetIdMap = Record<SheetName, string>
 
 export type SheetRow<N extends SheetName> = N extends 'announcement'
@@ -54,4 +60,8 @@ export type SheetRow<N extends SheetName> = N extends 'announcement'
         ? SponsorNewsRow
         : N extends 'youtube'
           ? YoutubeRow
-          : never
+          : N extends 'topics'
+            ? TopicsRow
+            : N extends 'booths'
+              ? BoothsRow
+              : never
