@@ -16,14 +16,31 @@
         :key="speaker.id"
         class="card speaker-container"
       >
+        <a class="author" :name="speaker.id" />
         <div class="img-container">
+          <a :href="undefined" target="_blank" rel="noopener">
             <img
               :src="speaker.avatar"
               :alt="`topics ${speaker.name[languageType]}'s logo`"
             />
+          </a>
         </div>
         <div class="content-container">
-          <a target="_blank" rel="noopener">
+          <router-link
+            v-if="speaker.sessionId"
+            :to="{
+              name: 'SessionDetail',
+              params: {
+                sessionId: speaker.sessionId
+              },
+              query: {
+                from: 'Speaker'
+              }}">
+            <h2>
+              {{ speaker.name[languageType] }}
+            </h2>
+          </router-link>
+          <a v-else target="_blank" rel="noopener">
             <h2>
               {{ speaker.name[languageType] }}
             </h2>
@@ -42,7 +59,6 @@
 import { computed, defineComponent, onMounted, watch } from 'vue'
 import markdown from '@/utils/markdown'
 import sessionData from '@/assets/json/session.json'
-
 import '@/assets/scss/pages/speaker.scss'
 import { useBreakpoints } from '@/modules/breakpoints'
 import { Locale } from '@/modules/i18n'
@@ -57,7 +73,9 @@ export default defineComponent({
 
     const languageType = computed(() => locale.value as Locale)
 
-    const speakersList = computed(() => sessionData.speakers.map((el) => ({
+    const sessionList = computed(() => sessionData.sessions)
+
+    const speakersTemp = computed(() => sessionData.speakers.map((el) => ({
       ...el,
       bio: {
         en: markdown(el.en.bio),
@@ -66,10 +84,24 @@ export default defineComponent({
       name: {
         en: el.en.name,
         'zh-TW': el.zh.name
-      }
-    })).sort((a, b) => {
+      },
+      sessionId: sessionList.value.find(sp => sp.speakers.includes(el.id))?.id,
+      prime: sessionList.value.find(sp => sp.speakers.includes(el.id))?.tags.includes('Prime')
+    })))
+
+    const primeSpeakerList = speakersTemp.value.filter((element, index, array) => {
+      return element.prime === true
+    }).sort((a, b) => {
       return a.zh.name.charCodeAt(0) - b.zh.name.charCodeAt(0)
-    }))
+    })
+
+    const normalSpeakerList = speakersTemp.value.filter((element, index, array) => {
+      return element.prime !== true
+    }).sort((a, b) => {
+      return a.zh.name.charCodeAt(0) - b.zh.name.charCodeAt(0)
+    })
+
+    const speakersList = computed(() => primeSpeakerList.concat(normalSpeakerList))
 
     const detectOverflowContentElements = () => {
       const elements = Array.from(document.querySelectorAll('#sponsor .content-container'))
@@ -94,7 +126,8 @@ export default defineComponent({
     return {
       t,
       languageType,
-      speakersList
+      speakersList,
+      sessionList
     }
   }
 })
