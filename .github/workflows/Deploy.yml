@@ -43,10 +43,6 @@ jobs:
       - name: Build production 🚧
         run: pnpm run build
 
-      - name: Generate sitemap 🗺
-        run: |
-          pnpm run tool:generate-sitemap:local
-
       - name: Deploy 📡
         uses: peaceiris/actions-gh-pages@v3
         with:
