@@ -1,0 +1,146 @@
+@mixin session-filter {
+  .session-filter {
+    width: 80vw;
+    max-width: 250px;
+    position: fixed;
+    top: var(--navbar-height);
+    bottom: 0;
+    right: 0;
+    z-index: 3;
+    background-color: var(--color-filter-panel-background);
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+
+    &.active {
+      transform: translateX(0);
+    }
+
+    button {
+      border: none;
+      color: var(--color-filter-font);
+    }
+
+    .clear {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid var(--color-filter-border);
+      border-radius: 5px;
+      width: 100%;
+      padding: 5px;
+      background-color: transparent;
+      cursor: pointer;
+
+      &:hover, &:active {
+        color: var(--color-filter-panel-background);
+        background-color: var(--color-filter-border);
+      }
+    }
+
+    .fab {
+      position: absolute;
+      right: calc(100% + 25px);
+      width: 50px;
+      height: 50px;
+      font-size: 24px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+
+      @include xsOnly {
+        right: calc(100% + 15px);
+      }
+    }
+
+    .bookmark {
+      bottom: 85px;
+      background-color: var(--color-secondary);
+
+      @include xsOnly {
+        bottom: 135px;
+      }
+    }
+
+    .switch {
+      bottom: 25px;
+      background-color: var(--color-primary);
+      transition: transform 0.3s linear;
+
+      @include xsOnly {
+        bottom: 75px;
+      }
+
+      &.active {
+        transform: rotate(180deg);
+      }
+    }
+
+    .close {
+      bottom: 25px;
+      background-color: var(--color-primary);
+
+      @include xsOnly {
+        bottom: 75px;
+      }
+    }
+
+    section {
+      margin: 15px 0;
+    }
+
+    input {
+      width: 100%;
+      margin: 5px 0;
+      display: block;
+      border-radius: 8px;
+      border: 1px solid var(--color-filter-border);
+      box-shadow: none;
+
+      font-size: .85rem;
+      padding: 5px;
+      height: auto;
+
+      color: var(--color-filter-font);
+      background-color: $background-dark;
+    }
+
+    select {
+      width: 100%;
+      margin: 5px 0;
+      display: block;
+      border-radius: 8px;
+      border: 1px solid var(--color-filter-border);
+      box-shadow: none;
+
+      font-size: .85rem;
+      padding: 5px;
+      height: auto;
+    }
+
+    select[multiple] {
+      color: var(--color-filter-font);
+      background-color: $background-dark;
+      max-height: calc(100vh - var(--navbar-height) - 360px);
+    }
+
+    select:not([multiple]) {
+      background-image: var(--color-filter-icon);
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: right;
+      background-color: var(--color-filter-background);
+      color: var(--color-filter-font);
+
+      appearance: none;
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}

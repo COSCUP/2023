@@ -8,6 +8,7 @@
 <template>
   <main id="session" class="page-container">
     <ScheduleNavbar />
+    <SessionFilter />
     <template v-for="(schedule, index) in daysSchedule">
       <ScheduleList
         v-if="xsOnly"
@@ -34,6 +35,7 @@ import { useSession } from '@/modules/session'
 import ScheduleNavbar from '@/components/Session/ScheduleNavbar.vue'
 import ScheduleTable from '@/components/Session/ScheduleTable.vue'
 import ScheduleList from '@/components/Session/ScheduleList.vue'
+import SessionFilter from '@/components/Session/SessionFilter.vue'
 
 import '@/assets/scss/pages/session.scss'
 import { usePopUp } from '@/modules/pop-up'
@@ -50,7 +52,8 @@ export default defineComponent({
   components: {
     ScheduleNavbar,
     ScheduleTable,
-    ScheduleList
+    ScheduleList,
+    SessionFilter
   },
   setup () {
     const route = useRoute()
@@ -73,11 +76,7 @@ export default defineComponent({
       }
 
       const onClose = () => {
-        router.push({
-          name: route.query.from === 'Room'
-            ? 'Room'
-            : 'Session'
-        })
+        router.back()
       }
       if (sessionId === 'template') {
         openPopUp({

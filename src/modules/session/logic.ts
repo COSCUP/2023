@@ -12,33 +12,25 @@ import type { PopUpData } from '../pop-up'
 import type { Session, ScheduleElement, RawData, SessionType, Room, Speaker, Tag, SessionsMap, ScheduleList, YearOfDate, MonthOfDate, DateOfDate, SchedulDay, HourOfDate, MinuteOfDate, ScheduleTable, RoomId, ScheduleTableBodyCell, ScheduleTableBlankCell, ScheduleTableSpanCell, RoomsMap } from './types'
 
 export const TIMEZONE_OFFSET: number = -480
-// export const ROOM_ORDER = []
-export const ROOM_ORDER: RoomId[] = [
-  'RB105',
-  'AU101',
-  'TR209', 'TR211', 'TR212', 'TR213', 'TR214',
-  'TR310-1', 'TR310-2', 'TR311', 'TR313',
-  'TR409-1', 'TR409-2', 'TR410', 'TR411', 'TR412-1', 'TR412-2', 'TR413-1', 'TR413-2',
-  'TR510'
-]
+
+const compareRoomById = (a: string, b: string) => {
+  const nameOrder = ['RB', 'AU']
+  const [aName, aNum] = a.split(' ')
+  const [bName, bNum] = b.split(' ')
+  if (nameOrder.includes(aName) && nameOrder.includes(bName)) return nameOrder.indexOf(aName) - nameOrder.indexOf(bName)
+  if (nameOrder.includes(aName)) return -1
+  if (nameOrder.includes(bName)) return 1
+  return aNum.charCodeAt(0) - bNum.charCodeAt(0)
+}
 
 function mapSessionsWithIndex (sessions: Session[]):SessionsMap {
   return Object.fromEntries(sessions.map(s => [s.id, s]))
 }
 
-function filterAndSortScheduleElements (elements: ScheduleElement[], roomOrder: RoomId[]): ScheduleElement[] {
+function filterAndSortScheduleElements (elements: ScheduleElement[]): ScheduleElement[] {
   return elements
-    // .sort((a, b) => {
-    //   if (a.room === 'Main Track') return -1
-    //   if (b.room === 'Main Track') return 1
-    //   return a.room.charCodeAt(0) - b.room.charCodeAt(0)
-    // })
-    .filter(e => {
-      const result = roomOrder.includes(e.room)
-      !result && console.warn(`Session: ${e.session}'s room: ${e.room} is not in provided roomOrder`)
-      return result
-    })
-    .sort((a, b) => roomOrder.indexOf(a.room) - roomOrder.indexOf(b.room))
+    .slice()
+    .sort((a, b) => compareRoomById(a.room, b.room))
 }
 
 function getTimePoints (elements: ScheduleElement[], includeEndTime = true): [HourOfDate, MinuteOfDate][] {
@@ -54,7 +46,7 @@ function getTimePoints (elements: ScheduleElement[], includeEndTime = true): [Ho
   return timePoints
 }
 
-export function transformRawData (rawData: RawData, timeZoneOffsetMinutes: number | null = null, roomOrder: RoomId[]) {
+export function transformRawData (rawData: RawData, timeZoneOffsetMinutes: number | null = null) {
   type RawSession = RawData['sessions'][number]
 
   const createDate = (date: Date | string) => timeZoneOffsetMinutes === null
@@ -106,18 +98,17 @@ export function transformRawData (rawData: RawData, timeZoneOffsetMinutes: numbe
       coWrite,
       qa,
       slide,
-      record
+      record: record ?? null
     }
   }
 
   const tuples: [ScheduleElement, Session][] = rawData.sessions
     .map<[ScheduleElement, Session]>((rawSession) =>
       [transformToScheduleElement(rawSession), transformToSession(rawSession)])
-  const scheduleElements = filterAndSortScheduleElements(tuples.map(([d]) => d), roomOrder)
+  const scheduleElements = filterAndSortScheduleElements(tuples.map(([d]) => d))
   const sessionsMap = mapSessionsWithIndex(tuples.map(([_, d]) => d))
   const roomsMap: RoomsMap = Object.fromEntries(rawData.rooms
-    .filter(r => roomOrder.includes(r.id))
-    .sort((a, b) => roomOrder.indexOf(a.id) - roomOrder.indexOf(b.id))
+    .sort((a, b) => compareRoomById(a.id, b.id))
     .map(
       r => [r.id, {
         id: r.id,
@@ -341,4 +332,22 @@ export function generateSessionPopupData (session: Session, community: { id: str
       html: generateSessionPopupContentHtml(session, community, locale)
     }
   }
+}
+
+export function generateFilterOption (rawData: RawData) {
+  const result = []
+
+  const payload = { room: 'rooms', tags: 'tags', type: 'session_types' } as const
+  for (const key in payload) {
+    const label = key as keyof typeof payload
+    result.push({
+      label,
+      options: rawData[payload[label]].map(({ id, en, zh }: any) => ({
+        id,
+        name: { en: en.name, 'zh-TW': zh.name }
+      }))
+    })
+  }
+
+  return result
 }

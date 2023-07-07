@@ -83,22 +83,22 @@ const routes: RouteRecordRaw[] = import.meta.env.VITE_LANDING_ONLY === 'true'
           order: 1
         }
       },
-      {
-        path: '/room',
-        name: 'Room',
-        component: () => import('@/pages/Room.vue'),
-        meta: {
-          order: 2
-        }
-      },
-      {
-        path: '/community',
-        name: 'Community',
-        component: () => import('@/pages/Community.vue'),
-        meta: {
-          order: 3
-        }
-      },
+      // {
+      //   path: '/room',
+      //   name: 'Room',
+      //   component: () => import('@/pages/Room.vue'),
+      //   meta: {
+      //     order: 2
+      //   }
+      // },
+      // {
+      //   path: '/community',
+      //   name: 'Community',
+      //   component: () => import('@/pages/Community.vue'),
+      //   meta: {
+      //     order: 3
+      //   }
+      // },
       {
         path: '/sponsorship',
         name: 'Sponsorship',
@@ -115,14 +115,14 @@ const routes: RouteRecordRaw[] = import.meta.env.VITE_LANDING_ONLY === 'true'
           order: 3
         }
       },
-      {
-        path: '/venue',
-        name: 'Venue',
-        component: () => import('@/pages/Venue.vue'),
-        meta: {
-          order: 4
-        }
-      },
+      // {
+      //   path: '/venue',
+      //   name: 'Venue',
+      //   component: () => import('@/pages/Venue.vue'),
+      //   meta: {
+      //     order: 4
+      //   }
+      // },
       {
         path: '/sponsor',
         name: 'Sponsor',
