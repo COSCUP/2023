@@ -74,6 +74,7 @@ export default defineConfig(({ mode, command }) => {
       VitePWA({
         registerType: 'autoUpdate',
         workbox: {
+          globIgnores: ['**/session/*.html'],
           navigateFallback: 'index.html',
           navigateFallbackDenylist: [/.*\.(jpg|png|svg|json|js|xml)$/],
           offlineGoogleAnalytics: true,
