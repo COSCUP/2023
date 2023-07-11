@@ -20,7 +20,9 @@ const compareRoomById = (a: string, b: string) => {
   if (nameOrder.includes(aName) && nameOrder.includes(bName)) return nameOrder.indexOf(aName) - nameOrder.indexOf(bName)
   if (nameOrder.includes(aName)) return -1
   if (nameOrder.includes(bName)) return 1
-  return aNum.charCodeAt(0) - bNum.charCodeAt(0)
+  if (aNum > bNum) return 1
+  else if (aNum < bNum) return -1
+  else return 0
 }
 
 function mapSessionsWithIndex (sessions: Session[]):SessionsMap {
