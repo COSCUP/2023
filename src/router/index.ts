@@ -99,14 +99,15 @@ const routes: RouteRecordRaw[] = import.meta.env.VITE_LANDING_ONLY === 'true'
       //     order: 3
       //   }
       // },
-      // {
-      //   path: '/sponsorship',
-      //   name: 'Sponsorship',
-      //   component: () => import('@/pages/Sponsorship.vue'),
-      //   meta: {
-      //     order: 1
-      //   }
-      // },
+      {
+        path: '/sponsorship',
+        name: 'Sponsorship',
+        component: () => import('@/pages/Sponsorship.vue'),
+        meta: {
+          order: 1,
+          hidden: true
+        }
+      },
       {
         path: '/map',
         name: 'Map',
@@ -148,6 +149,7 @@ const routes: RouteRecordRaw[] = import.meta.env.VITE_LANDING_ONLY === 'true'
 
 export const pageRouteNameList = routes.filter(r => !isNaN(Number(r.meta?.order)))
   .sort((a, b) => Number(a.meta?.order) - Number(b.meta?.order))
+  .filter((r) => r.meta?.hidden !== true)
   .map(r => r.name?.toString() ?? '')
 
 export const routerOptions: RouterOptions = {
