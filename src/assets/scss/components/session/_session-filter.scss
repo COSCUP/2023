@@ -59,7 +59,7 @@
 
     .bookmark {
       bottom: 85px;
-      background-color: var(--color-secondary);
+      background-color: #dcd541;
 
       @include xsOnly {
         bottom: 135px;
@@ -106,7 +106,7 @@
       height: auto;
 
       color: var(--color-filter-font);
-      background-color: $background-dark;
+      background-color: var(--color-session-background);
     }
 
     select {
@@ -124,7 +124,7 @@
 
     select[multiple] {
       color: var(--color-filter-font);
-      background-color: $background-dark;
+      background-color: var(--color-session-background);
       max-height: calc(100vh - var(--navbar-height) - 360px);
     }
 
