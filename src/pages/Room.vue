@@ -12,20 +12,23 @@
         <tbody>
           <tr v-for="(status, roomId) in roomsStatusMap" :key="`r-${roomId}`">
             <td class="room">
-              <span class="bubble" :class="{ full: false }"></span>
+              <div class="status" :class="{ full: status.isFull }">
+                <span class="text">
+                  {{
+                    t(`room.table.body.status['${status.isFull ? 'full' : 'available'}']`)
+                  }}
+                </span>
+              </div>
               <span>
                 {{
                   getRoomById(roomId)[locale].name.split(" / ")[0]
                 }}
               </span>
             </td>
-            <td class="status">
-              <span class="bubble" :class="{ full: status.isFull }"></span>
-              <span class="text">
-                {{
-                  t(`room.table.body.status['${status.isFull ? 'full' : 'available'}']`)
-                }}
-              </span>
+            <td class="status" :class="{ full: status.isFull }">
+              {{
+                t(`room.table.body.status['${status.isFull ? 'full' : 'available'}']`)
+              }}
             </td>
             <td class="session">
               <router-link

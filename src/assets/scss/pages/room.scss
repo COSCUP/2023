@@ -58,32 +58,29 @@
       .room,
       .status {
         white-space: nowrap;
-
-        .bubble {
-          display: inline-block;
-          width: 12px;
-          height: 12px;
-          border-radius: 50%;
-          background-color: #3ca054;
-          margin-right: 0.5rem;
-          vertical-align: middle;
-
-          &.full {
-            background-color: #d33a3a;
-          }
-        }
       }
 
       .room {
-        .bubble {
+        .status {
           display: none;
+          justify-content: center;
+          background-color: #3ca054;
+          padding: 5px;
+          margin: 5px;
+          border-radius: 5px;
+          color: #fff;
         }
       }
 
       .status {
-        .text {
-          font-size: 0.75rem;
-          font-weight: 500;
+        font-size: 0.75rem;
+        font-weight: 500;
+        color: #fff;
+        text-align: center;
+        background-color: #3ca054;
+
+        &.full {
+          background-color: #ff4141;
         }
       }
 
@@ -125,6 +122,10 @@
 
   @include xsOnly {
     .room-table {
+      th, td {
+        padding: 0.5rem;
+      }
+
       thead {
         .status {
           display: none;
@@ -132,8 +133,16 @@
       }
 
       tbody {
-        .room .bubble {
-          display: inline-block;
+        .room {
+          text-align: center;
+
+          .status {
+            display: flex;
+
+            &.full {
+              background-color: #ff4141;
+            }
+          }
         }
 
         .status {
