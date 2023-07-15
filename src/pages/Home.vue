@@ -78,7 +78,7 @@ import '@/assets/scss/pages/home.scss'
 import { useI18n } from 'vue-i18n'
 
 interface Section {
-  name: 'notice' | 'about' | 'about-kcd';
+  name: 'notice' | 'coc' | 'about';
   title: string;
   content: string;
 }
@@ -97,6 +97,11 @@ export default defineComponent({
           name: 'notice',
           title: t('home.notice.title'),
           content: markdown(t('home.notice.content'))
+        },
+        {
+          name: 'coc',
+          title: t('home.coc.title'),
+          content: markdown(t('home.coc.content'))
         },
         {
           name: 'about',
