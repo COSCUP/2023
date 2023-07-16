@@ -44,7 +44,7 @@ export type YoutubeRow = Record<YoutubeRowKeys, string>
 type TopicsRowKeys = 'id' | 'name:zh-TW' | 'name:en' | 'intro:en' | 'intro:zh-TW' | 'link' | 'image'
 export type TopicsRow = Record<TopicsRowKeys, string>
 
-type BoothsRowKeys = 'id' | 'name:zh-TW' | 'name:en' | 'intro:en' | 'intro:zh-TW' | 'link' | 'image' | 'community'
+type BoothsRowKeys = 'id' | 'name:zh-TW' | 'name:en' | 'intro:en' | 'intro:zh-TW' | 'link' | 'image' | 'community' | 'room' | 'trackroom'
 export type BoothsRow = Record<BoothsRowKeys, string>
 
 export type SheetName = 'announcement' | 'community' | 'sponsorLevel' | 'sponsor' | 'sponsorNews' | 'youtube' | 'partner' | 'topics' | 'booths'

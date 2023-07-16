@@ -13,10 +13,7 @@
     "press-release": "Press Release",
     "coc": "CoC",
     "languageSwitch": "EN",
-    "collection": "My Collection",
-    "topics": "Topics and Co-located Events",
-    "booths": "Booths",
-    "speaker": "Speaker"
+    "collection": "My Collection"
   },
   "offline": "Offline mode",
   "footer": {

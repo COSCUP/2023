@@ -140,30 +140,6 @@ const routes: RouteRecordRaw[] = import.meta.env.VITE_LANDING_ONLY === 'true'
         }
       },
       {
-        path: '/topics',
-        name: 'Topics',
-        component: () => import('@/pages/Topics.vue'),
-        meta: {
-          order: 7
-        }
-      },
-      {
-        path: '/booths',
-        name: 'Booths',
-        component: () => import('@/pages/Booths.vue'),
-        meta: {
-          order: 8
-        }
-      },
-      {
-        path: '/speaker',
-        name: 'Speaker',
-        component: () => import('@/pages/Speaker.vue'),
-        meta: {
-          order: 9
-        }
-      },
-      {
         name: 'NotFound',
         path: '/:catchAll(.*)',
         redirect: '/'

@@ -17,6 +17,7 @@
     --color-link: #{$coscup-green};
     --color-link-hover: #{lighten($coscup-green, 8)};
     --opacity-of-image: 1;
+    --color-button-border: black;
   }
 
   @include theme-colors-of("dark", "#community") {
@@ -24,6 +25,7 @@
     --color-link: #{lighten($coscup-green, 8)};
     --color-link-hover: #{lighten($coscup-green, 15)};
     --opacity-of-image: 0.8;
+    --color-button-border: white;
   }
 }
 
@@ -79,7 +81,7 @@
 
       .img-container {
         display: inline-block;
-        position: sticky;
+        position: static;
         top: calc(var(--navbar-height) + 2rem);
         width: 240px;
         height: 160px;
@@ -88,6 +90,7 @@
         border-radius: 5px;
         vertical-align: top;
         opacity: var(--opacity-of-image);
+        
 
         img {
           display: block;
@@ -100,7 +103,8 @@
       .content-container {
         display: inline-block;
         position: relative;
-        width: calc(100% - 240px - 1rem);
+        width: calc(100% - 340px - 1rem);
+
 
         &.partner-container {
           width: 100%;
@@ -193,6 +197,51 @@
             font-size: 1.75rem;
             font-weight: 300;
           }
+        }
+      }
+
+      .tag-container {
+        position: relative;
+        display: inline-block;
+        vertical-align: top;
+        width: 5rem;
+
+        svg {
+          width: 2.5rem;
+          height: 2.5rem;
+          margin: 1rem 3rem 0px;
+          border: 3px solid var(--color-link);
+          border-radius: 5px;
+          background-color: var(--color-link);
+        }
+      }
+
+      .collapse-content-container {
+        width: 100%;
+        margin-top: 1.5rem;
+
+        .collapse-button {
+          display: inline-block;
+          width: 100%;
+
+          button {
+            width: calc(100%/3 - 1rem);
+            margin: 0px 0.5rem;
+            height: 2rem;
+            background-color: var(--color-card-background);
+            color: var(--color-text);
+            font-weight: 500;
+            font-size: larger;
+            border-radius: 5px;
+            border: 2px solid var(--color-button-border);
+
+            &:hover {
+              background-color: var(--color-link);
+            }
+          }
+        }
+        article {
+          margin-top: 2rem;
         }
       }
     }
