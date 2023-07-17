@@ -90,7 +90,7 @@
         border-radius: 5px;
         vertical-align: top;
         opacity: var(--opacity-of-image);
-        
+
 
         img {
           display: block;
@@ -222,7 +222,8 @@
 
         .collapse-button {
           display: inline-block;
-          width: 100%;
+          width: calc(100% + 1rem);
+          transform: translateX(-0.5rem);
 
           button {
             width: calc(100%/3 - 1rem);
@@ -234,6 +235,7 @@
             font-size: larger;
             border-radius: 5px;
             border: 2px solid var(--color-button-border);
+            cursor: pointer;
 
             &:hover {
               background-color: var(--color-link);

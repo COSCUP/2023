@@ -40,11 +40,11 @@
         <div class="collapse-content-container">
           <div class="collapse-button">
             <button @click="showContent(community.name[languageType], 'topic')"
-              v-if="community.topicIntro.en !== '' || community.topicIntro['zh-TW'] !== ''">活動</button>
+              v-if="community.topicIntro.en !== '' || community.topicIntro['zh-TW'] !== ''">{{ t('community.tags.topics') }}</button>
             <button @click="showContent(community.name[languageType], 'booth')"
-              v-if="community.boothIntro.en !== '' || community.boothIntro['zh-TW'] !== ''">攤位</button>
+              v-if="community.boothIntro.en !== '' || community.boothIntro['zh-TW'] !== ''">{{ t('community.tags.booths') }}</button>
             <button @click="showContent(community.name[languageType], 'speaker')"
-              v-if="community.track !== ''">講者</button>
+              v-if="community.track !== ''">{{ t('community.tags.track') }}</button>
           </div>
           <article class="topics" v-show="community.show === 'topic'">
             <a class="author" :name="community.id" />
@@ -190,23 +190,27 @@ export default defineComponent({
       track: sessionList.value.find(sp => sp.speakers.includes(el.id))?.communityName || { en: '', 'zh-TW': '' }
     })))
 
-    const communityList = reactive(communityData.communities.map((el) => ({
-      ...el,
-      intro: {
-        en: markdown(el.intro.en),
-        'zh-TW': markdown(el.intro['zh-TW'])
-      },
-      boothIntro: {
-        en: markdown(el.boothIntro.en !== undefined ? el.boothIntro.en : ''),
-        'zh-TW': markdown(el.boothIntro['zh-TW'] !== undefined ? el.boothIntro['zh-TW'] : '')
-      },
-      topicIntro: {
-        en: markdown(el.topicIntro.en !== undefined ? el.topicIntro.en : ''),
-        'zh-TW': markdown(el.topicIntro['zh-TW'] !== undefined ? el.topicIntro['zh-TW'] : '')
-      },
-      speaker: speakerList.value.filter(sp => ((sp.track.en !== '' && sp.track['zh-TW'] !== '') && (el.track.includes(sp.track.en) || el.track.includes(sp.track['zh-TW'])))),
-      show: ''
-    })))
+    const communityList = reactive(
+      communityData.communities
+        .map((el) => ({
+          ...el,
+          intro: {
+            en: markdown(el.intro.en),
+            'zh-TW': markdown(el.intro['zh-TW'])
+          },
+          boothIntro: {
+            en: markdown(el.boothIntro.en !== undefined ? el.boothIntro.en : ''),
+            'zh-TW': markdown(el.boothIntro['zh-TW'] !== undefined ? el.boothIntro['zh-TW'] : '')
+          },
+          topicIntro: {
+            en: markdown(el.topicIntro.en !== undefined ? el.topicIntro.en : ''),
+            'zh-TW': markdown(el.topicIntro['zh-TW'] !== undefined ? el.topicIntro['zh-TW'] : '')
+          },
+          speaker: speakerList.value.filter(sp => ((sp.track.en !== '' && sp.track['zh-TW'] !== '') && (el.track.includes(sp.track.en) || el.track.includes(sp.track['zh-TW'])))),
+          show: ''
+        }))
+        .sort(() => Math.random() - 0.5)
+    )
 
     const partnerList = computed(() => communityData.partners.map((el) => ({
       ...el,
