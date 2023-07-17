@@ -11,6 +11,7 @@ const _useRegisterSW = () => {
   router.isReady().then(async () => {
     const { registerSW } = await import('virtual:pwa-register')
     registerSW({
+      immediate: true,
       onRegistered (r) {
         if (!r) return
         console.log('onRegistered')
