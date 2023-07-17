@@ -91,14 +91,14 @@ const routes: RouteRecordRaw[] = import.meta.env.VITE_LANDING_ONLY === 'true'
           order: 2
         }
       },
-      // {
-      //   path: '/community',
-      //   name: 'Community',
-      //   component: () => import('@/pages/Community.vue'),
-      //   meta: {
-      //     order: 3
-      //   }
-      // },
+      {
+        path: '/community',
+        name: 'Community',
+        component: () => import('@/pages/Community.vue'),
+        meta: {
+          order: 3
+        }
+      },
       {
         path: '/sponsorship',
         name: 'Sponsorship',

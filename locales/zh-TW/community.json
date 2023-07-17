@@ -1,6 +1,11 @@
 {
   "meta": {
-    "title": "合作社群"
+    "title": "社群夥伴"
+  },
+  "tags": {
+    "topics": "議程主題與活動",
+    "booths": "參展攤位",
+    "track": "議程軌講者"
   },
   "partner": {
     "title": "議程審查顧問"

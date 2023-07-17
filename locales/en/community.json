@@ -2,6 +2,11 @@
   "meta": {
     "title": "Community"
   },
+  "tags": {
+    "topics": "Topics and Co-located Events",
+    "booths": "Booths",
+    "track": "Speaker for the Session Track"
+  },
   "partner": {
     "title": "Review Partners"
   }
