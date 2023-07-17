@@ -26,13 +26,15 @@ function transformPartnerMap (rows: PartnerRow[]) {
 }
 
 function transformData (communityRows: CommunityRow[], topicsRows: TopicsRow[], boothsRows: BoothsRow[]) {
+  const fallbackImageId = ['education', 'career', 'martech', 'ai', 'healing', 'world', 'misc']
+
   return Object.fromEntries(communityRows
     .map((r) => [
       r.id,
       {
         id: r.id,
         track: r.track,
-        image: `https://coscup.org/2023/images/community/${r.id}.png`,
+        image: `https://coscup.org/2023/images/community/${fallbackImageId.includes(r.id) ? 'coscup' : r.id}.png`,
         topicImage: `https://coscup.org/2023/images/community/${r.id}-topic.png`,
         boothImage: `https://coscup.org/2023/images/community/${r.id}-booth.png`,
         link: r.link,
