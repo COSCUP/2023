@@ -26,20 +26,14 @@ function transformPartnerMap (rows: PartnerRow[]) {
 }
 
 function transformData (communityRows: CommunityRow[], topicsRows: TopicsRow[], boothsRows: BoothsRow[]) {
-  const fallbackImageId = ['education', 'career', 'martech', 'ai', 'healing', 'world', 'misc']
-
   return Object.fromEntries(communityRows
     .map((r) => [
       r.id,
       {
         id: r.id,
         track: r.track,
-        image: `https://coscup.org/2023/images/community/${fallbackImageId.includes(r.id) ? 'coscup' : r.id}.png`,
-        topicImage: `https://coscup.org/2023/images/community/${fallbackImageId.includes(r.id) ? 'coscup' : r.id}.png`,
-        boothImage: `https://coscup.org/2023/images/community/${fallbackImageId.includes(r.id) ? 'coscup' : r.id}.png`,
+        image: `https://coscup.org/2023/images/community/${r.id}.png`,
         link: r.link,
-        topicLink: topicsRows.find(value => value.id === r.id)?.link,
-        boothLink: boothsRows.find(value => value.id === r.id)?.link,
         name: {
           en: r['name:en'],
           'zh-TW': r['name:zh-TW']
@@ -48,14 +42,32 @@ function transformData (communityRows: CommunityRow[], topicsRows: TopicsRow[], 
           en: r['intro:en'],
           'zh-TW': r['intro:zh-TW']
         },
-        topicIntro: {
-          en: topicsRows.find(value => value.id === r.id)?.['intro:en'],
-          'zh-TW': topicsRows.find(value => value.id === r.id)?.['intro:zh-TW']
-        },
-        boothIntro: {
-          en: boothsRows.find(value => value.id === r.id)?.['intro:en'],
-          'zh-TW': boothsRows.find(value => value.id === r.id)?.['intro:zh-TW']
-        }
+        topics: topicsRows
+          .filter(value => value.community_id === r.id)
+          .map(row => ({
+            name: {
+              en: row['name:en'],
+              'zh-TW': row['name:zh-TW']
+            },
+            intro: {
+              en: row['intro:en'],
+              'zh-TW': row['intro:zh-TW']
+            },
+            link: row.link
+          })),
+        booths: boothsRows
+          .filter(value => value.id === r.id)
+          .map(row => ({
+            name: {
+              en: row['name:en'],
+              'zh-TW': row['name:zh-TW']
+            },
+            intro: {
+              en: row['intro:en'],
+              'zh-TW': row['intro:zh-TW']
+            },
+            link: row.link
+          }))
       }
     ]))
 }

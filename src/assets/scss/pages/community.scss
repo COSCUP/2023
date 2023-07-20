@@ -79,6 +79,13 @@
         top: -75px;
       }
 
+      .topic,
+      .booth {
+        .content-container {
+          width: 100%;
+        }
+      }
+
       .img-container {
         display: inline-block;
         position: static;
@@ -98,6 +105,9 @@
           height: 100%;
           object-fit: contain;
           object-position: center;
+          text-align: center;
+          line-height: 160px;
+          overflow: hidden;
         }
       }
 

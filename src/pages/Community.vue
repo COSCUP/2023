@@ -12,7 +12,7 @@
         <a class="author" :name="community.id" />
         <div class="img-container">
           <a :href="community.link || undefined" target="_blank" rel="noopener">
-            <img :src="community.image" :alt="`Community ${community.name[languageType]}'s logo`" />
+            <img :src="community.image" :alt="community.name[languageType]" />
           </a>
         </div>
         <div class="content-container">
@@ -27,10 +27,10 @@
           </div>
         </div>
         <div class="tag-container">
-          <span title="Topic" v-if="community.topicIntro.en !== '' || community.topicIntro['zh-TW'] !== ''">
+          <span title="Topic" v-if="community.topics.length">
             <component :is="localActivityRounded"></component>
           </span>
-          <span title="Booth" v-if="community.boothIntro.en !== '' || community.boothIntro['zh-TW'] !== ''">
+          <span title="Booth" v-if="community.booths.length">
             <component alt="Booth" :is="tableRestaurantRounded"></component>
           </span>
           <span title="Track" v-if="community.track !== ''">
@@ -40,53 +40,52 @@
         <div class="collapse-content-container">
           <div class="collapse-button">
             <button @click="showContent(community.name[languageType], 'topic')"
-              v-if="community.topicIntro.en !== '' || community.topicIntro['zh-TW'] !== ''">{{ t('community.tags.topics') }}</button>
+              v-if="community.topics.length">{{ t('community.tags.topics') }}</button>
             <button @click="showContent(community.name[languageType], 'booth')"
-              v-if="community.boothIntro.en !== '' || community.boothIntro['zh-TW'] !== ''">{{ t('community.tags.booths') }}</button>
+              v-if="community.booths.length">{{ t('community.tags.booths') }}</button>
             <button @click="showContent(community.name[languageType], 'speaker')"
               v-if="community.track !== ''">{{ t('community.tags.track') }}</button>
           </div>
-          <article class="topics" v-show="community.show === 'topic'">
-            <a class="author" :name="community.id" />
-            <div class="img-container">
-              <a :href="community.topicLink || undefined" target="_blank" rel="noopener">
-                <img :src="community.topicImage" :alt="`Community ${community.name[languageType]}'s logo`" />
-              </a>
-            </div>
-            <div class="content-container">
-              <a :href="community.topicLink || undefined" target="_blank" rel="noopener">
-                <h2>
-                  {{ community.name[languageType] }}
-                </h2>
-              </a>
-              <article v-html="community.topicIntro[languageType]" class="markdown"></article>
-              <div class="readmore" @click="onReadmoreClick">
-                <span>Read More</span>
+          <template v-if="community.show === 'topic'">
+            <article
+              v-for="topic in community.topics"
+              :key="topic.id"
+              class="topic"
+            >
+              <div class="content-container">
+                <a :href="topic.link || undefined" target="_blank" rel="noopener">
+                  <h2>
+                    {{ topic.name[languageType] }}
+                  </h2>
+                </a>
+                <article v-html="topic.intro[languageType]" class="markdown"></article>
+                <div class="readmore" @click="onReadmoreClick">
+                  <span>Read More</span>
+                </div>
               </div>
-            </div>
-          </article>
-          <article class="booth" v-show="community.show === 'booth'">
-            <a class="author" :name="community.id" />
-            <div class="img-container">
-              <a :href="community.boothLink || undefined" target="_blank" rel="noopener">
-                <img :src="community.boothImage" :alt="`Community ${community.name[languageType]}'s logo`" />
-              </a>
-            </div>
-            <div class="content-container">
-              <a :href="community.boothLink || undefined" target="_blank" rel="noopener">
-                <h2>
-                  {{ community.name[languageType] }}
-                </h2>
-              </a>
-              <article v-html="community.boothIntro[languageType]" class="markdown"></article>
-              <div class="readmore" @click="onReadmoreClick">
-                <span>Read More</span>
+            </article>
+          </template>
+          <template v-if="community.show === 'booth'">
+            <article
+              v-for="booth in community.booths"
+              :key="booth.id"
+              class="booth"
+            >
+              <div class="content-container">
+                <a :href="booth.link || undefined" target="_blank" rel="noopener">
+                  <h2>
+                    {{ booth.name[languageType] }}
+                  </h2>
+                </a>
+                <article v-html="booth.intro[languageType]" class="markdown"></article>
+                <div class="readmore" @click="onReadmoreClick">
+                  <span>Read More</span>
+                </div>
               </div>
-            </div>
-          </article>
+            </article>
+          </template>
           <article class="speaker" v-show="community.show === 'speaker'">
             <div v-for="speaker in community.speaker" :key="speaker.id" class="card speaker-container">
-              <a class="author" :name="speaker.id" />
               <div class="img-container">
                 <a :href="undefined" target="_blank" rel="noopener">
                   <img :src="speaker.avatar" :alt="`topics ${speaker.name[languageType]}'s logo`" />
@@ -198,14 +197,20 @@ export default defineComponent({
             en: markdown(el.intro.en),
             'zh-TW': markdown(el.intro['zh-TW'])
           },
-          boothIntro: {
-            en: markdown(el.boothIntro.en !== undefined ? el.boothIntro.en : ''),
-            'zh-TW': markdown(el.boothIntro['zh-TW'] !== undefined ? el.boothIntro['zh-TW'] : '')
-          },
-          topicIntro: {
-            en: markdown(el.topicIntro.en !== undefined ? el.topicIntro.en : ''),
-            'zh-TW': markdown(el.topicIntro['zh-TW'] !== undefined ? el.topicIntro['zh-TW'] : '')
-          },
+          booths: el.booths.map((booth) => ({
+            ...booth,
+            intro: {
+              en: markdown(booth.intro.en),
+              'zh-TW': markdown(booth.intro['zh-TW'])
+            }
+          })),
+          topics: el.topics.map((topic) => ({
+            ...topic,
+            intro: {
+              en: markdown(topic.intro.en),
+              'zh-TW': markdown(topic.intro['zh-TW'])
+            }
+          })),
           speaker: speakerList.value.filter(sp => ((sp.track.en !== '' && sp.track['zh-TW'] !== '') && (el.track.includes(sp.track.en) || el.track.includes(sp.track['zh-TW'])))),
           show: ''
         }))
