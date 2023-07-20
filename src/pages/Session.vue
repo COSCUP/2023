@@ -76,7 +76,11 @@ export default defineComponent({
       }
 
       const onClose = () => {
-        router.back()
+        if (window.history.state.back) {
+          router.back()
+        } else {
+          router.push('/session')
+        }
       }
       if (sessionId === 'template') {
         openPopUp({
