@@ -41,7 +41,7 @@ export type SponsorNewsRow = {
 type YoutubeRowKeys = 'room' | 'link'
 export type YoutubeRow = Record<YoutubeRowKeys, string>
 
-type TopicsRowKeys = 'id' | 'name:zh-TW' | 'name:en' | 'intro:en' | 'intro:zh-TW' | 'link' | 'image'
+type TopicsRowKeys = 'id' | 'name:zh-TW' | 'name:en' | 'intro:en' | 'intro:zh-TW' | 'link' | 'image' | 'community_id'
 export type TopicsRow = Record<TopicsRowKeys, string>
 
 type BoothsRowKeys = 'id' | 'name:zh-TW' | 'name:en' | 'intro:en' | 'intro:zh-TW' | 'link' | 'image' | 'community' | 'room' | 'trackroom'

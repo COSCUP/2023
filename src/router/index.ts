@@ -100,6 +100,14 @@ const routes: RouteRecordRaw[] = import.meta.env.VITE_LANDING_ONLY === 'true'
         }
       },
       {
+        path: '/topics',
+        name: 'Topics',
+        component: () => import('@/pages/Topics.vue'),
+        meta: {
+          order: 3
+        }
+      },
+      {
         path: '/sponsorship',
         name: 'Sponsorship',
         component: () => import('@/pages/Sponsorship.vue'),
