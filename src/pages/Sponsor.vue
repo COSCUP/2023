@@ -115,7 +115,7 @@ export default defineComponent({
       return Object.fromEntries(
         await Promise.all(Object.entries(groupBy<SponsorData>(data, 'level'))
           .sort((entryA, entryB) => {
-            const sponsorSequence = ['titanium', 'diamond', 'gold', 'silver', 'bronze', 'friend', 'co-organizer', 'special-thanks', 'co-promotion-partner']
+            const sponsorSequence = ['titanium', 'diamond', 'gold', 'silver', 'bronze', 'friend', 'co-host', 'co-organizer', 'special-thanks', 'co-promotion-partner']
             return sponsorSequence.indexOf(entryA[0]) - sponsorSequence.indexOf(entryB[0])
           })
           .map(async ([group, rawSponsors]) => {
