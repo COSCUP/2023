@@ -5,7 +5,62 @@
 
 @import "../shared";
 
+@mixin venue-theme-colors {
+  @include theme-colors-of("all", "#venue") {
+    --color-link-text-primary: #{$coscup-green};
+    --color-link-primary: #{$coscup-green};
+    --color-image-background: #{$background-light};
+  }
+
+  @include theme-colors-of("light", "#venue") {
+    --color-link-text-primary: #{$coscup-green};
+    --color-link-primary: #{$coscup-green};
+    --color-image-background: #{$background-light};
+  }
+
+  @include theme-colors-of("dark", "#venue") {
+    --color-link-text-primary: #fff;
+    --color-link-primary: #{$coscup-green};
+    --color-image-background: #{adjust-color($background-light, $alpha: -0.2)};
+  }
+}
+
+@include venue-theme-colors;
+
 @include page("venue") {
+  .authors {
+    max-width: 900px;
+    margin: 10px auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    border-radius: 10px;
+
+    >a {
+      width: 120px;
+      text-align: center;
+      color: var(--color-link-text-primary);
+      padding: 10px 0px;
+      text-decoration: none;
+      text-transform: capitalize;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      border-radius: 10px;
+      margin: 2px;
+      word-break: keep-all;
+      border: 2px solid var(--color-link-primary);
+
+      &:hover,
+      &:active {
+        color: #fff;
+        background-color: var(--color-link-primary);
+      }
+    }
+  }
+
   .map-container {
     max-width: 900px;
     margin: auto;
@@ -16,6 +71,7 @@
       height: 100%;
       object-fit: cover;
       overflow: hidden;
+      background-color: var(--color-image-background);
     }
 
     .title {
@@ -39,6 +95,34 @@
   @include xsOnly {
     .outer-container {
       max-width: calc(100% - 2rem);
+    }
+  }
+
+  .download {
+    margin: 20px auto;
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+    text-decoration: none;
+
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    color: var(--color-link-text-primary);
+    border: solid 1px var(--color-link-text-primary);
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s;
+
+    &:hover {
+      transform: translateX(-50%) scale(1.05);
+      border-color: var(--color-link-primary);
+      background-color: var(--color-link-primary);
+      color: #fff;
+      transition: all 0.3s;
     }
   }
 }

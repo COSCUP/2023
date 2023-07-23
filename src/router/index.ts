@@ -92,14 +92,6 @@ const routes: RouteRecordRaw[] = import.meta.env.VITE_LANDING_ONLY === 'true'
         }
       },
       {
-        path: '/community',
-        name: 'Community',
-        component: () => import('@/pages/Community.vue'),
-        meta: {
-          order: 3
-        }
-      },
-      {
         path: '/topics',
         name: 'Topics',
         component: () => import('@/pages/Topics.vue'),
@@ -112,8 +104,15 @@ const routes: RouteRecordRaw[] = import.meta.env.VITE_LANDING_ONLY === 'true'
         name: 'Sponsorship',
         component: () => import('@/pages/Sponsorship.vue'),
         meta: {
-          order: 1,
           hidden: true
+        }
+      },
+      {
+        path: '/venue',
+        name: 'Venue',
+        component: () => import('@/pages/Venue.vue'),
+        meta: {
+          order: 4
         }
       },
       {
@@ -121,23 +120,23 @@ const routes: RouteRecordRaw[] = import.meta.env.VITE_LANDING_ONLY === 'true'
         name: 'Map',
         component: () => import('@/pages/Map.vue'),
         meta: {
-          order: 3
+          order: 5
         }
       },
-      // {
-      //   path: '/venue',
-      //   name: 'Venue',
-      //   component: () => import('@/pages/Venue.vue'),
-      //   meta: {
-      //     order: 4
-      //   }
-      // },
       {
         path: '/sponsor',
         name: 'Sponsor',
         component: () => import('@/pages/Sponsor.vue'),
         meta: {
-          order: 5
+          order: 6
+        }
+      },
+      {
+        path: '/community',
+        name: 'Community',
+        component: () => import('@/pages/Community.vue'),
+        meta: {
+          order: 7
         }
       },
       {
@@ -145,7 +144,7 @@ const routes: RouteRecordRaw[] = import.meta.env.VITE_LANDING_ONLY === 'true'
         name: 'Staff',
         component: () => import('@/pages/Staff.vue'),
         meta: {
-          order: 6
+          order: 8
         }
       },
       {
