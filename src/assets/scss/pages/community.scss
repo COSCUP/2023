@@ -232,13 +232,16 @@
         margin-top: 1.5rem;
 
         .collapse-button {
-          display: inline-block;
+          display: flex;
+          flex-wrap: wrap;
+          row-gap: 10px;
+          column-gap: 10px;
           width: calc(100% + 1rem);
           transform: translateX(-0.5rem);
 
           button {
-            width: calc(100%/3 - 1rem);
             margin: 0px 0.5rem;
+            padding: 5px 20px;
             height: 2rem;
             background-color: var(--color-card-background);
             color: var(--color-text);
