@@ -5,6 +5,7 @@ import { saveJSON } from './utils'
 import { join, dirname } from 'path'
 import { fileURLToPath } from 'url'
 import dotenv from 'dotenv'
+import CO_WRITE_MAP from './hackmd_url_mappings.json'
 
 dotenv.config()
 dotenv.config({ path: join(dirname(fileURLToPath(import.meta.url)), '../../.env.local') })
@@ -168,7 +169,8 @@ function genResult (talks, rooms, speakers) {
       tags: [s.content_locale]
         .concat(s.answers.find(a => a.question.id === SESSION_TAGS_ID) !== undefined ? [s.answers.find(a => a.question.id === SESSION_TAGS_ID).options[0].answer.en] : [])
         .concat(s.tags?.includes('prime session') ? ['Prime'] : []),
-      co_write: getAnswer(s, SESSION_CO_WRITE_ID, null),
+      // co_write: getAnswer(s, SESSION_CO_WRITE_ID, null),
+      co_write: CO_WRITE_MAP?.[s.code as keyof typeof CO_WRITE_MAP]?.URL || null,
       qa: getAnswer(s, SESSION_QA_ID, null),
       slide: getAnswer(s, SESSION_SLIDE_ID, null),
       record: getAnswer(s, SESSION_RECORD_ID, null),
@@ -189,9 +191,9 @@ export default async function run () {
   let data = {}
   try {
     const results = await Promise.all([
-      axios.get('https://pretalx.coscup.org/api/events/coscup-2023/talks/?limit=1000', pretalxOptions),
-      axios.get('https://pretalx.coscup.org/api/events/coscup-2023/rooms/?limit=1000', pretalxOptions),
-      axios.get('https://pretalx.coscup.org/api/events/coscup-2023/speakers/?limit=1000', pretalxOptions)
+      axios.get('https://pretalx.coscup.org/api/events/coscup-2023/talks/?limit=500', pretalxOptions),
+      axios.get('https://pretalx.coscup.org/api/events/coscup-2023/rooms/?limit=500', pretalxOptions),
+      axios.get('https://pretalx.coscup.org/api/events/coscup-2023/speakers/?limit=500', pretalxOptions)
     ])
     data = genResult(results[0].data, results[1].data, results[2].data)
   } catch (e) {

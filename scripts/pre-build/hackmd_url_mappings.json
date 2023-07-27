@@ -1,0 +1,1398 @@
+{
+  "9BMN3R": {
+    "Name": "Debian 12 - 自由的作業系統 - SZ Lin (林上智)",
+    "URL": "https://hackmd.io/@coscup/HJOJ1yJo2"
+  },
+  "ZQLYEN": {
+    "Name": "OpenRPA應用案例介紹 - IMA(資訊經理人協會), 鄧宣禮",
+    "URL": "https://hackmd.io/@coscup/S1iJykko2"
+  },
+  "BHMDWZ": {
+    "Name": "使用Python ORM實現資料庫存取和版本控制的實作 - 李毅山",
+    "URL": "https://hackmd.io/@coscup/H1Ck1yJj2"
+  },
+  "EFCLJK": {
+    "Name": "VulcanSQL - Open-source, Instant Data API Framework for data analysts - William Chang, Andy Yen",
+    "URL": "https://hackmd.io/@coscup/rkbxkkyon"
+  },
+  "DDZYDA": {
+    "Name": "意想不到的Jupyter用法－跟AI協作做出萬能的DevOps控制台 - Ben Lau",
+    "URL": "https://hackmd.io/@coscup/HJEeky1ih"
+  },
+  "QYPYUG": {
+    "Name": "Make Your Own Ray Tracing GPU with FPGA - Owen",
+    "URL": "https://hackmd.io/@coscup/S1Peky1sn"
+  },
+  "9LYBEC": {
+    "Name": "TypeScript Migration - Bunny Chang",
+    "URL": "https://hackmd.io/@coscup/ByjeJ1ysh"
+  },
+  "KUHLLR": {
+    "Name": "Accessible & Privacy Centric Websites - Saptak S",
+    "URL": "https://hackmd.io/@coscup/ryAeky1on"
+  },
+  "NDFZTH": {
+    "Name": "Collaborating the PHPBrew : past, now and future - Peter",
+    "URL": "https://hackmd.io/@coscup/By-W1yyi3"
+  },
+  "XESUJG": {
+    "Name": "Defensive Patent Strategy for Open-Source Projects and Companies - BIJU K NAIR",
+    "URL": "https://hackmd.io/@coscup/r1Sb1kyoh"
+  },
+  "FCJTW3": {
+    "Name": "在線等！農業病害影像資料庫聯盟，聯盟成員召集中/ ADADI, a collaborative project for agricultural image database. Welcome to join us! - 農業開放資料社群 Community of Open Data for Agriculture",
+    "URL": "https://hackmd.io/@coscup/Byd-k11in"
+  },
+  "SR7CVP": {
+    "Name": "善用 DevOps 應對 Hackathon 急速開發挑戰 - uccu",
+    "URL": "https://hackmd.io/@coscup/SyiWJkJjn"
+  },
+  "MGW99Q": {
+    "Name": "如何促進智權技術的開放授權以加速綠色科技的實施 - Liam Ding",
+    "URL": "https://hackmd.io/@coscup/HkR-yJkj3"
+  },
+  "EBHEGV": {
+    "Name": "人們為何能夠協作？ --  探尋四種代碼的作用 - 庄表伟",
+    "URL": "https://hackmd.io/@coscup/ry-zJ1Js3"
+  },
+  "YJ3NQU": {
+    "Name": "數位發展部開放原始碼軟體中文化 — 如何提升公民科技的發展 - 數位發展部 民主網絡司 張永青, KC Chen",
+    "URL": "https://hackmd.io/@coscup/ryHGkJJs2"
+  },
+  "39K9NC": {
+    "Name": "參與 Autoware 自駕車社群經驗分享 - 郭鎭頴",
+    "URL": "https://hackmd.io/@coscup/S1uG1yJo3"
+  },
+  "ZHRVJN": {
+    "Name": "MobX + 領域模型在區塊鏈項目上的實踐 - 涂文超",
+    "URL": "https://hackmd.io/@coscup/HyjM1yJi2"
+  },
+  "FX39FV": {
+    "Name": "帶您讀 MobX - 涂文超",
+    "URL": "https://hackmd.io/@coscup/BJ0M1Jki3"
+  },
+  "VAHKVH": {
+    "Name": "寶可夢苦難日：結局不是重點，重點是我爬不上大師啊 - Nijia Lin",
+    "URL": "https://hackmd.io/@coscup/S1MQ11Jsh"
+  },
+  "AWCXJK": {
+    "Name": "如何實作一個電子報訂閱與發送系統 — 以 COSCUP 電子報訂閱為例 - Toomore Chiang (COSCUP)",
+    "URL": "https://hackmd.io/@coscup/SJH7yykon"
+  },
+  "ULDFWL": {
+    "Name": "X-lab 開放實驗室參與開源社群的一百種方式 - 夏小雅",
+    "URL": "https://hackmd.io/@coscup/rk_7yJksn"
+  },
+  "QC3XEN": {
+    "Name": "Forking the book: an open invitation to translate Aesthetic Programming - ZIMU CULTURE, syh349",
+    "URL": "https://hackmd.io/@coscup/BJo7kkJjn"
+  },
+  "TYFMP7": {
+    "Name": "開源工具加速前端開發 - A framework agnostic solution - Xyphuz, 賴俊賓",
+    "URL": "https://hackmd.io/@coscup/r10m1Jks2"
+  },
+  "HSKKSZ": {
+    "Name": "維護自己的開源專案EZIO的心路歷程 - 黃宇強 Date Huang",
+    "URL": "https://hackmd.io/@coscup/HJM4yyks3"
+  },
+  "SPMM8U": {
+    "Name": "From Community to Commercialization 從開源項目社區到開源商業化 - 刘天栋",
+    "URL": "https://hackmd.io/@coscup/rkr4yJJjh"
+  },
+  "SGDX3Z": {
+    "Name": "OCF  桌遊團 - 開放文化基金會",
+    "URL": "https://hackmd.io/@coscup/B1i411Jj3"
+  },
+  "QCKR3X": {
+    "Name": "BoF Day1 Slot1 - COSCUP Team",
+    "URL": "https://hackmd.io/@coscup/SJJHkk1jn"
+  },
+  "XGTJKH": {
+    "Name": "BoF Day1 Slot2 - COSCUP Team",
+    "URL": "https://hackmd.io/@coscup/BJGrJy1i2"
+  },
+  "WMW8EB": {
+    "Name": "BoF Day1 Slot3 - COSCUP Team",
+    "URL": "https://hackmd.io/@coscup/SkrBJyys3"
+  },
+  "GJ7QUJ": {
+    "Name": "BoF Day1 Slot4 - COSCUP Team",
+    "URL": "https://hackmd.io/@coscup/ByOB1Jyo3"
+  },
+  "3CGMNF": {
+    "Name": "BoF Day1 Slot5 - COSCUP Team",
+    "URL": "https://hackmd.io/@coscup/HJsH111o3"
+  },
+  "YKBVZ9": {
+    "Name": "OCF  桌遊團 - 開放文化基金會",
+    "URL": "https://hackmd.io/@coscup/S1kLJk1oh"
+  },
+  "QNVLCD": {
+    "Name": "BoF Day2 Slot1 - COSCUP Team",
+    "URL": "https://hackmd.io/@coscup/ByGLykkon"
+  },
+  "K9D99D": {
+    "Name": "BoF Day2 Slot2 - COSCUP Team",
+    "URL": "https://hackmd.io/@coscup/ByS8Jk1jh"
+  },
+  "8XKXXS": {
+    "Name": "BoF Day2 Slot3 - COSCUP Team",
+    "URL": "https://hackmd.io/@coscup/HJ_UkyJj3"
+  },
+  "7JMAPT": {
+    "Name": "BoF Day2 Slot4 - COSCUP Team",
+    "URL": "https://hackmd.io/@coscup/SJiIkkkjn"
+  },
+  "HDB7UP": {
+    "Name": "BoF Day2 Slot5 - COSCUP Team",
+    "URL": "https://hackmd.io/@coscup/r10IkyJi2"
+  },
+  "UKKRLP": {
+    "Name": "What's new in PostgreSQL 16 - 林宗禧",
+    "URL": "https://hackmd.io/@coscup/rJSP1Jyjn"
+  },
+  "VWAH3S": {
+    "Name": "pg_anonymize, a new extension for simple and transparent data anonymization - Julien Rouhaud",
+    "URL": "https://hackmd.io/@coscup/HyYP1ykin"
+  },
+  "9SSA8R": {
+    "Name": "資料○蔽實務 - 古永忠",
+    "URL": "https://hackmd.io/@coscup/B1hvJJkih"
+  },
+  "8EA8NH": {
+    "Name": "PostgreSQL Index 的一些探討 - 張友謙",
+    "URL": "https://hackmd.io/@coscup/BkeuyJ1in"
+  },
+  "XNFJC8": {
+    "Name": "關於Trigger的使用與設計 - Rubin",
+    "URL": "https://hackmd.io/@coscup/Bkm_Jyys3"
+  },
+  "FT8X3S": {
+    "Name": "在 7 * 24 API 巨量 query DB 的服務中，PostgreSQL 中 table 的更新與清除機制優化 - Kater Lin",
+    "URL": "https://hackmd.io/@coscup/BkUO1kkj2"
+  },
+  "3MBNCY": {
+    "Name": "攻克金融數據之巔：優化 SQL 效能 - PostgreSQL 資料庫技巧揭密 - JackyLin",
+    "URL": "https://hackmd.io/@coscup/r15uykyin"
+  },
+  "LNUMDJ": {
+    "Name": "如何優化PostgreSQL在kubernetes上的容錯及修復經驗分享 - 黃堤瑋",
+    "URL": "https://hackmd.io/@coscup/H1adkJJj3"
+  },
+  "FTLGPN": {
+    "Name": "KeyCloak和PostgreSQL聯手實現DevOps工具一次登入(SSO) - 秉虎",
+    "URL": "https://hackmd.io/@coscup/H1gtJyJi3"
+  },
+  "GUHJYR": {
+    "Name": "TinyML with MicroPython on Raspberry Pi Pico．半套 - sosorry",
+    "URL": "https://hackmd.io/@coscup/ryDY1yJo2"
+  },
+  "7SVMUC": {
+    "Name": "TOSA: a widely used open-source architecture for tensor operations in Deep Neural Networks. - Odin Shen",
+    "URL": "https://hackmd.io/@coscup/SycFk1yin"
+  },
+  "KZZWTS": {
+    "Name": "Enhance MLPerf Tiny scores with ONNC - 謝政道, Luba Tang",
+    "URL": "https://hackmd.io/@coscup/BJatJ1ks2"
+  },
+  "3QSNJ9": {
+    "Name": "Large Language Model Optimization with\u000bIntel OpenVINO Toolkit & Neural Network Compression Framework (NNCF) - Chungyeh Wang",
+    "URL": "https://hackmd.io/@coscup/HygcJkJs2"
+  },
+  "JXS9SZ": {
+    "Name": "手把手帶領多款國產Smart AI CAM與語音手勢辨識開發板 - 章育銘",
+    "URL": "https://hackmd.io/@coscup/BJNqkJys3"
+  },
+  "QF9FYU": {
+    "Name": "TinyML新玩法─揮揮手馬上就能變身簡報播放遙控器 - Jack OmniXRI",
+    "URL": "https://hackmd.io/@coscup/S1Dcykksh"
+  },
+  "ZSZAKG": {
+    "Name": "Open source RISC-V GPGPU - Hyesoon Kim",
+    "URL": "https://hackmd.io/@coscup/r1T51yys3"
+  },
+  "XXLBHK": {
+    "Name": "Running CUDA on RISC-V - Hyesoon Kim",
+    "URL": "https://hackmd.io/@coscup/S1boJkJi3"
+  },
+  "MRBPG7": {
+    "Name": "SG13G2 OpenSource PDK: Progress after one Year - Frank Vater",
+    "URL": "https://hackmd.io/@coscup/BkEokyJjn"
+  },
+  "FZKPJN": {
+    "Name": "Open Silicon and Open Hardware for Real World Use Cases - D. Jeff Dionne",
+    "URL": "https://hackmd.io/@coscup/SJPiJ1yjh"
+  },
+  "VCUYP8": {
+    "Name": "Google 開放半導體計畫與大學合作計畫 - Jason Ma, Ph.D.",
+    "URL": "https://hackmd.io/@coscup/Sk9ik1Js2"
+  },
+  "YMWBGJ": {
+    "Name": "Caravel SoC FPGA Validation Platform - Jiin Lai",
+    "URL": "https://hackmd.io/@coscup/ryAjJkkjn"
+  },
+  "3RY9JG": {
+    "Name": "RSA256：用 verilator 驗證與測試的硬體模組 - yodalee, 林裕盛",
+    "URL": "https://hackmd.io/@coscup/SkWnJJ1oh"
+  },
+  "Y7Y8UU": {
+    "Name": "Challenge to Fabricate LSI without NDA with Open Method with my cell library nsxlib and next step nsxlib v2.0 - Naohiko Shimizu",
+    "URL": "https://hackmd.io/@coscup/Bk4hyJJo2"
+  },
+  "NZTMCX": {
+    "Name": "Coriolis - A RTL to GDSII FOSS Toolchain - Naohiko Shimizu, Jean-Paul.Chaput@lip6.fr",
+    "URL": "https://hackmd.io/@coscup/Hyvhy1ksn"
+  },
+  "KQMLR9": {
+    "Name": "Unlocking Opportunities: Exploring Global Open Source Conferences for Networking and Growth - Anupama Jha",
+    "URL": "https://hackmd.io/@coscup/rJahyy1o3"
+  },
+  "X3SC8T": {
+    "Name": "相信社區的力量——如何參與開源社區合作？ - 李明康",
+    "URL": "https://hackmd.io/@coscup/rybp1yJoh"
+  },
+  "ZFPXTX": {
+    "Name": "如何打造全球性技術社區 - 郭悦",
+    "URL": "https://hackmd.io/@coscup/rk4pkyki2"
+  },
+  "TPUL8T": {
+    "Name": "如何成功舉辦一場社區驅動的技術大會-COSCon中國開源年會經驗交流 - 许银",
+    "URL": "https://hackmd.io/@coscup/BkPaJ1Jsh"
+  },
+  "3S8BVT": {
+    "Name": "跟 RightsCon 看見全球- 開源在數位人權中越來越重要 - 黃詩惠",
+    "URL": "https://hackmd.io/@coscup/ryq61kksh"
+  },
+  "YLXCSK": {
+    "Name": "COSCUP 2023 國際交流，我們的所見所聞 - Mac Taylor, Shirley Lin, Su",
+    "URL": "https://hackmd.io/@coscup/rJaTJkyoh"
+  },
+  "SBSR93": {
+    "Name": "在 FOSDEM 除了聽演講你還可以做些什麼其他事情 - 劉雁 (Yanyiyi)",
+    "URL": "https://hackmd.io/@coscup/BJe0kk1o3"
+  },
+  "UELZJH": {
+    "Name": "十年海外走跳精選 -- 從海外會眾到海外講者、從海外入門到海外走跳 - Ernest Chiang",
+    "URL": "https://hackmd.io/@coscup/BkmRyyyj3"
+  },
+  "3UECGN": {
+    "Name": "我推的守則－COSCUP Code of Conduct 修訂之路 - 皇甫",
+    "URL": "https://hackmd.io/@coscup/BJ5CyJkj3"
+  },
+  "HBB8DR": {
+    "Name": "性別平等在科技領域內的規範與實作 - 陳湘妤",
+    "URL": "https://hackmd.io/@coscup/SyTCJJkin"
+  },
+  "E3YGW8": {
+    "Name": "如何在跨界位置進行不同跨域練習 – 以拍攝學習紀錄片為例 - Ivan Chiou",
+    "URL": "https://hackmd.io/@coscup/rkxkgy1i2"
+  },
+  "KCMBBY": {
+    "Name": "Effective Strategies for Disability Inclusion in Open Source Communities - Brayan Kai Mwanyumba",
+    "URL": "https://hackmd.io/@coscup/SkQ1eJJin"
+  },
+  "FBARFX": {
+    "Name": "從零開始的數位政策建構，應該也要 Open Policy Meeting 吧 - Cheng Peng",
+    "URL": "https://hackmd.io/@coscup/SJ81lkko3"
+  },
+  "U7VFQF": {
+    "Name": "如何將程式教育帶進偏鄉，成為照亮學子未來職涯的光 - 黃孟婷",
+    "URL": "https://hackmd.io/@coscup/r15kg1yin"
+  },
+  "W8EEPE": {
+    "Name": "Hacking Thursday CoC 的誕生祕辛 - RJ Hsiao",
+    "URL": "https://hackmd.io/@coscup/Hkpylyyon"
+  },
+  "GDGJJZ": {
+    "Name": "開源公益專案能賺錢嗎？ - Denken Chen",
+    "URL": "https://hackmd.io/@coscup/SyQlxJJsn"
+  },
+  "LSUHCF": {
+    "Name": "商業專案開源之旅：跨越技術挑戰與團隊溝通的實戰分享 - kkshyu, Clooooode, Logan",
+    "URL": "https://hackmd.io/@coscup/rkLlx1Js3"
+  },
+  "BQ97CG": {
+    "Name": "Startup Business by the Open Source Hardware and Software from China / 开源软件和硬件商业化从深圳和中国。 - TAKASU Masakazu(高須正和)",
+    "URL": "https://hackmd.io/@coscup/Bkqxgk1o2"
+  },
+  "TXHYET": {
+    "Name": "開源可以當飯吃！從國際企業的開源辦公室看開源職涯 - 開放文化基金會",
+    "URL": "https://hackmd.io/@coscup/SJpelkkon"
+  },
+  "FCFCQP": {
+    "Name": "開源力量：從 Mozilla 到 AWS、從半導體到傳統產業，我的職涯探索之旅 - Ernest Chiang",
+    "URL": "https://hackmd.io/@coscup/HkxZek1i2"
+  },
+  "3WWMFM": {
+    "Name": "Docker技術扭轉我的職涯：十年回顧 - philipz",
+    "URL": "https://hackmd.io/@coscup/Hkm-xJJo3"
+  },
+  "QNMDNM": {
+    "Name": "Infrastructure Architect 養成技能樹 - Weithenn",
+    "URL": "https://hackmd.io/@coscup/r1Lblkyoh"
+  },
+  "7YBUBF": {
+    "Name": "Modernizing Legacy Systems with Kafka and CDC Pipeline - Yayu Huang, Jack Yu",
+    "URL": "https://hackmd.io/@coscup/SJqZekJj3"
+  },
+  "V8F9VH": {
+    "Name": "An Introduction to JetBrains Exposed: The Kotlin-based ORM Framework - Recca Chao",
+    "URL": "https://hackmd.io/@coscup/r1gGgkkin"
+  },
+  "J7RHCH": {
+    "Name": "自家用 Kotlin 爬蟲實戰：以統整多平台 Podcast 聆聽數據為例 - 范聖佑",
+    "URL": "https://hackmd.io/@coscup/HJmzxJyj2"
+  },
+  "AHEXJF": {
+    "Name": "替你的 Coroutine 加上測試 - Andy Lu",
+    "URL": "https://hackmd.io/@coscup/rk8fx1ysn"
+  },
+  "CDLSBW": {
+    "Name": "A deep dive into Constant Dynamic/DynamicInvoke、and INDY - Kyle Lin",
+    "URL": "https://hackmd.io/@coscup/rkqzl1Jjn"
+  },
+  "WWK9DU": {
+    "Name": "Writing OS Updater App for Android - Aayush Gupta",
+    "URL": "https://hackmd.io/@coscup/S1pMlyJo3"
+  },
+  "QKUKKZ": {
+    "Name": "When IntelliJ IDEA Meets Amazon CodeWhisperer. - 楊舒安",
+    "URL": "https://hackmd.io/@coscup/Byg7gyysh"
+  },
+  "8FL7D7": {
+    "Name": "看 FIDO 與 Spring Authorization Server 如何斬斷密碼的枷鎖！ - samzhu",
+    "URL": "https://hackmd.io/@coscup/Bk7Xe1yo3"
+  },
+  "3YQUVL": {
+    "Name": "Arrow KT 2.0 預覽, 更道地 Kotlin 的 FP Library - Brandy Chang",
+    "URL": "https://hackmd.io/@coscup/BkDmx1kjh"
+  },
+  "FZ3C8S": {
+    "Name": "Deep dive into Compose Immutable and Stable annotation - 彥彬",
+    "URL": "https://hackmd.io/@coscup/Bk57xkko2"
+  },
+  "MG7BDS": {
+    "Name": "使用 Laravel Pennant 處理 Feature Flags - Recca Chao",
+    "URL": "https://hackmd.io/@coscup/B1lVx1yin"
+  },
+  "BXZXAN": {
+    "Name": "Less code with Monorepo - 李奕儇 (Clay Lee), 黎亞妮 (Amalia Kartika Ariyani)",
+    "URL": "https://hackmd.io/@coscup/HkNEgJyon"
+  },
+  "CHXDHC": {
+    "Name": "用 Laravel 做電子報系統可以很簡單！ - Su",
+    "URL": "https://hackmd.io/@coscup/SkDElJyo3"
+  },
+  "79HFVZ": {
+    "Name": "動畫的魔法：Anime.js 與 Vue.js 的完美結合 - Nono",
+    "URL": "https://hackmd.io/@coscup/SJ5Nx1ks3"
+  },
+  "GAVHLF": {
+    "Name": "Doing databases right in Laravel - Daniel Black",
+    "URL": "https://hackmd.io/@coscup/rk6EgJ1j3"
+  },
+  "JYETVA": {
+    "Name": "開開心心寫測試，你的程式碼也會微笑 - 高見龍",
+    "URL": "https://hackmd.io/@coscup/rkbHeJyi3"
+  },
+  "TP9FSJ": {
+    "Name": "一同創造開放和創新的設計世界 - EvA ChU",
+    "URL": "https://hackmd.io/@coscup/BkwHekksn"
+  },
+  "W3333Y": {
+    "Name": "open粉圓字型的3年旅程 - 千秋",
+    "URL": "https://hackmd.io/@coscup/r1cBlyJo3"
+  },
+  "DDEQVS": {
+    "Name": "如何利用開源設計提高設計品質 - 田佩穎",
+    "URL": "https://hackmd.io/@coscup/By0Hly1jn"
+  },
+  "HRJLTD": {
+    "Name": "一個 COSCUP 持續公開的設計可能性 - 劉雁 (Yanyiyi)",
+    "URL": "https://hackmd.io/@coscup/S1-Lekyo2"
+  },
+  "XNBAVV": {
+    "Name": "Why we need Designers in Open-source projects? Or why we even need a Designer when we are building stuff? - Terry Fusyuan Wang (@tofus)",
+    "URL": "https://hackmd.io/@coscup/BkELgyysn"
+  },
+  "APGRVM": {
+    "Name": "Open Source of Research Process - Yuya Su, GaryLee",
+    "URL": "https://hackmd.io/@coscup/BJOUgJyjh"
+  },
+  "SGLPKC": {
+    "Name": "社群的力量與 MVP 精神，UX 四神湯開源設計圖書館的過程 - The Journey from Design Community to Open-Source Design Library - Ben, Zoe",
+    "URL": "https://hackmd.io/@coscup/B1j8xJ1oh"
+  },
+  "7CZELB": {
+    "Name": "Becoming better contributors to social impact - Abhishek, Eriol Fox",
+    "URL": "https://hackmd.io/@coscup/rk1DxkJj3"
+  },
+  "CF7XLE": {
+    "Name": "手語詞典 Sign Languages dictionaries with Lingualibre SignIt. - 羅禹國 Hugo Lopez",
+    "URL": "https://hackmd.io/@coscup/ryHPe1kin"
+  },
+  "M9KGHF": {
+    "Name": "語音詞典 Recording voices and local languages with Lingualibre - 羅禹國 Hugo Lopez",
+    "URL": "https://hackmd.io/@coscup/BkdwgyJs3"
+  },
+  "AB799P": {
+    "Name": "阿美族語言文化的精彩 - 蔡中涵",
+    "URL": "https://hackmd.io/@coscup/B1sDe1Jj3"
+  },
+  "LFHFK8": {
+    "Name": "How can we utilize Wikidata to protect Puyuma, an endangered language? - Yucheng.Lin",
+    "URL": "https://hackmd.io/@coscup/r1JOgJysh"
+  },
+  "ULNXYH": {
+    "Name": "Seediq Wikipidiya - Seediq Wikipidiya",
+    "URL": "https://hackmd.io/@coscup/HkfOey1jn"
+  },
+  "TBGRFD": {
+    "Name": "台灣台語/閩南語/福建話/咱人話 (nan) tī 維基媒體計畫 ê 過去 kah 未來 - Dennis Raylin Chen",
+    "URL": "https://hackmd.io/@coscup/BkrOxJyjh"
+  },
+  "7DJRFK": {
+    "Name": "台灣維基媒體社群語言峰會 - Reke Wang",
+    "URL": "https://hackmd.io/@coscup/SyOOekyi2"
+  },
+  "8BXN8S": {
+    "Name": "How to build a powerful AI VR Virtual Assistant with AWS AI/ML service and OpenAI? - Shing Seto, Cyrus Wong",
+    "URL": "https://hackmd.io/@coscup/rJ1YlkJjn"
+  },
+  "LLXQQN": {
+    "Name": "簡介最新的智能家居業界標準 Matter 及 Home Assistant 對 Matter 的支援 - Amanda Lam",
+    "URL": "https://hackmd.io/@coscup/HyfFgyysn"
+  },
+  "7NXV7C": {
+    "Name": "How to use verilator - Peter Cheung",
+    "URL": "https://hackmd.io/@coscup/rySKekksh"
+  },
+  "ZHVR7V": {
+    "Name": "分散式出版面對的三道圍牆 - Kin Ko",
+    "URL": "https://hackmd.io/@coscup/SJttey1sh"
+  },
+  "GYUUD8": {
+    "Name": "使用 Postgres 時遇到的一些有趣案例分享 - Chung Wu",
+    "URL": "https://hackmd.io/@coscup/ry2YxJyjn"
+  },
+  "EFYC8R": {
+    "Name": "Build and manage Wasm applications using container tools - Hung Ying Tai",
+    "URL": "https://hackmd.io/@coscup/HkXcx1kjn"
+  },
+  "SAXWES": {
+    "Name": "利用 Kong API Gateway 優化微服務：簡化管理並提升安全性 - RyanWang",
+    "URL": "https://hackmd.io/@coscup/ry8cx1ki2"
+  },
+  "TMZRQP": {
+    "Name": "A Comprehensive Guide to API Gateways, Kubernetes Gateways, and Service Meshes - Navendu Pottekkat",
+    "URL": "https://hackmd.io/@coscup/ryt5xyJi3"
+  },
+  "L7AMRC": {
+    "Name": "數位發展部 Kubernetes 使用經驗 - 周詳",
+    "URL": "https://hackmd.io/@coscup/SJT5xyyon"
+  },
+  "RSMWRF": {
+    "Name": "Deploy 1 thousand pods in my JUST laptop (w/ kwok) - Hoon Jo",
+    "URL": "https://hackmd.io/@coscup/Sylsek1ih"
+  },
+  "WDCGBQ": {
+    "Name": "設計Kubernetes Controller與CRD的實踐 - 以網路為例 - 黃宇強 Date Huang",
+    "URL": "https://hackmd.io/@coscup/ryEseyki2"
+  },
+  "F7WJ9A": {
+    "Name": "Strengthening Kubernetes Security - Koteswara Rao Vellanki",
+    "URL": "https://hackmd.io/@coscup/BJPoxyki3"
+  },
+  "BCW9EX": {
+    "Name": "Multi-Tenant ArgoCD with security and isolation - Tony Yip",
+    "URL": "https://hackmd.io/@coscup/Hkiie1ksh"
+  },
+  "GKRP7Q": {
+    "Name": "我們為什麼需要新的開源專案Atmosphere來翻新跨國公有雲 - Rico Lin",
+    "URL": "https://hackmd.io/@coscup/r1Rjgyyin"
+  },
+  "7PGFJM": {
+    "Name": "Grafana 全家桶，如何打造高可用且具可擴充性的 o11y 平台 - HungWei Chiu",
+    "URL": "https://hackmd.io/@coscup/r1fnlJJsh"
+  },
+  "SY3PCJ": {
+    "Name": "Tekton and ArgoCD: The Dynamic Duo for Kube Native CI/CD - Kevin  Dubois",
+    "URL": "https://hackmd.io/@coscup/rJrhxyJj2"
+  },
+  "KSJLLL": {
+    "Name": "Exploring the Longhorn Data Plane: An Overview and Enhancements - Jing-Wei Su",
+    "URL": "https://hackmd.io/@coscup/H1_neyJs3"
+  },
+  "SGNHKA": {
+    "Name": "Demystifying Cloud Native Terminology: Explore the Cloud Native Glossary and Contribute to the Community - Seokho Son",
+    "URL": "https://hackmd.io/@coscup/Skn2g11i3"
+  },
+  "A9VPER": {
+    "Name": "Faster Image Pulling with IPFS Cache and eStargz Lazy Pulling - JenTing",
+    "URL": "https://hackmd.io/@coscup/B1J6gJyon"
+  },
+  "CNJUVM": {
+    "Name": "Who broke the build? — Using Kuttl to improve E2E testing and release faster - Ram Mohan Rao Chukka",
+    "URL": "https://hackmd.io/@coscup/BJf6xkksh"
+  },
+  "EGQK3C": {
+    "Name": "從 0 開始打造私有雲的 Kubernetes 監控吧！ - 梯口 tico88612",
+    "URL": "https://hackmd.io/@coscup/rkUaeyys3"
+  },
+  "UH3EXE": {
+    "Name": "Complete auto instrumentation go agent for distributed tracing and monitoring - 吴晟, 刘晗",
+    "URL": "https://hackmd.io/@coscup/S12axJksn"
+  },
+  "JNK8BS": {
+    "Name": "PGO (Profile-Guided Optimization): The Secret Weapon for Accelerating Golang Programs - 韓吉 Hanji",
+    "URL": "https://hackmd.io/@coscup/BkkCekysh"
+  },
+  "7VMFMQ": {
+    "Name": "From Event Storming to Clean Architecture in Go - River",
+    "URL": "https://hackmd.io/@coscup/H1X0x1yi3"
+  },
+  "VFQUPG": {
+    "Name": "Zoraxy - 用 Go 開發的新手向反向代理伺服器與集群管理小工具 - tobychui",
+    "URL": "https://hackmd.io/@coscup/HyLCgkko2"
+  },
+  "Y7GDZZ": {
+    "Name": "深入淺出 Go AST，動手做自己的 Linter - YCKao",
+    "URL": "https://hackmd.io/@coscup/Hkc0l1Jsn"
+  },
+  "DVVQ3T": {
+    "Name": "Protocol Buffers v3 in Go - Rain",
+    "URL": "https://hackmd.io/@coscup/BkaCek1in"
+  },
+  "EUP3W9": {
+    "Name": "WebAssembly for the backend - Adrian Cole",
+    "URL": "https://hackmd.io/@coscup/Sk-Jbk1jn"
+  },
+  "SVTYTE": {
+    "Name": "Go to Generics = Go to hell? What I experienced after Generics Introduced into Go - Hsueh-Tsung Kuo",
+    "URL": "https://hackmd.io/@coscup/ryBybJ1oh"
+  },
+  "WLP38V": {
+    "Name": "Laravel mock framework - Mockery source code browsing - John Liu",
+    "URL": "https://hackmd.io/@coscup/Hkn1-JJjn"
+  },
+  "FCXLBD": {
+    "Name": "C++ boost hana的分析以及在資料處理上的應用 - 林裕盛",
+    "URL": "https://hackmd.io/@coscup/Bk1gW11o3"
+  },
+  "7VMYAY": {
+    "Name": "Unveiling etcd: Architecture and Source Code Deep Dive - Jack Yu",
+    "URL": "https://hackmd.io/@coscup/SJ7eZ1Jjh"
+  },
+  "DSRWLL": {
+    "Name": "實作高效記憶體配置器 - 王漢祺",
+    "URL": "https://hackmd.io/@coscup/BJPlZJyo3"
+  },
+  "9VFVHQ": {
+    "Name": "剖析 KIND(Kubernetes IN Docker) 的實作原理 - HungWei Chiu",
+    "URL": "https://hackmd.io/@coscup/BkqgWy1s3"
+  },
+  "HL88HZ": {
+    "Name": "Reading and modifying the source code of the dbt adapter - qrtt1",
+    "URL": "https://hackmd.io/@coscup/BJTxWyyo3"
+  },
+  "DTQSDV": {
+    "Name": "初探 Kafka broker 原始碼 - Howard Chen",
+    "URL": "https://hackmd.io/@coscup/H1ZZ-1Jin"
+  },
+  "PZSRQ8": {
+    "Name": "B-Tree and SortedSet in Swift - 鄭宇哲",
+    "URL": "https://hackmd.io/@coscup/H1NWWk1o3"
+  },
+  "KRQUUR": {
+    "Name": "Angular 原始碼探索之 Signal 篇 - Leo 李歐",
+    "URL": "https://hackmd.io/@coscup/rkDZZ1Jih"
+  },
+  "MPL3HC": {
+    "Name": "超越監控：Grafana K6 帶你探索應用程式的深淵 - Marcus",
+    "URL": "https://hackmd.io/@coscup/Sks-WkJi3"
+  },
+  "DSJR9G": {
+    "Name": "CourseAPI 開放式課程資訊匯流學院 - Ted Lu / 呂顥天",
+    "URL": "https://hackmd.io/@coscup/S1ZGWJJo2"
+  },
+  "L7FY8F": {
+    "Name": "如何以開源軟體推動入門設計 - 楊欣玲",
+    "URL": "https://hackmd.io/@coscup/rkBfbJysn"
+  },
+  "RLMJHE": {
+    "Name": "從 Taker 成為 Giver！偏鄉學生也能成為開源貢獻者！ - 蔡秀吉",
+    "URL": "https://hackmd.io/@coscup/HkdGZk1o3"
+  },
+  "8AELJD": {
+    "Name": "利用數據和技術實現公平教育：均一影響和創新的旅程 - 蔡鎮宇, 蔡子揚",
+    "URL": "https://hackmd.io/@coscup/HJiM-1Jsh"
+  },
+  "PFDM7U": {
+    "Name": "看我們如何打造 UniCourse 大學課程資訊交流平臺 - Sky Hong",
+    "URL": "https://hackmd.io/@coscup/BJ1mbyJo3"
+  },
+  "CFGUDC": {
+    "Name": "開源與教育座談會：開放原始碼文化融入教育場域 - Ted Lu / 呂顥天, 洪士灝, 黃敬群, 紀博文",
+    "URL": "https://hackmd.io/@coscup/HJMm-yyoh"
+  },
+  "ASZXGR": {
+    "Name": "web3詐騙手法大解密 - John",
+    "URL": "https://hackmd.io/@coscup/rJF7bkJon"
+  },
+  "LVGFDA": {
+    "Name": "MEV 生態的進展 - Nic",
+    "URL": "https://hackmd.io/@coscup/r13QW11o3"
+  },
+  "LHRZQN": {
+    "Name": "區塊鏈的自動化任務排程 - Ping Chen",
+    "URL": "https://hackmd.io/@coscup/BylVWyyjn"
+  },
+  "8PESUM": {
+    "Name": "可升級智能合約 - Chi",
+    "URL": "https://hackmd.io/@coscup/HyXNbJks2"
+  },
+  "PBTRQ7": {
+    "Name": "PoS 網絡再質押（Restaking） 的可行性與對 PoS 網絡的安全 -- 以 Eigenlayer 為例 - Williams Lai",
+    "URL": "https://hackmd.io/@coscup/r1PVbkyjn"
+  },
+  "LUALXW": {
+    "Name": "Sui Network - When DAG meets Move language - Justa Liang",
+    "URL": "https://hackmd.io/@coscup/HycN-kyon"
+  },
+  "E79MB3": {
+    "Name": "Why Solana in 2023? - Jim",
+    "URL": "https://hackmd.io/@coscup/SJAE-1yjh"
+  },
+  "L78THQ": {
+    "Name": "Stealth Address 如何保護你的鏈上資產隱私 - Nic",
+    "URL": "https://hackmd.io/@coscup/rkZHWkksh"
+  },
+  "QSTFG8": {
+    "Name": "區塊鏈錢包的 Recovery 機制探索 - StevenCoke",
+    "URL": "https://hackmd.io/@coscup/B1rrZkki3"
+  },
+  "8FPWKS": {
+    "Name": "Exploiting the Profanity Flaw: Wintermute Hack Reproduction - Ashley Hsu",
+    "URL": "https://hackmd.io/@coscup/ry_Sby1jn"
+  },
+  "PM9CMJ": {
+    "Name": "Plonkathon! - nooma42",
+    "URL": "https://hackmd.io/@coscup/HksSWkyi3"
+  },
+  "9RW7HA": {
+    "Name": "TornadoCashV2: Privacy Pool Design - albertlin",
+    "URL": "https://hackmd.io/@coscup/rJJIbk1j2"
+  },
+  "N8UQQZ": {
+    "Name": "Cryptography of Secret Sharing Scheme - hung",
+    "URL": "https://hackmd.io/@coscup/SyMI-JJs3"
+  },
+  "XUESF8": {
+    "Name": "用 Keelung 構造零知識證明 Building Zero-knowledge proofs with Keelung - Viktor Lin",
+    "URL": "https://hackmd.io/@coscup/HyHL-Jyo2"
+  },
+  "UDVLDE": {
+    "Name": "COSCUP 2023: Welcome Day 1 - Tzu Yin Hong, COSCUP Team",
+    "URL": "https://hackmd.io/@coscup/Bk2IWk1ih"
+  },
+  "L8XSYB": {
+    "Name": "[Prime session] The Yin and Yang of Open Source: Unveiling the Dynamics of Collaboration, Diversity, and Cultural Transformation - Paloma Oliveira",
+    "URL": "https://hackmd.io/@coscup/BkyD-Jyi3"
+  },
+  "MBPYNH": {
+    "Name": "島嶼遲早連結成一片宇宙：ActivityPub協議入門及基礎實作攻略 - phx, SouthFox",
+    "URL": "https://hackmd.io/@coscup/rkQDWJkin"
+  },
+  "PUMCVN": {
+    "Name": "從數位視角出發的民間版數位政策白皮書 - 林雨蒼",
+    "URL": "https://hackmd.io/@coscup/H1IwZyJs3"
+  },
+  "URPPHL": {
+    "Name": "Kubernetes需要觀測的十大指標 - Steve Ng",
+    "URL": "https://hackmd.io/@coscup/SkcwZkyj3"
+  },
+  "8FRDHP": {
+    "Name": "集市的故事 - 丁文昊",
+    "URL": "https://hackmd.io/@coscup/rJ6PWkks2"
+  },
+  "X39N8N": {
+    "Name": "是技術也是文化：開源社區交流的看，聽，思 - 边思康",
+    "URL": "https://hackmd.io/@coscup/r1gd-kJsh"
+  },
+  "DBTWCP": {
+    "Name": "BanyanDB: An Optimized Observability DatabaseBanyanDB: An Optimized Observability Database - 高洪涛",
+    "URL": "https://hackmd.io/@coscup/S1VdbJysh"
+  },
+  "TAFBB3": {
+    "Name": "無主動，不開源 —— 暴論「開放協作」的迷思 - 石垚",
+    "URL": "https://hackmd.io/@coscup/Bydu-y1i2"
+  },
+  "8GEEAR": {
+    "Name": "[Prime session] Writing a technical book doesn’t have to be scary - Luca Palmieri",
+    "URL": "https://hackmd.io/@coscup/SJpu-kys2"
+  },
+  "PXWCTN": {
+    "Name": "Closing Day 1 - 劉雁 (Yanyiyi), COSCUP Team",
+    "URL": "https://hackmd.io/@coscup/SkxKWyJi3"
+  },
+  "FM3S7U": {
+    "Name": "COSCUP 2023: Welcome Day 2 - Denny Huang, COSCUP Team",
+    "URL": "https://hackmd.io/@coscup/Bk4YWJko2"
+  },
+  "KJRHRR": {
+    "Name": "Exploring RISC-V Perf Event Profiling - 林宇謙",
+    "URL": "https://hackmd.io/@coscup/HJwtbJ1o2"
+  },
+  "CHRQGG": {
+    "Name": "Building an IoT Monitoring App with InfluxDB, Python, and Flask with Edge to cloud replication - zoe steinkamp",
+    "URL": "https://hackmd.io/@coscup/BkiYbJki2"
+  },
+  "PRQSGE": {
+    "Name": "Accio - Cooper Tseng",
+    "URL": "https://hackmd.io/@coscup/SJCtWyyj3"
+  },
+  "MNW8TG": {
+    "Name": "Introducing Unikraft: An SDK for fast, secure, and highly-specialized unikernels - Michalis Pappas",
+    "URL": "https://hackmd.io/@coscup/HJf5Z1ys2"
+  },
+  "EQGB7L": {
+    "Name": "Does your Django application have proper security headers? - Saptak S",
+    "URL": "https://hackmd.io/@coscup/BJS9-y1oh"
+  },
+  "DAL9KC": {
+    "Name": "Investigating global open source trends and dynamics: The latest findings from Linux Foundation Research - Cailean Osborne",
+    "URL": "https://hackmd.io/@coscup/B1Yc-JJs3"
+  },
+  "8T37NM": {
+    "Name": "VLC 4.0 and Beyond - François Cartegnie",
+    "URL": "https://hackmd.io/@coscup/Hy39bJkih"
+  },
+  "RNKY8Q": {
+    "Name": "COSCUP Infrastructure Review - COSCUP Team",
+    "URL": "https://hackmd.io/@coscup/BJeiZkJo2"
+  },
+  "CEVGDA": {
+    "Name": "Closing Day 2 - Tzu Yin Hong, COSCUP Team",
+    "URL": "https://hackmd.io/@coscup/Sy7iZyJoh"
+  },
+  "KFFWVA": {
+    "Name": "⚡Lightning talk / 閃電秀⚡ - COSCUP Team",
+    "URL": "https://hackmd.io/@coscup/r1Di-y1i2"
+  },
+  "8GP8NC": {
+    "Name": "無城之城--- 桃園老城區的藝術行動 - 新樂園藝術空間, 林岳德",
+    "URL": "https://hackmd.io/@coscup/BJ0sWyks2"
+  },
+  "LVKG8D": {
+    "Name": "採集中的數位觀點、轉意與呈現 - 新樂園藝術空間, 鄭仰峰",
+    "URL": "https://hackmd.io/@coscup/SyW3bJys3"
+  },
+  "BB9VZG": {
+    "Name": "在土地上的我們 --- 江湖開放工作室與流域行動藝術祭 - 新樂園藝術空間, Ellen Li",
+    "URL": "https://hackmd.io/@coscup/Bk4n-1Jo2"
+  },
+  "RG37SG": {
+    "Name": "見證！？---我們在空城之中 - 新樂園藝術空間, 林彥翔",
+    "URL": "https://hackmd.io/@coscup/H1uhZ1yi3"
+  },
+  "TKMDCL": {
+    "Name": "[Prime session] Why and How to build open source maps with the Protomaps project - Brandon Liu",
+    "URL": "https://hackmd.io/@coscup/S1yTZkJi2"
+  },
+  "NG9MZM": {
+    "Name": "Wikidatacon 2023 年在臺灣！ - 王文岳",
+    "URL": "https://hackmd.io/@coscup/H1zab1ko3"
+  },
+  "R977RN": {
+    "Name": "開源GIS開講：回顧QGIS應用現況與瓶頸 - Dennis Raylin Chen, 林宥伯, 林政道, 王祖修",
+    "URL": "https://hackmd.io/@coscup/rkHpby1sn"
+  },
+  "MLFUV3": {
+    "Name": "OpenStreetMap上那些看得到的電：電廠、變電所和電塔 - tntchn",
+    "URL": "https://hackmd.io/@coscup/Hkta-yyoh"
+  },
+  "NHRACC": {
+    "Name": "政府開放資料在 OpenStreetMap 內的匯入狀況與挑戰 - littlebtc",
+    "URL": "https://hackmd.io/@coscup/SJ6TZ1Ji3"
+  },
+  "KYY7UQ": {
+    "Name": "可以召喚 ChatGPT 使用 WikiData 資料嗎？ - planetoid",
+    "URL": "https://hackmd.io/@coscup/HJbCW11on"
+  },
+  "E9EXSJ": {
+    "Name": "跨語言協作：打破全球知識分享的語言障礙 - Irvin, ChatGPT",
+    "URL": "https://hackmd.io/@coscup/rkHRWyJjn"
+  },
+  "SYJME3": {
+    "Name": "台灣 ê Wikidata 經驗 - 對迒語言連結文章到連結資料庫，Wikidata 按怎連結全世界所有 ê 智識 - Dennis Raylin Chen",
+    "URL": "https://hackmd.io/@coscup/r1OCW1Jjn"
+  },
+  "8KLBUN": {
+    "Name": "Wikidata基礎編輯教學 - 劉健豐",
+    "URL": "https://hackmd.io/@coscup/Byh0byysh"
+  },
+  "EVYR3G": {
+    "Name": "中文大型自然語言模型PaLM2與GPT的比較 - Jerry",
+    "URL": "https://hackmd.io/@coscup/BJG1Gykon"
+  },
+  "AB7PV7": {
+    "Name": "Flutter 不再黑箱之Dart語言源碼檢測分享 - noflag, Fngi",
+    "URL": "https://hackmd.io/@coscup/SyUJfkJj2"
+  },
+  "KW3ELG": {
+    "Name": "在 Google Cloud Platform 上為自己的 Podcast 節目打造一個家 - 范聖佑",
+    "URL": "https://hackmd.io/@coscup/SytJzy1i3"
+  },
+  "PT8VT7": {
+    "Name": "【從零開始養】讓 Public Cloud 增加你的能見度！ - Nijia Lin",
+    "URL": "https://hackmd.io/@coscup/Hy61Gkys2"
+  },
+  "HFU9VA": {
+    "Name": "Building portable and reliable applications on Google Cloud - Rich Lee",
+    "URL": "https://hackmd.io/@coscup/ryglMy1o2"
+  },
+  "SQCCYZ": {
+    "Name": "非同步訊息處理的選擇， Apache Kafka 或 Google Cloud pub/sub ? - Pei Hsuan",
+    "URL": "https://hackmd.io/@coscup/SyEeGk1i2"
+  },
+  "QLZUQ8": {
+    "Name": "Firebase建構GDG Taiwan社群後臺經驗分享 - Hank Yu",
+    "URL": "https://hackmd.io/@coscup/HkDxfk1j3"
+  },
+  "EHVAM3": {
+    "Name": "改造 Android開源 Podcast播放器！ 和 AI協作快速產出Room資料庫與文件！ - Dion Chang",
+    "URL": "https://hackmd.io/@coscup/Syclzyki3"
+  },
+  "GHLTBH": {
+    "Name": "Implementing a LED LightBar solution on Android system - Wig Cheng, LC Wang",
+    "URL": "https://hackmd.io/@coscup/SyCeGyks3"
+  },
+  "8PDDHW": {
+    "Name": "Cloud Native - GKE 容器平台 101 - Weithenn",
+    "URL": "https://hackmd.io/@coscup/B1WZGyJo3"
+  },
+  "X7SLCR": {
+    "Name": "GCP 費用優化分享 - Max Huang",
+    "URL": "https://hackmd.io/@coscup/rJrZzyJon"
+  },
+  "Q3UUYJ": {
+    "Name": "當 Firebase 遇到 Arduino - Edward Chuang",
+    "URL": "https://hackmd.io/@coscup/HJ_WGkki3"
+  },
+  "PCCGNZ": {
+    "Name": "Say 嗨 to Bard - Wolke Lin 林建宏",
+    "URL": "https://hackmd.io/@coscup/SJoZMJksh"
+  },
+  "AGUAMD": {
+    "Name": "On the Way to The Open Source - Si manglam",
+    "URL": "https://hackmd.io/@coscup/ryffMkJo2"
+  },
+  "BPTJJ8": {
+    "Name": "在學校開機場把自己的學費賺回來！ - Mark Hung, №Ball, kevin_xheng",
+    "URL": "https://hackmd.io/@coscup/SkIMfJkj2"
+  },
+  "8ZPQZT": {
+    "Name": "我在 FreeBSD Taiwan 實習的心得跟過程 - 王彥皓",
+    "URL": "https://hackmd.io/@coscup/S1Kzzkys3"
+  },
+  "LFWCZZ": {
+    "Name": "學生自治之 DAO ——開放學生自治組織白皮書 - Sky Hong, m5063232325 / 家好, FANFAN",
+    "URL": "https://hackmd.io/@coscup/Skazfyys2"
+  },
+  "CZWWVS": {
+    "Name": "從只會 Docker 到上手 Kubernetes - uccu",
+    "URL": "https://hackmd.io/@coscup/Skg7MJkj2"
+  },
+  "YEVZXC": {
+    "Name": "Intro to ROS:自駕車專題分享 - Bonki",
+    "URL": "https://hackmd.io/@coscup/ByVmGkJjh"
+  },
+  "NK3AGP": {
+    "Name": "關於我從做專題到發論文這檔事 - Andy Chiang",
+    "URL": "https://hackmd.io/@coscup/SyDXGk1o2"
+  },
+  "YNM8TC": {
+    "Name": "假如我年少有為不自卑——作為學生，你也可以進行開源貢獻！ - 火山 / Kazan",
+    "URL": "https://hackmd.io/@coscup/r1imMyyon"
+  },
+  "XXEP79": {
+    "Name": "Django REST View 到底有哪些寫法哩 我好像都只用 APIView 呢? - FKT",
+    "URL": "https://hackmd.io/@coscup/HJA7Myki2"
+  },
+  "YWWMBR": {
+    "Name": "從自己玩 Side Project 到 貢獻開源 - VP",
+    "URL": "https://hackmd.io/@coscup/H1z4Gkysh"
+  },
+  "YGERZZ": {
+    "Name": "Nix Flakes: Toward Portable, Reproducible and Dependency-Isolated General-Purpose Development Environments - Yueh-Shun Li (ShamrockLee)",
+    "URL": "https://hackmd.io/@coscup/r1SEfkki3"
+  },
+  "NVP7SV": {
+    "Name": "你說啥? 沒有 test 要怎麼 CI 啦? 工人智慧 test，您 CI 的最佳選擇。 - Mark Hung, №Ball",
+    "URL": "https://hackmd.io/@coscup/SkF4f11sn"
+  },
+  "YAQ3GX": {
+    "Name": "Exploring Autonomous Agents: Planning, Memory, Tool Use - 曾亭翰 Michael Tseng",
+    "URL": "https://hackmd.io/@coscup/rkeHzkJj3"
+  },
+  "998L9W": {
+    "Name": "What open source generative AI models and related code we can use on modern smart phones - Koan-Sin Tan",
+    "URL": "https://hackmd.io/@coscup/r1NSMyyih"
+  },
+  "LXQGDU": {
+    "Name": "利用本地端顯卡建立Llama.cpp模型 - Will",
+    "URL": "https://hackmd.io/@coscup/H1vBfyyi3"
+  },
+  "TALENU": {
+    "Name": "農來訊 x ChatGPT - 藍海物聯",
+    "URL": "https://hackmd.io/@coscup/B1jSMkysn"
+  },
+  "PBEU7M": {
+    "Name": "利用人工智慧改善台灣交通， 讓鬼島變成天堂 - 陳建廷",
+    "URL": "https://hackmd.io/@coscup/SJRHfyyo3"
+  },
+  "AVZGSH": {
+    "Name": "英雄聯盟AI評論員 - noflag, 哈斯, 邱子瑋, 陳建廷",
+    "URL": "https://hackmd.io/@coscup/r1fUMkJjh"
+  },
+  "QMR7Q7": {
+    "Name": "Japan Track introduction - Masafumi Ohta",
+    "URL": "https://hackmd.io/@coscup/S1_LGy1ih"
+  },
+  "KTTMUY": {
+    "Name": "Running Windows and WSL on LXD/VM - Mitsuya Shibata",
+    "URL": "https://hackmd.io/@coscup/H12Ifkysh"
+  },
+  "W8NLAC": {
+    "Name": "Get an issue tracker for your organization with Redmine, an open source project management software - MAEDA Go",
+    "URL": "https://hackmd.io/@coscup/ryywG1kj2"
+  },
+  "9AXGL7": {
+    "Name": "Linux Desktop Printing Systems in the 2020s - Naruhiko Ogasawara",
+    "URL": "https://hackmd.io/@coscup/HkXDf11j3"
+  },
+  "GNXGDH": {
+    "Name": "Home sshd DDOS measures - Shunsuke Yoshida",
+    "URL": "https://hackmd.io/@coscup/S1vPfk1sn"
+  },
+  "GCT8EF": {
+    "Name": "Status of CJK language support in LibreOffice 2023 - Shinji Enoki",
+    "URL": "https://hackmd.io/@coscup/r1cwGkyon"
+  },
+  "HXRHYG": {
+    "Name": "Let's create a family tree of SPY×FAMILY using a graph database! - Koji Annoura",
+    "URL": "https://hackmd.io/@coscup/B1awzkkon"
+  },
+  "V3YWCF": {
+    "Name": "How PostgreSQL extensions work and how to get started developing extensions. - Tatsuro Yamada",
+    "URL": "https://hackmd.io/@coscup/rkZufyks2"
+  },
+  "W7TAX3": {
+    "Name": "Source Code is a Good Tutor to Learn Programming: Accessibility Assessment in Several Cases of Programming Lessons - Jun Iio",
+    "URL": "https://hackmd.io/@coscup/H1SOMkJo3"
+  },
+  "MXCKWK": {
+    "Name": "Raspberry Pi for the business - Masafumi Ohta",
+    "URL": "https://hackmd.io/@coscup/BktufkJo2"
+  },
+  "GGX7RB": {
+    "Name": "【COODFA x ESG】讓開放資料加速數位減碳雙軸轉型",
+    "URL": "https://hackmd.io/@coscup/BJktfyyon"
+  },
+  "JBVBZN": {
+    "Name": "【減碳】讓開放資料助綠色供應鏈一臂之力吧!",
+    "URL": "https://hackmd.io/@coscup/HyQKfkyi3"
+  },
+  "EVF7UB": {
+    "Name": "【減碳】農來看風水-如何應用數據協助農業調適 - 陳似任, 農業開放資料社群 Community of Open Data for Agriculture",
+    "URL": "https://hackmd.io/@coscup/ry8YfJyin"
+  },
+  "SJ9SYU": {
+    "Name": "【數位】農來訊 x ChatGPT - 農業開放資料社群 Community of Open Data for Agriculture",
+    "URL": "https://hackmd.io/@coscup/H1qFM1kih"
+  },
+  "9TKAJT": {
+    "Name": "【數位】在線等！農業病害影像資料庫聯盟，聯盟成員召集中 - 農業開放資料社群 Community of Open Data for Agriculture",
+    "URL": "https://hackmd.io/@coscup/B1pYfkJi3"
+  },
+  "SYBSLM": {
+    "Name": "【數位】超農域?嘗試超農域?碰觸超農域!? - Aokman",
+    "URL": "https://hackmd.io/@coscup/H1-cfJki2"
+  },
+  "NCHMCB": {
+    "Name": "【數位】農業品牌聊天機器人 + ChatGPT？好吃嗎？ - MantaGO",
+    "URL": "https://hackmd.io/@coscup/r1Nqzk1j2"
+  },
+  "B9VSYB": {
+    "Name": "【數位】身為一個農民，使用聊天機器人做生意也是很正常的",
+    "URL": "https://hackmd.io/@coscup/SkO5z1ki3"
+  },
+  "KXWYQL": {
+    "Name": "Rust Web之旅：新時代的後端開發 - 朱章祺",
+    "URL": "https://hackmd.io/@coscup/HykoG1kon"
+  },
+  "QABLVS": {
+    "Name": "Writing MariaDB Plugins in Rust - Daniel Black",
+    "URL": "https://hackmd.io/@coscup/BkzsMyJih"
+  },
+  "NZAEYY": {
+    "Name": "Zenoh: A Zero Overhead Network Protocol - Yuyuan Yuan",
+    "URL": "https://hackmd.io/@coscup/SJLsf1kjn"
+  },
+  "ACJYYA": {
+    "Name": "如何轉職成死靈法師復活 Servo - 吳昱緯",
+    "URL": "https://hackmd.io/@coscup/HyKsM1kj2"
+  },
+  "AHXQMN": {
+    "Name": "TonSplitter 使用聊天機器人在區塊鏈上記帳 - RayHuang, Eason Chen",
+    "URL": "https://hackmd.io/@coscup/r1e3z1Jj2"
+  },
+  "WXTCCT": {
+    "Name": "LINE Beacon 介紹及大量建置經驗分享 - 戴均民",
+    "URL": "https://hackmd.io/@coscup/SJX3Gy1i2"
+  },
+  "RL8PFP": {
+    "Name": "用 Hugging Face 來做 Chatbot - Ko Ko",
+    "URL": "https://hackmd.io/@coscup/B1_nGy1jn"
+  },
+  "B9HEQT": {
+    "Name": "ChatGPT讓任務型機器人變身「真」聊天機器人 - 陳佳新（奇步老爹）",
+    "URL": "https://hackmd.io/@coscup/Skp2G11j2"
+  },
+  "ND3AZB": {
+    "Name": "ChatGPT API playground 的 100 種可能 - Wolke Lin 林建宏",
+    "URL": "https://hackmd.io/@coscup/ry-aGyys2"
+  },
+  "JTDYTG": {
+    "Name": "深入 LINE Bot 與 ChatGPT Plugin：從實作到理論的探討 - 卡米哥",
+    "URL": "https://hackmd.io/@coscup/S14Tf11i2"
+  },
+  "APY3ST": {
+    "Name": "mkroot walkthrough - Rob Landley",
+    "URL": "https://hackmd.io/@coscup/rJo6My1jn"
+  },
+  "HRZDUV": {
+    "Name": "怎麼在 2023 加入 Linux 核心社群 - Shung-Hsi Yu",
+    "URL": "https://hackmd.io/@coscup/Sk0Tz11s2"
+  },
+  "Y9ZEKH": {
+    "Name": "快還要更快 - 利用 Kernel I/O Offload 機制落實高度並行且低延遲的網路服務 - Steven Cheng",
+    "URL": "https://hackmd.io/@coscup/Bk4CfJkoh"
+  },
+  "FUCZYD": {
+    "Name": "你的 RNG 真的 RNG 嗎？ 不只是 rand() 的亂數產生器 - 黃柏愷",
+    "URL": "https://hackmd.io/@coscup/SkvAfJ1i2"
+  },
+  "JSGKMQ": {
+    "Name": "打造以 KVM 為基礎的精簡虛擬機器管理程式 - 王彥傑",
+    "URL": "https://hackmd.io/@coscup/BysCGJJjn"
+  },
+  "EVX7JQ": {
+    "Name": "建構精簡且高效的 RISC-V 指令集和系統模擬器 - 陳彥甫, 莊集",
+    "URL": "https://hackmd.io/@coscup/rJ00fkyo2"
+  },
+  "DKNPD8": {
+    "Name": "撿到槍的系統軟體工程師 - GDB&VScode - wayling",
+    "URL": "https://hackmd.io/@coscup/S1-kmJko3"
+  },
+  "GL9RD8": {
+    "Name": "TLS Demystified: Understanding the Mechanics and Compiler Support - 陳聖諺",
+    "URL": "https://hackmd.io/@coscup/ryHkXykj2"
+  },
+  "WZHJZ9": {
+    "Name": "Delve into firmware security with fwupd HSI - Kate Hsuan",
+    "URL": "https://hackmd.io/@coscup/rJ_ym1Joh"
+  },
+  "XA9XJC": {
+    "Name": "Tenok: 打造用於機器人控制的微型即時作業系統 - 鄭聖文",
+    "URL": "https://hackmd.io/@coscup/HkhkQ1Jo2"
+  },
+  "UZKQDV": {
+    "Name": "什麼是開源？之兄弟戲牆 - Matthew Lien 練喆明 (BlueT), Richard 強哥",
+    "URL": "https://hackmd.io/@coscup/HyfxXyksh"
+  },
+  "LH8TAF": {
+    "Name": "Non-Code Contributions to Open Source - Navendu Pottekkat",
+    "URL": "https://hackmd.io/@coscup/rJLgQkksn"
+  },
+  "AUMHPW": {
+    "Name": "在大學嘗試開源社團第一年的辛酸史 - 天祇稻 Timothy",
+    "URL": "https://hackmd.io/@coscup/SkteQ1Jj3"
+  },
+  "JMFFMN": {
+    "Name": "鐵道文化迷的開放資料數星星 - 劉雁 (Yanyiyi)",
+    "URL": "https://hackmd.io/@coscup/B1pl7yyi3"
+  },
+  "NW7RXR": {
+    "Name": "從 BBS 新手踏入開源貢獻世界的心路歷程 - r2",
+    "URL": "https://hackmd.io/@coscup/Skx-71ko2"
+  },
+  "NKPZHR": {
+    "Name": "開放原始碼軟體中文化 — 翻譯流程技術支援 - Toomore Chiang (ocf.tw), Peter Chen petercpg, 李欣穎 (Singing), 郭景晏 (Rosa Kuo), 曾政嘉 (Cheng-Chia Tseng)",
+    "URL": "https://hackmd.io/@coscup/SyVbXk1s3"
+  },
+  "KBT8C7": {
+    "Name": "遠離大手會社，自架基本服務 - miaoski",
+    "URL": "https://hackmd.io/@coscup/SJw-my1o2"
+  },
+  "PR3SVC": {
+    "Name": "該怎麼應用開源軟體？ 實作自架 Private Docker Registry - Ning",
+    "URL": "https://hackmd.io/@coscup/HJjbmkJo3"
+  },
+  "QSVBSK": {
+    "Name": "Welcome to the Open Source Firmware Track - Kai Michaelis",
+    "URL": "https://hackmd.io/@coscup/H1fzQJJon"
+  },
+  "XC7UAD": {
+    "Name": "coreboot + LinuxBoot for Intel Xeon-SP Platforms Why and How - Johnny Lin",
+    "URL": "https://hackmd.io/@coscup/BkrzXyJi2"
+  },
+  "MG78WL": {
+    "Name": "You, the Problem TPM2 Solves - ckhung",
+    "URL": "https://hackmd.io/@coscup/SktM7J1sh"
+  },
+  "MXDBRM": {
+    "Name": "The overview and future of Open Source FW for server industry - Hancock Chang",
+    "URL": "https://hackmd.io/@coscup/H1hGX11on"
+  },
+  "B8AXHU": {
+    "Name": "Exploited OSS vulnerability 2022-2023 - Kazuki Omo",
+    "URL": "https://hackmd.io/@coscup/rkgXXkksn"
+  },
+  "XPXNMP": {
+    "Name": "Libreboot : A Gamechanger for traditional BIOS ? - Preet Sharma",
+    "URL": "https://hackmd.io/@coscup/BkQ7XJysh"
+  },
+  "NYFP8X": {
+    "Name": "Hackathon Day 1 - Lean Sheng Tan",
+    "URL": "https://hackmd.io/@coscup/rJvX7Jkj3"
+  },
+  "T9QFQH": {
+    "Name": "Advancing the State of the Art for Server BMC - Christian Walter",
+    "URL": "https://hackmd.io/@coscup/S1cXmyJsn"
+  },
+  "NTLVB3": {
+    "Name": "coreboot+LinuxBoot as an open source  BIOS alternative on Inventec Sapphire Rapids servers - 李謙吾",
+    "URL": "https://hackmd.io/@coscup/HkRQ7Jki3"
+  },
+  "ZKFJVC": {
+    "Name": "Share the Experience of Using Embedded Development Board - Jian-Hong Pan (StarNight)",
+    "URL": "https://hackmd.io/@coscup/BJZNQkysn"
+  },
+  "SAYQPG": {
+    "Name": "Journey on enabling coreboot on Chromebooks - Eric Lai",
+    "URL": "https://hackmd.io/@coscup/HkNE7yko3"
+  },
+  "C7JTLG": {
+    "Name": "Introduction to Booting RISC-V Linux - 梁育齊",
+    "URL": "https://hackmd.io/@coscup/rydEQJ1o2"
+  },
+  "PKW3QE": {
+    "Name": "Common Firmware Handoff Design: Universal Payload Specification - Lean Sheng Tan, Gua Guo",
+    "URL": "https://hackmd.io/@coscup/HysNQJkih"
+  },
+  "WHFWTD": {
+    "Name": "Hackathon Day 2 - Lean Sheng Tan",
+    "URL": "https://hackmd.io/@coscup/HJ1SQ1Ji3"
+  },
+  "XJPTU3": {
+    "Name": "MySQL State of Dolphin (MySQL海豚報告) - 梶山隆輔",
+    "URL": "https://hackmd.io/@coscup/ryISXJyih"
+  },
+  "X3UYBZ": {
+    "Name": "A Deep Dive into MySQL Operator for Kubernetes - Hananto Wicaksono",
+    "URL": "https://hackmd.io/@coscup/rktSXkJi2"
+  },
+  "F3H3HP": {
+    "Name": "Overview of the MySQL NDB Operator for Kubernetes - Hananto Wicaksono",
+    "URL": "https://hackmd.io/@coscup/Hy3rQkkih"
+  },
+  "C3CYHE": {
+    "Name": "Using VS Code with MySQL - Ivan Ma",
+    "URL": "https://hackmd.io/@coscup/BygU7yJs2"
+  },
+  "EAL7CK": {
+    "Name": "Introduction to MySQL REST Service - Ivan Tu",
+    "URL": "https://hackmd.io/@coscup/r1XLQkkj3"
+  },
+  "UYZ8BS": {
+    "Name": "Prediction made easy using MySQL HeatWave AutoML - Ryan Kuan",
+    "URL": "https://hackmd.io/@coscup/SyvIX11j2"
+  },
+  "PBN3L7": {
+    "Name": "The how and why of MariaDB - Daniel Black",
+    "URL": "https://hackmd.io/@coscup/B198Q1kjn"
+  },
+  "CC3LAH": {
+    "Name": "自由開源授權條款到底是在幹嘛？ - Florence T.M. Ko 葛冬梅",
+    "URL": "https://hackmd.io/@coscup/rkZwXJ1sn"
+  },
+  "DEA9PW": {
+    "Name": "有系統最安心？科技手段的正當程序 - Poren Chiang (@RSChiang)",
+    "URL": "https://hackmd.io/@coscup/HJHPmyyin"
+  },
+  "GUQJMY": {
+    "Name": "OpenAI Licenses及其爭議案例討論-Copilot還是Co-copier？ - Lucien C.H. Lin 林誠夏",
+    "URL": "https://hackmd.io/@coscup/SJOPmy1sn"
+  },
+  "GKHNRQ": {
+    "Name": "讓你看不見台灣的一粒沙：「全景自由」在台灣 - Reke Wang",
+    "URL": "https://hackmd.io/@coscup/ByhD7yyjh"
+  },
+  "TU7FUJ": {
+    "Name": "你被CC了嗎？--痛解國家文化記憶庫於公眾授權機制的應用錯誤和謬論 - Lucien C.H. Lin 林誠夏",
+    "URL": "https://hackmd.io/@coscup/BJJdQy1o3"
+  },
+  "DYGH83": {
+    "Name": "再向前一點點我就會點頭：哪些記憶庫很棒的案例可以怎樣更開放一點點 - 劉雁 (Yanyiyi)",
+    "URL": "https://hackmd.io/@coscup/B1QOXkJjh"
+  },
+  "CHMKDS": {
+    "Name": "Dirty！Rails 中的 ActiveRecord 和 ActiveModel - Cindy",
+    "URL": "https://hackmd.io/@coscup/SyFOXJ1sn"
+  },
+  "LN8PAN": {
+    "Name": "搞懂 React 和 Rails 作為前後端分離夥伴的麻煩事 - 何澤清",
+    "URL": "https://hackmd.io/@coscup/BJTd7y1sn"
+  },
+  "TRAZU7": {
+    "Name": "Incorporating Zero Trust with Legacy Environments (OmniAuth as your Supercharger) - Melvrick Goh",
+    "URL": "https://hackmd.io/@coscup/SJ-tQ1Jjn"
+  },
+  "JMHL87": {
+    "Name": "Rails ORM 踩坑經驗談 - Meng-Ying Tsai",
+    "URL": "https://hackmd.io/@coscup/HyVFQJyin"
+  },
+  "EFMZR3": {
+    "Name": "面對 legacy code - Ken",
+    "URL": "https://hackmd.io/@coscup/Sy_Y7k1i2"
+  },
+  "GYHMXU": {
+    "Name": "Turbo 之力：深度探討跟 JS 說再見的單頁式網站技術 - 卡米哥",
+    "URL": "https://hackmd.io/@coscup/ryotmJyo2"
+  },
+  "X7TDPK": {
+    "Name": "用 Docker Swarm 與 GitLab CI 讓你的 Rails 開發與部署更加敏捷 - Mu-Fan",
+    "URL": "https://hackmd.io/@coscup/SJkq71yi2"
+  },
+  "Z3GYBW": {
+    "Name": "FHIR Patient Resource Synthetic and Test Dataset Generator by Dolly 2.0 - Teemo",
+    "URL": "https://hackmd.io/@coscup/SySqm1ys2"
+  },
+  "KNCV8H": {
+    "Name": "加速FHIR的測試與開發：導入醫療數據領域的自動化測試框架",
+    "URL": "https://hackmd.io/@coscup/ByKqmyJs3"
+  },
+  "QBG8U7": {
+    "Name": "開源專案：FHIR Universal Converter 助力醫療資料無痛轉換 - Lorex",
+    "URL": "https://hackmd.io/@coscup/SJ3cm1Jih"
+  },
+  "DWWBQE": {
+    "Name": "FHIR-Pandas：React、AngularJS 的TW Core IG臺灣核心實作指引Client開源工具 - 楊嘉翔, 楊曜承",
+    "URL": "https://hackmd.io/@coscup/SJljmJJi3"
+  },
+  "TWEA3T": {
+    "Name": "ngs2fhir:開源基因定序轉換FHIR工具",
+    "URL": "https://hackmd.io/@coscup/BJEimJyon"
+  },
+  "SWZGFV": {
+    "Name": "醫資標準的教育推廣",
+    "URL": "https://hackmd.io/@coscup/BJvs7JJsn"
+  },
+  "TTB8TR": {
+    "Name": "FHIR 實作與應用線上論壇 – FHIR 整合與推動 – 電子病歷交換實務案例分享",
+    "URL": "https://hackmd.io/@coscup/r1jiQkyon"
+  },
+  "CMJUAB": {
+    "Name": "BlueLight:臺灣開源Web醫學影像瀏覽器",
+    "URL": "https://hackmd.io/@coscup/Hk0j7kkjh"
+  },
+  "DDFTHC": {
+    "Name": "Raccoon: 使用DICOM標準整合醫療影像與人工智慧模型",
+    "URL": "https://hackmd.io/@coscup/H1fhQJyih"
+  },
+  "SUGBT8": {
+    "Name": "如何使用開源工具進行醫學影像去識別化實務",
+    "URL": "https://hackmd.io/@coscup/HJIhXykjn"
+  },
+  "TXZWJG": {
+    "Name": "SVG 應用面面觀 - ckhung",
+    "URL": "https://hackmd.io/@coscup/SkY371Jih"
+  },
+  "GYSF79": {
+    "Name": "O-RAN Alliance and O-RAN Software Community - Ian Joseph Chandra",
+    "URL": "https://hackmd.io/@coscup/r1-Tmykoh"
+  },
+  "HXNQDM": {
+    "Name": "AI/ML in 5G O-RAN - 莊雨樵",
+    "URL": "https://hackmd.io/@coscup/H1VTXJyjh"
+  },
+  "HEMKVT": {
+    "Name": "The Development and Prospect of AI Cloud-Native O-RAN - 蔡秀吉",
+    "URL": "https://hackmd.io/@coscup/r1ua71Jo2"
+  },
+  "NJPZFR": {
+    "Name": "Design a Linux DPDK-based router system of your own to achieve 100G forwarding efficiency! - Tsung-Yi Yu",
+    "URL": "https://hackmd.io/@coscup/Sk3aQJksn"
+  },
+  "CNLZWZ": {
+    "Name": "Production-Ready HA K8S Clusters in 5G Environment with Kube-vip and Metallb - Guanru Huang",
+    "URL": "https://hackmd.io/@coscup/B1kCQk1o2"
+  },
+  "FYPKL9": {
+    "Name": "The Design We Open Workshop - 網路中斷黑客松",
+    "URL": "https://hackmd.io/@coscup/BJUCXy1s2"
+  },
+  "DKYAKQ": {
+    "Name": "[CNTUG Workshop] Podman 實戰建置監控 + 警報系統 - 梯口 tico88612",
+    "URL": "https://hackmd.io/@coscup/Hk9RmJkin"
+  },
+  "WMYFZE": {
+    "Name": "Julia for Data-Driven SWC Estimation in Agriculture - 吳宗羲",
+    "URL": "https://hackmd.io/@coscup/BJZJN1Ji3"
+  },
+  "HP9F3Z": {
+    "Name": "On Using Julia in High-Energy Physics Data Analysis - Yuan-Ru Lin",
+    "URL": "https://hackmd.io/@coscup/BkHJ4yJin"
+  },
+  "XESY8Q": {
+    "Name": "如何在 Julia 建構微服務 - Yueh-Hua Tu 杜岳華",
+    "URL": "https://hackmd.io/@coscup/B1_JEyyj2"
+  },
+  "ED3VPX": {
+    "Name": "SmallDatasetMaker.jl: A little helper for making and maintaining small datasets as julia packages - 吳宗羲",
+    "URL": "https://hackmd.io/@coscup/H1hyVkksh"
+  },
+  "YZDLJ8": {
+    "Name": "我的 Julia 軟體架構演進之旅 - Yueh-Hua Tu 杜岳華",
+    "URL": "https://hackmd.io/@coscup/HJex41yj3"
+  },
+  "FHMWYE": {
+    "Name": "基於Airflow的ETL框架：簡化結構化資料處理流程 - 林奕勳",
+    "URL": "https://hackmd.io/@coscup/BJDeVkki3"
+  },
+  "YAGKY8": {
+    "Name": "你終究是要學 SQL 的，那為什麼不一開始就用 DuckDB - douenergy",
+    "URL": "https://hackmd.io/@coscup/Hy9xVyJsh"
+  },
+  "UBDV83": {
+    "Name": "OpenTaiwan - aha",
+    "URL": "https://hackmd.io/@coscup/B10e4yyo2"
+  },
+  "K7TDAB": {
+    "Name": "辦個 Python 研討會真的有這麼難嗎？ 真的 - Winnie, Pochun",
+    "URL": "https://hackmd.io/@coscup/SJZWVyJj3"
+  },
+  "XJU9FS": {
+    "Name": "PyConTW的數位轉型與社群行銷策略 - tumi",
+    "URL": "https://hackmd.io/@coscup/rJHbEJJsn"
+  },
+  "SCCF9K": {
+    "Name": "以社群為本體的 Podcast 經營之道 - Perfectly JoJo",
+    "URL": "https://hackmd.io/@coscup/S1FWVykjh"
+  },
+  "TUGLJP": {
+    "Name": "Atomic Commits: An Easy & Proven Way to Manage & Automate Release Process - Wei Lee",
+    "URL": "https://hackmd.io/@coscup/ry3bVkkon"
+  }
+}
