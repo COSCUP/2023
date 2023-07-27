@@ -95,11 +95,19 @@
       .tag-list {
         color: #fff;
         margin-top: 0.5rem;
+        display: flex;
+        flex-wrap: wrap;
+
+        justify-content: flex-start;
+        align-items: center;
+        row-gap: 0.5rem;
+        column-gap: 0.5rem;
 
         span {
           display: inline-block;
+          white-space: nowrap;
           font-size: 0.8rem;
-          margin-right: 0.5rem;
+          // margin-right: 0.5rem;
           padding: 4px 8px;
           background-color: var(--color-primary);
           border-radius: 16px;
