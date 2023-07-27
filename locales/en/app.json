@@ -1,6 +1,7 @@
 {
   "navbar": {
     "home": "COSCUP 2023",
+    "guide": "Guide",
     "session": "Session",
     "room": "Venue Status",
     "community": "Community",

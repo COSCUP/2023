@@ -1,0 +1,70 @@
+// Copyright (c) 2020 DevilTea
+//
+// This software is released under the MIT License.
+// https://opensource.org/licenses/MIT
+
+@import "../shared";
+
+@mixin venue-theme-colors {
+  @include theme-colors-of("all", "#guide") {
+    --color-link-text-primary: #{$coscup-green};
+    --color-link-primary: #{$coscup-green};
+  }
+
+  @include theme-colors-of("light", "#guide") {
+    --color-link-text-primary: #{$coscup-green};
+    --color-link-primary: #{$coscup-green};
+  }
+
+  @include theme-colors-of("dark", "#guide") {
+    --color-link-text-primary: #fff;
+    --color-link-primary: #{$coscup-green};
+  }
+}
+
+@include venue-theme-colors;
+
+@include page("guide") {
+
+  section {
+    max-width: 900px;
+    margin: auto;
+    padding-bottom: 30px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .guide-container {
+    width: 50%;
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      overflow: hidden;
+    }
+  }
+
+  @include smOnly {
+    section {
+      max-width: 90%;
+    }
+    .guide-container {
+      width: 100%;
+    }
+  }
+
+  @include xsOnly {
+    .outer-container {
+      max-width: calc(100% - 2rem);
+    }
+    section {
+      max-width: 90%;
+    }
+    .guide-container {
+      width: 100%;
+    }
+  }
+}

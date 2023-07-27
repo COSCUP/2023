@@ -95,17 +95,17 @@ export function useNavbarItems () {
       },
       component: ExternalLink
     },
-    {
-      type: 'external-link',
-      options: {
-        name: 'press-release',
-        text: getNavbarItemText('press-release'),
-        fixedInNavbar: false,
-        hiddenInMenu: false,
-        url: 'https://blog.coscup.org/p/press-release.html'
-      },
-      component: ExternalLink
-    },
+    // {
+    //   type: 'external-link',
+    //   options: {
+    //     name: 'press-release',
+    //     text: getNavbarItemText('press-release'),
+    //     fixedInNavbar: false,
+    //     hiddenInMenu: false,
+    //     url: 'https://blog.coscup.org/p/press-release.html'
+    //   },
+    //   component: ExternalLink
+    // },
     {
       type: 'external-link',
       options: {
