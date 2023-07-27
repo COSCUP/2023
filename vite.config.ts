@@ -76,7 +76,7 @@ export default defineConfig(({ mode, command }) => {
         workbox: {
           globIgnores: ['**/session/*.html'],
           navigateFallback: 'index.html',
-          navigateFallbackDenylist: [/.*\.(jpg|png|svg|json|js|xml)$/],
+          navigateFallbackDenylist: [/.*\.(jpg|png|svg|json|js|xml|pdf)$/],
           offlineGoogleAnalytics: true,
           runtimeCaching: [
             {
