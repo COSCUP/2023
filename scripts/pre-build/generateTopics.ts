@@ -15,7 +15,7 @@ async function fetchRemoteTopicsData () {
 }
 
 function transformTopicsMap (rows: TopicsRow[]) {
-  const fallbackImageId = ['education', 'career', 'martech', 'ai', 'healing', 'world', 'misc']
+  const fallbackImageId = ['career', 'martech', 'ai', 'healing', 'world', 'misc']
 
   return Object.fromEntries(rows
     .map((r) => [
