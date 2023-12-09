@@ -2,7 +2,7 @@ import { useRegisterSW } from 'virtual:pwa-register/vue'
 import { InjectionKey } from 'vue'
 import { createModuleSetup, useSetupCtx } from '../utils'
 
-const PROVIDE_KEY: InjectionKey<ReturnType<typeof useRegisterSW> | false> = Symbol('scroll-lock')
+const PROVIDE_KEY: InjectionKey<ReturnType<typeof useRegisterSW> | false> = Symbol('pwa-register')
 
 const _useRegisterSW = () => {
   const { isClient, router } = useSetupCtx()
