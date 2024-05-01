@@ -6,6 +6,7 @@ import { join, dirname } from 'path'
 import { fileURLToPath } from 'url'
 import dotenv from 'dotenv'
 import CO_WRITE_MAP from './hackmd_url_mappings.json'
+import { SESSION_RECORD_TABLE } from './sessionRecordTable';
 
 dotenv.config()
 dotenv.config({ path: join(dirname(fileURLToPath(import.meta.url)), '../../.env.local') })
@@ -173,7 +174,7 @@ function genResult (talks, rooms, speakers) {
       co_write: CO_WRITE_MAP?.[s.code as keyof typeof CO_WRITE_MAP]?.URL || null,
       qa: getAnswer(s, SESSION_QA_ID, null),
       slide: getAnswer(s, SESSION_SLIDE_ID, null),
-      record: getAnswer(s, SESSION_RECORD_ID, null),
+      record: SESSION_RECORD_TABLE[s.code],
       uri: `https://coscup.org/2023/session/${s.code}`
     }
   })
