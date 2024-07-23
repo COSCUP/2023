@@ -58,7 +58,7 @@ export default defineComponent({
       }
     }), 'level'))
       .sort((entryA, entryB) => {
-        const sponsorSequence = ['titanium', 'diamond', 'gold', 'silver', 'bronze', 'friend', 'co-promotion-partner', 'co-host', 'co-organizer', 'special-thanks']
+        const sponsorSequence = ['titanium', 'diamond', 'gold', 'silver', 'bronze', 'friend', 'co-promotion-partner', 'co-host', 'co-organizer', 'over-seas', 'special-thanks']
         return sponsorSequence.indexOf(entryA[0]) - sponsorSequence.indexOf(entryB[0])
       })
     )
